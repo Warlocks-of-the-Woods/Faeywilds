@@ -367,7 +367,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["voice_color"]		>> voice_color
 	S["voice_pitch"]		>> voice_pitch
 	S["skin_tone"]			>> skin_tone
-	S["hairstyle_name"]		>> hairstyle
+	S["hairstyle_name"]	>> hairstyle
 	S["facial_style_name"]	>> facial_hairstyle
 	S["accessory"]			>> accessory
 	S["detail"]				>> detail
@@ -379,8 +379,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_mcolor2"]	>> features["mcolor2"]
 	S["feature_mcolor3"]	>> features["mcolor3"]
 	S["feature_ethcolor"]	>> features["ethcolor"]
+	/*
 	S["pronouns"]			>> pronouns
 	S["voice_type"]			>> voice_type
+	*/
 
 /datum/preferences/proc/load_character(slot)
 	if(!path)
@@ -472,9 +474,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["char_accent"]		>> char_accent
 	if (!char_accent)
 		char_accent = "No accent"
-
+	/*
 	S["pronouns"] >> pronouns
 	S["voice_type"] >> voice_type
+	*/
 	S["flavor_text"]			>> flavor_text
 	if(!valid_flavor_text(null, flavor_text, TRUE))
 		flavor_text = null
@@ -541,8 +544,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	backpack			= sanitize_inlist(backpack, GLOB.backpacklist, initial(backpack))
 	jumpsuit_style	= sanitize_inlist(jumpsuit_style, GLOB.jumpsuitlist, initial(jumpsuit_style))
 	uplink_spawn_loc = sanitize_inlist(uplink_spawn_loc, GLOB.uplink_spawn_loc_list, initial(uplink_spawn_loc))
+	/*
 	pronouns = sanitize_text(pronouns, THEY_THEM)
 	voice_type = sanitize_text(voice_type, VOICE_TYPE_MASC)
+	*/
 	features["mcolor"]	= sanitize_hexcolor(features["mcolor"], 6, 0)
 	features["mcolor2"]	= sanitize_hexcolor(features["mcolor2"], 6, 0)
 	features["mcolor3"]	= sanitize_hexcolor(features["mcolor3"], 6, 0)
@@ -654,8 +659,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["nsfw_headshot_link"] , nsfw_headshot_link)
 	WRITE_FILE(S["char_accent"] , char_accent)
 	WRITE_FILE(S["statpack"] , statpack.type)
+	/*
 	WRITE_FILE(S["voice_type"] , voice_type)
 	WRITE_FILE(S["pronouns"] , pronouns)
+*/
 	if(loadout)
 		WRITE_FILE(S["loadout"] , loadout.type)
 	else
