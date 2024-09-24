@@ -2434,6 +2434,7 @@ Slots: [job.spawn_positions]</span>
 
 	// LETHALSTONE ADDITION END
 	*/
+	character.statpack = statpack
 
 	if(parent)
 		var/list/L = get_player_curses(parent.ckey)
