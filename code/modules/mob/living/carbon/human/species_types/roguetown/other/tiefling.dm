@@ -143,3 +143,6 @@
 
 /datum/species/tieberian/random_surname()
 	return " [pick(world.file2list("strings/rt/names/other/tieflast.txt"))]"
+
+/datum/species/tieberian/check_roundstart_eligible()
+	return TRUE
