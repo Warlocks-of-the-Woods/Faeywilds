@@ -55,10 +55,11 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		else
 			GLOB.lordsurname = "of [L.real_name]"
 		SSticker.select_ruler()
-		if(L.gender != FEMALE)
+		if(L.gender != FEMALE) 
 			to_chat(world, "<b><span class='notice'><span class='big'>[L.real_name] is King of Rockhill.</span></span></b>")
 			addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, lord_color_choice)), 50)
 		else
+			SSticker.rulertype = "Queen" // goonwood edit. this is stupid it is not set properly anywhere at the game start, but the only place it even takes place is a fucking scom laws
 			to_chat(world, "<b><span class='notice'><span class='big'>[L.real_name] is Queen of Rockhill.</span></span></b>")
 			addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, lord_color_choice)), 50)
 

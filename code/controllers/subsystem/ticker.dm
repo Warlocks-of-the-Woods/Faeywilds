@@ -260,7 +260,25 @@ SUBSYSTEM_DEF(ticker)
 	var/list/readied_jobs = list()
 	var/list/required_jobs = list()
 
-	//var/list/required_jobs = list("Queen","King","Merchant") //JTGSZ - 4/11/2024 - This was the prev set of required jobs to go with the hardcoded checks commented out below
+	//goonwood edits to ticker to make ruler a required role
+	required_jobs = list(	
+		"Queen",
+		"King",
+		//"Merchant"
+						)
+#ifdef DEPLOY_TEST
+	required_jobs = list()
+	readied_jobs = list("Merchant", "King")
+#endif
+#ifdef ROGUEWORLD
+	required_jobs = list()
+#endif
+	var/amt_ready = 0
+	for(var/mob/dead/new_player/player in GLOB.player_list)
+		if(!player)
+			continue
+		if(player.ready == PLAYER_READY_TO_PLAY)
+			amt_ready++
 
 	for(var/V in required_jobs)
 		for(var/mob/dead/new_player/player in GLOB.player_list)
@@ -270,20 +288,57 @@ SUBSYSTEM_DEF(ticker)
 				if(player.ready == PLAYER_READY_TO_PLAY)
 					if(player.client.prefs.lastclass == V)
 						if(player.IsJobUnavailable(V) != JOB_AVAILABLE)
-							to_chat(player, span_warning("You cannot be [V] and thus are not considered."))
+							to_chat(player, "<span class='warning'>You cannot be [V] and thus are not considered.</span>")
 							continue
 				readied_jobs.Add(V)
-		/*
-			// These else conditions stop the round from starting unless there is a merchant, king, and queen.
-		else
-			var/list/stuffy = list("Set a Ruler to 'high' in your class preferences to start the game!", "PLAY Ruler NOW!", "A Ruler is required to start.", "Pray for a Ruler.", "One day, there will be a Ruler.", "Just try playing Ruler.", "If you don't play Ruler, the game will never start.", "We need at least one Ruler to start the game.", "We're waiting for you to pick Ruler to start.", "Still no Ruler is readied..", "I'm going to lose my mind if we don't get a Ruler readied up.","No. The game will not start because there is no Ruler.","What's the point of ROGUETOWN without a Ruler?")
-			to_chat(world, span_purple("[pick(stuffy)]"))
-			return FALSE
+	
+	if(amt_ready<9)
+		var/list/stuffy = list("Зизо проклинает вас на жизнь в этом пустом мире.","вы будете жить в мире собственных ошибок.","вы остаетесь подумать, зачем вы в этом пустом мире.","вы отпускаетесь вместе со своим одиночеством.","вы отправляетесь вместе со своим одиночеством в свободное плавание.")
+		to_chat(world,"<span class='notice'>Правитель требуется для начала раунда... однако так как в мире всего [amt_ready] душ, [pick(stuffy)]</span>")
 	else
-		var/list/stuffy = list("Set Merchant to 'high' in your class preferences to start the game!", "PLAY Merchant NOW!", "A Merchant is required to start.", "Pray for a Merchant.", "One day, there will be a Merchant.", "Just try playing Merchant.", "If you don't play Merchant, the game will never start.", "We need at least one Merchant to start the game.", "We're waiting for you to pick Merchant to start.", "Still no Merchant is readied..", "I'm going to lose my mind if we don't get a Merchant readied up.","No. The game will not start because there is no Merchant.","What's the point of ROGUETOWN without a Merchant?")
-		to_chat(world, span_purple("[pick(stuffy)]"))
-		return FALSE
+		var/list/failed_job = required_jobs - readied_jobs
+		var/list/stuffy = list(
+			"Поставь [failed_job], на 'хай' в своем преференсе, чтобы партия могла начаться!",
+			"ПОИГРАЙ ЗА [failed_job] СЕЙЧАС ЖЕ!", 
+			"[failed_job] требуется для начала партии.",
+			"Молись на [failed_job].",
+			"Однажды, [failed_job] появится.", 
+			"Просто ПОПРОБУЙ поиграть на [failed_job].",
+			"Если ты не захочешь играть за [failed_job], то партия просто не начнется.",
+			"Нам нужен хотя бы один [failed_job] для начала партии.", 
+			"Мы все ждем пока ты выберешь [failed_job] для старта партии.", 
+			"И все так же нет [failed_job]...", 
+			"Я сейчас сойду с ума, если [failed_job] не появится среди готовых персонажей!",
+			"Нет. Игра просто не начнется, просто потому что никто не хочет быть [failed_job].",
+			"Партия не начнется, пока у ДМа не будет листа [failed_job].",
+			"Какой вообще смысл приключения, если нет [failed_job]?!", 
+		)
+		if(!(("King" in failed_job) && ("Queen" in failed_job)))
+			if("King" in failed_job)
+				failed_job.Remove("King")
+			else
+				failed_job.Remove("Queen")
+		if(failed_job.len > 0)
+			to_chat(world, "<span class='purple'>[pick(stuffy)]</span>")
+			return FALSE
+	
+	/*
+		if("Merchant" in readied_jobs)
+			if(("King" in readied_jobs) || ("Queen" in readied_jobs))
+				if("King" in readied_jobs)
+					rulertype = "King"
+				else
+					rulertype = "Queen"
+			else
+				var/list/stuffy = list("Set a Ruler to 'high' in your class preferences to start the game!", "PLAY Ruler NOW!", "A Ruler is required to start.", "Pray for a Ruler.", "One day, there will be a Ruler.", "Just try playing Ruler.", "If you don't play Ruler, the game will never start.", "We need at least one Ruler to start the game.", "We're waiting for you to pick Ruler to start.", "Still no Ruler is readied..", "I'm going to lose my mind if we don't get a Ruler readied up.","No. The game will not start because there is no Ruler.","What's the point of ROGUETOWN without a Ruler?")
+				to_chat(world, "<span class='purple'>[pick(stuffy)]</span>")
+				return FALSE
+		else
+			var/list/stuffy = list("Set Merchant to 'high' in your class preferences to start the game!", "PLAY Merchant NOW!", "A Merchant is required to start.", "Pray for a Merchant.", "One day, there will be a Merchant.", "Just try playing Merchant.", "If you don't play Merchant, the game will never start.", "We need at least one Merchant to start the game.", "We're waiting for you to pick Merchant to start.", "Still no Merchant is readied..", "I'm going to lose my mind if we don't get a Merchant readied up.","No. The game will not start because there is no Merchant.","What's the point of ROGUETOWN without a Merchant?")
+			to_chat(world, "<span class='purple'>[pick(stuffy)]</span>")
+			return FALSE
 	*/
+	//goonwood edits end
 
 	/*
 		This prevents any gamemode from starting unless theres at least 2 players ready, but the comments say 20 or it defaults into a deathmatch mode.
