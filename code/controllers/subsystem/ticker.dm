@@ -270,7 +270,8 @@ SUBSYSTEM_DEF(ticker)
 
 	var/players = GLOB.player_list.len
 
-	for(var/mob/dead/new_player/player in GLOB.player_list)
+	for(var/i in GLOB.new_player_list)
+		var/mob/dead/new_player/player = i
 		if(!player || !(player.ready))
 			continue
 		if((player.mind.assigned_role == "King") || (player.mind.assigned_role == "Queen"))
@@ -295,7 +296,7 @@ SUBSYSTEM_DEF(ticker)
 	//priest = TRUE
 #endif
 
-	if(players>9)
+	if(players<10)
 		var/list/stuffy = list("Зизо проклинает вас на жизнь в этом пустом мире.","вы будете жить в мире собственных ошибок.","вы остаетесь подумать, зачем вы в этом пустом мире.","вы отпускаетесь вместе со своим одиночеством.","вы отправляетесь вместе со своим одиночеством в свободное плавание.")
 		to_chat(world,"<span class='notice'>Правитель требуется для начала раунда... однако так как в мире всего [players] душ, [pick(stuffy)]</span>")
 	else
