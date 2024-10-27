@@ -1,0 +1,3 @@
+[submodule "faeywild-secrets"]
+	path = faeywild-secrets
+	url = https://github.com/Warlocks-of-the-Woods/faeywild-secrets.git
