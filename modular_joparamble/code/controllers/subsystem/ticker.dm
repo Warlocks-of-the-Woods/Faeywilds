@@ -1,4 +1,4 @@
-/datum/controller/subsystem/ticker/proc/checkreqroles()
+/datum/controller/subsystem/ticker/checkreqroles()
 	//goonwood edits to ticker to make ruler a required role
 	if(start_immediately == TRUE)
 		return TRUE
@@ -18,7 +18,8 @@
 			continue
 		for(var/j)
 		if((player.client.prefs.job_preferences["King"] == JP_HIGH) || (player.client.prefs.job_preferences["Queen"] == JP_HIGH))
-			ruler = TRUE
+			if((player.IsJobUnavailable("King") != JOB_AVAILABLE) && (player.IsJobUnavailable("Queen") != JOB_AVAILABLE)) // fuck you irvin
+				ruler = TRUE
 		/*Future proofing. Sort of.
 		if(player.mind.assigned_role == "Merchant")
 			merchant = TRUE
@@ -27,6 +28,8 @@
 		*/
 		if(ruler)
 			return TRUE
+
+	
 
 #ifdef DEPLOY_TEST
 	ruler = TRUE
@@ -59,6 +62,8 @@
 				"Нет. Игра просто не начнется, просто потому что никто не хочет быть [jobs_required]ом.",
 				"Партия не начнется, пока у ДМа не будет листа [jobs_required]а.",
 				"Какой вообще смысл приключения, если нет [jobs_required]а?!", 
+				"НИГГЕРЫ ГДЕ [jobs_required]?!",
+				"Псидон отвернулся от вас, потому что вы не выбрали [jobs_required]."
 			)
 			to_chat(world, "<span class='notice'>[pick(stuffy)]</span>")
 			return FALSE
