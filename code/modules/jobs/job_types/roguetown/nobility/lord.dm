@@ -59,6 +59,8 @@ GLOBAL_LIST_EMPTY(lord_titles)
 			to_chat(world, "<b><span class='notice'><span class='big'>[L.real_name] is King of Rockhill.</span></span></b>")
 			addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, lord_color_choice)), 50)
 		else
+			//Faeywild edit: setting ticker var for scom. It's actually stupid it's not set anywhere, but it's probably the best place for it here, since job controller is half ass borked.
+			SSticker.rulertype = "Queen"
 			to_chat(world, "<b><span class='notice'><span class='big'>[L.real_name] is Queen of Rockhill.</span></span></b>")
 			addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, lord_color_choice)), 50)
 
