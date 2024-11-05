@@ -103,6 +103,7 @@
 	playsound(user, pick('sound/vo/mobs/ghost/whisper (1).ogg','sound/vo/mobs/ghost/whisper (2).ogg','sound/vo/mobs/ghost/whisper (3).ogg'), 30, TRUE)
 /obj/item/book/granter/trait/on_reading_finished(mob/user)
 	. = ..()
+	var/mob/living/L = user
 	to_chat(user, "<span class='notice'>The shard dims, granting you knowledge of [traitname]!</span>")
 	ADD_TRAIT(user, granted_trait, SHARD_TRAIT)
 	ADD_TRAIT(user, granted_trait2, SHARD_TRAIT)
@@ -118,8 +119,8 @@
 		var/datum/crafting_recipe/R = crafting_recipe_type
 		user.mind.teach_crafting_recipe(crafting_recipe_type)
 		to_chat(user,"<span class='notice'>You learned how to make [initial(R.name)].</span>")
-	user.attunement_points_used += attunement_cost
-	user.check_attunement_points()
+	L.attunement_points_used += attunement_cost
+	L.check_attunement_points()
 	onlearned(user)
 
 /obj/item/book/granter/trait/mobility

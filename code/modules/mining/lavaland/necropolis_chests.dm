@@ -1422,8 +1422,8 @@
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	infusable = FALSE
 	attunement_cost = 5
-	var/active_item
-
+	//var/active_item = FALSE
+/*
 /obj/item/melee/sword_of_the_forsaken/equipped(mob/living/user)
 	. = ..()
 	if(active_item)
@@ -1440,7 +1440,7 @@
 		user.check_attunement_points()
 		active_item = FALSE
 		return
-
+*/
 //Enables the sword to butcher bodies
 /obj/item/melee/sword_of_the_forsaken/Initialize(mapload)
 	. = ..()
@@ -1492,11 +1492,12 @@
 
 /obj/item/clothing/neck/roguetown/necklace_of_the_forsaken/dropped(mob/user)
 	..()
+	var/mob/living/L = user
 	if(active_owner)
 		remove_necklace()
 	if(active_item)
-		user.attunement_points_used -= attunement_cost
-		user.check_attunement_points()
+		L.attunement_points_used -= attunement_cost
+		L.check_attunement_points()
 		active_item = FALSE
 
 //Apply a temp buff until the necklace is used
