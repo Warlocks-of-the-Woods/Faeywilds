@@ -211,6 +211,8 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	//can you infuse this item magically?
 	var/infusable = TRUE
 
+	var/attunement_cost = 0
+
 /obj/item/Initialize()
 	. = ..()
 	if(!pixel_x && !pixel_y && !bigboy)

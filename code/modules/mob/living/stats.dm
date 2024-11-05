@@ -26,6 +26,42 @@
 	var/list/statindex = list()
 	var/datum/patron/patron = /datum/patron/godless
 
+	var/attunement_points_max = 0 //how many magic items can you wear, magic items cost 1 to 5
+	var/attunement_points_used = 0 //adjusted when equipping magic items
+	var/attunement_points_bonus = 0 //adjusted based on special roles, an artificer or antagonist should have this bonus, NOBODY ELSE...
+	var/magic_sickness = FALSE
+
+/mob/living/proc/calculate_attunement_points()
+	attunement_points_max = STAINT - 4 + mind.get_skill_level(/datum/skill/magic/arcane) + attunement_points_bonus
+
+/mob/living/proc/check_attunement_points()
+	if(attunement_points_used > attunement_points_max)
+		//debuff
+		apply_status_effect(/datum/status_effect/buff/magic_sickness/)
+		visible_message(span_info("[src] begins to look sick."), span_warning("I feel sick all of the sudden."))
+		magic_sickness = TRUE
+	else
+		if(magic_sickness)
+			magic_sickness = FALSE
+			remove_status_effect(/datum/status_effect/buff/magic_sickness/)
+			visible_message(span_info("[src] looks like they feel a bit better."), span_info("My nausea fades away."))
+
+/datum/status_effect/buff/magic_sickness
+	id = "arcyne sickness"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/magic_sickness
+	effectedstats = list("strength" = -2, "perception" = -2, "constitution" = -2, "endurance" = -2, "speed" = -2, "fortune" = -2) //int is not effected because int effects attunement points themselves, that could trap you with arcyne sickness
+	duration = -1
+
+/datum/status_effect/buff/magic_sickness/tick()
+	var/mob/living/target = owner
+	var/mob/living/carbon/M = target
+	M.add_nausea(5) //it's a lot, but get the fucking items off. That's the point.
+
+/atom/movable/screen/alert/status_effect/buff/magic_sickness
+	name = "Arcyne Sickness"
+	desc = "I am feeling sick due to powerful item enchantments."
+	icon_state = "debuff"
+
 /mob/living/proc/init_faith()
 	set_patron(/datum/patron/godless)
 
@@ -193,6 +229,7 @@
 				newamt--
 				BUFINT++
 			STAINT = newamt
+			calculate_attunement_points() //recalculate attunement points
 
 		if("constitution")
 			newamt = STACON + amt

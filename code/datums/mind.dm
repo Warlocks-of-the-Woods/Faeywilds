@@ -305,6 +305,7 @@
 			to_chat(current, span_nicegreen("My [S.name] grows to [SSskills.level_names[known_skills[S]]]!"))
 		if(skill == /datum/skill/magic/arcane)
 			adjust_spellpoints(1)
+			current.calculate_attunement_points()
 	else
 		to_chat(current, span_warning("My [S.name] has weakened to [SSskills.level_names[known_skills[S]]]!"))
 
@@ -325,6 +326,7 @@
 	var/amt2gain = 0
 	if(skill == /datum/skill/magic/arcane)
 		adjust_spellpoints(amt)
+		current.calculate_attunement_points()
 	if(amt > 0) //positive at
 		for(var/i in 1 to amt)
 			switch(skill_experience[S])

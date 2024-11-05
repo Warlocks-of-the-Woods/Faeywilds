@@ -1420,6 +1420,26 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut", "gutted", "gored")
 	// sharpness = SHARP_EDGED
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	infusable = FALSE
+	attunement_cost = 5
+	var/active_item
+
+/obj/item/melee/sword_of_the_forsaken/equipped(mob/living/user)
+	. = ..()
+	if(active_item)
+		return
+	else
+		active_item = TRUE
+		user.attunement_points_used += attunement_cost
+		user.check_attunement_points()
+		return
+
+/obj/item/melee/sword_of_the_forsaken/dropped(mob/living/user)
+	if(active_item)
+		user.attunement_points_used -= attunement_cost
+		user.check_attunement_points()
+		active_item = FALSE
+		return
 
 //Enables the sword to butcher bodies
 /obj/item/melee/sword_of_the_forsaken/Initialize(mapload)
@@ -1451,8 +1471,21 @@
 	icon_state = "necklace_forsaken_active"
 	actions_types = list(/datum/action/item_action/hands_free/necklace_of_the_forsaken)
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	attunement_cost = 5
+	infusable = FALSE
 	var/mob/living/carbon/active_owner
 	var/numUses = 1
+	var/active_item
+
+/obj/item/clothing/neck/roguetown/necklace_of_the_forsaken/equipped(mob/living/user)
+	. = ..()
+	if(active_item)
+		return
+	else
+		active_item = TRUE
+		user.attunement_points_used += attunement_cost
+		user.check_attunement_points()
+		return
 
 /obj/item/clothing/neck/roguetown/necklace_of_the_forsaken/item_action_slot_check(slot)
 	return (..() && (slot == ITEM_SLOT_NECK))
@@ -1461,6 +1494,10 @@
 	..()
 	if(active_owner)
 		remove_necklace()
+	if(active_item)
+		user.attunement_points_used -= attunement_cost
+		user.check_attunement_points()
+		active_item = FALSE
 
 //Apply a temp buff until the necklace is used
 /obj/item/clothing/neck/roguetown/necklace_of_the_forsaken/proc/temp_buff(mob/living/carbon/human/user)

@@ -942,7 +942,10 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 666
 	static_price = TRUE
+	attunement_cost = 5
+	infusable = FALSE
 	var/active_item = FALSE
+	
 
 /obj/item/clothing/neck/roguetown/blkknight/equipped(mob/living/user)
 	. = ..()
@@ -961,6 +964,8 @@
 	else
 		to_chat(user, span_notice("I feel an evil power about that necklace.."))
 		armor = getArmor("blunt" = 0, "slash" = 0, "stab" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	user.attunement_points_used += attunement_cost
+	user.check_attunement_points()
 
 /obj/item/clothing/neck/roguetown/blkknight/dropped(mob/living/user)
 	if(!active_item)
@@ -977,6 +982,8 @@
 	else
 		to_chat(user, span_notice("Strange, I don't feel that power anymore.."))
 		armor = getArmor("blunt" = 100, "slash" = 100, "stab" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 0)
+	user.attunement_points_used -= attunement_cost
+	user.check_attunement_points()
 
 /obj/item/clothing/suit/roguetown/armor/plate/blkknight
 	slot_flags = ITEM_SLOT_ARMOR

@@ -249,6 +249,27 @@
 	smeltresult = /obj/item/ingot/steel
 	sellprice = 363
 	static_price = TRUE
+	attunement_cost = 5
+	infusable = FALSE
+	var/active_item
+
+/obj/item/rogueweapon/sword/long/vlord/equipped(mob/living/user)
+	. = ..()
+	if(active_item)
+		return
+	else
+		active_item = TRUE
+		user.attunement_points_used += attunement_cost
+		user.check_attunement_points()
+		return
+
+/obj/item/rogueweapon/sword/long/vlord/dropped(mob/living/user)
+	if(active_item)
+		user.attunement_points_used -= attunement_cost
+		user.check_attunement_points()
+		active_item = FALSE
+		return
+
 
 /obj/item/rogueweapon/sword/long/vlord/getonmobprop(tag)
 	. = ..()

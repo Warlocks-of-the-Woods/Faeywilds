@@ -155,8 +155,10 @@
 	name = "Dragon Ring"
 	icon_state = "dragonring"
 	sellprice = 666
+	attunement_cost = 5
 	var/active_item
-
+	infusable = FALSE
+	
 /obj/item/clothing/ring/dragon_ring/equipped(mob/living/user)
 	. = ..()
 	if(active_item)
@@ -167,6 +169,8 @@
 		user.change_stat("strength", 2)
 		user.change_stat("constitution", 2)
 		user.change_stat("endurance", 2)
+		user.attunement_points_used += attunement_cost
+		user.check_attunement_points()
 		return
 
 /obj/item/clothing/ring/dragon_ring/dropped(mob/living/user)
@@ -175,6 +179,8 @@
 		user.change_stat("strength", -2)
 		user.change_stat("constitution", -2)
 		user.change_stat("endurance", -2)
+		user.attunement_points_used -= attunement_cost
+		user.check_attunement_points()
 		active_item = FALSE
 		return
 

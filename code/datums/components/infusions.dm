@@ -20,11 +20,11 @@
 	///////////TIERS
 	in the list next to the name of the infusion there is a number. This number is the TIER of the infusion. higher level gems are required for higher level infusions.
 
-	tier 1, toper : adds flavor
-	tier 2, gemerald : minor effect (skill increases and okay traits)
-	tier 3, saffira : normal effect or (okay spells, stat increases and good traits)
-	tier 4, blortz : major effect (good spells and amazing traits)
-	tier 5, dorpel or rontz or riddle of steel : potentially game changing effect
+	tier/cost 1, toper : adds flavor
+	tier/cost 2, gemerald : minor effect (skill increases and okay traits)
+	tier/cost 3, saffira : normal effect or (okay spells, stat increases and good traits)
+	tier/cost 4, blortz : major effect (good spells and amazing traits)
+	tier/cost 5, dorpel or rontz or riddle of steel : potentially game changing effect
 
 	Hope that has been helpful in using this datum.
 	~Ham-Hole
@@ -151,8 +151,16 @@
 	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(dropped))
 	RegisterSignal(parent, COMSIG_MOVABLE_IMPACT, PROC_REF(throw_impact))
 	RegisterSignal(parent, COMSIG_ITEM_HIT_REACT, PROC_REF(blocked))
+	RegisterSignal(parent, COMSIG_ITEM_AFTERATTACK, PROC_REF(after_attack))
+	
 	var/obj/item/I = parent
 	add_infusion(I, infuser, gem_used, random)
+
+/datum/component/infusions/proc/after_attack(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
+	switch(infusion_name)
+		if("flaming")
+			source.say("flame on") //don't do this, do something else.
+
 
 /datum/component/infusions/proc/check_change_item(obj/item/source, mob/user)
 	switch(infusion_name)
@@ -162,18 +170,17 @@
 				var/new_slash = 90
 				var/new_stab = 70
 				var/new_bullet = 100
-				source.armor.modifyRatingMax(new_blunt, new_slash, new_stab, new_bullet)
+				source.armor = getArmor("blunt" = new_blunt, "slash" = new_slash, "stab" = new_stab, "bullet" = new_bullet, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 0)
 			else //mask
 				var/new_blunt = 90
 				var/new_slash = 100
 				var/new_stab = 80
 				var/new_bullet = 20
-				source.armor.modifyRatingMax(new_blunt, new_slash, new_stab, new_bullet)
+				source.armor = getArmor("blunt" = new_blunt, "slash" = new_slash, "stab" = new_stab, "bullet" = new_bullet, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 0)
 		if("radiance")
 			source.light_range = 5
 			source.light_color = "#da8c45"
 			source.set_light_on(TRUE)
-			START_PROCESSING(SSobj, source)
 		if("alchemy")
 			var/item = new /obj/item/reagent_containers/glass/bottle/alchemyjug
 
@@ -253,6 +260,7 @@
 /datum/component/infusions/proc/equipped(obj/item/source, mob/user, slot)
 	if(!active_item)
 		var/mob/living/L = user
+		L.attunement_points_used += source.attunement_cost
 		active_item = TRUE
 		switch(infusion_name)
 			if("awareness")
@@ -280,7 +288,7 @@
 				eyes.owner.update_sight()
 
 			if("propulsion")
-				user.add_movespeed_modifier(MOVESPEED_ID_ADMIN_VAREDIT, update=TRUE, priority=100, multiplicative_slowdown=-1.15, movetypes=GROUND)
+				user.add_movespeed_modifier(MOVESPEED_ID_ADMIN_VAREDIT, update=TRUE, priority=100, multiplicative_slowdown=-1.075, movetypes=GROUND)
 				//user.remove_movespeed_modifier(MOVESPEED_ID_ADMIN_VAREDIT, TRUE)
 
 			if("magical strength")
@@ -377,6 +385,7 @@
 /datum/component/infusions/proc/dropped(obj/item/source, mob/user)
 	if(active_item)
 		var/mob/living/L = user
+		L.attunement_points_used -= source.attunement_cost
 		active_item = FALSE
 		switch(infusion_name)
 			if("awareness")
@@ -574,6 +583,8 @@
 				infusion_name = input("Choose Infusion", "Available Infusions") as anything in options
 
 			I.name = "[I.name] of [infusion_name]"
+			I.attunement_cost = options[infusion_name]
+			I.say(options[infusion_name])
 			check_change_item(I, infuser)
 		else
 			qdel(src)
