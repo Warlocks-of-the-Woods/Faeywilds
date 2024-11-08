@@ -98,7 +98,7 @@
 	else
 		if(!cocked)
 			to_chat(user, span_info("I ready the matchlock to be fired..."))
-			if(do_after(user, 100 - user.STASTR, target = user))
+			if(do_after(user, 40 - user.STASTR, target = user))
 				playsound(user, 'sound/foley/musketcock.ogg', 100, FALSE)
 				cocked = TRUE
 		else

@@ -116,12 +116,34 @@
 				. += span_love("It's my spouse.")
 
 		if(name in GLOB.excommunicated_players)
-			. += span_userdanger("HERETIC! SHAME!")
+			. += span_userdanger("EXCOMMUNICATED!")
+
+		if(name in GLOB.heretical_players)
+			. += span_userdanger("HERETIC'S BRAND! SHAME!")
+		if(iszizocultist(user) || iszizolackey(user))
+			if(virginity)
+				. += "<span class='userdanger'>VIRGIN!</span>"
+
+		if(real_name in GLOB.outlawed_players)
+			. += "<span class='userdanger'>OUTLAW!</span>"
+		if(mind && mind.special_role)
+		else
+			if(mind && mind.special_role == "Bandit")
+				. += "<span class='userdanger'>BANDIT!</span>"
+			if(mind && mind.special_role == "Vampire Lord")
+				. += "<span class='userdanger'>A MONSTER!</span>"
 
 		if(name in GLOB.outlawed_players)
 			. += span_userdanger("OUTLAW!")
 
+		if(mind)
+			var/mob/living/carbon/human/H = mind.current
+			if(H.enemies.Find(name))
+				. += span_userdanger("My target!")
 
+			if(H.hunters.Find(name))
+				. += span_userdanger("I'm a dead man!")
+					
 		var/commie_text
 		if(mind)
 			if(mind.special_role == "Bandit")
@@ -463,6 +485,12 @@
 
 	if(length(msg))
 		. += span_warning("[msg.Join("\n")]")
+	// Show especially large embedded objects at a glance
+	for(var/obj/item/bodypart/part in bodyparts)
+		if (LAZYLEN(part.embedded_objects))
+			for(var/obj/item/stuck_thing in part.embedded_objects)
+				if (stuck_thing.w_class >= WEIGHT_CLASS_SMALL)
+					. += span_bloody("<b>[m3] \a [stuck_thing] stuck in [m2] [part.name]!</b>")
 
 	if((user != src) && isliving(user))
 		var/mob/living/L = user
