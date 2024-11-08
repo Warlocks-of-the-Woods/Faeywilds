@@ -88,3 +88,5 @@
 				"Партия начинается, встречаемся в таверне.",
 			)
 	send2chat(new /datum/tgs_message_content("[sendgif] [pick(stuffy)]"), CONFIG_GET(string/chat_announce_new_game))
+
+
