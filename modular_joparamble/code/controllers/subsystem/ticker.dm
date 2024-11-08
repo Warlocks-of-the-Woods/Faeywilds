@@ -8,7 +8,7 @@
 	var/merchant = FALSE
 	var/priest = FALSE
 	*/
-	var/jobs_required = "Монарх" // this is for final message only. This doesn't do anything on it's own
+	var/jobs_required = "Герцог" // this is for final message only. This doesn't do anything on it's own
 
 	var/players = GLOB.player_list.len
 
@@ -17,8 +17,8 @@
 		if(!player || !(player.ready))
 			continue
 		for(var/j)
-		if((player.client.prefs.job_preferences["King"] == JP_HIGH) || (player.client.prefs.job_preferences["Queen"] == JP_HIGH))
-			if((player.IsJobUnavailable("King") != JOB_AVAILABLE) && (player.IsJobUnavailable("Queen") != JOB_AVAILABLE)) // fuck you irvin
+		if((player.client.prefs.job_preferences["Duke"] == JP_HIGH) || (player.client.prefs.job_preferences["Duchess"] == JP_HIGH))
+			if((player.IsJobUnavailable("Duke") != JOB_AVAILABLE) && (player.IsJobUnavailable("Duchess") != JOB_AVAILABLE)) // fuck you irvin
 				ruler = TRUE
 		/*Future proofing. Sort of.
 		if(player.mind.assigned_role == "Merchant")
@@ -70,3 +70,22 @@
 	
 	job_change_locked = TRUE
 	return TRUE
+
+/datum/controller/subsystem/ticker/setup()
+	. = ..()
+	var/sendgif = "https://tenor.com/view/leaf-black-souls-black-souls-2-marry-ann-mary-sue-gif-9443358797381852725"
+	var/list/stuffy = list(
+				"О-о-о? Что это? Начало игры?",
+				"Это для меня? Начало игры?",
+				"ИГРА НАЧАЛАСЬ! :)",
+				"Давно-давно... Началась история, произошедшая на [SSmapping.config.map_name]",
+				"Уэ. Новый раунд или что-то вроде того.",
+				"Я всегда возвращаюсь вместе с новой партией.",
+				"Мы начинаем!",
+				"Стартуем!",
+				"Пора начинать партию!",
+				"Партия начинается. Вы встретились в таверне, мои чуваки.",
+				",g Мы начали партию.",
+				"Партия начинается, встречаемся в таверне.",
+			)
+	send2chat(new /datum/tgs_message_content("[sendgif] [pick(stuffy)]"), CONFIG_GET(string/chat_announce_new_game))
