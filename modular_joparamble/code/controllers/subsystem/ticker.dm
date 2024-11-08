@@ -18,8 +18,7 @@
 			continue
 		for(var/j)
 		if((player.client.prefs.job_preferences["Duke"] == JP_HIGH) || (player.client.prefs.job_preferences["Duchess"] == JP_HIGH))
-			if((player.IsJobUnavailable("Duke") != JOB_AVAILABLE) && (player.IsJobUnavailable("Duchess") != JOB_AVAILABLE)) // fuck you irvin
-				ruler = TRUE
+			ruler = TRUE
 		/*Future proofing. Sort of.
 		if(player.mind.assigned_role == "Merchant")
 			merchant = TRUE
