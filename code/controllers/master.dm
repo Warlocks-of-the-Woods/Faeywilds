@@ -170,8 +170,10 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	if(delay)
 		sleep(delay)
 
+	/*
 	if(tgs_prime)
 		world.TgsInitializationComplete()
+	*/
 
 	if(init_sss)
 		init_subtypes(/datum/controller/subsystem, subsystems)

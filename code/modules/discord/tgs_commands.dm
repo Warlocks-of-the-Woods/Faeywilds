@@ -28,3 +28,10 @@
 			return "That ckey is not associated to this discord account. If someone has used your ID, please inform an administrator"
 	else
 		return "Account not setup for linkage"
+
+/datum/tgs_chat_command/test
+	name = "test"
+	help_text = "..."
+
+/datum/tgs_chat_command/test/Run()
+	return new /datum/tgs_message_content("ЭЙ, ТЫ, ЖОПА С РУЧКОЙ!")

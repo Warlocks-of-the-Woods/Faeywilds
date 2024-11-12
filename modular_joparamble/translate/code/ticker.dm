@@ -31,7 +31,7 @@
 
 	if(end_reason)
 		to_chat(world, span_bigbold("[end_reason]."))
-		
+
 	return end_reason
 
 /datum/controller/subsystem/ticker/stats_report()
@@ -51,4 +51,3 @@
 
 	return
 
-/datum/controller/subsystem/ticker/proc/stats2tgs()
