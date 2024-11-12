@@ -3,6 +3,8 @@
 
 	if(istype(SSticker.mode, /datum/game_mode/chaosmode))
 		var/datum/game_mode/chaosmode/C = SSticker.mode
+		//we reverse the logic because uhhh, because we do.
+		end_reason = "Городу удалось пережить очередную неделю."
 		if(C.check_for_lord)
 			if(!C.check_for_lord(forced = TRUE))
 				end_reason = pick("Без своего Лорда, они были обречены стать рабами Зизо.",
@@ -29,16 +31,14 @@
 
 	if(end_reason)
 		to_chat(world, span_bigbold("[end_reason]."))
-	else
-		to_chat(world, span_bigbold("Городу удалось пережить очередную неделю."))
-
-	send2chat(new /datum/tgs_message_content("...[end_reason] Вот и сказочке конец."), CONFIG_GET(string/chat_announce_new_game))
+		
+	return end_reason
 
 /datum/controller/subsystem/ticker/stats_report()
 	var/list/shit = list()
 	shit += "<br><span class='bold'>Δ--------------------Δ</span><br>"
-	shit += "<br><font color='#9b6937'><span class='bold'>Смертей::</span></font> [deaths]"
-	shit += "<br><font color='#af2323'><span class='bold'>Крови пролито::</span></font> [round(blood_lost / 100, 1)]L"
+	shit += "<br><font color='#9b6937'><span class='bold'>Смертей:</span></font> [deaths]"
+	shit += "<br><font color='#af2323'><span class='bold'>Крови пролито:</span></font> [round(blood_lost / 100, 1)]L"
 	shit += "<br><font color='#36959c'><span class='bold'>Триумфов получено:</span></font> [tri_gained]"
 	shit += "<br><font color='#a02fa4'><span class='bold'>Триумфов украдено:</span></font> [tri_lost * -1]"
 	shit += "<br><font color='#ffd4fd'><span class='bold'>Наслаждений:</span></font> [cums]"
@@ -48,5 +48,7 @@
 			shit += "[x]"
 	shit += "<br><br><span class='bold'>∇--------------------∇</span>"
 	to_chat(world, "[shit.Join()]")
-	send2chat(new /datum/tgs_message_content("[shit.Join]"), CONFIG_GET(string/chat_announce_new_game))
+
 	return
+
+/datum/controller/subsystem/ticker/proc/stats2tgs()

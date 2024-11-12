@@ -70,6 +70,7 @@
 	job_change_locked = TRUE
 	return TRUE
 
+/*
 /datum/controller/subsystem/ticker/setup()
 	. = ..()
 	var/sendgif = "https://tenor.com/view/leaf-black-souls-black-souls-2-marry-ann-mary-sue-gif-9443358797381852725"
@@ -88,5 +89,6 @@
 				"Партия начинается, встречаемся в таверне.",
 			)
 	send2chat(new /datum/tgs_message_content("[sendgif] [pick(stuffy)]"), CONFIG_GET(string/chat_announce_new_game))
+*/
 
 

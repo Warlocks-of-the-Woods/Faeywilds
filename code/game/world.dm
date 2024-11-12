@@ -274,7 +274,9 @@ GLOBAL_VAR(restart_counter)
 		return
 
 	if(TgsAvailable())
+/* Faeywild edit -> moved to ticker.dm. Is this moving thing too early? I dunno and I don't think I care enough. 
 		send2chat(new /datum/tgs_message_content("Round ending!"), CONFIG_GET(string/chat_announce_new_game))
+*/
 		testing("tgsavailable passed")
 		var/do_hard_reboot
 		// check the hard reboot counter

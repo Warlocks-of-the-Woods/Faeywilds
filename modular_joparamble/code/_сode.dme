@@ -7,4 +7,5 @@
 #include "controllers\subsystem\ticker.dm"
 #include "modules\whitelist\whitelist.dm"
 #include "modules\roguemachine\steward.dm"
+#include "modules\tgs\tgsIntegraion.dm"
 #endif
