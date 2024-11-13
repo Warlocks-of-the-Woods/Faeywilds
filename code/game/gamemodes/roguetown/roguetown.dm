@@ -164,22 +164,20 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 
 	var/major_roll = rand(1,100)
 	switch(major_roll)
-		if(0 to 25)
+		if(1 to 30)
 			pick_rebels()
 			log_game("Major Antagonist: Rebellion")
-		if(26 to 51)
+		if(31 to 60)
 			pick_cultist()
 			log_game("Major Antagonist: Cultists")
-		if(52 to 76)
+		if(61 to 90)
 			//WWs and Vamps now normally roll together
-			// pick_vampires()
 			pick_werewolves()
+			pick_vampires()
 			log_game("Major Antagonist: Werewolves")
-		if(77 to 99)
+		if(91 to 100)
 			log_game("Major Antagonist: Extended") //gotta put something here.
 	
-	pick_bandits()
-	log_game("Minor Antagonist: Bandit")
 	if(prob(45))
 		pick_aspirants()
 		log_game("Minor Antagonist: Aspirant")
@@ -188,9 +186,12 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 		pick_lich()
 		log_game("Minor Antagonist: Lich")
 
-	// if(prob(10))
-	// 	pick_maniac()
-	// 	log_game("Minor Antagonist: Maniac")
+	if(prob(10))
+		pick_maniac()
+		log_game("Minor Antagonist: Maniac")
+
+	pick_bandits()
+	log_game("Minor Antagonist: Bandit")
 	
 	return TRUE
 
@@ -398,9 +399,10 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 
 /datum/game_mode/chaosmode/proc/pick_lich()
 
-	// High pop only
-	if(num_players() < 70)
-		return FALSE
+	//Faeywild: nah.
+	// // High pop only
+	// if(num_players() < 70)
+	// 	return FALSE
 
 	restricted_jobs = list(
 	"Duke",

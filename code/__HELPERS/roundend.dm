@@ -301,6 +301,7 @@
 	sleep(10 SECONDS)
 	SSvote.initiate_vote("map", "Goonwood players")
 	ready_for_reboot = TRUE
+	world.SendTGSRoundEnd()
 	standard_reboot()
 
 /datum/controller/subsystem/ticker/proc/get_end_reason()
