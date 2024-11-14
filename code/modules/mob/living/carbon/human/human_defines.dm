@@ -115,9 +115,8 @@
 	var/strengths = null
 	var/weakness = null
 	var/theme = null
-/* //Goonwood edit nachalo | REMOVE RACE NAME
 	var/custom_race_name = null
-*/ //Goonwood edit end
+
 	var/ooc_notes = null
 
 	var/nsfw_headshot_link = null
