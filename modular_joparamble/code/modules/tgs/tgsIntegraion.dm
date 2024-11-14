@@ -10,7 +10,7 @@
 				"О-о-о? Что это? Начало игры?",
 				"Это для меня? Начало игры?",
 				"ИГРА НАЧАЛАСЬ! :)",
-				"Давно-давно... Началась история, произошедшая на [SSmapping.config.map_name]",
+				"Давно-давно... Началась история, произошедшая в славном городе Рокхилл.",
 				"Уэ. Новый раунд или что-то вроде того.",
 				"Я всегда возвращаюсь вместе с новой партией.",
 				"Мы начинаем новую партию!",
@@ -43,7 +43,7 @@
 
 	embed.fields = list(line, joinat)
 
-	send2chat(message, CONFIG_GET(string/chat_announce_new_game))
+	send2chat(message, "launches") //can't "CONFIG_GET" before mc start. Womp-womp
 
 /world/proc/SendTGSRoundEnd()
 	var/datum/tgs_message_content/message = new ("...Вот и сказочке конец.")
@@ -63,6 +63,6 @@
 
 	embed.fields = list(deaths, bloodspilled, triumphgained, triumphslost, pleasures, confessors, players)
 
-	send2chat(message, CONFIG_GET(string/chat_announce_new_game))
+	send2chat(message, "launches")
 
 #undef ROUNDWAITER
