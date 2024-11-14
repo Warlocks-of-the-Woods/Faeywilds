@@ -64,7 +64,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	//character preferences
 	var/slot_randomized					//keeps track of round-to-round randomization of the character slot, prevents overwriting
 	var/real_name						//our character's name
+/*
 	var/custom_race_name				//custom race name
+*/
 	var/gender = MALE					//gender of character (well duh) (LETHALSTONE EDIT: this no longer references anything but whether the masculine or feminine model is used)
 	var/datum/statpack/statpack	= new /datum/statpack/wildcard/fated // LETHALSTONE EDIT: the statpack we're giving our char instead of racial bonuses
 	var/age = AGE_ADULT						//age of character
@@ -150,11 +152,11 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/update_mutant_colors = TRUE
 
 	var/headshot_link
-	
+
 	var/flavor_text
 
 	var/ooc_notes
-	
+
 	var/nsfw_headshot_link
 	var/nsfw_info
 
@@ -350,8 +352,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 				dat += "<a href='?_src_=prefs;preference=name;task=input'>[real_name]</a> <a href='?_src_=prefs;preference=name;task=random'>\[R\]</a>"
 
 			dat += "<BR>"
-			dat += "<b>Race Origin:</b> <a href='?_src_=prefs;preference=species;task=input'>[pref_species.name]</a>[spec_check(user) ? "" : " (!)"]<BR>"
-			dat += "<b>Race Name:</b> <a href='?_src_=prefs;preference=customracename;task=input'>Change: [custom_race_name]</a><BR>"
+			dat += "<b>Race:</b> <a href='?_src_=prefs;preference=species;task=input'>[pref_species.name]</a>[spec_check(user) ? "" : " (!)"]<BR>"
 			// LETHALSTONE EDIT BEGIN: add statpack selection
 			dat += "<b>Statpack:</b> <a href='?_src_=prefs;preference=statpack;task=input'>[statpack.name]</a><BR>"
 //			dat += "<a href='?_src_=prefs;preference=species;task=random'>Random Species</A> "
@@ -1532,8 +1533,8 @@ Slots: [job.spawn_positions]</span>
 						// LETHALSTONE EDIT END
 						ResetJobs()
 						to_chat(user, "<font color='red'>Classes reset.</font>")
-						
-					
+
+
 				// LETHALSTONE EDIT: add statpack selection
 				if ("statpack")
 					var/list/statpacks_available = list()
@@ -1549,7 +1550,7 @@ Slots: [job.spawn_positions]</span>
 						statpack = statpack_chosen
 						to_chat(user, "<font color='purple'>[statpack.name]</font>")
 						to_chat(user, "<font color='purple'>[statpack.description_string()]</font>")
-					
+
 				/*
 				// LETHALSTONE EDIT: add pronouns
 				if ("pronouns")
@@ -1744,6 +1745,7 @@ Slots: [job.spawn_positions]</span>
 					to_chat(user, "<span class='notice'>Successfully updated theme.</span>")
 					log_game("[user] has set their theme to '[theme]'.")
 
+/*
 				if("customracename")
 					to_chat(user, "<span class='notice'>What are you?</span>")
 					var/new_custom_race_name = input(user, "Input your custom race name:", "Custom Race Name", custom_race_name) as message|null
@@ -1760,8 +1762,7 @@ Slots: [job.spawn_positions]</span>
 					custom_race_name = new_custom_race_name
 					to_chat(user, "<span class='notice'>Successfully updated Race Name</span>")
 					log_game("[user] has set their Race Name to '[custom_race_name]'.")
-
-
+*/
 				if("headshot")
 					to_chat(user, "<span class='notice'>Please use a relatively SFW image of the head and shoulder area to maintain immersion level. Lastly, ["<span class='bold'>do not use a real life photo or use any image that is less than serious.</span>"]</span>")
 					to_chat(user, "<span class='notice'>If the photo doesn't show up properly in-game, ensure that it's a direct image link that opens properly in a browser.</span>")
@@ -1829,7 +1830,7 @@ Slots: [job.spawn_positions]</span>
 					nsfw_headshot_link = new_nsfw_headshot_link
 					to_chat(user, "<span class='notice'>Successfully updated NSFW Headshot picture</span>")
 					log_game("[user] has set their NSFW Headshot image to '[nsfw_headshot_link]'.")
-		
+
 				if("nsfwinfo")
 					to_chat(user, "<span class='notice'>Please use this for things such as image links, f-list links, or any additional NSFW information.</span>")
 					var/new_nsfw_info = input(user, "Type your NSFW Info here:", "NSFW Info", nsfw_info) as message|null
@@ -2441,8 +2442,10 @@ Slots: [job.spawn_positions]</span>
 	character.strengths = strengths
 	character.weakness = weakness
 	character.theme = theme
-	character.custom_race_name = custom_race_name
 
+/*
+	character.custom_race_name = custom_race_name
+*/
 	character.nsfw_headshot_link = nsfw_headshot_link
 
 	character.nsfw_info = nsfw_info
@@ -2694,12 +2697,13 @@ Slots: [job.spawn_positions]</span>
 		return FALSE
 	return TRUE
 
+/*
 /proc/valid_custom_race_name(mob/user, value, silent = FALSE)
 
 	if(!length(value))
 		return FALSE
 	return TRUE
-
+*/
 /proc/valid_nsfw_info(mob/user, value, silent = FALSE)
 
 	if(!length(value))
