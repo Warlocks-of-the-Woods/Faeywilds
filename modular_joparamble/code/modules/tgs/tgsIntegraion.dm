@@ -1,4 +1,4 @@
-#define ROUNDWAITER "1304832124544749633"
+#define ROUNDWAITER "1301307213188562954"
 
 /datum/tgs_chat_embed/provider/author/glob
 	name = "Эйри Мэнн вещает"
