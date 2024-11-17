@@ -29,7 +29,7 @@
 				",g Мы начали партию.",
 				"Партия начинается, встречаемся в таверне.")
 	
-	var/datum/tgs_message_content/message = new ("Я собираю людей для новой партии прямо сейчас! <@&[ROUNDWAITER]>")
+	var/datum/tgs_message_content/message = new ("Я собираю людей для новой партии прямо сейчас!") // <@&[ROUNDWAITER]> 
 	var/datum/tgs_chat_embed/structure/embed = new()
 	message.embed = embed
 	embed.title = "Начинается новая история!"
