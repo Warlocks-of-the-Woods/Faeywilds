@@ -19,12 +19,12 @@
 
 /datum/emote/living/carbon/blink
 	key = "blink"
-	key_third_person = "blinks"
-	message = "blinks."
+	key_third_person = "моргает"
+	message = "моргает."
 
 /datum/emote/living/carbon/blink_r
 	key = "blink_r"
-	message = "blinks rapidly."
+	message = "проморгался."
 
 
 
@@ -36,9 +36,9 @@
 
 /datum/emote/living/moan
 	key = "moan"
-	key_third_person = "moans"
-	message = "moans."
-	message_mime = "appears to moan!"
+	key_third_person = "стонет"
+	message = "стонет."
+	message_mime = "сдавленно стонет!"
 	emote_type = EMOTE_AUDIBLE
 
 /datum/emote/living/carbon/roll

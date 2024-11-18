@@ -140,7 +140,7 @@
 	emote_type = EMOTE_AUDIBLE
 
 /mob/living/carbon/human/verb/emote_burp()
-	set name = "Отрыжка"
+	set name = "Рыгать"
 	set category = "Noises"
 
 	emote("burp", intentional = TRUE)
@@ -154,8 +154,8 @@
 
 /datum/emote/living/choke
 	key = "choke"
-	key_third_person = "давится"
-	message = "давиться!"
+	key_third_person = "подавился"
+	message = "подавился!"
 	emote_type = EMOTE_AUDIBLE
 	ignore_silent = TRUE
 
@@ -225,8 +225,8 @@
 
 /datum/emote/living/clearthroat
 	key = "clearthroat"
-	key_third_person = "откашливается"
-	message = "откашлевается."
+	key_third_person = "прокашливается"
+	message = "прокашливается."
 	emote_type = EMOTE_AUDIBLE
 
 /mob/living/carbon/human/verb/emote_clearthroat()
@@ -258,13 +258,13 @@
 /datum/emote/living/deathgasp
 	key = ""
 	key_third_person = ""
-	message = "издаёт свой последних вздох..."
+	message = "издаёт свой последний вздох..."
 	message_robot = "shudders violently for a moment before falling still, its eyes slowly darkening."
 	message_AI = "screeches, its screen flickering as its systems slowly halt."
 	message_alien = "lets out a waning guttural screech, and collapses onto the floor..."
 	message_larva = "lets out a sickly hiss of air and falls limply to the floor..."
 	message_monkey = "lets out a faint chimper as it collapses and stops moving..."
-	message_simple =  "falls limp."
+	message_simple =  "падает замертво."
 	stat_allowed = UNCONSCIOUS
 
 /datum/emote/living/deathgasp/run_emote(mob/user, params, type_override, intentional)
@@ -299,7 +299,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_faint()
-	set name = "Обморок"
+	set name = "Упасть в обморок"
 	set category = "Emotes"
 
 	emote("faint", intentional = TRUE)
@@ -316,8 +316,8 @@
 
 /datum/emote/living/flap
 	key = "flap"
-	key_third_person = "махает крыльями"
-	message = "махает крыльями."
+	key_third_person = "машет крыльями"
+	message = "машет крыльями."
 	restraint_check = TRUE
 	var/wing_time = 20
 
@@ -327,7 +327,7 @@
 /datum/emote/living/flap/aflap
 	key = "aflap"
 	key_third_person = "aflaps"
-	message = "агрессивно махает крыльями!"
+	message = "агрессивно машет крыльями!"
 	restraint_check = TRUE
 	wing_time = 10
 
@@ -380,8 +380,8 @@
 
 /datum/emote/living/breathgasp
 	key = "breathgasp"
-	key_third_person = "breathgasps"
-	message = "задыхается от нехватки воздуха!"
+	key_third_person = "пытается отдышаться"
+	message = "пытается отдышаться!"
 	emote_type = EMOTE_AUDIBLE
 
 /datum/emote/living/giggle
@@ -406,12 +406,12 @@
 
 /datum/emote/living/chuckle
 	key = "chuckle"
-	key_third_person = "посмеивается"
-	message = "посмеивается."
+	key_third_person = "хохочет"
+	message = "хохочет."
 	emote_type = EMOTE_AUDIBLE
 
 /mob/living/carbon/human/verb/emote_chuckle()
-	set name = "Посмеиваться"
+	set name = "Хохотать"
 	set category = "Noises"
 
 	emote("chuckle", intentional = TRUE)
@@ -442,7 +442,7 @@
 	message = "ухмыляется."
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_grin()
-	set name = "Ухмельнуться"
+	set name = "Ухмыльнуться"
 	set category = "Emotes"
 
 	emote("grin", intentional = TRUE)
@@ -485,8 +485,8 @@
 
 /datum/emote/living/leap
 	key = "leap"
-	key_third_person = "совершает прыжок"
-	message = "совершает прыжок!"
+	key_third_person = "совершает скачок"
+	message = "совершает скачок!"
 	restraint_check = TRUE
 	only_forced_audio = TRUE
 
@@ -591,7 +591,7 @@
 
 /datum/emote/living/holdbreath
 	key = "hold"
-	key_third_person = "задержать воздух"
+	key_third_person = "задерживает дыхание"
 	message = "начинает задерживать дыхание."
 	stat_allowed = SOFT_CRIT
 
@@ -640,7 +640,7 @@
 	..()
 
 /mob/living/carbon/human/verb/emote_slap()
-	set name = "Шлёпать"
+	set name = "Шлёпнуть"
 	set category = "Emotes"
 
 	emote("slap", intentional = TRUE, targetted = TRUE)
@@ -718,7 +718,7 @@
 	message_param = "кивает %t."
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_nod()
-	set name = "Кивать"
+	set name = "Кивнуть"
 	set category = "Emotes"
 
 	emote("nod", intentional = TRUE)
@@ -767,7 +767,7 @@
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
 		if(C.silent || !C.can_speak_vocal())
-			message = "издаёт беззвучный крик!"
+			message = "издаёт беззвучный шум!"
 		if(intentional)
 			if(!C.rogfat_add(10))
 				to_chat(C, span_warning("Я пытаюсь кричать, но мой голос подводит меня."))
@@ -890,7 +890,7 @@
 
 /datum/emote/living/haltyell
 	key = "haltyell"
-	message = "shouts a halt!"
+	message = "кричит остановиться!"
 	emote_type = EMOTE_AUDIBLE
 	only_forced_audio = TRUE
 
@@ -913,13 +913,11 @@
 
 /datum/emote/living/attnwhistle
 	key = "attnwhistle"
-	message = "свистит, чтобы привлечь внимание!"
+	message = "свистит, стараясь привлечь внимание!"
 	emote_type = EMOTE_AUDIBLE
 
-
-
 /mob/living/carbon/human/verb/emote_attnwhistle()
-	set name = "Свистеть во внимании"
+	set name = "Присвистнуть"
 	set category = "Noises"
 
 	emote("attnwhistle", intentional = TRUE)
@@ -943,7 +941,7 @@
 
 
 /mob/living/carbon/human/verb/emote_clap()
-	set name = "Хлопать руками"
+	set name = "Похлопать"
 	set category = "Noises"
 
 	emote("clap", intentional = TRUE)
@@ -1060,7 +1058,7 @@
 	nomsg = TRUE
 
 /mob/living/carbon/human/verb/emote_huh()
-	set name = "Хах?"
+	set name = "Удивиться"
 	set category = "Noises"
 
 	emote("huh", intentional = TRUE)
@@ -1074,12 +1072,12 @@
 
 /datum/emote/living/hum
 	key = "hum"
-	key_third_person = "мелодично гудит"
-	message = "мелодично гудит."
+	key_third_person = "мелодично мычит"
+	message = "мелодично мычит."
 	emote_type = EMOTE_AUDIBLE
 
 /mob/living/carbon/human/verb/emote_hum()
-	set name = "Гудеть"
+	set name = "Мычать"
 	set category = "Noises"
 
 	emote("hum", intentional = TRUE)
@@ -1411,7 +1409,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_squint()
-	set name = "Прищуриться"
+	set name = "Щуриться"
 	set category = "Emotes"
 
 	emote("squint", intentional = TRUE)
@@ -1495,7 +1493,7 @@
 	emote_type = EMOTE_AUDIBLE
 
 /mob/living/carbon/human/verb/emote_catrage()
-	set name = "Кошачая ярость"
+	set name = "Кошачий вой"
 	set category = "Noises"
 
 	emote("catrage", intentional = TRUE)
@@ -1522,8 +1520,8 @@
 
 /datum/emote/living/whine
 	key = "whine"
-	key_third_person = "скулить"
-	message = "скулить."
+	key_third_person = "скулит"
+	message = "скулит."
 	emote_type = EMOTE_AUDIBLE
 
 /mob/living/carbon/human/verb/emote_whine()
@@ -1537,11 +1535,12 @@
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
 		if(C.silent || !C.can_speak_vocal())
-			message = "издает приглушенный скулеж."
+			message = "издает приглушенное скуление."
+
 /datum/emote/living/cackle
 	key = "cackle"
-	key_third_person = "гогочет по собачьи"
-	message = "гогочет по собачьи."
+	key_third_person = "гогочет по-собачьи"
+	message = "гогочет по-собачьи."
 	emote_type = EMOTE_AUDIBLE
 
 /mob/living/carbon/human/verb/emote_cackle()
@@ -1652,11 +1651,11 @@
 
 /datum/emote/living/carbon/human/eyebrow
 	key = "eyebrow"
-	message = "поднимает бровь."
+	message = "приподнимает бровь."
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_eyebrow()
-	set name = "Поднять бровь"
+	set name = "Приподнять бровь"
 	set category = "Emotes"
 
 	emote("eyebrow", intentional = TRUE)
@@ -1668,19 +1667,19 @@
 	nomsg = TRUE
 
 /mob/living/carbon/human/verb/emote_psst()
-	set name = "Привлечь внимание"
+	set name = "Подозвать"
 	set category = "Noises"
 
 	emote("psst", intentional = TRUE)
 
 /datum/emote/living/carbon/human/grumble
 	key = "grumble"
-	key_third_person = "ропщет"
-	message = "ропщет."
+	key_third_person = "ворчит"
+	message = "ворчит."
 	emote_type = EMOTE_AUDIBLE
 
 /mob/living/carbon/human/verb/emote_grumble()
-	set name = "Ропотать"
+	set name = "Ворчать"
 	set category = "Noises"
 
 	emote("grumble", intentional = TRUE)
@@ -1707,12 +1706,12 @@
 
 /datum/emote/living/carbon/human/mumble
 	key = "mumble"
-	key_third_person = "бормочет"
-	message = "бормочет."
+	key_third_person = "бормочет под нос"
+	message = "бормочет под нос."
 	emote_type = EMOTE_AUDIBLE
 
 /mob/living/carbon/human/verb/mumble()
-	set name = "Ворчать"
+	set name = "Бормотать"
 	set category = "Noises"
 
 	emote("mumble", intentional = TRUE)
