@@ -16,7 +16,7 @@
 	key = "airguitar"
 	message = "strums an invisible lute."
 	restraint_check = TRUE
-
+/*
 /datum/emote/living/carbon/blink
 	key = "blink"
 	key_third_person = "blinks"
@@ -27,20 +27,20 @@
 	message = "blinks rapidly."
 
 
-
+*/
 /datum/emote/living/carbon/gnarl
 	key = "gnarl"
 	key_third_person = "gnarls"
 	message = "gnarls and shows its teeth..."
 	mob_type_allowed_typecache = list(/mob/living/carbon/monkey)
-
+/*
 /datum/emote/living/moan
 	key = "moan"
 	key_third_person = "moans"
 	message = "moans."
 	message_mime = "appears to moan!"
 	emote_type = EMOTE_AUDIBLE
-
+*/
 /datum/emote/living/carbon/roll
 	key = "roll"
 	key_third_person = "rolls"
