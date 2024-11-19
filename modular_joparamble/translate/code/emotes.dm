@@ -406,12 +406,12 @@
 
 /datum/emote/living/chuckle
 	key = "chuckle"
-	key_third_person = "хохочет"
-	message = "хохочет."
+	key_third_person = "усмехается"
+	message = "усмехается."
 	emote_type = EMOTE_AUDIBLE
 
 /mob/living/carbon/human/verb/emote_chuckle()
-	set name = "Хохотать"
+	set name = "Усмехаться"
 	set category = "Noises"
 
 	emote("chuckle", intentional = TRUE)
@@ -890,7 +890,7 @@
 
 /datum/emote/living/haltyell
 	key = "haltyell"
-	message = "кричит остановиться!"
+	message = "приказывает остановиться!"
 	emote_type = EMOTE_AUDIBLE
 	only_forced_audio = TRUE
 
@@ -1072,8 +1072,8 @@
 
 /datum/emote/living/hum
 	key = "hum"
-	key_third_person = "мелодично мычит"
-	message = "мелодично мычит."
+	key_third_person = "напевает мыча"
+	message = "напевает мыча."
 	emote_type = EMOTE_AUDIBLE
 
 /mob/living/carbon/human/verb/emote_hum()
@@ -1562,6 +1562,11 @@
 	message = "моргает."
 	emote_type = EMOTE_AUDIBLE
 
+/datum/emote/living/carbon/blink_r
+	key = "blink_r"	
+	message = "проморгался."
+
+
 /mob/living/carbon/human/verb/emote_blink()
 	set name = "Моргать"
 	set category = "Noises"
@@ -1622,6 +1627,12 @@
 		if(C.silent || !C.can_speak())
 			message = "издаёт сдавленный звук, сопровождающийся слёзами."
 
+/datum/emote/living/moan
+	key = "moan"
+	key_third_person = "стонет"
+	message = "стонет."
+	message_mime = "сдавленно стонет!"
+	emote_type = EMOTE_AUDIBLE
 
 /datum/emote/living/carbon/human/sexmoanlight
 	key = "sexmoanlight"
