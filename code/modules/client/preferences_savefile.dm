@@ -505,7 +505,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["theme"]			>> theme
 	if(!valid_theme(null, theme, TRUE))
 		theme = null
-*/
+
 	//try to fix any outdated data if necessary
 	if(needs_update >= 0)
 		update_character(needs_update, S)		//needs_update == savefile_version if we need an update (positive integer)
@@ -672,7 +672,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["nsfw_headshot_link"] , nsfw_headshot_link)
 	WRITE_FILE(S["char_accent"] , char_accent)
 	WRITE_FILE(S["statpack"] , statpack.type)
-	/*
+
 	WRITE_FILE(S["voice_type"] , voice_type)
 	WRITE_FILE(S["pronouns"] , pronouns)
 */

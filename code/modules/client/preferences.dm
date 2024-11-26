@@ -1544,7 +1544,7 @@ Slots: [job.spawn_positions]</span>
 						statpack = statpack_chosen
 						to_chat(user, "<font color='purple'>[statpack.name]</font>")
 						to_chat(user, "<font color='purple'>[statpack.description_string()]</font>")
-
+				/*
 				// LETHALSTONE EDIT: add pronouns
 				if ("pronouns")
 					var pronouns_input = input(user, "Choose your character's pronouns", "Pronouns") as null|anything in GLOB.pronouns_list

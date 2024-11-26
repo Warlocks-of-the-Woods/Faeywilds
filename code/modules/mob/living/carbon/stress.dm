@@ -28,21 +28,6 @@
 /mob/proc/get_negative_stressors()
 	return list()
 
-/mob/proc/get_stress_amount()
-	return 0
-
-/mob/proc/get_stress_event(event_type)
-	return null
-
-/mob/proc/has_stress_event(event_type)
-	return FALSE
-
-/mob/proc/get_positive_stressors()
-	return list()
-
-/mob/proc/get_negative_stressors()
-	return list()
-
 /mob/living/carbon
 	var/oldstress = 0
 	var/list/stressors = list()
