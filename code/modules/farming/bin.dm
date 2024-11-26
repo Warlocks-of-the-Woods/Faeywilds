@@ -137,7 +137,7 @@
 //We need to use this or the object will be put in storage instead of attacking it
 /obj/item/roguebin/StorageBlock(obj/item/I, mob/user)
 	if(user.used_intent)
-		if(user.used_intent.type in list(/datum/intent/fill,/datum/intent/pour,/datum/intent/splash))
+		if(user.used_intent.type in list(INTENT_FILL,INTENT_POUR,INTENT_SPLASH))
 			return TRUE
 	if(istype(I, /obj/item/rogueweapon/tongs))
 		var/obj/item/rogueweapon/tongs/T = I

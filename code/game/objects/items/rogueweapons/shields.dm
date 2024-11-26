@@ -29,7 +29,9 @@
 	blade_dulling = DULLING_BASHCHOP
 	anvilrepair = /datum/skill/craft/armorsmithing
 	COOLDOWN_DECLARE(shield_bang)
-
+	w_class = WEIGHT_CLASS_BULKY
+	pickup_sound = 'modular_helmsguard/sound/sheath_sounds/draw_shield.ogg'
+	sheathe_sound = 'modular_helmsguard/sound/sheath_sounds/put_back_shield.ogg'
 
 /obj/item/rogueweapon/shield/attackby(obj/item/attackby_item, mob/user, params)
 
@@ -81,7 +83,7 @@
 	if(!overlays.len)
 		var/icon/J = new('icons/roguetown/weapons/wood_heraldry.dmi')
 		var/list/istates = J.IconStates()
-		var/picked_name = input(user, "Choose a Heraldry", "ROGUETOWN", name) as null|anything in sortList(istates)
+		var/picked_name = input(user, "Choose a Heraldry", "DREAM KEEP", name) as null|anything in sortList(istates)
 		if(!picked_name)
 			picked_name = "none"
 		var/mutable_appearance/M = mutable_appearance('icons/roguetown/weapons/wood_heraldry.dmi', picked_name)
@@ -158,7 +160,7 @@
 	if(!overlays.len)
 		var/icon/J = new('icons/roguetown/weapons/shield_heraldry.dmi')
 		var/list/istates = J.IconStates()
-		var/picked_name = input(user, "Choose a Heraldry", "ROGUETOWN", name) as null|anything in sortList(istates)
+		var/picked_name = input(user, "Choose a Heraldry", "DREAM KEEP", name) as null|anything in sortList(istates)
 		if(!picked_name)
 			picked_name = "none"
 		var/mutable_appearance/M = mutable_appearance('icons/roguetown/weapons/shield_heraldry.dmi', picked_name)

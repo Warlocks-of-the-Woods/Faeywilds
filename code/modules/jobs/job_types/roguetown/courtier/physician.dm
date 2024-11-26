@@ -1,24 +1,23 @@
 /datum/job/roguetown/physician
-	title = "Court Physician"
+	title = "Physician"
 	flag = PHYSICIAN
 	department_flag = NOBLEMEN
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 
-	allowed_races = RACES_TOLERATED_UP
+	allowed_races = RACES_ALL_KINDSPLUS
 	allowed_sexes = list(MALE, FEMALE)
 	display_order = JDO_PHYSICIAN
 	tutorial = "You were a child born into good wealth - But poor health. \
 		Perhaps in another life, you would have turned out to be a powerful mage, wise archivist or a shrewd steward, \
 		but leprosy took away your younger years. \
-		Out of desperation, you followed the ways of Pestra and managed to be cured. \
-		Now you serve in the Duke's court ensuring the good health of those inhabiting the keep."
+		Out of desperation, you followed the ways of Hermeir and managed to be cured."
 	outfit = /datum/outfit/job/roguetown/physician
-	whitelist_req = TRUE
+	whitelist_req = FALSE
 
 	give_bank_account = 25
-	min_pq = 0
+	min_pq = 5
 	max_pq = null
 
 	cmode_music = 'sound/music/combat_physician.ogg'
@@ -57,17 +56,16 @@
 	)
 	ADD_TRAIT(H, TRAIT_EMPATH, "[type]")
 	ADD_TRAIT(H, TRAIT_NOSTINK, "[type]")
-	ADD_TRAIT(H, TRAIT_ROT_EATER, "[type]")
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/alchemy, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 6, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/alchemy, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/polearms, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sewing, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 6, TRUE)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/diagnose/secular)
 		H.change_stat("strength", -1)
 		H.change_stat("constitution", -1)

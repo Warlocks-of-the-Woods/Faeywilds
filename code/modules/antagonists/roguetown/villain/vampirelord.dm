@@ -14,9 +14,9 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	antag_hud_type = ANTAG_HUD_VAMPIRE
 	antag_hud_name = "Vlord"
 	confess_lines = list(
-		"I AM ANCIENT", 
-		"I AM THE LAND", 
-		"CHILD OF KAIN!",
+		"I AM A CHILD OF NIGHT!",
+		"I AM THE LAND!",
+		"CHILD OF BLOOD!",
 	)
 	rogue_enabled = TRUE
 	var/isspawn = FALSE
@@ -34,6 +34,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/cache_hair
 	var/obj/effect/proc_holder/spell/targeted/shapeshift/bat/batform //attached to the datum itself to avoid cloning memes, and other duplicates
 	var/obj/effect/proc_holder/spell/targeted/shapeshift/gaseousform/gas
+	var/ashes = FALSE
+	var/is_solo = FALSE
 
 /datum/antagonist/vampirelord/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampirelord/lesser))
@@ -60,14 +62,20 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	owner.special_role = name
 	ADD_TRAIT(owner.current, TRAIT_CRITICAL_WEAKNESS, "[type]") //half assed but necessary otherwise these guys be invincible
 	ADD_TRAIT(owner.current, TRAIT_STRONGBITE, "[type]")
-	ADD_TRAIT(owner.current, TRAIT_NOROGSTAM, "[type]")
 	ADD_TRAIT(owner.current, TRAIT_NOHUNGER, "[type]")
 	ADD_TRAIT(owner.current, TRAIT_NOBREATH, "[type]")
-	ADD_TRAIT(owner.current, TRAIT_NOPAIN, "[type]")
-	ADD_TRAIT(owner.current, TRAIT_TOXIMMUNE, "[type]")
-	ADD_TRAIT(owner.current, TRAIT_STEELHEARTED, "[type]")
-	ADD_TRAIT(owner.current, TRAIT_NOSLEEP, "[type]")
-	ADD_TRAIT(owner.current, TRAIT_VAMPMANSION, "[type]")
+	ADD_TRAIT(owner.current, TRAIT_TOLERANT, "[type]")
+	ADD_TRAIT(owner.current, TRAIT_ZOMBIE_IMMUNE, "[type]")
+	ADD_TRAIT(owner.current, TRAIT_NOSLEEP, "[type]") 
+	if(!is_solo)
+		ADD_TRAIT(owner.current, TRAIT_NOPAIN, "[type]")
+		ADD_TRAIT(owner.current, TRAIT_NOROGSTAM, "[type]")
+		ADD_TRAIT(owner.current, TRAIT_VAMPMANSION, "[type]")
+		ADD_TRAIT(owner.current, TRAIT_TOXIMMUNE, "[type]")
+		ADD_TRAIT(owner.current, TRAIT_STEELHEARTED, "[type]")
+	owner.current.faction = list("undead")
+	for(var/obj/structure/fluff/traveltile/vampire/tile in GLOB.traveltiles)
+		tile.show_travel_tile(owner.current)
 	owner.current.cmode_music = 'sound/music/combat_vamp.ogg'
 	var/obj/item/organ/eyes/eyes = owner.current.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
@@ -79,6 +87,10 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	owner.current.verbs |= /mob/living/carbon/human/proc/vampire_telepathy
 	vamp_look()
 	owner.current.verbs |= /mob/living/carbon/human/proc/disguise_button
+	if(is_solo)
+		add_objective(/datum/objective/solovamp)
+		return
+
 	if(isspawn)
 		add_objective(/datum/objective/vlordserve)
 		finalize_vampire_lesser()
@@ -86,7 +98,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 			mypool = mansion
 		equip_spawn()
 		greet()
-		addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, spawn_pick_class), "VAMPIRE SPAWN"), 5 SECONDS)
+		if(!sired)
+			addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, spawn_pick_class), "VAMPIRE SPAWN"), 5 SECONDS)
 	else
 		forge_vampirelord_objectives()
 		finalize_vampire()
@@ -97,7 +110,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		equip_lord()
 		addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "VAMPIRE LORD"), 5 SECONDS)
 		greet()
-	return ..()
 
 // OLD AND EDITED
 /datum/antagonist/vampirelord/proc/equip_lord()
@@ -154,15 +166,15 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /datum/outfit/job/roguetown/vamplord/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.mind.adjust_skillrank(/datum/skill/magic/blood, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/maces, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/magic/blood, 2, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 5, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 4, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 4, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 4, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/polearms, 4, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, 4, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 5, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 5, TRUE)
 	H.attunement_points_bonus = 7
 	H.calculate_attunement_points()
 	pants = /obj/item/clothing/under/roguetown/tights/black
@@ -313,11 +325,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 /datum/antagonist/vampirelord/proc/finalize_vampire()
 	owner.current.forceMove(pick(GLOB.vlord_starts))
 	owner.current.playsound_local(get_turf(owner.current), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
-	
+
 
 /datum/antagonist/vampirelord/proc/finalize_vampire_lesser()
 	owner.current.playsound_local(get_turf(owner.current), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
-	
+
 
 /datum/antagonist/vampirelord/proc/vamp_look()
 	var/mob/living/carbon/human/V = owner.current
@@ -332,8 +344,9 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	V.update_hair()
 	V.update_body_parts(redraw = TRUE)
 	V.mob_biotypes = MOB_UNDEAD
+	V.update_body_parts()
 	if(isspawn)
-		V.vampire_disguise()
+		V.vampire_disguise(src)
 
 /datum/antagonist/vampirelord/on_life(mob/user)
 	if(!user)
@@ -474,10 +487,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	name = "Vampire Spawn"
 	antag_hud_name = "Vspawn"
 	confess_lines = list(
-		"THE CRIMSON CALLS!", 
-		"MY MASTER COMMANDS", 
+		"THE CRIMSON CALLS!",
+		"MY MASTER COMMANDS",
 		"THE SUN IS ENEMY!",
 	)
+	rogue_enabled = TRUE
 	isspawn = TRUE
 
 /datum/antagonist/vampirelord/lesser/move_to_spawnpoint()
@@ -490,7 +504,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/datum/game_mode/chaosmode/C = SSticker.mode
 	if(istype(C))
 		if(C.kingsubmit)
-			to_chat(src, "I am already the Master of Enigma.")
+			to_chat(src, "I am already the Master of Stonehedge.")
 			return
 	for(var/mob/living/carbon/human/H in oview(1))
 		if(SSticker.rulermob == H)
@@ -529,32 +543,39 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	set category = "VAMPIRE"
 
 	var/datum/game_mode/chaosmode/C = SSticker.mode
-	var/list/mob/living/carbon/human/possible = list()
+	var/list/possible = list()
 	for(var/datum/mind/V in C.vampires)
 		if(V.special_role == "Vampire Spawn")
-			possible |= V.current
+			possible[V.current.real_name] = V.current
 	for(var/datum/mind/D in C.deathknights)
-		possible |= D.current
-	var/mob/living/carbon/human/choice = input(src, "Who to punish?", "PUNISHMENT") as anything in possible|null
-	if(choice)
-		var/punishmentlevels = list("Pause", "Pain", "Release")
-		switch(input(src, "Severity?", "PUNISHMENT") as anything in punishmentlevels|null)
-			if("Pain")
-				to_chat(choice, span_boldnotice("You are wracked with pain as your master punishes you!"))
-				choice.apply_damage(30, BRUTE)
+		possible[D.current.real_name] = D.current
+	var/name_choice = input(src, "Who to punish?", "PUNISHMENT") as null|anything in possible
+	if(!name_choice)
+		return
+	var/mob/living/carbon/human/choice = possible[name_choice]
+	if(!choice || QDELETED(choice))
+		return
+	var/punishmentlevels = list("Pause", "Pain", "DESTROY")
+	var/punishment = input(src, "Severity?", "PUNISHMENT") as null|anything in punishmentlevels
+	if(!punishment)
+		return
+	switch(punishment)
+		if("Pain")
+			to_chat(choice, span_boldnotice("You are wracked with pain as your master punishes you!"))
+			choice.apply_damage(30, BRUTE)
+			choice.emote_scream()
+			playsound(choice, 'sound/misc/obey.ogg', 100, FALSE, pressure_affected = FALSE)
+		if("Pause")
+			to_chat(choice, span_boldnotice("Your body is frozen in place as your master punishes you!"))
+			choice.Paralyze(300)
+			choice.emote_scream()
+			playsound(choice, 'sound/misc/obey.ogg', 100, FALSE, pressure_affected = FALSE)
+		if("DESTROY")
+			to_chat(choice, span_boldnotice("You feel only darkness. Your master no longer has use of you."))
+			spawn(10 SECONDS)
 				choice.emote_scream()
-				playsound(choice, 'sound/misc/obey.ogg', 100, FALSE, pressure_affected = FALSE)
-			if("Pause")
-				to_chat(choice, span_boldnotice("Your body is frozen in place as your master punishes you!"))
-				choice.Paralyze(300)
-				choice.emote_scream()
-				playsound(choice, 'sound/misc/obey.ogg', 100, FALSE, pressure_affected = FALSE)
-			if("Release")
-				to_chat(choice, span_boldnotice("You feel only darkness. Your master no longer has use of you."))
-				spawn(10 SECONDS)
-					choice.emote_scream()
-					choice.dust()
-		visible_message(span_danger("[src] reaches out, gripping [choice]'s soul, inflicting punishment!"))
+				choice.dust()
+	visible_message(span_danger("[src] reaches out, gripping [choice]'s soul, inflicting punishment!"))
 
 /obj/structure/vampire/portal/Crossed(atom/movable/AM)
 	. = ..()
@@ -616,7 +637,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/datum/antagonist/vampirelord/lord = user.mind.has_antag_datum(/datum/antagonist/vampirelord)
 	if(user.mind.special_role != "Vampire Lord")
 		return
-	var/choice = input(user,"What to do?", "ROGUETOWN") as anything in useoptions|null
+	var/choice = input(user,"What to do?", "DREAM KEEP") as anything in useoptions|null
 	switch(choice)
 		if("Grow Power")
 			if(lord.vamplevel == 4)
@@ -637,7 +658,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 					return
 				if(do_after(user, 100))
 					lord.handle_vitae(-500)
-					var/naming = input(user, "Select a name for the amulet.", "ROGUETOWN") as text|null
+					var/naming = input(user, "Select a name for the amulet.", "DREAM KEEP") as text|null
 					var/obj/item/clothing/neck/roguetown/portalamulet/P = new(src.loc)
 					if(naming)
 						P.name = naming
@@ -767,7 +788,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		if(!unlocked)
 			to_chat(user, "I have yet to regain this aspect of my power!")
 			return
-		var/choice = input(user,"What to do?", "ROGUETOWN") as anything in useoptions|null
+		var/choice = input(user,"What to do?", "DREAM KEEP") as anything in useoptions|null
 		switch(choice)
 			if("Create Death Knight")
 				if(alert(user, "Create a Death Knight? Cost:5000","","Yes","No") == "Yes")
@@ -792,7 +813,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 				if(GLOB.tod == "night")
 					to_chat(user, "It's already night!")
 					return
-				if(alert(user, "Force Enigma into Night? Cost:5000","","Yes","No") == "Yes")
+				if(alert(user, "Force Day into Night? Cost:5000","","Yes","No") == "Yes")
 					if(!lord.mypool.check_withdraw(-2500))
 						to_chat(user, "I don't have enough vitae!")
 						return
@@ -884,7 +905,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /datum/objective/vampirelord/conquer
 	name = "conquer"
-	explanation_text = "Make the Ruler of Enigma bow to my will."
+	explanation_text = "Make the Ruler of this land respect my power and wisdom."
 	team_explanation_text = ""
 	triumph_count = 5
 
@@ -896,7 +917,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /datum/objective/vampirelord/ascend
 	name = "sun"
-	explanation_text = "Astrata has spurned me long enough. I must conquer the Sun."
+	explanation_text = "The Day Realm has spurned me long enough. I must conquer the Sun."
 	team_explanation_text = ""
 	triumph_count = 5
 
@@ -912,7 +933,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /datum/objective/vampirelord/infiltrate/one/check_completion()
 	var/datum/game_mode/chaosmode/C = SSticker.mode
-	var/list/churchjobs = list("Priest", "Priestess", "Cleric", "Acolyte", "Templar", "Churchling", "Crusader", "Grandmaster", "Inquisitor")
+	var/list/churchjobs = list("Prophet", "Priestess", "Priest", "Priest", "Paladin", "Churchling", "Crusader", "Grandmaster", "Witcher")
 	for(var/datum/mind/V in C.vampires)
 		if(V.current.job in churchjobs)
 			return TRUE
@@ -924,7 +945,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /datum/objective/vampirelord/infiltrate/two/check_completion()
 	var/datum/game_mode/chaosmode/C = SSticker.mode
-	var/list/noblejobs = list("Duke", "Duke Courtier", "Royal Heir", "Hand", "Steward")
+	var/list/noblejobs = list("Monarch", "Consort", "Royal Heir", "Hand", "Steward")
 	for(var/datum/mind/V in C.vampires)
 		if(V.current.job in noblejobs)
 			return TRUE
@@ -958,6 +979,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	name = "serve"
 	explanation_text = "I must serve my master, and ensure that they triumph."
 	triumph_count = 3
+
+/datum/objective/solovamp
+	name = "survive"
+	explanation_text = "I must survive, find blood while not giving the mortals a reason to try and destroy me."
+	triumph_count = 0
 
 /datum/objective/vlordserve/check_completion()
 	var/datum/game_mode/chaosmode/C = SSticker.mode
@@ -1014,7 +1040,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 /obj/item/clothing/neck/roguetown/portalamulet/Initialize()
 	GLOB.vampire_objects |= src
 	. = ..()
-	
+
 /obj/item/clothing/neck/roguetown/portalamulet/Destroy()
 	GLOB.vampire_objects -= src
 	return ..()
@@ -1027,7 +1053,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 /obj/structure/vampire/Initialize()
 	GLOB.vampire_objects |= src
 	. = ..()
-	
+
 /obj/structure/vampire/Destroy()
 	GLOB.vampire_objects -= src
 	return ..()
@@ -1150,7 +1176,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		var/area/A = V
 		if(!A.hidden)
 			filtered += A
-	var/area/thearea  = input("Area to jump to", "ROGUETOWN") as null|anything in filtered
+	var/area/thearea  = input("Area to jump to", "DREAM KEEP") as null|anything in filtered
 
 	if(!thearea)
 		return
@@ -1264,7 +1290,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 // Spells
 /obj/effect/proc_holder/spell/targeted/transfix
-	name = "Transfix"
+	name = "Hypnosis"
 	overlay_state = "transfix"
 	releasedrain = 100
 	chargedrain = 0
@@ -1274,7 +1300,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	movement_interrupt = FALSE
 	chargedloop = null
 	invocation_type = "shout"
-	associated_skill = /datum/skill/magic/blood
+	associated_skill = /datum/skill/magic/arcane
 	antimagic_allowed = TRUE
 	charge_max = 10 SECONDS
 	include_user = 0
@@ -1300,10 +1326,10 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		for(var/obj/item/clothing/neck/roguetown/psicross/silver/I in L.contents) //Subpath fix.
 			found_psycross = TRUE
 			break
-			
+
 		if(bloodroll >= willroll)
 			if(found_psycross == TRUE)
-				to_chat(L, "<font color='white'>The silver psycross shines and protect me from the unholy magic.</font>")
+				to_chat(L, "<font color='white'>The silver symbol shines and protect me from the enchantment magic.</font>")
 				to_chat(user, span_userdanger("[L] has my BANE!It causes me to fail to ensnare their mind!"))
 			else
 				L.drowsyness = min(L.drowsyness + 50, 150)
@@ -1333,20 +1359,20 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 		if(willroll >= bloodroll)
 			if(found_psycross == TRUE)
-				to_chat(L, "<font color='white'>The silver psycross shines and protect me from the unholy magic.</font>")
+				to_chat(L, "<font color='white'>The silver symbol shines and protect me from the enchantment magic.</font>")
 				to_chat(user, span_userdanger("[L] has my BANE!It causes me to fail to ensnare their mind!"))
 			else
 				to_chat(user, "I fail to ensnare their mind.")
 			if(willroll - bloodroll >= 3)
 				if(found_psycross == TRUE)
-					to_chat(L, "<font color='white'> The silver psycross shines and protect me from the blood magic, the one who used blood magic was [user]!</font>")
+					to_chat(L, "<font color='white'> The silver symbol shines and protect me from the enchantment magick, the one who used the enchantment magic was nearby!</font>")
 				else
 					to_chat(user, "I fail to ensnare their mind.")
-					to_chat(L, "I feel like someone or something unholy is messing with my head. I should get out of here!")
+					to_chat(L, "I feel like someone or something is messing with my head. I should get out of here!")
 					var/holyskill = L.mind.get_skill_level(/datum/skill/magic/holy)
 					var/arcaneskill = L.mind.get_skill_level(/datum/skill/magic/arcane)
 					if(holyskill + arcaneskill >= 1)
-						to_chat(L, "I feel like the unholy magic came from [user]. I should use my magic or miracles on them.")
+						to_chat(L, "I feel like the enchantment magic came from [user]. I should investigate further..")
 
 /obj/effect/proc_holder/spell/targeted/transfix/master
 	name = "Subjugate"
@@ -1404,4 +1430,3 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 					L.Slowdown(50)
 					sleep(50)
 					L.Sleeping(300)
-

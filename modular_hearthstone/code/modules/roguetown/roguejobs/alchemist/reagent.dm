@@ -215,7 +215,7 @@
 	name = "Intellect Potion"
 	description = "Increases one's Intelligence and Perception."
 	reagent_state = LIQUID
-	color = "#922296"
+	color = "#00ffa6"
 	taste_description = "whispering insight"
 	overdose_threshold = 19
 	metabolization_rate = 0.2 * REAGENTS_METABOLISM 
@@ -232,7 +232,7 @@
 	name = "Virlity Potion"
 	description = "Increases one's virility."
 	reagent_state = LIQUID
-	color = "#ffa6f8"
+	color = "#759cbf"
 	taste_description = "aching virility"
 	overdose_threshold = 9
 	metabolization_rate = 0.2 * REAGENTS_METABOLISM 

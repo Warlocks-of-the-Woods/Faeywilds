@@ -8,7 +8,7 @@
 	desc = "<b>Seelie</b><br>\
 	The smallest of Fae-folk, Seelie are a mysterious race and not well understood. \
     Parentless creatures and apparently only feminine in nature, it is clear that they do not propogate in a typical human way. \
-    Instead, Seelie tend to appear and gather in places of chaos and misfortune, thriving in such an environment. \
+    Instead, Seelie tend to appear and gather in places of innate magic, thriving in such an environments. \
     Seelie are known to have Elemental Attunements, an influence of nature that mystically sprung them into existance. \
     Any tribalism or history regarding the race is scarce and uncommmon, and as such misconception and myth surrounds them. \
     The wary traveller should take heed of such beings, as both fortune and missery is said to accompany the little troublemakers."
@@ -46,8 +46,8 @@
 	specstats = list(
 		"perception" = 4,
 		"intelligence" = 2,
-		"constitution" = -6,
-		"endurance" = -1,
+		"constitution" = -1,
+		"endurance" = 0,
 		"speed" = 7,
 		"fortune" = 2
 		)
@@ -75,13 +75,18 @@
 		/datum/customizer/bodypart_feature/hair/facial/humanoid,
 		/datum/customizer/bodypart_feature/accessory,
 		/datum/customizer/bodypart_feature/face_detail,
+		/datum/customizer/bodypart_feature/underwear,
 		/datum/customizer/organ/wings/seelie,
 		/datum/customizer/organ/testicles/human,
 		/datum/customizer/organ/penis/human,
 		/datum/customizer/organ/breasts/human,
+		/datum/customizer/organ/belly/human,
+		/datum/customizer/organ/butt/human,
 		/datum/customizer/organ/vagina/human,
 		)
 	body_markings = list(
+		/datum/body_marking/flushed_cheeks,
+		/datum/body_marking/eyeliner,
 		/datum/body_marking/tonage,
 	)
 	languages = list(

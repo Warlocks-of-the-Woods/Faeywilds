@@ -4,5 +4,8 @@
 ##################################
 ## ACTUAL CONTRIBUTORS BELOW
 ####################################
-thepsydon
+Murderfox
+Frozzter
+Jimblob
+Wolfy-Sage
 CrimsonQuiver

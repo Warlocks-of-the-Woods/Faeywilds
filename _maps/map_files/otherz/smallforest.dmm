@@ -488,7 +488,7 @@
 /turf/closed/wall/mineral/rogue/stone,
 /area/rogue/indoors)
 "nk" = (
-/obj/effect/landmark/start/grenzelhoftlate{
+/obj/effect/landmark/start/mercenarylate{
 	dir = 4
 	},
 /turf/open/floor/rogue/cobble,

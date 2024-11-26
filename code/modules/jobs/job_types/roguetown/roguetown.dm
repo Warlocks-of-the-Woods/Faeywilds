@@ -70,12 +70,14 @@
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(to_chat), H, change_message), 5 SECONDS)
 /*	if(H.mind)
 		var/datum/species/pref_species = H.dna?.species
-		var/weak_gender = FEMALE
-		if(pref_species?.gender_swapping)
-			weak_gender = MALE
-		if(H.gender == weak_gender)
-			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
+		for(var/skill_type in pref_species.specskills)
+			H.mind.adjust_skillrank(skill_type, H.dna.species.specskills[skill_type], TRUE)
+		if(H.gender == FEMALE)
+			for(var/skill_type in pref_species.specskills_f)
+				H.mind.adjust_skillrank(skill_type, H.dna.species.specskills_f[skill_type], TRUE)
+		else
+			for(var/skill_type in pref_species.specskills_m)
+				H.mind.adjust_skillrank(skill_type, H.dna.species.specskills_m[skill_type], TRUE)
 		if(H.dna)
 			if(H.dna.species)
 				if(H.dna.species.name in list("Elf", "Half-Elf"))
@@ -103,7 +105,7 @@
 	var/choice = input("Choose a spell, points left: [H.mind.spell_points - H.mind.used_spell_points]") as null|anything in choices
 	var/obj/effect/proc_holder/spell/item = choices[choice]
 	if(!item)
-		return     // user canceled; 
+		return     // user canceled;
 	if(item.cost > H.mind.spell_points - H.mind.used_spell_points)
 		to_chat(H,span_warning("You do not have enough experience to learn a new spell"))
 		return		// not enough spell points

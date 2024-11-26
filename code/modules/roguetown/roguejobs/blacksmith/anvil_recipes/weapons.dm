@@ -6,7 +6,7 @@
 // Craft Difficulty: 1 (Base)
 
 /datum/anvil_recipe/weapons/isword
-	name = "Sword"
+	name = "Iron Sword"
 	req_bar = /obj/item/ingot/iron
 	created_item = /obj/item/rogueweapon/sword/iron
 	i_type = "Weapons"
@@ -123,7 +123,7 @@
 	craftdiff = 2
 
 /datum/anvil_recipe/weapons/ssword
-	name = "Sword"
+	name = "Steel Sword"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/rogueweapon/sword
 	i_type = "Weapons"

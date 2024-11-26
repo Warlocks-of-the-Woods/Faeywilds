@@ -388,8 +388,8 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 
 /datum/objective/escape/boat
 	name = "escape"
-	explanation_text = "Escape on the last boat out of ROGUETOWN."
-	team_explanation_text = "Escape on the last boat out of ROGUETOWN."
+	explanation_text = "Escape on the last boat out of DREAM KEEP."
+	team_explanation_text = "Escape on the last boat out of DREAM KEEP."
 
 /datum/objective/escape/boat/check_completion()
 	if(SSshuttle.emergency.mode != SHUTTLE_ENDGAME)

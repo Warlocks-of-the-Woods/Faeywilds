@@ -94,11 +94,13 @@
 		if(4)
 			affecting = get_bodypart(BODY_ZONE_HEAD)
 			chat_message = span_danger("I fall on my head!")
-	if(affecting && apply_damage(dam, BRUTE, affecting, run_armor_check(affecting, "blunt", damage = dam)))
+	if(affecting)
+		apply_damage(dam/2, BRUTE, affecting)
+		if(apply_damage(dam/2, BRUTE, affecting, run_armor_check(affecting, "blunt", damage = dam)))
+			if(levels >= 1)
+				//absurd damage to guarantee a crit
+				affecting.try_crit(BCLASS_TWIST, 300)
 		update_damage_overlays()
-		if(levels >= 1)
-			//ouchie
-			affecting.try_crit(BCLASS_TWIST, 125*levels)
 
 	if(chat_message)
 		to_chat(src, chat_message)
@@ -118,7 +120,7 @@
 
 /mob/living/carbon/human/Destroy()
 	QDEL_NULL(sexcon)
-	SShumannpc.processing -= src
+	STOP_PROCESSING(SShumannpc, src)
 	QDEL_NULL(physiology)
 	GLOB.human_list -= src
 	return ..()
@@ -141,7 +143,7 @@
 		if(VD)
 			if(statpanel("Stats"))
 				stat("Vitae:",VD.vitae)
-		if((mind.assigned_role == "Shepherd") || (mind.assigned_role == "Inquisitor"))
+		if((mind.assigned_role == "Shepherd") || (mind.assigned_role == "Witcher"))
 			if(statpanel("Status"))
 				stat("Confessions sent: [GLOB.confessors.len]")
 
@@ -1057,12 +1059,14 @@
 	return ..()
 
 /mob/living/carbon/human/species
-	var/race = null
+	var/datum/species/race = null
 
 /mob/living/carbon/human/species/Initialize()
 	. = ..()
 	if(race)
 		set_species(race)
+	if(erpable)
+		give_genitals()
 
 /mob/living/carbon/human/species/abductor
 	race = /datum/species/abductor
@@ -1244,6 +1248,9 @@
 
 /mob/living/carbon/human/proc/has_belly()
 	return getorganslot(ORGAN_SLOT_BELLY)
+
+/mob/living/carbon/human/proc/has_butt()
+	return getorganslot(ORGAN_SLOT_BUTT)
 
 /mob/living/carbon/human/proc/is_fertile()
 	return getorganslot(ORGAN_SLOT_VAGINA).fertility

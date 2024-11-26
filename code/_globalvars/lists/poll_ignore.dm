@@ -23,7 +23,6 @@
 #define POLL_IGNORE_ACADEMY_WIZARD "academy_wizard"
 #define POLL_IGNORE_NECROMANCER_SKELETON "necromancer_skeleton"
 
-
 GLOBAL_LIST_INIT(poll_ignore_desc, list(
 	POLL_IGNORE_SENTIENCE_POTION = "Sentience potion",
 	POLL_IGNORE_POSSESSED_BLADE = "Possessed blade",

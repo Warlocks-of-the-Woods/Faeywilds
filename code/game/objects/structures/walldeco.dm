@@ -174,12 +174,31 @@
 	breakoutextra = 10 MINUTES
 	buckleverb = "tie"
 
+/obj/structure/fluff/walldeco/user_unbuckle_mob(mob/living/M, mob/user)
+	if(obj_broken)
+		..()
+		return
+	if(isliving(user))
+		var/mob/living/L = user
+		var/time2mount = CLAMP((L.STASTR*2), 1, 99)
+		user.changeNext_move(CLICK_CD_RESIST)
+		if(user != M)
+			if(prob(time2mount))
+				..()
+			else
+				user.visible_message(span_warning("[user] tries to pull [M] free of [src]!"))
+			return
+		if(prob(time2mount))
+			..()
+		else
+			user.visible_message(span_warning("[user] tries to break free of [src]!"))
+
 /obj/structure/fluff/walldeco/chains/Initialize()
 	icon_state = "chains[rand(1,8)]"
 	..()
 
 /obj/structure/fluff/walldeco/customflag
-	name = "rockhill flag"
+	name = "stonehedge flag"
 	desc = ""
 	icon_state = "wallflag"
 

@@ -38,6 +38,7 @@
 		Stun(50)
 
 	if(mind)
+		mind.sleep_adv.add_stress_cycle(get_stress_amount())
 		for(var/datum/antagonist/A in mind.antag_datums)
 			A.on_life(src)
 
@@ -47,19 +48,23 @@
 				HM.on_life()
 
 		if(mode == AI_OFF)
+			handle_vamp_dreams()
 			if(IsSleeping())
 				if(health > 0)
 					if(has_status_effect(/datum/status_effect/debuff/sleepytime))
 						tiredness = 0
 						remove_status_effect(/datum/status_effect/debuff/sleepytime)
 						if(mind)
-							if(!mind.antag_datums || !mind.antag_datums.len)
-								allmig_reward++
-								to_chat(src, span_danger("Nights Survived: \Roman[allmig_reward]"))
-								var/datum/game_mode/chaosmode/C = SSticker.mode
-								if(istype(C) && C.allmig)
-									if(allmig_reward > 3)
-										adjust_triumphs(1)
+							mind.sleep_adv.advance_cycle()
+						var/datum/game_mode/chaosmode/C = SSticker.mode
+						if(istype(C))
+							if(mind)
+								if(!mind.antag_datums || !mind.antag_datums.len)
+									allmig_reward++
+									to_chat(src, span_danger("Nights Survived: \Roman[allmig_reward]"))
+									if(C.allmig)
+										if(allmig_reward > 3)
+											adjust_triumphs(1)
 					if(has_status_effect(/datum/status_effect/debuff/trainsleep))
 						remove_status_effect(/datum/status_effect/debuff/trainsleep)
 			if(HAS_TRAIT(src, TRAIT_LEPROSY))
@@ -72,6 +77,7 @@
 							part.add_wound(/datum/wound/slash)
 				adjustToxLoss(0.3)
 			//heart attack stuff
+			handle_curses()
 			handle_heart()
 			handle_liver()
 			update_rogfat()
@@ -79,8 +85,8 @@
 			if(charflaw && !charflaw.ephemeral)
 				charflaw.flaw_on_life(src)
 			if(health <= 0)
-				adjustOxyLoss(0.5)
-			if(!client && !HAS_TRAIT(src, TRAIT_NOSLEEP))
+				adjustOxyLoss(0.3)
+			if(!client && !isfucking && !HAS_TRAIT(src, TRAIT_NOSLEEP))
 				if(mob_timers["slo"])
 					if(world.time > mob_timers["slo"] + 90 SECONDS)
 						Sleeping(100)
@@ -89,7 +95,7 @@
 			else
 				if(mob_timers["slo"])
 					mob_timers["slo"] = null
-					
+
 		if(dna?.species)
 			dna.species.spec_life(src) // for mutantraces
 
@@ -243,6 +249,8 @@
 	if(locations & HEAD)
 		if(!coverhead)
 			add_stress(/datum/stressevent/coldhead)
+		else
+			add_stress(/datum/stressevent/raining)
 //	if(locations & FEET)
 //		if(!coverfeet)
 //			add_stress(/datum/stressevent/coldfeet)
@@ -395,6 +403,23 @@
 		Unconscious(80)
 	// Tissues die without blood circulation
 	adjustBruteLoss(2)
+
+/mob/living/carbon/human/proc/handle_vamp_dreams()
+	if(!mind)
+		return
+	if(!has_status_effect(/datum/status_effect/debuff/devitalised))
+		return
+	if(!eyesclosed)
+		return
+	if(mobility_flags & MOBILITY_STAND)
+		return
+	if(!istype(loc, /obj/structure/closet/crate/coffin))
+		return
+	var/obj/structure/closet/crate/coffin/coffin = loc
+	if(coffin.opened)
+		return
+	remove_status_effect(/datum/status_effect/debuff/devitalised)
+	mind.sleep_adv.advance_cycle()
 
 #undef THERMAL_PROTECTION_HEAD
 #undef THERMAL_PROTECTION_CHEST

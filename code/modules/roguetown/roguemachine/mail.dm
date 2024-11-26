@@ -34,13 +34,13 @@
 	if(!coin_loaded)
 		to_chat(user, span_warning("The machine doesn't respond. It needs a coin."))
 		return
-	var/send2place = input(user, "Where to? (Person or #number)", "ROGUETOWN", null)
+	var/send2place = input(user, "Where to? (Person or #number)", "DREAM KEEP", null)
 	if(!send2place)
 		return
-	var/sentfrom = input(user, "Who is this letter from?", "ROGUETOWN", null)
+	var/sentfrom = input(user, "Who is this letter from?", "DREAM KEEP", null)
 	if(!sentfrom)
 		sentfrom = "Anonymous"
-	var/t = stripped_multiline_input("Write Your Letter", "ROGUETOWN", no_trim=TRUE)
+	var/t = stripped_multiline_input("Write Your Letter", "DREAM KEEP", no_trim=TRUE)
 	if(t)
 		if(length(t) > 2000)
 			to_chat(user, span_warning("Too long. Try again."))
@@ -101,7 +101,7 @@
 
 /obj/structure/roguemachine/mail/attackby(obj/item/P, mob/user, params)
 	if(istype(P, /obj/item/paper/confession))
-		if((user.mind.assigned_role == "Confessor") || (user.mind.assigned_role == "Inquisitor"))
+		if((user.mind.assigned_role == "Confessor") || (user.mind.assigned_role == "Witcher"))
 			var/obj/item/paper/confession/C = P
 			if(C.signed)
 				if(GLOB.confessors)
@@ -117,7 +117,7 @@
 							GLOB.confessors += "[C.signed]"
 				qdel(C)
 				visible_message(span_warning("[user] sends something."))
-				send_ooc_note("Confessions: [GLOB.confessors.len]/5", job = list("confessor", "inquisitor", "priest"))
+				send_ooc_note("Confessions: [GLOB.confessors.len]/5", job = list("confessor", "Witcher", "Prophet"))
 				playsound(loc, 'sound/magic/hallelujah.ogg', 100, FALSE, -1)
 				playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 		return
@@ -125,8 +125,8 @@
 		if(P.w_class >= WEIGHT_CLASS_BULKY)
 			return
 		if(alert(user, "Send Mail?",,"YES","NO") == "YES")
-			var/send2place = input(user, "Where to? (Person or #number)", "ROGUETOWN", null)
-			var/sentfrom = input(user, "Who is this from?", "ROGUETOWN", null)
+			var/send2place = input(user, "Where to? (Person or #number)", "DREAM KEEP", null)
+			var/sentfrom = input(user, "Who is this from?", "DREAM KEEP", null)
 			if(!sentfrom)
 				sentfrom = "Anonymous"
 			if(findtext(send2place, "#"))

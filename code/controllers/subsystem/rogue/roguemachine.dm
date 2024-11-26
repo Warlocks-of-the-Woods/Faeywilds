@@ -23,7 +23,7 @@ PROCESSING_SUBSYSTEM_DEF(roguemachine)
 				for(var/I in death_queue)
 					var/obj/item/paper/P = new(X.loc)
 					P.mailer = "death witness"
-					P.mailedto = "steward of roguetown"
+					P.mailedto = "steward of stonehedge"
 					P.update_icon()
 					P.info = I
 					var/datum/component/storage/STR = X.GetComponent(/datum/component/storage)
@@ -62,7 +62,7 @@ PROCESSING_SUBSYSTEM_DEF(roguemachine)
 #ifdef TESTING
 /mob/living/verb/maxzcdec()
 	set category = "DEBUGTEST"
-	set name = "IsInRoguetown"
+	set name = "IsInStonehedge"
 	set desc = ""
 	if(is_in_roguetown(src))
 		to_chat(src, "\n<font color='purple'>IS IN</font>")

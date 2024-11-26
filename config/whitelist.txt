@@ -2,10 +2,29 @@
 # Basically, a list of ckeys who make it past user connection                                 #
 # Case is not important for ckey.                                                             #
 ###############################################################################################
-#Optimumtact
-#kevinz000
-#Iamgoofball
-#Rshoe95
-#That one penguin who became an admin
-
-Psydon
+Murderfox
+InferNelKorzky
+AnalWerewolf
+Omnom18
+Classynoto
+PlaugeWalker
+Jimblob
+Butch_Flowers
+Bryar
+JGlitch
+Longbuoy
+AnonymousWoman
+Sir K Lime
+SimpleStorage
+LaughingRabbit
+Guayo
+Bryar
+Merkel
+ATGiltspire
+A.Roche
+Xehra
+Wolfy-Sage
+nghetti
+CrimsonQuiver
+derflammenwerfer
+Uniqueuser2

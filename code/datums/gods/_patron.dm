@@ -1,5 +1,5 @@
-#define CLERIC_SPELLS "Cleric"
-#define PRIEST_SPELLS "Priest"
+#define CLERIC_SPELLS "Priest"
+#define PRIEST_SPELLS "Prophet"
 
 GLOBAL_LIST_EMPTY(patronlist)
 GLOBAL_LIST_EMPTY(patrons_by_faith)

@@ -5,20 +5,20 @@
 
 	telegraph_duration = 10 SECONDS
 	telegraph_message = span_warning("The sky begins to weep.")
-	telegraph_sound = 'sound/blank.ogg'
+	telegraph_sound = 'sound/ambience/rainin.ogg'
 
 	weather_message = ""
-	weather_overlay = "rain1"
+	weather_overlay = "rain"
 	weather_duration_lower = 5 MINUTES
 	weather_duration_upper = 12 MINUTES
-	weather_sound = 'sound/blank.ogg'
-	weather_alpha = 200
+	weather_sound = 'sound/ambience/rain.ogg'
+	weather_alpha = 100
 
 	probability = 3
 
 	end_duration = 5 SECONDS
 	end_message = ""
-	end_sound = 'sound/blank.ogg'
+	end_sound = 'sound/ambience/rainout.ogg'
 
 	area_type = /area/rogue/outdoors
 	protected_areas = list(/area/rogue/indoors,/area/rogue/under)
@@ -53,7 +53,7 @@
 			return "bla1"
 //			return telegraph_overlay
 		if(MAIN_STAGE)
-			return pick("rain1", "rain2", "rain3", "rain4")
+			return pick("rain")
 		if(WIND_DOWN_STAGE)
 			return "bla2"
 			return end_overlay
@@ -105,9 +105,8 @@
 		if(istype(A, /area/rogue/indoors))
 			M.playsound_local(M, pick('sound/ambience/noises/thunin (1).ogg','sound/ambience/noises/thunin (2).ogg','sound/ambience/noises/thunin (3).ogg','sound/ambience/noises/thunin (4).ogg'), 100, FALSE)
 			continue
-//	testing("dolightingflash")
-//	for(var/obj/machinery/light/sun/L in GLOB.machines)
-//		L.lightningflash()
+	/*for(var/obj/machinery/light/sun/L in GLOB.machines)
+		L.lightningflash()*/
 
 /datum/weather/rain/start()
 	. = ..()

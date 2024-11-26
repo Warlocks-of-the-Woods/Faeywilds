@@ -1,5 +1,5 @@
-/*/datum/job/roguetown/bogmaster
-	title = "Bog Master"
+/datum/job/roguetown/bogmaster
+	title = "Hedgemaster"
 	flag = BOGMASTER
 	department_flag = GARRISON
 	faction = "Station"
@@ -7,17 +7,17 @@
 	spawn_positions = 1
 	allowed_patrons = ALL_DIVINE_PATRONS
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
-	tutorial = "You are the most experienced idiot to volunteer to the Bog Guard... What a mistake that was. You report to the Judge, and your job is to keep the bogmen in line and to ensure the routes to the town are safe. May the nine have mercy on you..."
+	tutorial = " You are one of the most experienced members of the Elven Forest-Guard. You have the experience of a Ranger and the Strategum of a Wizard - the Respect of the Nation to boot. Your purpose is to protect the borders of the realm and handle the threats within it, with your trusty Hedge Knights - and those good adventurefolk you can trust."
 	display_order = JDO_BOGMASTER
-	whitelist_req = TRUE
+	whitelist_req = FALSE
 
 	spells = list(/obj/effect/proc_holder/spell/self/convertrole/bog)
 	outfit = /datum/outfit/job/roguetown/bogmaster
 
-	give_bank_account = 35
-	min_pq = 1
+	give_bank_account = 350
+	min_pq = 10
 	max_pq = null
 	cmode_music = 'sound/music/combat_bog.ogg'
 
@@ -36,42 +36,42 @@
 
 /datum/outfit/job/roguetown/bogmaster/pre_equip(mob/living/carbon/human/H)
 	. = ..()
-	head = /obj/item/clothing/head/roguetown/helmet/sallet/visored
+	head = /obj/item/clothing/head/roguetown/helmet/leather
 	pants = /obj/item/clothing/under/roguetown/chainlegs
-	cloak = /obj/item/clothing/cloak/stabard/bog
+	cloak = /obj/item/clothing/cloak/raincloak/green
 	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/half
 	neck = /obj/item/clothing/neck/roguetown/bervor
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	gloves = /obj/item/clothing/gloves/roguetown/chain
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
-	beltl = /obj/item/storage/keyring/guardcastle
-	beltr = /obj/item/rogueweapon/sword
+	beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/longbow
+	beltr = /obj/item/rogueweapon/sword/silver/sabre/elf
 	belt = /obj/item/storage/belt/rogue/leather
 	backr = /obj/item/storage/backpack/rogue/satchel
-	backl = /obj/item/rogueweapon/shield/tower
+	backl = /obj/item/quiver/Parrows
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1, /obj/item/signal_horn = 1)
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axes, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/tracking, 4, TRUE) //Hearthstone change.
-		H.mind.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)	//Peasent levy, so some skill
-		H.mind.adjust_skillrank(/datum/skill/labor/farming, pick(1,2,2), TRUE)		//Peasent levy, so some skill
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/axes, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/polearms, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/tracking, 4, TRUE) //Hearthstone change.
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/shields, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 3, TRUE)	//Peasent levy, so some skill
+		H.mind.adjust_skillrank_up_to(/datum/skill/labor/farming, pick(1,2,2), TRUE)		//Peasent levy, so some skill
 		H.change_stat("strength", 3)
 		H.change_stat("constitution", 2)
 		H.change_stat("perception", 2)
@@ -82,6 +82,16 @@
 	ADD_TRAIT(H, TRAIT_BOG_TREKKING, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_WILD_EATER, TRAIT_GENERIC)
 
+/obj/effect/proc_holder/spell/self/convertrole/bog
+	name = "Recruit Hedgeknight"
+	new_role = "Hedge Knight"
+	recruitment_faction = "Hedge Knight"
+	recruitment_message = "Serve the Forest, %RECRUIT!"
+	accept_message = "FOR THE HEDGE!"
+	refuse_message = "I refuse."
 
-
-*/
+/obj/effect/proc_holder/spell/self/convertrole/bog/convert(mob/living/carbon/human/recruit, mob/living/carbon/human/recruiter)
+	. = ..()
+	if(!.)
+		return
+	recruit.verbs |= /mob/proc/haltyell

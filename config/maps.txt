@@ -13,9 +13,11 @@ Format:
 	votable (is this map votable)
 endmap
 
-map rockhill
+map dreamhold
 	default
-	votable
+endmap
+
+map roguetest
 endmap
 map rockhill_rus
 	default

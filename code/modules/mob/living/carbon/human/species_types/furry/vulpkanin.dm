@@ -2,9 +2,9 @@
 	race = /datum/species/vulpkanin
 
 /datum/species/vulpkanin
-	name = "Vulpkian"
+	name = "Kitsune"
 	id = "vulpkanin"
-	desc = "In time you will learn the history of this race"
+	desc = "The Kitsune hail from a distant eastern outer-realm known for it's auspicious gods and land spirits. They are thought to be innately lucky and charismatic, just as revered as feared for their cunning."
 	default_color = "444"
 	species_traits = list(
 		MUTCOLORS,
@@ -12,7 +12,7 @@
 		LIPS,
 		HAIR,
 	)
-	inherent_traits = list(TRAIT_NOMOBSWAP)
+	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_NIGHT_VISION, TRAIT_WILD_EATER,TRAIT_NOFALLDAMAGE1,)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	attack_verb = "slash"
 	liked_food = GROSS | MEAT | FRIED
@@ -26,7 +26,7 @@
 		OFFSET_ID = list(0,1), OFFSET_GLOVES = list(0,1), OFFSET_WRISTS = list(0,1),\
 		OFFSET_CLOAK = list(0,1), OFFSET_FACEMASK = list(0,1), OFFSET_HEAD = list(0,1), \
 		OFFSET_FACE = list(0,1), OFFSET_BELT = list(0,1), OFFSET_BACK = list(0,1), \
-		OFFSET_NECK = list(0,1), OFFSET_MOUTH = list(0,1), OFFSET_PANTS = list(0,1), \
+		OFFSET_NECK = list(0,1), OFFSET_MOUTH = list(0,1), OFFSET_PANTS = list(0,0), \
 		OFFSET_SHIRT = list(0,1), OFFSET_ARMOR = list(0,1), OFFSET_HANDS = list(0,1), OFFSET_UNDIES = list(0,1), \
 		OFFSET_ID_F = list(0,-1), OFFSET_GLOVES_F = list(0,0), OFFSET_WRISTS_F = list(0,0), OFFSET_HANDS_F = list(0,0), \
 		OFFSET_CLOAK_F = list(0,0), OFFSET_FACEMASK_F = list(0,-1), OFFSET_HEAD_F = list(0,-1), \
@@ -34,8 +34,8 @@
 		OFFSET_NECK_F = list(0,-1), OFFSET_MOUTH_F = list(0,-1), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1), \
 		)
-	specstats = list("strength" = 0, "perception" = 1, "intelligence" = 1, "constitution" = -1, "endurance" = 0, "speed" = -1, "fortune" = 0)
-	specstats_f = list("strength" = -1, "perception" = 0, "intelligence" = 2, "constitution" = -1, "endurance" = 0, "speed" = 1, "fortune" = 0)
+	specstats = list("strength" = -1, "perception" = 2, "intelligence" = 2, "constitution" = -1, "endurance" = 0, "speed" = 1, "fortune" = 2)
+	specstats_f = list("strength" = -1, "perception" = 2, "intelligence" = 2, "constitution" = -1, "endurance" = 0, "speed" = 1, "fortune" = 2)
 	race_bonus = list(STAT_INTELLIGENCE = 1)
 	enflamed_icon = "widefire"
 	organs = list(
@@ -48,7 +48,8 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
-		ORGAN_SLOT_TAIL = /obj/item/organ/tail/vulpkanin,
+		ORGAN_SLOT_ANUS = /obj/item/organ/filling_organ/anus,
+		//ORGAN_SLOT_TAIL = /obj/item/organ/tail/vulpkanin, //Commenting out due to use of customizer organs.
 		ORGAN_SLOT_SNOUT = /obj/item/organ/snout/vulpkanin,
 		)
 	bodypart_features = list(
@@ -69,6 +70,7 @@
 		/datum/customizer/organ/penis/canine,
 		/datum/customizer/organ/breasts/animal,
 		/datum/customizer/organ/belly/animal,
+		/datum/customizer/organ/butt/animal,
 		/datum/customizer/organ/vagina/animal,
 		)
 	body_marking_sets = list(
@@ -78,6 +80,8 @@
 		/datum/body_marking_set/belly,
 	)
 	body_markings = list(
+		/datum/body_marking/flushed_cheeks,
+		/datum/body_marking/eyeliner,
 		/datum/body_marking/belly,
 		/datum/body_marking/bellyslim,
 		/datum/body_marking/butt,
@@ -86,6 +90,7 @@
 		/datum/body_marking/splotcheswap,
 	)
 	descriptor_choices = list(
+		/datum/descriptor_choice/height,
 		/datum/descriptor_choice/body,
 		/datum/descriptor_choice/stature,
 		/datum/descriptor_choice/face,
@@ -94,6 +99,12 @@
 		/datum/descriptor_choice/voice,
 		/datum/descriptor_choice/prominent_one,
 		/datum/descriptor_choice/prominent_two,
+		/datum/descriptor_choice/prominent_three,
+		/datum/descriptor_choice/prominent_four,
+	)
+	languages = list(
+		/datum/language/common,
+		/datum/language/beast
 	)
 
 /datum/species/vulpkanin/check_roundstart_eligible()

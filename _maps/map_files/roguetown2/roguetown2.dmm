@@ -548,7 +548,7 @@
 /area/rogue/under/town/basement)
 "cg" = (
 /obj/structure/closet/crate/coffin,
-/obj/item/reagent_containers/powder,
+/obj/item/reagent_containers/powder/spice,
 /turf/open/floor/carpet/purple,
 /area/rogue/under/town/basement)
 "ci" = (
@@ -608,7 +608,7 @@
 "cu" = (
 /obj/structure/table/wood,
 /obj/item/roguekey/dungeon,
-/obj/item/keyring,
+/obj/item/storage/keyring,
 /obj/item/roguekey/garrison,
 /turf/open/floor/rogue/concrete,
 /area/rogue/under/town/basement)
@@ -1705,7 +1705,7 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/outdoors/town)
 "gQ" = (
-/obj/effect/landmark/start/royalguard{
+/obj/effect/landmark/start/manorguardsman{
 	dir = 4
 	},
 /turf/open/floor/rogue/tile/masonic,
@@ -2924,7 +2924,7 @@
 /turf/open/floor/rogue/blocks/stonered,
 /area/rogue/indoors/town/dwarfin)
 "mw" = (
-/obj/effect/landmark/start/royalguard{
+/obj/effect/landmark/start/manorguardsman{
 	dir = 8
 	},
 /turf/open/floor/rogue/tile/masonic,
@@ -3234,7 +3234,7 @@
 /turf/open/transparent/openspace,
 /area/rogue/indoors/town/manor)
 "nR" = (
-/obj/effect/landmark/start/royalguard{
+/obj/effect/landmark/start/manorguardsman{
 	dir = 4
 	},
 /turf/open/floor/rogue/tile/masonic{
@@ -3432,7 +3432,7 @@
 	},
 /obj/item/roguekey/garrison,
 /obj/item/roguekey/garrison,
-/obj/item/keyring,
+/obj/item/storage/keyring,
 /turf/open/floor/rogue/blocks,
 /area/rogue/indoors/town/garrison)
 "oG" = (
@@ -3595,7 +3595,7 @@
 	},
 /area/rogue/outdoors/town)
 "ps" = (
-/obj/effect/landmark/start/royalguard{
+/obj/effect/landmark/start/manorguardsman{
 	dir = 8
 	},
 /turf/open/floor/rogue/tile/masonic{
@@ -3643,7 +3643,7 @@
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
 	},
-/obj/effect/landmark/start/royalguard{
+/obj/effect/landmark/start/manorguardsman{
 	dir = 4
 	},
 /turf/open/floor/rogue/tile/masonic{
@@ -3831,7 +3831,7 @@
 /turf/open/floor/rogue/cobblerock,
 /area/rogue/outdoors/rtfield)
 "qr" = (
-/obj/effect/landmark/start/royalguard{
+/obj/effect/landmark/start/manorguardsman{
 	dir = 4
 	},
 /turf/open/floor/rogue/tile/masonic{
@@ -4028,8 +4028,8 @@
 	icon_state = "tablewood1"
 	},
 /obj/item/roguekey/walls,
-/obj/item/keyring,
-/obj/item/keyring,
+/obj/item/storage/keyring,
+/obj/item/storage/keyring,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/town/garrison)
 "rl" = (
@@ -4198,7 +4198,7 @@
 /area/rogue/outdoors/rtfield)
 "sa" = (
 /obj/item/roguekey/shop,
-/obj/item/keyring,
+/obj/item/storage/keyring,
 /obj/structure/table/wood{
 	icon_state = "largetable";
 	dir = 10
@@ -4979,9 +4979,9 @@
 "vo" = (
 /obj/structure/closet/crate/chest,
 /obj/machinery/light/rogue/wallfire/candle/r,
-/obj/item/reagent_containers/food/snacks/egg/loaded,
-/obj/item/reagent_containers/food/snacks/egg/loaded,
-/obj/item/reagent_containers/food/snacks/egg/loaded,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
 /obj/item/reagent_containers/powder/salt,
 /obj/item/reagent_containers/powder/salt,
 /obj/item/reagent_containers/powder/salt,
@@ -5151,7 +5151,7 @@
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
 	},
-/obj/effect/landmark/start/royalguard{
+/obj/effect/landmark/start/manorguardsman{
 	dir = 8
 	},
 /turf/open/floor/rogue/tile/masonic,
@@ -5311,7 +5311,7 @@
 /area/rogue/indoors/town/manor)
 "wN" = (
 /obj/machinery/light/rogue/wallfire/candle,
-/obj/item/reagent_containers/glass/pot,
+/obj/item/reagent_containers/glass/bucket/pot,
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town/manor)
 "wO" = (
@@ -7466,7 +7466,7 @@
 /obj/structure/closet/crate/roguecloset,
 /obj/item/roguekey/dungeon,
 /obj/item/roguekey/walls,
-/obj/item/keyring,
+/obj/item/storage/keyring,
 /obj/item/roguekey/manor,
 /obj/item/storage/backpack/rogue/satchel,
 /turf/open/floor/carpet/royalblack,
@@ -8199,7 +8199,7 @@
 /area/rogue/indoors/town/shop)
 "HI" = (
 /obj/structure/closet/crate/roguecloset,
-/obj/item/reagent_containers/powder,
+/obj/item/reagent_containers/powder/spice,
 /obj/item/roguekey/merchant,
 /turf/open/floor/rogue/tile,
 /area/rogue/indoors/town/shop)
@@ -9149,7 +9149,7 @@
 /area/rogue/indoors/town/church)
 "Lb" = (
 /obj/structure/table/wood,
-/obj/item/keyring,
+/obj/item/storage/keyring,
 /obj/structure/fluff/railing/wood{
 	dir = 1;
 	pixel_y = 7;
@@ -11011,7 +11011,7 @@
 /turf/open/floor/rogue/blocks,
 /area/rogue/indoors/town/manor)
 "Sg" = (
-/obj/effect/landmark/start/royalguard{
+/obj/effect/landmark/start/manorguardsman{
 	dir = 8
 	},
 /turf/open/floor/rogue/tile/masonic{
@@ -11103,7 +11103,7 @@
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/bath)
 "SC" = (
-/obj/item/reagent_containers/glass/pot,
+/obj/item/reagent_containers/glass/bucket/pot,
 /turf/open/floor/rogue/tile,
 /area/rogue/indoors/town/tavern)
 "SD" = (
@@ -11330,7 +11330,7 @@
 /area/rogue/indoors)
 "Tt" = (
 /obj/structure/table/wood,
-/obj/item/keyring,
+/obj/item/storage/keyring,
 /turf/open/floor/rogue/wood,
 /area/rogue/outdoors/town)
 "Tu" = (
@@ -11397,7 +11397,7 @@
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
 	},
-/obj/effect/landmark/start/royalguard{
+/obj/effect/landmark/start/manorguardsman{
 	dir = 4
 	},
 /turf/open/floor/rogue/tile/masonic{
@@ -12234,7 +12234,7 @@
 /area/rogue/outdoors/beach)
 "WR" = (
 /obj/structure/chair/wood/rogue,
-/obj/effect/landmark/start/judge,
+/obj/effect/landmark/start/marshal,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/town/basement)
 "WS" = (

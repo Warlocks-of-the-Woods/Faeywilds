@@ -1,8 +1,8 @@
 /obj/effect/proc_holder/spell/invoked/strengthen_undead
-	name = "Strengthen Undead"
+	name = "Infuse Unlife"
 	overlay_state = "raiseskele"
 	releasedrain = 30
-	chargetime = 5
+	chargetime = 2
 	range = 7
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
@@ -28,7 +28,8 @@
 			return TRUE
 		target.visible_message(span_info("Necrotic energy floods over [target]!"), span_userdanger("I feel colder as the dark energy floods into me!"))
 		if(iscarbon(target))
-			target.Paralyze(50)
+			target.emote("scream")
+			target.Stun(30)
 		else
 			target.adjustBruteLoss(20)
 		return TRUE
@@ -38,7 +39,7 @@
 	name = "Eyebite"
 	overlay_state = "raiseskele"
 	releasedrain = 30
-	chargetime = 15
+	chargetime = 7
 	range = 7
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
@@ -68,7 +69,7 @@
 	overlay_state = "raiseskele"
 	sound = list('sound/magic/magnet.ogg')
 	releasedrain = 40
-	chargetime = 60
+	chargetime = 30
 	warnie = "spellwarning"
 	no_early_release = TRUE
 	charging_slowdown = 1
@@ -233,7 +234,7 @@
 	sound = list('sound/misc/portal_enter.ogg')
 	active = FALSE
 	releasedrain = 30
-	chargetime = 10
+	chargetime = 5
 	warnie = "spellwarning"
 	no_early_release = TRUE
 	charging_slowdown = 1
@@ -267,3 +268,63 @@
 		if(player.mind)
 			to_chat(player, span_boldannounce("Lich [lich_player.real_name] commands: [message]"))
 
+
+/obj/effect/proc_holder/spell/invoked/projectile/lifesteal
+	name = "Life Steal"
+	desc = ""
+	clothes_req = FALSE
+	overlay_state = "bloodsteal"
+	sound = 'sound/magic/vlightning.ogg'
+	range = 8
+	projectile_type = /obj/projectile/magic/lifesteal
+	releasedrain = 30
+	chargedrain = 1
+	chargetime = 25
+	charge_max = 20 SECONDS
+	warnie = "spellwarning"
+	no_early_release = TRUE
+	movement_interrupt = FALSE
+	charging_slowdown = 3
+	chargedloop = /datum/looping_sound/invokegen
+	associated_skill = /datum/skill/magic/blood
+
+/obj/projectile/magic/lifesteal
+	name = "life steal"
+	tracer_type = /obj/effect/projectile/tracer/lifesteal
+	muzzle_type = null
+	impact_type = null
+	hitscan = TRUE
+	movement_type = UNSTOPPABLE
+	damage = 25
+	damage_type = BRUTE
+	nodamage = FALSE
+	speed = 0.3
+	flag = "magic"
+	light_color = "#00d5ff"
+	light_range = 7
+
+/obj/effect/projectile/tracer/lifesteal
+	name = "life steal"
+	icon_state = "tracer_beam"
+
+/obj/projectile/magic/lifesteal/on_hit(target)
+	. = ..()
+	if(ismob(target))
+		var/mob/M = target
+		if(M.anti_magic_check())
+			visible_message(span_warning("[src] fizzles on contact with [target]!"))
+			playsound(get_turf(target), 'sound/magic/magic_nulled.ogg', 100)
+			qdel(src)
+			return BULLET_ACT_BLOCK
+		if(ishuman(target))
+			var/mob/living/carbon/human/H = target
+			H.visible_message(span_danger("[target] has their life force ripped from their body!!"), \
+					span_userdanger("I feel like i lost a part of me within!"), \
+					span_hear("..."), COMBAT_MESSAGE_RANGE, target)
+			sender.heal_overall_damage(25, 25)
+		var/list/wCount = sender.get_wounds()
+		if(wCount.len > 0)
+			sender.heal_wounds(25)
+			sender.update_damage_overlays()
+			to_chat(sender, span_blue("I feel some of my wounds mend."))
+	qdel(src)

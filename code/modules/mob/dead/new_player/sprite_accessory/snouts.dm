@@ -193,6 +193,8 @@
 /datum/sprite_accessory/snout/shark
 	name = "Shark"
 	icon_state = "shark"
+	color_keys = 2
+	color_key_names = list("Snout", "Inner")
 
 /datum/sprite_accessory/snout/hshark
 	name = "hShark"

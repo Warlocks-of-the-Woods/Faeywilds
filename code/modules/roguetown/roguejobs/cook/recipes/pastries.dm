@@ -119,7 +119,7 @@
 // 	result = /obj/item/reagent_containers/food/snacks/rogue/applejam
 // 	craftdiff = 2
 // 	subtype_reqs = FALSE
-// 	tools = list(/obj/item/reagent_containers/glass/pot)
+// 	tools = list(/obj/item/reagent_containers/glass/bucket/pot)
 
 // /obj/item/reagent_containers/food/snacks/rogue/applejam
 // 	name = "apple jam"
@@ -247,7 +247,7 @@
 // 	result = /obj/item/reagent_containers/food/snacks/rogue/berryjam
 // 	craftdiff = 2
 // 	subtype_reqs = FALSE
-// 	tools = list(/obj/item/reagent_containers/glass/pot)
+// 	tools = list(/obj/item/reagent_containers/glass/bucket/pot)
 
 // /obj/item/reagent_containers/food/snacks/rogue/berryjam
 // 	name = "berry jam"
@@ -454,7 +454,7 @@
 // 	result = /obj/item/reagent_containers/food/snacks/rogue/candybase
 // 	craftdiff = 1
 // 	subtype_reqs = FALSE
-// 	tools = list(/obj/item/reagent_containers/glass/pot)
+// 	tools = list(/obj/item/reagent_containers/glass/bucket/pot)
 
 // /obj/item/reagent_containers/food/snacks/rogue/candybase
 // 	name = "candy base"
@@ -475,7 +475,7 @@
 // 	result = /obj/item/reagent_containers/food/snacks/rogue/pumpkincandy
 // 	craftdiff = 1
 // 	subtype_reqs = FALSE
-// 	tools = list(/obj/item/reagent_containers/glass/pot)
+// 	tools = list(/obj/item/reagent_containers/glass/bucket/pot)
 
 // /obj/item/reagent_containers/food/snacks/rogue/pumpkincandy
 // 	name = "pumpkin candy"
@@ -510,7 +510,7 @@
 // 	result = /obj/item/reagent_containers/food/snacks/rogue/applecandy
 // 	craftdiff = 1
 // 	subtype_reqs = FALSE
-// 	tools = list(/obj/item/reagent_containers/glass/pot)
+// 	tools = list(/obj/item/reagent_containers/glass/bucket/pot)
 
 // /obj/item/reagent_containers/food/snacks/rogue/applecandy
 // 	name = "apple candy"
@@ -545,7 +545,7 @@
 // 	result = /obj/item/reagent_containers/food/snacks/rogue/berrycandy
 // 	craftdiff = 1
 // 	subtype_reqs = FALSE
-// 	tools = list(/obj/item/reagent_containers/glass/pot)
+// 	tools = list(/obj/item/reagent_containers/glass/bucket/pot)
 
 // /obj/item/reagent_containers/food/snacks/rogue/berrycandy
 // 	name = "berry candy"

@@ -5,11 +5,7 @@
 	name = "Goblin"
 	id = "goblinp"
 	desc = "<b>Goblin</b><br>\
-		Spawn of Graggar, these small, green creatures are usually found where Orcs are found. \
-		Cruel and unfriendly, most Goblins stick to their own tribes, and are rarely kind to outsiders. \
-		Runts of the Goblin litter are more often than not shunned and kicked out of their tribe, forced to roam the world alone. \
-		These Goblins can find themselves in the cities of Man, some of them finding work via crime, while others make use of their skills to assist the watchmen. \
-		Born of Graggar's will, Goblins worship him over any other god in the Inhumen Pantheon, but some Goblins will worship any god from the pantheon, especially Baotha or even Matthios, the King of Thieves."
+	Small chaotic creatures, hailing from the Fairy dimension. They are vicious and vile, cunning and brutal. Many of the outer realms hold contempt for their kin from past ambushes and assaults."
 	species_traits = list(EYECOLOR,LIPS,STUBBLE)
 	inherent_traits = list(TRAIT_NOMOBSWAP)
 	possible_ages = ALL_AGES_LIST
@@ -35,6 +31,7 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
+		ORGAN_SLOT_ANUS = /obj/item/organ/filling_organ/anus,
 		)
 	offset_features = list(
 		OFFSET_ID = list(0,-4), OFFSET_GLOVES = list(0,0), OFFSET_WRISTS = list(0,0),\
@@ -45,7 +42,7 @@
 		OFFSET_ID_F = list(0,-5), OFFSET_GLOVES_F = list(0,-4), OFFSET_WRISTS_F = list(0,-4), OFFSET_HANDS_F = list(0,-4), \
 		OFFSET_CLOAK_F = list(0,0), OFFSET_FACEMASK_F = list(0,-5), OFFSET_HEAD_F = list(0,-5), \
 		OFFSET_FACE_F = list(0,-5), OFFSET_BELT_F = list(0,-4), OFFSET_BACK_F = list(0,-4), \
-		OFFSET_NECK_F = list(0,-5), OFFSET_MOUTH_F = list(0,-5), OFFSET_PANTS_F = list(0,0), \
+		OFFSET_NECK_F = list(0,-5), OFFSET_MOUTH_F = list(0,-5), OFFSET_BUTT = list(0,-4), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES = list(0,0), OFFSET_UNDIES_F = list(0,0), \
 		)
 	specstats = list("strength" = -1, "perception" = 1, "intelligence" = -2, "constitution" = -1, "endurance" = 1, "speed" = 2, "fortune" = 0)
@@ -66,6 +63,7 @@
 		/datum/customizer/organ/penis/human,
 		/datum/customizer/organ/breasts/human,
 		/datum/customizer/organ/belly/human,
+		/datum/customizer/organ/butt/human,
 		/datum/customizer/organ/vagina/human,
 		)
 	languages = list(

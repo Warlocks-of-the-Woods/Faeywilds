@@ -5,10 +5,14 @@
 	name = "Half Orc"
 	id = "halforc"
 	desc = "<b>Half Orcs</b><br>\
-		The result of communion between an Orc and a Humen, these outcasts of Orcish society find themselves struggling to find purpose in the lands of other races. \
-		Looked down upon by most for their birth, Half-Orcs are not as strong as pure Orcs, but sadly still retain much of their ignorance and stupidity. \
-		Some Half-Orcs find a way to rise above their Orcish heritage, usually through martial prowess. \
-		It is for this reason that Half-Orcs predominantly worship Ravox over other gods in the divine pantheon." 
+	With the various clans across the realms on a centuries-long warpath, \
+	crushed orc tribes have lost their menfolk and war-widows have been scattered to the hinterlands. \
+	Between human civilization and orc savagery, orc-women opting for exile over dishonor have become \
+	more common visitors to fur trading posts and prospecting camps, eventually leading to half-orcs \
+	being born in these rough places otherwise devoid of a fairer sex. Your mother-clan is irrelevent within modern society. \
+	True orcs would kill you as a mongrel dog and your people cannot decide constantly  how to become one, if not for the wisdom of your tribal leaders in decades past. \
+	between mere distrust and disgust. Yet somehow your wandering feet came to this place, where \
+	half-orcs ply muscle and their hardiness in the rough underbelly or outer reaches of society."
 
 	skin_tone_wording = "Clan"
 
@@ -38,8 +42,8 @@
 	OFFSET_FACE_F = list(0,1), OFFSET_BELT_F = list(0,1), OFFSET_BACK_F = list(0,1), \
 	OFFSET_NECK_F = list(0,1), OFFSET_MOUTH_F = list(0,1), OFFSET_PANTS_F = list(0,1), \
 	OFFSET_SHIRT_F = list(0,1), OFFSET_ARMOR_F = list(0,1), OFFSET_UNDIES_F = list(0,1))
-	specstats = list("strength" = 1, "perception" = -2, "intelligence" = -2, "constitution" = 2, "endurance" = 1, "speed" = 0, "fortune" = 0)
-	specstats_f = list("strength" = 1, "perception" = -1, "intelligence" = -2, "constitution" = 1, "endurance" = 2, "speed" = 0, "fortune" = -1)
+	specstats = list("strength" = 2, "perception" = 1, "intelligence" = -1, "constitution" = 2, "endurance" = 2, "speed" = 0, "fortune" = -2)
+	specstats_f = list("strength" = 2, "perception" = 1, "intelligence" = -1, "constitution" = 2, "endurance" = 2, "speed" = 0, "fortune" = -2)
 	race_bonus = list(STAT_CONSTITUTION = 1)
 	enflamed_icon = "widefire"
 	organs = list(
@@ -52,9 +56,12 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
+		ORGAN_SLOT_ANUS = /obj/item/organ/filling_organ/anus,
 		ORGAN_SLOT_HORNS = /obj/item/organ/horns/halforc,
 		)
 	body_markings = list(
+		/datum/body_marking/flushed_cheeks,
+		/datum/body_marking/eyeliner,
 		/datum/body_marking/tonage,
 	)
 	customizers = list(
@@ -68,6 +75,7 @@
 		/datum/customizer/organ/penis/human,
 		/datum/customizer/organ/breasts/human,
 		/datum/customizer/organ/belly/human,
+		/datum/customizer/organ/butt/human,
 		/datum/customizer/organ/vagina/human,
 		)
 	languages = list(

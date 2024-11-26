@@ -1,16 +1,16 @@
 /datum/job/roguetown/vampire/vampthrall
-	title = "Antediluvian Peasant"
+	title = "Underdark Peasant"
 	flag = VAMPTHRALL
 	department_flag = VAMPIRE
 	faction = "Station"
-	total_positions = 0
-	spawn_positions = 0
+	total_positions = 10
+	spawn_positions = 10
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 	show_in_credits = FALSE		//Stops Scom from announcing their arrival.
 	spells = list(/obj/effect/proc_holder/spell/invoked/diagnose/secular, /obj/effect/proc_holder/spell/self/convertrole/vampire,
 	/obj/effect/proc_holder/spell/targeted/shapeshift/bat)
-	tutorial = "You've existed long before the gods existed, you know the truth and have no reason to worship them. You are faithless. After attaining power, Zizo has cursed your people, bringing bad omens where ever you go. For this reason, the people of Rockhill have shunned you and discriminated against you, there is no possible way an antediluvian will ever hold a position of power in Rockhill, let alone be welcomed. Zizo has only shown favor to one antediluvian, rewarding them with the title of Vampire Lord, and gifting them powers far beyond that of a regular nitecreacher. Your pale skin, fangs, and eerie eyes are EASILY identifable features, so it is best to stay covered at all times in public areas."
+	tutorial = "You are one of the fallen, sired by the lord of the underkeep. You are a vampire thrall; and you find yourself within the undercity as one of it's subjects."
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/vampthrall
 	/* advclass_cat_rolls = list(CTAG_ADVENTURER = 20)
@@ -23,18 +23,18 @@
 
 /datum/outfit/job/roguetown/vampthrall/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3 , TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/masonry, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/labor/farming, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 2, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 4, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 3 , TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/craft/masonry, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/craft/carpentry, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/sewing, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/labor/farming, 4, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/craft/cooking, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 4, TRUE)
 	belt = /obj/item/storage/belt/rogue/leather
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/random
 	cloak = /obj/item/clothing/cloak/raincloak/brown
@@ -71,7 +71,7 @@
 			if(isturf(H.loc))
 				var/turf/T = H.loc
 				if(T.can_see_sky())
-					if(T.get_lumcount() > 0.15)	
+					if(T.get_lumcount() > 0.15)
 						to_chat(H, span_warning("Astrata spurns me! I must get out of her rays!")) // VLord is more punished for daylight excursions.
 						var/turf/N = H.loc
 						if(N.can_see_sky())
@@ -84,7 +84,7 @@
 		var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampirelord/lesser()
 		H.mind.add_antag_datum(new_antag)
 
-	
+
 /obj/effect/proc_holder/spell/self/convertrole/vampire
 	name = "Recruit Ally"
 	new_role = "Vampyre Sympathizer"

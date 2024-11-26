@@ -32,6 +32,8 @@
 	var/magic_sickness = FALSE
 
 /mob/living/proc/calculate_attunement_points()
+	if(!mind)
+		return
 	attunement_points_max = STAINT - 4 + mind.get_skill_level(/datum/skill/magic/arcane) + attunement_points_bonus
 
 /mob/living/proc/check_attunement_points()
@@ -49,7 +51,7 @@
 /datum/status_effect/buff/magic_sickness
 	id = "arcyne sickness"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/magic_sickness
-	effectedstats = list("strength" = -2, "perception" = -2, "constitution" = -2, "endurance" = -2, "speed" = -2, "fortune" = -2) //int is not effected because int effects attunement points themselves, that could trap you with arcyne sickness
+	effectedstats = list("strength" = -2, "constitution" = -2, "endurance" = -2) //int is not effected because int effects attunement points themselves, that could trap you with arcyne sickness
 	duration = -1
 
 /datum/status_effect/buff/magic_sickness/tick()
@@ -79,8 +81,6 @@
 	return TRUE
 
 /datum/species
-	var/list/specstats = list("strength" = 0, "perception" = 0, "intelligence" = 0, "constitution" = 0, "endurance" = 0, "speed" = 0, "fortune" = 0)
-	var/list/specstats_f = list("strength" = 0, "perception" = 0, "intelligence" = 0, "constitution" = 0, "endurance" = 0, "speed" = 0, "fortune" = 0)
 	// Associative list of stat (STAT_STRENGTH, etc) bonuses used to differentiate each race. They should ALWAYS be positive.
 	var/list/race_bonus = list()
 
@@ -92,6 +92,7 @@
 	STAEND = 10
 	STASPD = 10
 	STALUC = 10
+/*		Bye-bye stat drift RNG
 	for(var/S in MOBSTATS)
 		if(prob(33))
 			change_stat(S, 1)
@@ -101,6 +102,7 @@
 			change_stat(S, -1)
 			if(prob(33))
 				change_stat(S, 1)
+*/
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 		/* - Old way of handling race/gender stats, no longer used. See: Statpacks.
@@ -111,7 +113,7 @@
 			else
 				for(var/S in H.dna.species.specstats)
 					change_stat(S, H.dna.species.specstats[S])*/
-		
+
 		if (H.statpack)
 			H.statpack.apply_to_human(H)
 		if (H.dna?.species) // LETHALSTONE EDIT: apply our race bonus, if we have one

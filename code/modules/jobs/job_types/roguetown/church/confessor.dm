@@ -3,8 +3,8 @@
 	flag = CONFESSOR
 	department_flag = CHURCHMEN
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	allowed_patrons = list(
 		/datum/patron/old_god,
 		/datum/patron/divine/astrata,
@@ -18,14 +18,14 @@
 		/datum/patron/divine/malum,
 	)
 
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 	allowed_sexes = list(MALE, FEMALE)
 	tutorial = "Confessors are shady agents of the church hired to spy on the populace and keep them moral. As the most fanatical members of the clergy, their main concern is assisting the local Inquisitor with their work in extracting confessions of sin as well as hunting night beasts and cultists that hide in plain sight."
 
 	outfit = /datum/outfit/job/roguetown/shepherd
 	//cant use the spells anyway due no devotion.
 	//spells = list(/obj/effect/proc_holder/spell/invoked/heal, /obj/effect/proc_holder/spell/invoked/shepherd)
-	whitelist_req = TRUE
+	whitelist_req = FALSE
 	display_order = JDO_SHEPHERD
 	give_bank_account = 3
 	min_pq = 0
@@ -48,20 +48,20 @@
 	beltl = /obj/item/rogueweapon/mace/cudgel
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/maces, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/tracking, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sewing, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sneaking, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/stealing, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/tracking, 3, TRUE)
 		H.change_stat("intelligence", -1)
 		H.change_stat("endurance", 1)
 		H.change_stat("strength", 2)

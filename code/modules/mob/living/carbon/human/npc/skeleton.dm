@@ -7,13 +7,17 @@
 					 /obj/item/bodypart/r_arm, /obj/item/bodypart/r_leg, /obj/item/bodypart/l_leg)
 	faction = list("undead")
 	var/skel_outfit = /datum/outfit/job/roguetown/npc/skeleton
+	var/skel_fragile = FALSE
 	ambushable = FALSE
 	rot_type = null
 	possible_rmb_intents = list()
+	cmode_music = 'sound/music/combat_weird.ogg'
+
 /mob/living/carbon/human/species/skeleton/npc
 	aggressive = 1
 	mode = AI_IDLE
 	wander = FALSE
+	skel_fragile = TRUE
 
 /mob/living/carbon/human/species/skeleton/npc/ambush
 	wander = TRUE
@@ -57,10 +61,18 @@
 	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOPAIN, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_SHOCKIMMUNE, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LIMBATTACHMENT, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_CRITICAL_RESISTANCE, TRAIT_GENERIC)
+	if(skel_fragile)
+		ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
+	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
+	if(eyes)
+		eyes.Remove(src,1)
+		QDEL_NULL(eyes)
+	eyes = new /obj/item/organ/eyes/night_vision/zombie
+	eyes.Insert(src)
+
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_KNEESTINGER_IMMUNITY, TRAIT_GENERIC)
 	for(var/obj/item/bodypart/B in src.bodyparts)
 		B.skeletonize(FALSE)
 	update_body()
@@ -71,19 +83,19 @@
 
 /datum/outfit/job/roguetown/npc/skeleton/pre_equip(mob/living/carbon/human/H)
 	..()
-	if(prob(50))
+	if(prob(90))
 		wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
-	if(prob(10))
+	if(prob(80))
+		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
+	if(prob(30))
 		armor = /obj/item/clothing/suit/roguetown/armor/chainmail/iron
 	if(prob(30))
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/vagrant
 		if(prob(50))
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/vagrant/l
-	if(prob(30))
-		pants = /obj/item/clothing/under/roguetown/tights/vagrant
-		if(prob(50))
-			pants = /obj/item/clothing/under/roguetown/tights/vagrant/l
-	if(prob(10))
+	if(prob(90))
+		pants = /obj/item/clothing/under/roguetown/chainlegs/iron
+	if(prob(40))
 		head = /obj/item/clothing/head/roguetown/helmet/leather
 	if(prob(70))
 		gloves = /obj/item/clothing/gloves/roguetown/chain
@@ -151,6 +163,36 @@
 	H.STACON = 20
 	H.STAEND = 20
 	H.STAINT = 1
+
+	//light labor skills for skeleton manual labor and some warrior-adventurer skills, equipment is still bad probably
+	if(H.mind) //npcs dont have a mind.
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/carpentry, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/masonry, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sewing, 1, TRUE)
+
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/polearms, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/axes, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/shields, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 2, TRUE)
+
+	H.set_patron(/datum/patron/inhumen/zizo)
+	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
+
+	H.possible_rmb_intents = list(/datum/rmb_intent/feint,\
+	/datum/rmb_intent/aimed,\
+	/datum/rmb_intent/strong,\
+	/datum/rmb_intent/swift,\
+	/datum/rmb_intent/riposte,\
+	/datum/rmb_intent/weak)
+	H.swap_rmb_intent(num=1) //dont want to mess with base NPCs too much out of fear of breaking them so I assigned the intents in the outfit
+
 	if(prob(50))
 		r_hand = /obj/item/rogueweapon/eaglebeak/lucerne
 		l_hand = null

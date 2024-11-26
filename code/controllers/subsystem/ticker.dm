@@ -40,7 +40,7 @@ SUBSYSTEM_DEF(ticker)
 	//376000 day
 	var/gametime_offset = 288001		//Deciseconds to add to world.time for station time.
 	var/station_time_rate_multiplier = 50		//factor of station time progressal vs real time.
-	var/time_until_vote = 150 MINUTES //This doesnt do anything. Old unused var, I believe. Handled with INITIAL_ROUND_TIMER in compile options
+	var/time_until_vote = 150 MINUTES
 	var/last_vote_time = null
 	var/autovote = TRUE
 	var/firstvote = TRUE
@@ -67,8 +67,9 @@ SUBSYSTEM_DEF(ticker)
 	var/end_state = "undefined"
 	var/job_change_locked = FALSE
 	var/list/royals_readied = list()
-	var/rulertype = "Duke" // reports whether king or queen rules
+	var/rulertype = "Monarch" // reports whether king or queen rules
 	var/rulermob = null // reports what the ruling mob is.
+	var/rulermob2 = null // for queen
 	var/failedstarts = 0
 	var/list/manualmodes = list()
 
@@ -244,7 +245,16 @@ SUBSYSTEM_DEF(ticker)
 				toggle_dooc(TRUE)
 				declare_completion(force_ending)
 				Master.SetRunLevel(RUNLEVEL_POSTGAME)
-
+			if(firstvote)
+				if(world.time > round_start_time + time_until_vote && autovote)
+					SSvote.initiate_vote("restart", "The Gods")
+					//nah keep the old time bruv
+					//time_until_vote = 30 MINUTES
+					last_vote_time = world.time
+					firstvote = FALSE
+			else
+				if(world.time > last_vote_time + time_until_vote && autovote)
+					SSvote.initiate_vote("restart", "The Gods")
 
 /datum/controller/subsystem/ticker
 	var/last_bot_update = 0
@@ -253,7 +263,7 @@ SUBSYSTEM_DEF(ticker)
 	var/list/readied_jobs = list()
 	var/list/required_jobs = list()
 
-	//var/list/required_jobs = list("Queen","King","Merchant") //JTGSZ - 4/11/2024 - This was the prev set of required jobs to go with the hardcoded checks commented out below
+	//var/list/required_jobs = list("Queen","Monarch","Merchant") //JTGSZ - 4/11/2024 - This was the prev set of required jobs to go with the hardcoded checks commented out below
 
 	for(var/V in required_jobs)
 		for(var/mob/dead/new_player/player in GLOB.player_list)
@@ -269,11 +279,11 @@ SUBSYSTEM_DEF(ticker)
 		/*
 			// These else conditions stop the round from starting unless there is a merchant, king, and queen.
 		else
-			var/list/stuffy = list("Set a Ruler to 'high' in your class preferences to start the game!", "PLAY Ruler NOW!", "A Ruler is required to start.", "Pray for a Ruler.", "One day, there will be a Ruler.", "Just try playing Ruler.", "If you don't play Ruler, the game will never start.", "We need at least one Ruler to start the game.", "We're waiting for you to pick Ruler to start.", "Still no Ruler is readied..", "I'm going to lose my mind if we don't get a Ruler readied up.","No. The game will not start because there is no Ruler.","What's the point of ROGUETOWN without a Ruler?")
+			var/list/stuffy = list("Set a Ruler to 'high' in your class preferences to start the game!", "PLAY Ruler NOW!", "A Ruler is required to start.", "Pray for a Ruler.", "One day, there will be a Ruler.", "Just try playing Ruler.", "If you don't play Ruler, the game will never start.", "We need at least one Ruler to start the game.", "We're waiting for you to pick Ruler to start.", "Still no Ruler is readied..", "I'm going to lose my mind if we don't get a Ruler readied up.","No. The game will not start because there is no Ruler.","What's the point of DREAM KEEP without a Ruler?")
 			to_chat(world, span_purple("[pick(stuffy)]"))
 			return FALSE
 	else
-		var/list/stuffy = list("Set Merchant to 'high' in your class preferences to start the game!", "PLAY Merchant NOW!", "A Merchant is required to start.", "Pray for a Merchant.", "One day, there will be a Merchant.", "Just try playing Merchant.", "If you don't play Merchant, the game will never start.", "We need at least one Merchant to start the game.", "We're waiting for you to pick Merchant to start.", "Still no Merchant is readied..", "I'm going to lose my mind if we don't get a Merchant readied up.","No. The game will not start because there is no Merchant.","What's the point of ROGUETOWN without a Merchant?")
+		var/list/stuffy = list("Set Merchant to 'high' in your class preferences to start the game!", "PLAY Merchant NOW!", "A Merchant is required to start.", "Pray for a Merchant.", "One day, there will be a Merchant.", "Just try playing Merchant.", "If you don't play Merchant, the game will never start.", "We need at least one Merchant to start the game.", "We're waiting for you to pick Merchant to start.", "Still no Merchant is readied..", "I'm going to lose my mind if we don't get a Merchant readied up.","No. The game will not start because there is no Merchant.","What's the point of DREAM KEEP without a Merchant?")
 		to_chat(world, span_purple("[pick(stuffy)]"))
 		return FALSE
 	*/
@@ -282,7 +292,9 @@ SUBSYSTEM_DEF(ticker)
 		This prevents any gamemode from starting unless theres at least 2 players ready, but the comments say 20 or it defaults into a deathmatch mode.
 		It is commented out and just left here for posterity
 	*/
-	/*
+
+	//im da captain now, only 1 player ready to go -- vide
+
 	var/amt_ready = 0
 	for(var/mob/dead/new_player/player in GLOB.player_list)
 		if(!player)
@@ -290,8 +302,9 @@ SUBSYSTEM_DEF(ticker)
 		if(player.ready == PLAYER_READY_TO_PLAY)
 			amt_ready++
 
-	if(amt_ready < 2)
-		to_chat(world, span_purple("[amt_ready]/20 players ready."))
+	if(amt_ready < 1)
+		to_chat(world, span_purple("[amt_ready]/1 players ready."))
+	/*
 		failedstarts++
 		if(failedstarts > 7)
 			to_chat(world, span_purple("[failedstarts]/13"))
@@ -406,8 +419,8 @@ SUBSYSTEM_DEF(ticker)
 //	else
 //		mode.announce()
 
-	if(!CONFIG_GET(flag/ooc_during_round))
-		toggle_ooc(FALSE) // Turn it off
+//	if(!CONFIG_GET(flag/ooc_during_round))
+//		toggle_ooc(FALSE) // Turn it off
 
 	CHECK_TICK
 	GLOB.start_landmarks_list = shuffle(GLOB.start_landmarks_list) //Shuffle the order of spawn points so they dont always predictably spawn bottom-up and right-to-left
@@ -545,7 +558,7 @@ SUBSYSTEM_DEF(ticker)
 	for(var/mob/living/carbon/human/K in world)
 		if(istype(K, /mob/living/carbon/human/dummy))
 			continue
-		if(K.job == "Duke")
+		if(K.job == "Monarch")
 			rulermob = K
 			return
 
@@ -570,7 +583,7 @@ SUBSYSTEM_DEF(ticker)
 	for(var/mob/character as anything in valid_characters)
 		var/mob/new_player = valid_characters[character]
 		SSjob.EquipRank(new_player, character.mind.assigned_role, joined_late = FALSE)
-		if(CONFIG_GET(flag/roundstart_traits) && ishuman(character))
+		if(ishuman(character))
 			SSquirks.AssignQuirks(character, new_player.client, TRUE)
 		CHECK_TICK
 //	if(captainless)

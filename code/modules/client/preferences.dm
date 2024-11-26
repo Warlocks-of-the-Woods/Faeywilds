@@ -93,7 +93,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/list/friendlyGenders = list("Male" = "male", "Female" = "female")
 	var/phobia = "spiders"
 	var/shake = TRUE
-	var/sexable = FALSE
+//	var/sexable = TRUE
 
 	var/list/custom_names = list()
 	var/preferred_ai_core_display = "Blue"
@@ -152,15 +152,17 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/update_mutant_colors = TRUE
 
 	var/headshot_link
+	var/nudeshot_link
 
 	var/flavor_text
 
 	var/ooc_notes
 
-	var/nsfw_headshot_link
 	var/nsfw_info
 
 	var/background_image
+
+/* useless shit from hearthstone.
 	var/alias
 	var/height
 	var/interest
@@ -168,11 +170,12 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/strengths
 	var/weakness
 	var/theme
+*/
+
 	var/list/violated = list()
 	var/list/descriptor_entries = list()
+	var/list/custom_descriptors = list()
 	var/defiant = TRUE
-	var/nsfw = FALSE
-
 	/// Tracker to whether the person has ever spawned into the round, for purposes of applying the respawn ban
 	var/has_spawned = FALSE
 
@@ -230,7 +233,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	accessory = "Nothing"
 
 	headshot_link = null
-	nsfw_headshot_link = null
+	nudeshot_link = null
 
 	background_image = null
 
@@ -269,27 +272,10 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 			// Top-level menu table
 			dat += "<table style='width: 100%; line-height: 20px;'>"
-			// FIRST ROW
-			dat += "<tr>"
-			dat += "<td style='width:33%;text-align:left'>"
-			dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;'>Change Character</a>"
-			dat += "</td>"
-
-
-			dat += "<td style='width:33%;text-align:center'>"
-			if(SStriumphs.triumph_buys_enabled)
-				dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=triumph_buy_menu'>Triumph Buy</a>"
-			dat += "</td>"
-
-			dat += "<td style='width:33%;text-align:right'>"
-			dat += "<a href='?_src_=prefs;preference=keybinds;task=menu'>Keybinds</a>"
-			dat += "</td>"
-			dat += "</tr>"
-
-
 			// NEXT ROW
 			dat += "<tr>"
 			dat += "<td style='width:33%;text-align:left'>"
+			dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;'>Change Character</a>"
 			dat += "</td>"
 
 			dat += "<td style='width:33%;text-align:center'>"
@@ -297,6 +283,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "</td>"
 
 			dat += "<td style='width:33%;text-align:right'>"
+			dat += "<a href='?_src_=prefs;preference=keybinds;task=menu'>Keybinds</a>"
 			dat += "</td>"
 			dat += "</tr>"
 
@@ -321,6 +308,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 			dat += "<td style='width:33%;text-align:center'>"
 			dat += "<a href='?_src_=prefs;preference=triumphs;task=menu'><b>TRIUMPHS:</b></a> [user.get_triumphs() ? "\Roman [user.get_triumphs()]" : "None"]"
+			if(SStriumphs.triumph_buys_enabled)
+				dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=triumph_buy_menu'>Triumph Buy</a>"
 			dat += "</td>"
 
 			dat += "<td style='width:33%;text-align:right'>"
@@ -328,10 +317,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 			dat += "</table>"
 
-			if(CONFIG_GET(flag/roundstart_traits))
-				dat += "<center><h2>Quirk Setup</h2>"
-				dat += "<a href='?_src_=prefs;preference=trait;task=menu'>Configure Quirks</a><br></center>"
-				dat += "<center><b>Current Quirks:</b> [all_quirks.len ? all_quirks.Join(", ") : "None"]</center>"
+			dat += "<center><h2>Quirk Setup</h2>"
+			dat += "<a href='?_src_=prefs;preference=trait;task=menu'>Configure Quirks</a><br></center>"
+			dat += "<center><b>Current Quirks:</b> [all_quirks.len ? all_quirks.Join(", ") : "None"]</center>"
 
 			// Encapsulating table
 			dat += "<table width = '100%'>"
@@ -352,9 +340,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 				dat += "<a href='?_src_=prefs;preference=name;task=input'>[real_name]</a> <a href='?_src_=prefs;preference=name;task=random'>\[R\]</a>"
 
 			dat += "<BR>"
-			dat += "<b>Race:</b> <a href='?_src_=prefs;preference=species;task=input'>[pref_species.name]</a>[spec_check(user) ? "" : " (!)"]<BR>"
-			// LETHALSTONE EDIT BEGIN: add statpack selection
-			dat += "<b>Statpack:</b> <a href='?_src_=prefs;preference=statpack;task=input'>[statpack.name]</a><BR>"
+			dat += "<b>Race Origin:</b> <a href='?_src_=prefs;preference=species;task=input'>[pref_species.name]</a>[spec_check(user) ? "" : " (!)"]<BR>"
+			dat += "<b>Race Name:</b> <a href='?_src_=prefs;preference=customracename;task=input'>Change: [custom_race_name]</a><BR>"
 //			dat += "<a href='?_src_=prefs;preference=species;task=random'>Random Species</A> "
 //			dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_SPECIES]'>Always Random Species: [(randomise[RANDOM_SPECIES]) ? "Yes" : "No"]</A><br>"
 
@@ -379,14 +366,22 @@ GLOBAL_LIST_EMPTY(chosen_names)
 //				dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_AGE_ANTAG]'>When Antagonist: [(randomise[RANDOM_AGE_ANTAG]) ? "Yes" : "No"]</A>"
 
 //			dat += "<b><a href='?_src_=prefs;preference=name;task=random'>Random Name</A></b><BR>"
+			dat += "<b>__________________________</b><br>"
 			dat += "<b>Flaw:</b> <a href='?_src_=prefs;preference=charflaw;task=input'>[charflaw]</a><BR>"
 			var/datum/faith/selected_faith = GLOB.faithlist[selected_patron?.associated_faith]
 			dat += "<b>Faith:</b> <a href='?_src_=prefs;preference=faith;task=input'>[selected_faith?.name || "FUCK!"]</a><BR>"
 			dat += "<b>Patron:</b> <a href='?_src_=prefs;preference=patron;task=input'>[selected_patron?.name || "FUCK!"]</a><BR>"
 //			dat += "<b>Family:</b> <a href='?_src_=prefs;preference=family'>Unknown</a><BR>" // Disabling until its working
 			dat += "<b>Dominance:</b> <a href='?_src_=prefs;preference=domhand'>[domhand == 1 ? "Left-handed" : "Right-handed"]</a><BR>"
+			dat += "<b>Statpack:</b> <a href='?_src_=prefs;preference=statpack;task=input'>[statpack.name]</a><BR>"
+			dat += "<b>Loadout Item:</b> <a href='?_src_=prefs;preference=loadout_item;task=input'>[loadout ? loadout.name : "None"]</a><br>"
+			dat += "<b>__________________________</b><br>"
+			dat += "<b>Voice Type</b>: <a href='?_src_=prefs;preference=voicetype;task=input'>[voice_type]</a><BR>"
+			dat += "<b>Voice Color:</b> <a href='?_src_=prefs;preference=voice;task=input'>Change</a><br>"
+			dat += "<b>Voice Pitch:</b> <a href='?_src_=prefs;preference=voice_pitch;task=input'>[voice_pitch]</a><br>"
+			dat += "<b><b>Accent:</b> <a href='?_src_=prefs;preference=char_accent;task=input'>[char_accent]</a><br>"
 
-			dat += "<b>ERP Panel:</b> <a href='?_src_=prefs;preference=sexable'>[sexable == TRUE ? "Yes" : "No"]</a><BR>"
+//			dat += "<b>ERP Panel:</b> <a href='?_src_=prefs;preference=sexable'>[sexable == TRUE ? "Yes" : "No"]</a><BR>"
 
 /*
 			dat += "<br><br><b>Special Names:</b><BR>"
@@ -434,33 +429,32 @@ GLOBAL_LIST_EMPTY(chosen_names)
 				dat += "<b>Mutant Color #3:</b><span style='border: 1px solid #161616; background-color: #[features["mcolor3"]];'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=mutant_color3;task=input'>Change</a><BR>"
 
 
-			dat += "<br>"
-			dat += "<b>Voice Color: </b><a href='?_src_=prefs;preference=voice;task=input'>Change</a>"
-			dat += "<br>Voice Pitch: </b><a href='?_src_=prefs;preference=voice_pitch;task=input'>[voice_pitch]</a>"
-			dat += "<br><b>Accent:</b> <a href='?_src_=prefs;preference=char_accent;task=input'>[char_accent]</a>"
 			dat += "<br><b>Features:</b> <a href='?_src_=prefs;preference=customizers;task=menu'>Change</a>"
 			dat += "<br><b>Markings:</b> <a href='?_src_=prefs;preference=markings;task=menu'>Change</a>"
 			dat += "<br><b>Descriptors:</b> <a href='?_src_=prefs;preference=descriptors;task=menu'>Change</a>"
 
-			dat += "<br><b>Headshot:</b> <a href='?_src_=prefs;preference=headshot;task=input'>Change</a>"
-			if(headshot_link != null)
-				dat += "<br><img src='[headshot_link]' width='250px' height='250px'>"
+			dat += "<br><b>__________________________</b>"
 			dat += "<br><b>Flavor Text:</b> <a href='?_src_=prefs;preference=flavor;task=input'>Change</a>"
 			dat += "<br><b>OOC Notes:</b> <a href='?_src_=prefs;preference=oocnotes;task=input'>Change</a>"
+			dat += "<br><b>NSFW Notes:</b> <a href='?_src_=prefs;preference=nsfwinfo;task=input'>Change</a>"
 			dat += "<br><b>Infocard Background:</b> <a href='?_src_=prefs;preference=background;task=input'>Change</a>"
+/* useless hearthstone shit.
 			dat += "<br><b>Title:</b> <a href='?_src_=prefs;preference=alias;task=input'>Change</a>"
 			dat += "<br><b>Height:</b> <a href='?_src_=prefs;preference=height;task=input'>Change</a>"
 			dat += "<br><b>Interest:</b> <a href='?_src_=prefs;preference=interest;task=input'>Change</a>"
 			dat += "<br><b>Personality:</b> <a href='?_src_=prefs;preference=personality;task=input'>Change</a>"
 			dat += "<br><b>Strengths:</b> <a href='?_src_=prefs;preference=strengths;task=input'>Change</a>"
 			dat += "<br><b>Weaknesses:</b> <a href='?_src_=prefs;preference=weakness;task=input'>Change</a>"
-			dat += "<br><b>Theme:</b> <a href='?_src_=prefs;preference=theme;task=input'>Change</a>"
-			dat += "<br><b>Loadout Item:</b> <a href='?_src_=prefs;preference=loadout_item;task=input'>[loadout ? loadout.name : "None"]</a>"
-			if(user.client.prefs.nsfw)
-				dat += "<br><b>NSFW Headshot:</b> <a href='?_src_=prefs;preference=nsfw_headshot;task=input'>Change</a>"
-				if(nsfw_headshot_link != null)
-					dat += "<br><img src='[nsfw_headshot_link]' width='250px' height='250px'>"
-				dat += "<br><b>NSFW Info:</b> <a href='?_src_=prefs;preference=nsfwinfo;task=input'>Change</a>"
+			dat += "<br><b>Infocard Music:</b> <a href='?_src_=prefs;preference=theme;task=input'>Change</a>"
+*/
+			dat += "<br><b>__________________________</b>"
+			dat += "<br><b>Headshot:</b> <a href='?_src_=prefs;preference=headshot;task=input'>Change</a>"
+			if(headshot_link != null)
+				dat += "<a href='?_src_=prefs;preference=view_headshot;task=input'>View</a>"
+
+			dat += "<br><b>Nudeshot:</b> <a href='?_src_=prefs;preference=nudeshot;task=input'>Change</a>"
+			if(nudeshot_link != null)
+				dat += "<a href='?_src_=prefs;preference=view_nudeshot;task=input'>View</a>"
 			dat += "</td>"
 
 			dat += "</tr></table>"
@@ -713,7 +707,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	dat += "<tr>"
 	dat += "<td width='33%' align='left'></td>"
 	dat += "<td width='33%' align='center'>"
+	/* Special thing makes things LRP as someone just keeps changing every round, better just incorporate the things to selectable traits instead --vide noir
 	dat += "<a href='?_src_=prefs;preference=bespecial'><b>[next_special_trait ? "<font color='red'>SPECIAL</font>" : "Be Special"]</b></a><BR>"
+	*/
 	var/mob/dead/new_player/N = user
 	if(istype(N))
 		if(SSticker.current_state <= GAME_STATE_PREGAME)
@@ -733,8 +729,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 	dat += "</td>"
 	dat += "<td width='33%' align='right'>"
-	// dat += "<b>Be defiant:</b> <a href='?_src_=prefs;preference=be_defiant'>[(defiant) ? "Yes":"No"]</a><br>"
-	dat += "<b>Enable NSFW Content:</b> <a href='?_src_=prefs;preference=be_nsfw'>[(nsfw) ? "Yes":"No"]</a><br>"
+	dat += "<b>Be defiant:</b> <a href='?_src_=prefs;preference=be_defiant'>[(defiant) ? "Yes":"No"]</a><br>"
 	dat += "<b>Be voice:</b> <a href='?_src_=prefs;preference=schizo_voice'>[(toggles & SCHIZO_VOICE) ? "Enabled":"Disabled"]</a>"
 	dat += "</td>"
 	dat += "</tr>"
@@ -781,7 +776,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	popup.open(FALSE)
 	onclose(user, "capturekeypress", src)
 
-/datum/preferences/proc/SetChoices(mob/user, limit = 14, list/splitJobs = list("Court Magician", "Guard Captain", "Priest", "Merchant", "Archivist", "Towner", "Grenzelhoft Mercenary", "Beggar", "Prisoner", "Goblin King"), widthPerColumn = 295, height = 620) //295 620
+/datum/preferences/proc/SetChoices(mob/user, limit = 15, list/splitJobs = list("Watchmen Captain", "Prophet", "Merchant Prince", "Archivist", "Nightmaster", "Towner", "Grenzelhoft Mercenary", "Low Life", "Prisoner", "Chieftain"), widthPerColumn = 295, height = 620) //295 620
 	if(!SSjob)
 		return
 
@@ -1068,7 +1063,7 @@ Slots: [job.spawn_positions]</span>
 	else
 		dat += "<center><b>Choose quirk setup</b></center><br>"
 		dat += "<div align='center'>Left-click to add or remove quirks. You need negative quirks to have positive ones.<br>\
-		Quirks are applied at roundstart and cannot normally be removed.</div>"
+		Quirks are applied at roundstart and cannot normally be removed. Most things may not work or work right.</div>"
 		dat += "<center><a href='?_src_=prefs;preference=trait;task=close'>Done</a></center>"
 		dat += "<hr>"
 		dat += "<center><b>Current quirks:</b> [all_quirks.len ? all_quirks.Join(", ") : "None"]</center>"
@@ -1534,7 +1529,6 @@ Slots: [job.spawn_positions]</span>
 						ResetJobs()
 						to_chat(user, "<font color='red'>Classes reset.</font>")
 
-
 				// LETHALSTONE EDIT: add statpack selection
 				if ("statpack")
 					var/list/statpacks_available = list()
@@ -1551,7 +1545,6 @@ Slots: [job.spawn_positions]</span>
 						to_chat(user, "<font color='purple'>[statpack.name]</font>")
 						to_chat(user, "<font color='purple'>[statpack.description_string()]</font>")
 
-				/*
 				// LETHALSTONE EDIT: add pronouns
 				if ("pronouns")
 					var pronouns_input = input(user, "Choose your character's pronouns", "Pronouns") as null|anything in GLOB.pronouns_list
@@ -1603,6 +1596,19 @@ Slots: [job.spawn_positions]</span>
 							return
 						voice_color = sanitize_hexcolor(new_voice)
 
+				if("view_headshot")
+					var/list/dat = list("<img src='[headshot_link]' width='360px' height='480px'>")
+					var/datum/browser/popup = new(user, "headshot", "<div align='center'>Headshot</div>", 390, 540)
+					popup.set_content(dat.Join())
+					popup.open(FALSE)
+					return
+
+				if("view_nudeshot")
+					var/list/dat = list("<img src='[nudeshot_link]' width='360px' height='480px'>")
+					var/datum/browser/popup = new(user, "nudeshot", "<div align='center'>Nudeshot</div>", 390, 540)
+					popup.set_content(dat.Join())
+					popup.open(FALSE)
+					return
 				if("voice_pitch")
 					var/new_voice_pitch = input(user, "Choose your character's voice pitch ([MIN_VOICE_PITCH] to [MAX_VOICE_PITCH], lower is deeper):", "Voice Pitch") as null|num
 					if(new_voice_pitch)
@@ -1610,11 +1616,10 @@ Slots: [job.spawn_positions]</span>
 							to_chat(user, "<font color='red'>Value must be between [MIN_VOICE_PITCH] and [MAX_VOICE_PITCH].</font>")
 							return
 						voice_pitch = new_voice_pitch
-
 				if("background")
 					to_chat(user, "<span class='notice'>This will be used for the background image of your infocard")
 					to_chat(user, "<span class='notice'>This works best with a repeating pattern image, as the image placed in the background will be repeated.</span>")
-					var/new_background_image = input(user, "Input the background image link (https, hosts: gyazo, discord, lensdump, imgbox, catbox):", "background", background_image) as text|null
+					var/new_background_image = input(user, "Input the background image link (https, hosts: gyazo,lensdump, imgbox, catbox):", "background", background_image) as text|null
 					if(new_background_image == null)
 						return
 					if(new_background_image == "")
@@ -1628,7 +1633,7 @@ Slots: [job.spawn_positions]</span>
 					background_image = new_background_image
 					to_chat(user, "<span class='notice'>Successfully updated infocard background image.</span>")
 					log_game("[user] has set their background image to '[background_image]'.")
-
+/* useless shit from hearthstone.
 				if("alias")
 					to_chat(user, "<span class='notice'>What do they call you? (Having a headshot and a title enables the new infocard)</span>")
 					var/new_alias = input(user, "Type your title here:", "alias", alias) as message|null
@@ -1744,6 +1749,7 @@ Slots: [job.spawn_positions]</span>
 					theme = new_theme
 					to_chat(user, "<span class='notice'>Successfully updated theme.</span>")
 					log_game("[user] has set their theme to '[theme]'.")
+*/
 
 /*
 				if("customracename")
@@ -1766,8 +1772,8 @@ Slots: [job.spawn_positions]</span>
 				if("headshot")
 					to_chat(user, "<span class='notice'>Please use a relatively SFW image of the head and shoulder area to maintain immersion level. Lastly, ["<span class='bold'>do not use a real life photo or use any image that is less than serious.</span>"]</span>")
 					to_chat(user, "<span class='notice'>If the photo doesn't show up properly in-game, ensure that it's a direct image link that opens properly in a browser.</span>")
-					to_chat(user, "<span class='notice'>Keep in mind that the photo will be downsized to 250x250 pixels, so the more square the photo, the better it will look.</span>")
-					var/new_headshot_link = input(user, "Input the headshot link (https, hosts: gyazo, discord, lensdump, imgbox, catbox):", "Headshot", headshot_link) as text|null
+					to_chat(user, "<span class='notice'>Resolution: 525x575 pixels.</span>")
+					var/new_headshot_link = input(user, "Input the headshot link (https, hosts: gyazo, lensdump, imgbox, catbox):", "Headshot", headshot_link) as text|null
 					if(new_headshot_link == null)
 						return
 					if(new_headshot_link == "")
@@ -1814,22 +1820,6 @@ Slots: [job.spawn_positions]</span>
 					ooc_notes = new_ooc_notes
 					to_chat(user, "<span class='notice'>Successfully updated OOC Notes</span>")
 					log_game("[user] has set their OOC Notes to '[ooc_notes]'.")
-				if("nsfw_headshot")
-					to_chat(user, "<span class='notice'>Finally a place to show it all.</span>")
-					var/new_nsfw_headshot_link = input(user, "Input the nsfw headshot link (https, hosts: gyazo, discord, lensdump, imgbox, catbox):", "NSFW Headshot", nsfw_headshot_link) as text|null
-					if(new_nsfw_headshot_link == null)
-						return
-					if(new_nsfw_headshot_link == "")
-						nsfw_headshot_link = null
-						ShowChoices(user)
-						return
-					if(!valid_nsfw_headshot_link(user, new_nsfw_headshot_link))
-						nsfw_headshot_link = null
-						ShowChoices(user)
-						return
-					nsfw_headshot_link = new_nsfw_headshot_link
-					to_chat(user, "<span class='notice'>Successfully updated NSFW Headshot picture</span>")
-					log_game("[user] has set their NSFW Headshot image to '[nsfw_headshot_link]'.")
 
 				if("nsfwinfo")
 					to_chat(user, "<span class='notice'>Please use this for things such as image links, f-list links, or any additional NSFW information.</span>")
@@ -1865,7 +1855,26 @@ Slots: [job.spawn_positions]</span>
 							loadout = loadouts_available[loadout_input]
 							to_chat(user, "<font color='yellow'><b>[loadout.name]</b></font>")
 							if(loadout.desc)
-								to_chat(user, "[loadout.desc]")
+								to_chat(user, "[loadout.desc]. I can retrieve it by right-clicking a tree, clock or statue as well as any stashed item.")
+
+				if("nudeshot")
+					to_chat(user, "<span class='notice'>["<span class='bold'>do not use a real life photo or use any image that is less than serious.</span>"]</span>")
+					to_chat(user, "<span class='notice'>If the photo doesn't show up properly in-game, ensure that it's a direct image link that opens properly in a browser.</span>")
+					to_chat(user, "<span class='notice'>Resolution: 560x680 pixels.</span>")
+					var/new_nudeshot_link = input(user, "Input the nudeshot link (https, hosts: gyazo, lensdump, imgbox, catbox):", "Nudeshot", nudeshot_link) as text|null
+					if(new_nudeshot_link == null)
+						return
+					if(new_nudeshot_link == "")
+						nudeshot_link = null
+						ShowChoices(user)
+						return
+					if(!valid_headshot_link(user, new_nudeshot_link))
+						nudeshot_link = null
+						ShowChoices(user)
+						return
+					nudeshot_link = new_nudeshot_link
+					to_chat(user, "<span class='notice'>Successfully updated nudeshot picture</span>")
+					log_game("[user] has set their Nudeshot image to '[nudeshot_link]'.")
 
 				if("species")
 
@@ -1880,7 +1889,7 @@ Slots: [job.spawn_positions]</span>
 							continue
 						crap += bla
 
-					var/result = input(user, "Select a race", "Roguetown") as null|anything in crap
+					var/result = input(user, "Select a race", "Stonehedge") as null|anything in crap
 
 					if(result)
 						set_new_race(result, user)
@@ -1890,13 +1899,18 @@ Slots: [job.spawn_positions]</span>
 
 				if("charflaw")
 					var/list/coom = GLOB.character_flaws.Copy()
-					var/result = input(user, "Select a flaw", "Roguetown") as null|anything in coom
+					var/result = input(user, "Select a flaw", "Stonehedge") as null|anything in coom
 					if(result)
 						result = coom[result]
 						var/datum/charflaw/C = new result()
 						charflaw = C
 						if(charflaw.desc)
 							to_chat(user, "<span class='info'>[charflaw.desc]</span>")
+
+				if("char_accent")
+					var/selectedaccent = input(user, "Choose your character's accent:", "Character Preference") as null|anything in GLOB.character_accents
+					if(selectedaccent)
+						char_accent = selectedaccent
 
 				if("mutant_color")
 					var/new_mutantcolor = color_pick_sanitized_lumi(user, "Choose your character's mutant #1 color:", "Character Preference","#"+features["mcolor"])
@@ -2053,11 +2067,6 @@ Slots: [job.spawn_positions]</span>
 						domhand = 2
 					else
 						domhand = 1
-				if("sexable")
-					if(sexable == FALSE)
-						sexable = TRUE
-					else
-						sexable = FALSE
 				if("bespecial")
 					if(next_special_trait)
 						print_special_text(user, next_special_trait)
@@ -2268,18 +2277,13 @@ Slots: [job.spawn_positions]</span>
 					widescreenpref = !widescreenpref
 					user.client.change_view(CONFIG_GET(string/default_view))
 
-				// if("be_defiant")
-				// 	defiant = !defiant
-				// 	if(defiant)
-				// 		to_chat(user, span_notice("You will now have resistance from people violating you, but be punished for trying to violate others. This is not full protection."))
-				// 	else
-				// 		to_chat(user, span_boldwarning("You fully immerse yourself in the grim experience, waiving your resistance from people violating you, but letting you do the same unto other non-defiants"))
-				if("be_nsfw")
-					nsfw = !nsfw
-					if(nsfw)
-						to_chat(user, span_notice("You will now not see people's NSFW content, but will still see a desccriptor."))
+				if("be_defiant")
+					defiant = !defiant
+					if(defiant)
+						to_chat(user, span_notice("You will now have resistance from people violating you, but be punished for trying to violate others." + " " + span_boldwarning("(COMBAT Mode will disable ERP interactions. Bypassing this is a bannable offense, AHELP if necessary.)")))
 					else
-						to_chat(user, span_boldwarning("You will now see people's NSFW content. Disabling this does not disable your profile."))
+						to_chat(user, span_boldwarning("You fully immerse yourself in the grim experience, waiving your resistance from people violating you, but letting you do the same unto other non-defiants"))
+
 				if("schizo_voice")
 					toggles ^= SCHIZO_VOICE
 					if(toggles & SCHIZO_VOICE)
@@ -2329,7 +2333,7 @@ Slots: [job.spawn_positions]</span>
 								if(!name)
 									name = "Slot[i]"
 								choices[name] = i
-					var/choice = input(user, "CHOOSE A HERO","ROGUETOWN") as null|anything in choices
+					var/choice = input(user, "CHOOSE A HERO","DREAM KEEP") as null|anything in choices
 					if(choice)
 						choice = choices[choice]
 						if(!load_character(choice))
@@ -2394,10 +2398,13 @@ Slots: [job.spawn_positions]</span>
 			else if(firstspace == name_length)
 				real_name += "[pick(GLOB.last_names)]"
 
+/*
 	if(real_name in GLOB.chosen_names)
 		character.real_name = pref_species.random_name(gender)
 	else
 		character.real_name = real_name
+	character.name = character.real_name*/
+	character.real_name = real_name
 	character.name = character.real_name
 
 	character.domhand = domhand
@@ -2417,8 +2424,6 @@ Slots: [job.spawn_positions]</span>
 	character.detail = detail
 	character.set_patron(selected_patron)
 	character.backpack = backpack
-	character.defiant = defiant
-	character.nsfw = nsfw
 
 	character.jumpsuit_style = jumpsuit_style
 
@@ -2429,12 +2434,14 @@ Slots: [job.spawn_positions]</span>
 	character.dna.real_name = character.real_name
 
 	character.headshot_link = headshot_link
+	character.nudeshot_link = nudeshot_link
 	character.background_image = background_image
 
 
 	character.flavor_text = flavor_text
 	character.ooc_notes = ooc_notes
 
+/* useless shit from hearthstone.
 	character.alias = alias
 	character.height = height
 	character.interest = interest
@@ -2442,11 +2449,8 @@ Slots: [job.spawn_positions]</span>
 	character.strengths = strengths
 	character.weakness = weakness
 	character.theme = theme
-
-/*
-	character.custom_race_name = custom_race_name
 */
-	character.nsfw_headshot_link = nsfw_headshot_link
+	character.custom_race_name = custom_race_name
 
 	character.nsfw_info = nsfw_info
 	/*
@@ -2522,7 +2526,7 @@ Slots: [job.spawn_positions]</span>
 		reset_all_customizer_accessory_colors()
 
 /proc/valid_headshot_link(mob/user, value, silent = FALSE)
-	var/static/link_regex = regex("i.gyazo.com|a.l3n.co|b.l3n.co|c.l3n.co|images2.imgbox.com|thumbs2.imgbox.com|files.catbox.moe") //gyazo, discord, lensdump, imgbox, catbox
+	var/static/link_regex = regex("i.gyazo.com|a.l3n.co|b.l3n.co|c.l3n.co|images2.imgbox.com|thumbs2.imgbox.com|files.catbox.moe") //gyazo, lensdump, imgbox, catbox
 	var/static/list/valid_extensions = list("jpg", "png", "jpeg") // Regex works fine, if you know how it works
 
 	if(!length(value))
@@ -2553,40 +2557,6 @@ Slots: [job.spawn_positions]</span>
 			to_chat(usr, "<span class='warning'>The image must be hosted on one of the following sites: 'Gyazo, Lensdump, Imgbox, Catbox'</span>")
 		return FALSE
 	return TRUE
-
-/proc/valid_nsfw_headshot_link(mob/user, value, silent = FALSE)
-	var/static/link_regex = regex("i.gyazo.com|a.l3n.co|b.l3n.co|c.l3n.co|images2.imgbox.com|thumbs2.imgbox.com|files.catbox.moe") //gyazo, discord, lensdump, imgbox, catbox
-	var/static/list/valid_extensions = list("jpg", "png", "jpeg") // Regex works fine, if you know how it works
-
-	if(!length(value))
-		return FALSE
-
-	var/find_index = findtext(value, "https://")
-	if(find_index != 1)
-		if(!silent)
-			to_chat(user, "<span class='warning'>Your link must be https!</span>")
-		return FALSE
-
-	if(!findtext(value, "."))
-		if(!silent)
-			to_chat(user, "<span class='warning'>Invalid link!</span>")
-		return FALSE
-	var/list/value_split = splittext(value, ".")
-
-	// extension will always be the last entry
-	var/extension = value_split[length(value_split)]
-	if(!(extension in valid_extensions))
-		if(!silent)
-			to_chat(usr, "<span class='warning'>The image must be one of the following extensions: '[english_list(valid_extensions)]'</span>")
-		return FALSE
-
-	find_index = findtext(value, link_regex)
-	if(find_index != 9)
-		if(!silent)
-			to_chat(usr, "<span class='warning'>The image must be hosted on one of the following sites: 'Gyazo, Lensdump, Imgbox, Catbox'</span>")
-		return FALSE
-	return TRUE
-
 
 /proc/valid_theme(mob/user, value, silent = FALSE)
 	// var/static/link_regex = regex("cdn.discordapp.com") //gyazo, discord, lensdump, imgbox, catbox
@@ -2622,7 +2592,7 @@ Slots: [job.spawn_positions]</span>
 	// return TRUE
 
 /proc/valid_background_image(mob/user, value, silent = FALSE)
-	var/static/link_regex = regex("i.gyazo.com|a.l3n.co|b.l3n.co|c.l3n.co|images2.imgbox.com|thumbs2.imgbox.com|files.catbox.moe") //gyazo, discord, lensdump, imgbox, catbox
+	var/static/link_regex = regex("i.gyazo.com|a.l3n.co|b.l3n.co|c.l3n.co|images2.imgbox.com|thumbs2.imgbox.com|files.catbox.moe") //gyazo, lensdump, imgbox, catbox
 	var/static/list/valid_extensions = list("jpg", "png", "jpeg") // Regex works fine, if you know how it works
 
 	if(!length(value))

@@ -28,6 +28,7 @@
 
 	var/resting = FALSE
 	var/wallpressed = FALSE
+
 	var/pixelshifted = FALSE
 	var/pixelshift_x = 0
 	var/pixelshift_y = 0
@@ -143,7 +144,7 @@
 	var/defprob = 50 //base chance to defend against this mob's attacks, for simple mob combat
 	var/defdrain = 5
 	var/encumbrance = 0
-
+	var/del_on_deaggro = 0 //seconds to delete after losing aggro
 	var/eyesclosed = 0
 	var/fallingas = 0
 
@@ -168,6 +169,7 @@
 	var/rot_type = /datum/component/rot/simple
 
 	var/list/mob_descriptors
+	var/list/custom_descriptors
 
 	/**This variable updated in mob_movement.dm primarily. Mainly a shitcode measure for existing shitcode because this is SHITCODE!
 	 * All it does is track when a mob is sneaking so we don't have to constantly reset alpha values as this fucks with how things are intended to be.

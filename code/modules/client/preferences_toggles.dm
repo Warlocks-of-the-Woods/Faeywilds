@@ -49,6 +49,8 @@
 		else
 			to_chat(src, "Screen shake disabled.")
 
+//defiant exists
+/*
 /client/verb/toggle_ERP() // Alters if other people can use the ERP panel ON you.
 	set category = "Options"
 	set name = "Toggle ERP Panel"
@@ -58,18 +60,7 @@
 		if(prefs.sexable)
 			to_chat(src, "Others can play with you.")
 		else
-			to_chat(src, "Others can't touch you.")
-
-/client/verb/toggle_nsfw()
-	set category = "Options"
-	set name = "Toggle NSFW Content"
-	if(prefs)
-		prefs.nsfw = !prefs.nsfw
-		prefs.save_preferences()
-		if(prefs.nsfw)
-			to_chat(src, "NSFW Content enabled.")
-		else
-			to_chat(src, "NSFW Content disabled.")
+			to_chat(src, "Others can't touch you.")*/
 
 /client/verb/toggle_lobby_music()
 	set name = "Toggle Lobby Music"

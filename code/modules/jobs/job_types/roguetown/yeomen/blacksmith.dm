@@ -6,13 +6,13 @@
 	total_positions = 0
 	spawn_positions = 0
 
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 
 	tutorial = "You studied for many decades under your master with a few other apprentices to become an Armorer, a trade that certainly has seen a boom in revenue in recent times with many a bannerlord seeing the importance in maintaining a well-equipped army."
 
 	outfit = /datum/outfit/job/roguetown/armorsmith
 	display_order = JDO_ARMORER
-	give_bank_account = 11
+	give_bank_account = 400
 	min_pq = 0
 	max_pq = null
 
@@ -22,19 +22,19 @@
 	if(prob(50))
 		head = /obj/item/clothing/head/roguetown/hatblu
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axes, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, pick(3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/smelting, pick(2), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/axes, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/blacksmithing, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/armorsmithing, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/smelting, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 2, TRUE)
 		if(H.age == AGE_OLD)
-			H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(1), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, pick(1), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/smelting, pick(1), TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/blacksmithing, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/armorsmithing, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/smelting, 1, TRUE)
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/trou
 		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
@@ -68,13 +68,13 @@
 	total_positions = 0
 	spawn_positions = 0
 
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 
 	tutorial = "You studied for many decades under your master with a few other apprentices to become a Weaponsmith, a trade that is as ancient as the secrets of steel itself! You've repaired the blades of cooks, the cracked hoes of peasants and greased the spears of many soldiers into war."
 
 	outfit = /datum/outfit/job/roguetown/weaponsmith
 	display_order = JDO_WEAPONSMITH
-	give_bank_account = 11
+	give_bank_account = 400
 	min_pq = 0
 	max_pq = null
 
@@ -84,19 +84,19 @@
 	if(prob(50))
 		head = /obj/item/clothing/head/roguetown/hatblu
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axes, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, pick(3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/smelting, pick(2), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/axes, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/blacksmithing, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/weaponsmithing, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/smelting, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 2, TRUE)
 		if(H.age == AGE_OLD)
-			H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(1), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, pick(1), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/smelting, pick(1), TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/blacksmithing, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/weaponsmithing, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/smelting, 1, TRUE)
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/trou
 		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
@@ -105,7 +105,7 @@
 		backpack_contents = list(/obj/item/rogueweapon/hammer = 1, /obj/item/rogueweapon/tongs = 1)
 		belt = /obj/item/storage/belt/rogue/leather
 		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
-		beltr = /obj/item/roguekey/blacksmith
+		beltr = /obj/item/roguekey/blacksmith/town
 		cloak = /obj/item/clothing/cloak/apron/blacksmith
 	else
 		pants = /obj/item/clothing/under/roguetown/trou
@@ -130,13 +130,13 @@
 	total_positions = 2
 	spawn_positions = 2
 
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 
 	tutorial = "You've studied for many decades under quite a number of master smiths. Whether it's cookware or tools of war, you're unmatched at the art of bending metal to your will."
 
 	outfit = /datum/outfit/job/roguetown/blacksmith
 	display_order = JDO_BLACKSMITH
-	give_bank_account = 11
+	give_bank_account = 400
 	min_pq = 0
 	max_pq = null
 
@@ -146,19 +146,19 @@
 	if(prob(50))
 		head = /obj/item/clothing/head/roguetown/hatblu
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axes, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/axes, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/blacksmithing, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/armorsmithing, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/weaponsmithing, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 2, TRUE)
 		if(H.age == AGE_OLD)
-			H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/blacksmithing, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/armorsmithing, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/weaponsmithing, 1, TRUE)
 	if(H.gender == FEMALE) // downstream change
 		pants = /obj/item/clothing/under/roguetown/trou
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random

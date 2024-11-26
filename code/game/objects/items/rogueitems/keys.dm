@@ -42,7 +42,7 @@
 
 /obj/item/roguekey/lord
 	name = "master key"
-	desc = "The Duke's key."
+	desc = "The Monarch's key."
 	icon_state = "bosskey"
 	lockid = "lord"
 
@@ -62,6 +62,12 @@
 	desc = "The Key to the royal chambers. It even feels pretentious."
 	icon_state = "ekey"
 	lockid = "royal"
+
+/obj/item/roguekey/prince_rooms
+	name = "Princely Key"
+	desc = "The Key to the heirs chambers."
+	icon_state = "ekey"
+	lockid = "prince"
 
 /obj/item/roguekey/manor
 	name = "manor key"
@@ -106,17 +112,17 @@
 	icon_state = "cheesekey"
 	lockid = "vault"
 
-/obj/item/roguekey/sheriff
-	name = "guard captain's key"
-	desc = "This key belongs to the captain of the guard."
+/obj/item/roguekey/councillor_rooms
+	name = "councillor rooms key"
+	desc = "This key opens the councillor's rooms."
 	icon_state = "cheesekey"
-	lockid = "sheriff"
+	lockid = "councillor"
 
 /obj/item/roguekey/judge
 	name = "judge's key"
 	desc = "This key belongs to the judge."
 	icon_state = "cheesekey"
-	lockid = "sheriff"
+	lockid = "watchmen captain"
 
 /obj/item/roguekey/merchant
 	name = "merchant's key"
@@ -129,6 +135,12 @@
 	desc = "This key opens and closes a shop door."
 	icon_state = "ekey"
 	lockid = "shop"
+
+/obj/item/roguekey/townie // For use in round-start available houses in town. Do not use default lockID.
+	name = "town dwelling Key"
+	desc = "The key of some townie's home. Hope it's not lost."
+	icon_state ="brownkey"
+	lockid = "townie"
 
 /obj/item/roguekey/tavern
 	name = "tavern key"
@@ -235,6 +247,12 @@
 	icon_state = "rustkey"
 	lockid = "farm"
 
+/obj/item/roguekey/veteran
+	name = "guildmaster key"
+	desc = "This key is for adventurer's guild."
+	icon_state = "ekey"
+	lockid = "veteran"
+
 /obj/item/roguekey/butcher
 	name = "butcher key"
 	desc = "This is a rusty key that'll open butcher doors."
@@ -251,7 +269,7 @@
 	name = "priest's key"
 	desc = "This is the master key of the church."
 	icon_state = "cheesekey"
-	lockid = "priest"
+	lockid = "Prophet"
 
 /obj/item/roguekey/tower
 	name = "tower key"
@@ -315,7 +333,7 @@
 
 /obj/item/roguekey/hand
 	name = "hand's key"
-	desc = "This regal key belongs to the Duke's Right Hand."
+	desc = "This regal key belongs to the Monarch's Right Hand."
 	icon_state = "cheesekey"
 	lockid = "hand"
 
@@ -330,6 +348,90 @@
 	desc = "This key looks barely used."
 	icon_state = "ekey"
 	lockid = "archive"
+
+/obj/item/roguekey/manor
+	name = "manor key"
+	desc = "This key will open any manor doors."
+	icon_state = "mazekey"
+	lockid = "manor"
+
+/obj/item/roguekey/bog_gatehouse
+	name = "bog gatehouse key"
+	desc = "This key opens the bog gatehouse."
+	icon_state = "spikekey"
+	lockid = "bog_gatehouse"
+
+/obj/item/roguekey/bog_barracks
+	name = "bog barracks key"
+	desc = "This key opens the bog barracks."
+	icon_state = "spikekey"
+	lockid = "bog_barracks"
+
+/obj/item/roguekey/bog_dungeon
+	name = "bog dungeon key"
+	desc = "This key opens the bog dungeon."
+	icon_state = "spikekey"
+	lockid = "bog_dungeon"
+
+/obj/item/roguekey/bog_armory
+	name = "bog armory key"
+	desc = "This key opens the bog armory."
+	icon_state = "spikekey"
+	lockid = "bog_armory"
+
+/obj/item/roguekey/town_barracks
+	name = "town barracks key"
+	desc = "This key opens the town barracks."
+	icon_state = "spikekey"
+	lockid = "town_barracks"
+
+/obj/item/roguekey/town_dungeon
+	name = "town dungeon key"
+	desc = "This key opens the town dungeon."
+	icon_state = "spikekey"
+	lockid = "town_dungeon"
+
+/obj/item/roguekey/town_armory
+	name = "town armory key"
+	desc = "This key opens the town armory."
+	icon_state = "spikekey"
+	lockid = "town_armory"
+
+/obj/item/roguekey/sheriff_office
+	name = "sheriff's office key"
+	desc = "This key opens the sheriff's office."
+	icon_state = "spikekey"
+	lockid = "sheriff_office"
+
+/obj/item/roguekey/keep_gatehouse
+	name = "keep gatehouse key"
+	desc = "This key opens the keep gatehouse."
+	icon_state = "spikekey"
+	lockid = "keep_gatehouse"
+
+/obj/item/roguekey/keep_barracks
+	name = "keep barracks key"
+	desc = "This key opens the keep barracks."
+	icon_state = "spikekey"
+	lockid = "keep_barracks"
+
+/obj/item/roguekey/keep_dungeon
+	name = "keep dungeon key"
+	desc = "This key opens the keep dungeon."
+	icon_state = "spikekey"
+	lockid = "keep_dungeon"
+
+/obj/item/roguekey/keep_dungeon_torture
+	name = "keep dungeon torture room key"
+	desc = "This key opens the keep dungeon torture room."
+	icon_state = "spikekey"
+	lockid = "keep_dungeon_torture"
+
+/obj/item/roguekey/keep_armory
+	name = "keep armory key"
+	desc = "This key opens the keep armory."
+	icon_state = "spikekey"
+	lockid = "keep_armory"
 
 //grenchensnacker
 /obj/item/roguekey/porta
@@ -352,7 +454,7 @@
 
 /obj/item/roguekey/custom/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/rogueweapon/hammer))
-		var/input = (input(user, "What would you name this key?", "", "") as text) 
+		var/input = (input(user, "What would you name this key?", "", "") as text)
 		if(input)
 			name = input + " key"
 			to_chat(user, span_notice("You rename the key to [name]."))
@@ -389,7 +491,7 @@
 		F.lockid = lockhash
 		to_chat(user, span_notice("You finish [F]."))
 		qdel(src)
-	
+
 
 //custom lock unfinished
 /obj/item/customlock
@@ -478,5 +580,10 @@
 				to_chat(user, span_notice("You add [src] to [K]."))
 				qdel(src)
 		else
-			to_chat(user, span_warning("A lock can't be added to [K]."))
-			
+			KE.keylock = TRUE
+			KE.lockhash = src.lockhash
+			KE.lock_strength = 100
+			if(src.holdname)
+				KE.name = src.holdname
+			to_chat(user, span_notice("You add [src] to [K]."))
+			qdel(src)

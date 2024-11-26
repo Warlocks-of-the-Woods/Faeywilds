@@ -61,7 +61,7 @@
 	whp = 150
 	sleep_healing = 0
 	/// Most head fractures are serious enough to cause paralysis
-	var/paralysis = FALSE
+	var/paralysis = TRUE
 	/// Some head fractures are so serious they cause instant death
 	var/mortal = FALSE
 	/// Funny easter egg
@@ -107,7 +107,7 @@
 		"The cranium is torn!",
 	)
 	embed_chance = 100
-	paralysis = FALSE
+	paralysis = TRUE
 	mortal = FALSE
 	dents_brain = TRUE
 
@@ -208,10 +208,11 @@
 		"The ribcage caves in!",
 	)
 	whp = 50
+	sleep_healing = 1
 
 /datum/wound/fracture/chest/on_mob_gain(mob/living/affected)
 	. = ..()
-	affected.Stun(0)
+	affected.Stun(20)
 
 /datum/wound/fracture/chest/on_life()
 	. = ..()

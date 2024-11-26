@@ -15,6 +15,8 @@
 	obj_flags = CAN_BE_HIT
 	w_class = WEIGHT_CLASS_HUGE
 
+/obj/item/grown/log/tree/large
+
 /obj/item/grown/log/tree/small
 	name = "small log"
 	desc = "Smaller log that came from a larger log. Suitable for building."
@@ -44,7 +46,7 @@
 	icon_state = "stick1"
 	desc = "A dry stick from a tree branch."
 	blade_dulling = 0
-	max_integrity = 20
+	max_integrity = 5
 	static_debris = null
 	firefuel = 5 MINUTES
 	obj_flags = null
@@ -64,7 +66,7 @@
 		if(prob(prob2break))
 			playsound(src,'sound/items/seedextract.ogg', 100, FALSE)
 			qdel(src)
-			if (L.alpha == 0 && L.rogue_sneaking) // not anymore you're not
+			if (L.alpha <= 100) // not anymore you're not
 				L.update_sneak_invis(TRUE)
 			L.consider_ambush()
 
@@ -94,9 +96,9 @@
 		return
 	if(istype(I, /obj/item/grown/log/tree/stick))
 		var/obj/item/natural/bundle/stick/F = new(src.loc)
+		qdel(I)
 		H.put_in_hands(F)
 		H.visible_message("[user] ties the sticks into a bundle.")
-		qdel(I)
 		qdel(src)
 	if(istype(I, /obj/item/natural/bundle/stick))
 		var/obj/item/natural/bundle/stick/B = I
@@ -118,6 +120,7 @@
 	blade_dulling = 0
 	max_integrity = 20
 	static_debris = null
+	tool_behaviour = TOOL_IMPROVISED_RETRACTOR
 	obj_flags = null
 	w_class = WEIGHT_CLASS_SMALL
 	twohands_required = FALSE

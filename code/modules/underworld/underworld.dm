@@ -1,5 +1,5 @@
 /obj/item/flashlight/lantern/shrunken
-	name = "shrunken lamp"
+	name = "Soul Lamp"
 	desc = "A beacon."
 	icon_state = "shrunkenlamp"
 	item_state = "shrunkenlamp"
@@ -166,8 +166,8 @@
 GLOBAL_VAR_INIT(underworld_coins, 0)
 
 /obj/item/underworld/coin
-	name = "The Toll"
-	desc = "This is more than just a coin."
+	name = "Soulcoin"
+	desc = "This is more than just a coin.. it's.. screaming?"
 	icon = 'icons/roguetown/underworld/enigma_husks.dmi'
 	icon_state = "soultoken_floor"
 	var/should_track = TRUE

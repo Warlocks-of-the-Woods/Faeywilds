@@ -1,12 +1,13 @@
 /datum/job/roguetown/puritan
-	title = "Inquisitor"
+	title = "Wytcher Captain"
 	flag = PURITAN
 	department_flag = CHURCHMEN
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 5
+	spawn_positions = 5
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+	spells = list (/obj/effect/proc_holder/spell/invoked/sacred_flame_rogue,new /obj/effect/proc_holder/spell/invoked/projectile/lightningbolt)
+	allowed_races = RACES_ALL_KINDSPLUS
 	allowed_patrons = list(
 		/datum/patron/old_god,
 		/datum/patron/divine/astrata,
@@ -19,26 +20,17 @@
 		/datum/patron/divine/pestra,
 		/datum/patron/divine/malum,
 	) //gets set to old god anyways
-	tutorial = "As an Inquisitor, the Queen has emboldened your radical sect to root out cultists and the cursed night beasts, using your practice of extracting involuntary 'sin confessions' as a guise to spy on the local populace. Witch Hunters are hired for their extreme paranoia and religious fervor."
-	whitelist_req = TRUE
+	tutorial = "As an Witcher, you have been tasked with hunting the various monsters that haunt the dream dales. Using Magick, Faith and your Arsenal of Tools; you are the stuff of legends which must fight the forces of darkness."
+	whitelist_req = FALSE
 
 	outfit = /datum/outfit/job/roguetown/puritan
 	display_order = JDO_PURITAN
 	give_bank_account = 36
-	min_pq = 1
+	min_pq = 0
 	max_pq = null
 
-/datum/job/roguetown/puritan/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
-	..()
-	if(!L.mind)
-		return
-	if(L.mind.has_antag_datum(/datum/antagonist))
-		return
-	var/datum/antagonist/new_antag = new /datum/antagonist/purishep()
-	L.mind.add_antag_datum(new_antag)
-
 /datum/outfit/job/roguetown/puritan
-	name = "Inquisitor"
+	name = "Witcher"
 	jobtype = /datum/job/roguetown/puritan
 	allowed_patrons = list(/datum/patron/old_god)
 
@@ -59,21 +51,21 @@
 	beltl = /obj/item/quiver/bolts
 	beltr = /obj/item/rogueweapon/sword/rapier
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/tracking, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3 , TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sewing, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/tracking, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 3 , TRUE)
 		H.change_stat("strength", 2)
 		H.change_stat("endurance", 2)
 		H.change_stat("constitution", 3)
@@ -134,10 +126,10 @@
 	if(H.add_stress(/datum/stressevent/tortured))
 		if(!H.stat)
 			var/static/list/faith_lines = list(
-				"DO YOU DENY THE TEN?",
+				"DO YOU DENY THE GOODLY ORDER?",
 				"WHO IS YOUR GOD?",
-				"ARE YOU FAITHFUL?",
-				"WHO IS YOUR SHEPHERD?",
+				"ARE YOU EVIL?",
+				"WHO IS YOUR PATRON?",
 			)
 			say(pick(faith_lines), spans = list("torture"))
 			if(painpercent >= 100)

@@ -257,3 +257,89 @@
 	if(!istype(T, /turf/open/floor/rogue))
 		return
 	return ..()
+
+
+/// GLASS
+
+/datum/crafting_recipe/roguetown/turfs/glasswindow
+	name = "glass window"
+	result = /obj/structure/roguewindow
+	reqs = list(/obj/item/ingot/glass = 1, /obj/item/grown/log/tree/small = 1)
+	skillcraft = /datum/skill/craft/carpentry
+	verbage_simple = "construct"
+	verbage = "constructs"
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/turfs/glasswindow/TurfCheck(mob/user, turf/T)
+	if(isclosedturf(T))
+		return
+	if(!istype(T, /turf/open/floor/rogue))
+		return
+	return TRUE
+
+/// DURT
+/datum/crafting_recipe/roguetown/turfs/nrich
+	name = "soil plot"
+	result = /turf/open/floor/rogue/dirt/nrich
+	reqs = list(/obj/item/ash = 1,
+				/obj/item/natural/fibers = 1,
+				/obj/item/natural/dirtclod = 2)
+	skillcraft = /datum/skill/labor/farming
+	verbage_simple = "set up"
+	verbage = "sets up"
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/turfs/nrich/TurfCheck(mob/user, turf/T)
+	if(isclosedturf(T))
+		return
+	if(!istype(T, /turf/open/floor/rogue))
+		return
+	return TRUE
+
+/datum/crafting_recipe/roguetown/turfs/glasswindowopenclose
+	name = "glass openable window"
+	result = /obj/structure/roguewindow/openclose
+	reqs = list(/obj/item/ingot/glass = 1, /obj/item/grown/log/tree/small = 1)
+	skillcraft = /datum/skill/craft/carpentry
+	verbage_simple = "construct"
+	verbage = "constructs"
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/turfs/glasswindow/TurfCheck(mob/user, turf/T)
+	if(isclosedturf(T))
+		return
+	if(!istype(T, /turf/open/floor/rogue))
+		return
+	return TRUE
+
+/datum/crafting_recipe/roguetown/turfs/glasswindowsilver
+	name = "glass stained silver window"
+	result = /obj/structure/roguewindow/stained/silver
+	reqs = list(/obj/item/ingot/glass = 1, /obj/item/grown/log/tree/small = 1)
+	skillcraft = /datum/skill/craft/carpentry
+	verbage_simple = "construct"
+	verbage = "constructs"
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/turfs/glasswindow/TurfCheck(mob/user, turf/T)
+	if(isclosedturf(T))
+		return
+	if(!istype(T, /turf/open/floor/rogue))
+		return
+	return TRUE
+
+/datum/crafting_recipe/roguetown/turfs/glasswindowyellow
+	name = "glass stained yellow window"
+	result = /obj/structure/roguewindow/stained/yellow
+	reqs = list(/obj/item/ingot/glass = 1, /obj/item/grown/log/tree/small = 1)
+	skillcraft = /datum/skill/craft/carpentry
+	verbage_simple = "construct"
+	verbage = "constructs"
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/turfs/glasswindow/TurfCheck(mob/user, turf/T)
+	if(isclosedturf(T))
+		return
+	if(!istype(T, /turf/open/floor/rogue))
+		return
+	return TRUE

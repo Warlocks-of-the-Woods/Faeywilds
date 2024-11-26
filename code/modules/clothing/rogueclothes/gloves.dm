@@ -8,6 +8,8 @@
 	bloody_icon_state = "bloodyhands"
 	sleevetype = "shirt"
 	max_heat_protection_temperature = 361
+	siemens_coefficient = 1
+	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/clothing/gloves/roguetown/carapace
 	name = "carapace gauntlets"
@@ -24,10 +26,10 @@
 	anvilrepair = null
 	sewrepair = TRUE
 /obj/item/clothing/gloves/roguetown/carapace/dragon
-	name = "dragon gauntlets"
-	desc = "Strong dragonbone plated gauntlets."
-	color = "red"
-	armor = list("blunt" = 80, "slash" = 100, "stab" = 60, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 60, "acid" = 0)
+	name = "dragonscale gauntlets"
+	desc = "Strong dragonscale plated gauntlets."
+	color = "#9e5761"
+	armor = list("blunt" = 80, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 60, "acid" = 0)
 
 /obj/item/clothing/gloves/roguetown/leather
 	name = "leather gloves"
@@ -44,7 +46,7 @@
 	sewrepair = TRUE
 
 /obj/item/clothing/gloves/roguetown/leather/black
-	color = CLOTHING_BLACK
+	icon_state = "gloves_black"
 
 /obj/item/clothing/gloves/roguetown/fingerless
 	name = "fingerless gloves"
@@ -88,6 +90,7 @@
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
+	resistance_flags = FIRE_PROOF
 
 /obj/item/clothing/gloves/roguetown/chain/iron
 	icon_state = "icgloves"
@@ -103,7 +106,7 @@
 	icon_state = "gauntlets"
 	armor = list("blunt" = 90, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CHOP, BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
-	resistance_flags = null
+	resistance_flags = FIRE_PROOF
 	blocksound = PLATEHIT
 	max_integrity = 300
 	blade_dulling = DULLING_BASH
@@ -111,6 +114,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
+	clothing_flags = CANT_SLEEP_IN
 
 /obj/item/clothing/gloves/roguetown/graggaritegauntletsleader
 	name = "graggarite leader gauntlets"
@@ -126,7 +130,8 @@
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
-	smeltresult = /obj/item/ingot/steel	
+	smeltresult = /obj/item/ingot/steel
+	clothing_flags = CANT_SLEEP_IN
 
 /obj/item/clothing/gloves/roguetown/grenzelgloves
 	name = "grenzelhoft gloves"
@@ -174,7 +179,7 @@
 	anvilrepair = /datum/skill/craft/armorsmithing
 	icon_state = "graggaritegauntlets"
 	item_state = "graggaritegauntlets"
-	smeltresult = /obj/item/ingot/iron	
+	smeltresult = /obj/item/ingot/iron
 
 /obj/item/clothing/gloves/roguetown/katefractoiigauntlets
 	name = "katefractoii gauntlets"
@@ -190,7 +195,7 @@
 	anvilrepair = /datum/skill/craft/armorsmithing
 	icon_state = "katefractoiigauntlets"
 	item_state = "katefractoiigauntlets"
-	smeltresult = /obj/item/ingot/iron	
+	smeltresult = /obj/item/ingot/iron
 
 /obj/item/clothing/gloves/roguetown/dwarfgauntlets
 	name = "dwarven gauntlets"
@@ -254,7 +259,7 @@
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
-	smeltresult = /obj/item/ingot/steel	
+	smeltresult = /obj/item/ingot/steel
 
 /obj/item/clothing/gloves/roguetown/plate/zybantinegauntlets
 	name = "zybantine gauntlets"
@@ -270,7 +275,7 @@
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
-	smeltresult = /obj/item/ingot/steel	
+	smeltresult = /obj/item/ingot/steel
 
 /obj/item/clothing/gloves/roguetown/feldgloves
 	name = "long gloves"

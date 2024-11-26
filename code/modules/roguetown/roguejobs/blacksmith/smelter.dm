@@ -1,6 +1,7 @@
 
 /obj/item
 	var/smeltresult
+	var/smithed = FALSE
 
 /obj/machinery/light/rogue/smelter
 	icon = 'icons/roguetown/misc/forge.dmi'
@@ -18,7 +19,7 @@
 	var/maxore = 1
 	var/cooking = 0
 	var/actively_smelting = FALSE // Are we currently smelting?
-	fueluse = 5 MINUTES
+	fueluse = 20 MINUTES
 	crossfire = FALSE
 
 /obj/machinery/light/rogue/smelter/attackby(obj/item/W, mob/living/user, params)
@@ -63,7 +64,6 @@
 			else
 				var/datum/mind/smelter_mind = user.mind
 				var/smelter_exp = smelter_mind.get_skill_level(/datum/skill/craft/smelting)
-				//Fine to Legendary removed; caused issues of exploits. But you still gain EXP to stop making sub-par quality armor.
 				ore[W] = floor(rand(smelter_exp*15, max(63, smelter_exp*25))/25) // (0-25 spoil, 25-50 poor, 50-75, normal, 75-onwards good) no skill = 0, 63, novice = 15, 63, apprentice = 30, 63, skilled = 45, 75, expert = 60, 100, master = 75, 125, legendary = 100, 150, (may want to add a tier above good)
 			user.visible_message(span_warning("[user] puts something in the smelter."))
 			cooking = 0
@@ -125,7 +125,7 @@
 	anchored = TRUE
 	density = TRUE
 	maxore = 4
-	fueluse = 10 MINUTES
+	fueluse = 30 MINUTES
 	climbable = FALSE
 
 /obj/machinery/light/rogue/smelter/great/process()
@@ -172,3 +172,15 @@
 					visible_message("<span class='notice'>\The [src] finished smelting.</span>")
 					cooking = 31
 					actively_smelting = FALSE
+
+/obj/machinery/light/rogue/smelter/improved
+	icon = 'icons/roguetown/misc/forge.dmi'
+	name = "modified furnace"
+	desc = "A slightly more thoughtfully made smelter, still basic in design but able to hold more ores."
+	icon_state = "cavesmelter0"
+	base_state = "cavesmelter"
+	anchored = TRUE
+	density = TRUE
+	maxore = 3
+	fueluse = 30 MINUTES
+	climbable = TRUE

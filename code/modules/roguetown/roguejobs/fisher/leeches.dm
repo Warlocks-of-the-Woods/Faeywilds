@@ -6,7 +6,10 @@
 	icon = 'icons/roguetown/items/surgery.dmi'
 	icon_state = "leech"
 	baitchance = 100
-	fishloot = list(/obj/item/reagent_containers/food/snacks/fish/eel = 9,
+	dropshrink = 0.5
+	fishloot = list(/obj/item/reagent_containers/food/snacks/fish/carp = 5,
+					/obj/item/reagent_containers/food/snacks/fish/eel = 5,
+					/obj/item/reagent_containers/food/snacks/fish/angler = 1,
 					/obj/item/reagent_containers/food/snacks/fish/clownfish = 1)
 	embedding = list(
 		"embed_chance" = 100,
@@ -31,6 +34,7 @@
 	var/blood_maximum = BLOOD_VOLUME_SURVIVE
 	// Who are we latching onto?
 	var/mob/living/host
+	w_class = WEIGHT_CLASS_SMALL
 
 	// Completely silent, no do_after and no visible_message
 	var/completely_silent = FALSE

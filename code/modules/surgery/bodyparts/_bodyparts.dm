@@ -50,6 +50,7 @@
 	var/species_icon = ""
 
 	var/animal_origin = null //for nonhuman bodypart (e.g. monkey)
+	var/prosthetic_prefix = "pr" // for unique prosthetic icons on mob
 	var/dismemberable = 1 //whether it can be dismembered with a weapon.
 	var/disableable = 1
 
@@ -84,12 +85,15 @@
 	var/skeletonized = FALSE
 
 	var/fingers = TRUE
+	var/organ_slowdown = 0 // Its here because this is first shared definition between two leg organ paths
 
 	/// Visaul markings to be rendered alongside the bodypart
 	var/list/markings
 	var/list/aux_markings
 	/// Visual features of the bodypart, such as hair and accessories
 	var/list/bodypart_features
+	var/draw_organ_features = TRUE
+	var/draw_bodypart_features = TRUE
 
 	resistance_flags = FLAMMABLE
 
@@ -337,6 +341,10 @@
 	update_HP()
 	if(required_status && (status != required_status)) //So we can only heal certain kinds of limbs, ie robotic vs organic.
 		return
+	if(owner && owner.has_status_effect(/datum/status_effect/buff/fortify))
+		brute *= 1.5
+		burn *= 1.5
+		stamina *= 1.5
 
 	brute_dam	= round(max(brute_dam - brute, 0), DAMAGE_PRECISION)
 	burn_dam	= round(max(burn_dam - burn, 0), DAMAGE_PRECISION)
@@ -585,15 +593,14 @@
 			if(!hideaux)
 				aux = image(limb.icon, "[aux_zone][skel]", -aux_layer, image_dir)
 				. += aux
-
 	else
 		limb.icon = species_icon
-		limb.icon_state = "pr_[body_zone]"
+		limb.icon_state = "[prosthetic_prefix]_[body_zone]"
 		if(aux_zone)
 			if(!hideaux)
-				aux = image(limb.icon, "pr_[aux_zone]", -aux_layer, image_dir)
+				//Prosthetic arms do not have additional hand icons on them, because of this they do not render above clothing, this is why aux image uses body_zone var instead of aux_zone//
+				aux = image(limb.icon, "[prosthetic_prefix]_[body_zone]", -aux_layer, image_dir)
 				. += aux
-
 
 	var/override_color = null
 	if(rotted)
@@ -624,7 +631,7 @@
 				. += organ_appearance
 
 	// Feature overlays
-	if(!skeletonized)
+	if(!skeletonized && draw_bodypart_features)
 		for(var/datum/bodypart_feature/feature as anything in bodypart_features)
 			var/overlays = feature.get_bodypart_overlay(src)
 			if(!overlays)

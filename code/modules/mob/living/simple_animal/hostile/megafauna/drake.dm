@@ -50,7 +50,6 @@ Difficulty: Medium
 	pixel_x = -16
 	crusher_loot = list(/obj/structure/closet/crate/necropolis/dragon/crusher)
 	loot = list(/obj/structure/closet/crate/necropolis/dragon)
-	guaranteed_butcher_results = list(/obj/item/stack/sheet/animalhide/ashdrake = 10)
 	var/swooping = NONE
 	var/player_cooldown = 0
 	gps_name = "Fiery Signal"
@@ -73,7 +72,7 @@ Difficulty: Medium
 	see_in_dark = 10
 	move_to_delay = 3
 	base_intents = list(/datum/intent/simple/drake)
-	butcher_results = list(/obj/item/natural/carapace/dragon = 2,/obj/item/reagent_containers/food/snacks/rogue/meat/steak = 2, /obj/item/soul_fragment/essence = 1)
+	butcher_results = list(/obj/item/natural/carapace/dragon = 4,/obj/item/reagent_containers/food/snacks/rogue/meat/steak = 2, /obj/item/soul_fragment/essence = 1, /obj/item/natural/dragon_head = 1)
 	faction = list("caves")
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	health = 2500
@@ -168,7 +167,7 @@ Difficulty: Medium
 		return
 	target.visible_message(span_boldwarning("Fire rains from the sky!"))
 	for(var/turf/turf in range(9,get_turf(target)))
-		if(prob(11))
+		if(prob(5))
 			new /obj/effect/temp_visual/target(turf)
 
 /mob/living/simple_animal/hostile/retaliate/rogue/megafauna/dragon/proc/lava_pools(amount, delay = 0.8)
@@ -224,7 +223,9 @@ Difficulty: Medium
 		if(istype(T, /turf/open/indestructible))
 			continue
 		if(!istype(T, /turf/closed/indestructible))
+			var/reset_turf = T.type
 			T.ChangeTurf(/turf/open/floor/plating/asteroid/basalt/lava_land_surface, flags = CHANGETURF_INHERIT_AIR)
+			addtimer(CALLBACK(T, TYPE_PROC_REF(/turf, ChangeTurf), reset_turf, null, CHANGETURF_INHERIT_AIR), 30 SECONDS, TIMER_OVERRIDE|TIMER_UNIQUE)
 		else
 			indestructible_turfs += T
 	SLEEP_CHECK_DEATH(10) // give them a bit of time to realize what attack is actually happening

@@ -64,6 +64,8 @@
 
 /mob/living
 	var/tempatarget = null
+	var/mouth_blocked = FALSE
+	var/show_genitals = FALSE
 
 /obj/item/proc/attack(mob/living/M, mob/living/user)
 	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK, M, user) & COMPONENT_ITEM_NO_ATTACK)
@@ -239,9 +241,9 @@
 					var/mob/living/lumberjacker = user
 					var/lumberskill = lumberjacker.mind.get_skill_level(/datum/skill/labor/lumberjacking)
 					if(!I.remove_bintegrity(1))
-						dullfactor = 0.2
+						dullfactor = 0.3
 					else
-						dullfactor = 1.2 + (lumberskill * 0.15)
+						dullfactor = 1.0 + (lumberskill * 0.25)
 						lumberjacker.mind.adjust_experience(/datum/skill/labor/lumberjacking, (lumberjacker.STAINT*0.2))
 					cont = TRUE
 			if(!cont)
@@ -283,7 +285,7 @@
 			if(!cont)
 				return 0
 		if(DULLING_PICK) //cannot deal damage if not a pick item. aka rock walls
-				    
+
 			if(user.used_intent.blade_class != BCLASS_PICK)
 				return 0
 			var/mob/living/miner = user
@@ -294,10 +296,12 @@
 				newforce = newforce * (8+(mineskill*1.5))
 			shake_camera(user, 1, 1)
 			miner.mind.adjust_experience(/datum/skill/labor/mining, (miner.STAINT*0.2))
-	
+
 	newforce = (newforce * user.used_intent.damfactor) * dullfactor
 	if(user.used_intent.get_chargetime() && user.client?.chargedprog < 100)
 		newforce = newforce * 0.5
+	if(!(user.mobility_flags & MOBILITY_STAND))
+		newforce *= 0.5
 	newforce = round(newforce,1)
 	newforce = max(newforce, 1)
 	testing("endforce [newforce]")
@@ -411,10 +415,20 @@
 
 /mob/living/attacked_by(obj/item/I, mob/living/user)
 	var/hitlim = simple_limb_hit(user.zone_selected)
+	var/from_behind = FALSE
+	if(user && (src.dir == turn(get_dir(src,user), 180)))
+		from_behind = TRUE
 	testing("[src] attacked_by")
 	I.funny_attack_effects(src, user)
 	if(I.force)
 		var/newforce = get_complex_damage(I, user)
+		if(from_behind && user.mind && !HAS_TRAIT(src, TRAIT_BLINDFIGHTING) && !user.has_status_effect(/datum/status_effect/debuff/stealthcd))//Backstabs do increased damage; Sneak attacks have a higher crit chance. Combined, a stealthy backstab should be very damaging.
+			var/sneakmult = 2 + (user.mind.get_skill_level(/datum/skill/misc/sneaking))
+			newforce *= sneakmult
+			user.apply_status_effect(/datum/status_effect/debuff/stealthcd)
+			to_chat(src, span_userdanger("BACKSTAB!!! THE ATTACK DEALS GREATER DAMAGE!"))
+			to_chat(user, span_userdanger("BACKSTAB!!! MY ATTACK DOES GREATER DAMAGE!"))
+			user.mind?.adjust_experience(/datum/skill/misc/sneaking, user.STAINT * 5, TRUE)
 		apply_damage(newforce, I.damtype, def_zone = hitlim)
 		if(I.damtype == BRUTE)
 			next_attack_msg.Cut()

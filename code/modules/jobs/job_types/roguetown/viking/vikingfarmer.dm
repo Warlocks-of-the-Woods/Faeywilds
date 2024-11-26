@@ -5,8 +5,8 @@
 	flag = VIKINGFARMER
 	department_flag = VIKING
 	faction = "Station"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_ALL_KINDSPLUS
 	show_in_credits = FALSE		//Stops Scom from announcing their arrival.
@@ -14,7 +14,7 @@
 	tutorial = "You have likely seen the brutality of the Northmen firsthand. Put aside any notion of rescue, and serve the warband well. Taken so far away from home, it is better to keep your head down and do your part, for you will likely never see your loved ones ever again."
 	whitelist_req = FALSE
 
-	
+
 	outfit = /datum/outfit/job/roguetown/farmer
 	display_order = JDO_VIKINGFARMER
 	min_pq = -10
@@ -23,21 +23,21 @@
 /datum/outfit/job/roguetown/vikingfarmer/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3 , TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/masonry, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/alchemy, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/labor/farming, pick(4,5), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/polearms, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 3 , TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/masonry, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/carpentry, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/alchemy, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/labor/farming, pick(4,5), TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sewing, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/cooking, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 3, TRUE)
 		H.change_stat("strength", 1)
 		H.change_stat("constitution", 1)
 		H.change_stat("speed", 1)

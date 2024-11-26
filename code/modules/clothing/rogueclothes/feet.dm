@@ -10,7 +10,16 @@
 	sleevetype = "leg"
 	bloody_icon_state = "shoeblood"
 	equip_delay_self = 30
-	resistance_flags = FIRE_PROOF
+	w_class = WEIGHT_CLASS_SMALL
+
+/obj/item/clothing/shoes/roguetown/boots/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/storage/concrete)
+	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+	if(STR)
+		STR.max_combined_w_class = 3
+		STR.max_w_class = WEIGHT_CLASS_NORMAL
+		STR.max_items = 1
 
 /obj/item/clothing/shoes/roguetown/boots
 	name = "dark boots"
@@ -107,6 +116,7 @@
 	icon_state = "shalal"
 	item_state = "shalal"
 	sewrepair = TRUE
+	armor = list("blunt" = 25, "slash" = 20, "stab" = 25, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/shoes/roguetown/boots/carapace
 	name = "carapace boots"
@@ -123,10 +133,10 @@
 	smeltresult = /obj/item/ash
 	sewrepair = TRUE
 /obj/item/clothing/shoes/roguetown/boots/carapace/dragon
-	name = "dragon boots"
-	desc = "Boots made from dragonbone for added protection."
-	color = "red"
-	armor = list("blunt" = 80, "slash" = 100, "stab" = 60, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 60, "acid" = 0)
+	name = "dragonscale boots"
+	desc = "Boots made from dragonscale for added protection."
+	color = "#9e5761"
+	armor = list("blunt" = 80, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 60, "acid" = 0)
 
 
 /obj/item/clothing/shoes/roguetown/boots/armoriron
@@ -154,6 +164,8 @@
 	armor = list("blunt" = 90, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
+	clothing_flags = CANT_SLEEP_IN
+	resistance_flags = FIRE_PROOF
 
 /obj/item/clothing/shoes/roguetown/boots/graggaritebootsleader
 	name = "graggarite leader boots"
@@ -166,7 +178,7 @@
 	blocksound = PLATEHIT
 	armor = list("blunt" = 90, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	anvilrepair = /datum/skill/craft/armorsmithing
-	smeltresult = /obj/item/ingot/steel	
+	smeltresult = /obj/item/ingot/steel
 
 /obj/item/clothing/shoes/roguetown/boots/dwarfboots
 	name = "dwarven boots"
@@ -311,7 +323,7 @@
 	blocksound = PLATEHIT
 	armor = list("blunt" = 90, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	anvilrepair = /datum/skill/craft/armorsmithing
-	smeltresult = /obj/item/ingot/steel	
+	smeltresult = /obj/item/ingot/steel
 
 /obj/item/clothing/shoes/roguetown/boots/psydonianknightboots
 	name = "psydonian knight greaves"
@@ -324,7 +336,7 @@
 	blocksound = PLATEHIT
 	armor = list("blunt" = 90, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	anvilrepair = /datum/skill/craft/armorsmithing
-	smeltresult = /obj/item/ingot/steel	
+	smeltresult = /obj/item/ingot/steel
 
 /obj/item/clothing/shoes/roguetown/boots/zybantineboots
 	name = "zybantine boots"
@@ -337,7 +349,7 @@
 	blocksound = PLATEHIT
 	armor = list("blunt" = 90, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	anvilrepair = /datum/skill/craft/armorsmithing
-	smeltresult = /obj/item/ingot/steel	
+	smeltresult = /obj/item/ingot/steel
 
 /obj/item/clothing/shoes/roguetown/nephilimsandals
 	name = "nephilim sandals"
@@ -367,28 +379,16 @@
 /obj/item/clothing/shoes/roguetown/boots/hidden
 	desc = "A fine set of dark boots with a hidden compartment."
 
-/obj/item/clothing/shoes/roguetown/boots/hidden/poison
-
-/obj/item/clothing/shoes/roguetown/boots/hidden/ComponentInitialize()
-	. = ..()
-	AddComponent(/datum/component/storage/concrete)
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		STR.max_combined_w_class = 3
-		STR.max_w_class = WEIGHT_CLASS_NORMAL
-		STR.max_items = 1
-
-/obj/item/clothing/shoes/roguetown/boots/hidden/dropped(mob/living/carbon/human/user)
-	..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
-
 /obj/item/clothing/shoes/roguetown/boots/hidden/poison/Initialize()
 	. = ..()
 	var/obj/item/reagent_containers/glass/bottle/rogue/poison/H = new(loc)
+	if(istype(H))
+		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
+			qdel(H)
+
+/obj/item/clothing/shoes/roguetown/boots/hidden/berrypoison/Initialize()
+	. = ..()
+	var/obj/item/reagent_containers/glass/bottle/rogue/berrypoison/H = new(loc)
 	if(istype(H))
 		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
 			qdel(H)

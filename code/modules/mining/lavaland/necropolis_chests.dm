@@ -295,10 +295,10 @@
 	return ..()
 
 /obj/effect/wisp
-	name = "benevolent spirit"
-	desc = "My companion in these dark times."
-	icon = 'icons/roguetown/items/lighting.dmi'
-	icon_state = "wisp"
+	name = "wisp"
+	desc = "These seelie spirits often appear in magical forests.."
+	icon = 'modular_stonehedge/icons/obj/lighting.dmi'
+	icon_state = "orb"
 	light_system = MOVABLE_LIGHT
 	light_range = 7
 	pixel_x = 20
@@ -309,11 +309,11 @@
 
 /obj/effect/wisp/orbit(atom/thing)
 	. = ..()
-//	if(ismob(thing))
-//		RegisterSignal(thing, COMSIG_MOB_UPDATE_SIGHT, PROC_REF(update_user_sight))
-//		var/mob/being = thing
-//		being.update_sight()
-//		to_chat(thing, span_notice("The wisp enhances my vision."))
+	if(ismob(thing))
+		RegisterSignal(thing, COMSIG_MOB_UPDATE_SIGHT, PROC_REF(update_user_sight))
+		var/mob/being = thing
+		being.update_sight()
+		to_chat(thing, span_notice("The wisp enhances my vision."))
 
 /obj/effect/wisp/stop_orbit(datum/component/orbiter/orbits)
 	. = ..()
@@ -757,7 +757,7 @@
 	var/list/loot = list(/obj/item/book/granter/trait/defense/heavyarmor=35,
 		/obj/item/book/granter/trait/defense/mediumarmor=12,
 		/obj/item/book/granter/trait/war/undying=8,
-		/obj/item/natural/dragon_head = 45)
+		/obj/item/riddleofsteel = 45)
 	if(prob(50))
 		var/I = pickweight(loot)
 		new I(src)

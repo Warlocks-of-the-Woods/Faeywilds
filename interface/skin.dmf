@@ -134,7 +134,7 @@ window "outputwindow"
 		is-default = true
 		border = sunken
 		saved-params = ""
-		command = "say"
+		command = ""
 
 window "statwindow"
 	elem "statwindow"
@@ -201,7 +201,7 @@ window "preferencess_window"
 		saved-params = ""
 	elem "character_preview_map"
 		type = MAP
-		pos = 260,230
+		pos = 260,260
 		size = 140x192
 		anchor1 = 75,30
 		anchor2 = 100,20
@@ -209,4 +209,3 @@ window "preferencess_window"
 		right-click = true
 		icon-size = 64
 		zoom-mode = "distort"
-

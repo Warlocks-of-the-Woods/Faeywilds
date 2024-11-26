@@ -4,11 +4,11 @@
 #define MOVING_TO_TARGET 3
 #define SPINNING_COCOON 4
 
-/mob/living/simple_animal/hostile/poison
+/mob/living/simple_animal/hostile/retaliate/rogue/poison
 	var/poison_per_bite = 5
 	var/poison_type = /datum/reagent/toxin
 
-/mob/living/simple_animal/hostile/poison/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/AttackingTarget()
 	. = ..()
 	if(. && isliving(target))
 		var/mob/living/L = target
@@ -16,7 +16,7 @@
 			L.reagents.add_reagent(poison_type, poison_per_bite)
 
 //basic spider mob, these generally guard nests
-/mob/living/simple_animal/hostile/poison/giant_spider
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider
 	name = "giant spider"
 	desc = ""
 	icon_state = "guard"
@@ -26,50 +26,88 @@
 	speak_emote = list("chitters")
 	emote_hear = list("chitters")
 	speak_chance = 5
-	turns_per_move = 5
-	see_in_dark = 4
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/spider = 2, /obj/item/reagent_containers/food/snacks/spiderleg = 8)
+	gender = MALE
+	speak_chance = 1
+	turns_per_move = 3
+	see_in_dark = 6
+	move_to_delay = 4
+	vision_range = 5
+	aggro_vision_range = 9
+	base_intents = list(/datum/intent/simple/bite)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/spider = 2, /obj/item/natural/silk = 6, /obj/item/reagent_containers/food/snacks/spidereggs = 1)
 	response_help_continuous = "pets"
 	response_help_simple = "pet"
 	response_disarm_continuous = "gently pushes aside"
 	response_disarm_simple = "gently push aside"
-	maxHealth = 200
-	health = 200
-	obj_damage = 60
-	melee_damage_lower = 15
-	melee_damage_upper = 20
 	faction = list("spiders")
-	var/busy = SPIDER_IDLE
-	pass_flags = PASSTABLE
-	move_to_delay = 6
-	ventcrawler = VENTCRAWLER_ALWAYS
-	attack_verb_continuous = "bites"
-	attack_verb_simple = "bite"
-	attack_sound = 'sound/blank.ogg'
-	unique_name = 1
+	mob_biotypes = MOB_ORGANIC|MOB_BEAST
+	attack_sound = 'sound/combat/wooshes/punch/punchwoosh (2).ogg'
+	health = 80
+	maxHealth = 80
+	melee_damage_lower = 17
+	melee_damage_upper = 27
+	environment_smash = ENVIRONMENT_SMASH_NONE
+	retreat_distance = 0
+	minimum_distance = 0
+	milkies = FALSE
+	food_type = list(/obj/item/bodypart, /obj/item/organ, /obj/item/reagent_containers/food/snacks/rogue/meat)
+	pooptype = null
+	STACON = 6
+	STASTR = 9
+	STASPD = 10
+	deaggroprob = 0
+	tame_chance = 15
+	defprob = 40
+	defdrain = 10
+	attack_same = 0
+	retreat_health = 0.3
+	attack_sound = list('sound/vo/mobs/spider/attack (1).ogg','sound/vo/mobs/spider/attack (2).ogg','sound/vo/mobs/spider/attack (3).ogg','sound/vo/mobs/spider/attack (4).ogg')
+	aggressive = 1
+	stat_attack = UNCONSCIOUS
 	gold_core_spawnable = HOSTILE_SPAWN
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
 	footstep_type = FOOTSTEP_MOB_CLAW
 	var/playable_spider = FALSE
 	var/datum/action/innate/spider/lay_web/lay_web
 	var/directive = "" //Message passed down to children, to relay the creator's orders
+	var/busy = FALSE
 
-/mob/living/simple_animal/hostile/poison/giant_spider/Initialize()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/get_sound(input)
+	switch(input)
+		if("aggro")
+			return pick('sound/vo/mobs/spider/aggro (1).ogg','sound/vo/mobs/spider/aggro (2).ogg','sound/vo/mobs/spider/aggro (3).ogg')
+		if("pain")
+			return pick('sound/vo/mobs/spider/pain.ogg')
+		if("death")
+			return pick('sound/vo/mobs/spider/death.ogg')
+		if("idle")
+			return pick('sound/vo/mobs/spider/idle (1).ogg','sound/vo/mobs/spider/idle (2).ogg','sound/vo/mobs/spider/idle (3).ogg','sound/vo/mobs/spider/idle (4).ogg')
+
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/taunted(mob/user)
+	emote("aggro")
+	Retaliate()
+	GiveTarget(user)
+	return
+
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/Initialize()
 	. = ..()
+	gender = MALE
+	if(prob(33))
+		gender = FEMALE
 	lay_web = new
 	lay_web.Grant(src)
 
-/mob/living/simple_animal/hostile/poison/giant_spider/Destroy()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/Destroy()
 	QDEL_NULL(lay_web)
 	return ..()
 
-/mob/living/simple_animal/hostile/poison/giant_spider/Topic(href, href_list)
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/Topic(href, href_list)
 	if(href_list["activate"])
 		var/mob/dead/observer/ghost = usr
 		if(istype(ghost) && playable_spider)
 			humanize_spider(ghost)
 
-/mob/living/simple_animal/hostile/poison/giant_spider/Login()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/Login()
 	..()
 	if(directive)
 		to_chat(src, span_spider("My mother left you a directive! Follow it at all costs."))
@@ -77,13 +115,13 @@
 		if(mind)
 			mind.store_memory(span_spider("<b>[directive]</b>"))
 
-/mob/living/simple_animal/hostile/poison/giant_spider/attack_ghost(mob/user)
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/attack_ghost(mob/user)
 	. = ..()
 	if(.)
 		return
 	humanize_spider(user)
 
-/mob/living/simple_animal/hostile/poison/giant_spider/proc/humanize_spider(mob/user)
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/proc/humanize_spider(mob/user)
 	if(key || !playable_spider || stat)//Someone is in it, it's dead, or the fun police are shutting it down
 		return 0
 	var/spider_ask = alert("Become a spider?", "Are you australian?", "Yes", "No")
@@ -98,13 +136,13 @@
 	return 1
 
 //nursemaids - these create webs and eggs
-/mob/living/simple_animal/hostile/poison/giant_spider/nurse
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse
 	desc = ""
 	icon_state = "nurse"
 	icon_living = "nurse"
 	icon_dead = "nurse_dead"
 	gender = FEMALE
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/spider = 2, /obj/item/reagent_containers/food/snacks/spiderleg = 8, /obj/item/reagent_containers/food/snacks/spidereggs = 4)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/spider = 2, /obj/item/natural/silk = 6, /obj/item/reagent_containers/food/snacks/spidereggs = 4)
 	maxHealth = 40
 	health = 40
 	melee_damage_lower = 5
@@ -118,7 +156,7 @@
 	var/static/list/consumed_mobs = list() //the tags of mobs that have been consumed by nurse spiders to lay eggs
 	gold_core_spawnable = NO_SPAWN
 
-/mob/living/simple_animal/hostile/poison/giant_spider/nurse/Initialize()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/Initialize()
 	. = ..()
 	wrap = new
 	AddAbility(wrap)
@@ -127,14 +165,14 @@
 	set_directive = new
 	set_directive.Grant(src)
 
-/mob/living/simple_animal/hostile/poison/giant_spider/nurse/Destroy()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/Destroy()
 	RemoveAbility(wrap)
 	QDEL_NULL(lay_eggs)
 	QDEL_NULL(set_directive)
 	return ..()
 
 //broodmothers are the queen of the spiders, can send messages to all them and web faster. That rare round where you get a queen spider and turn my 'for honor' players into 'r6siege' players will be a fun one.
-/mob/living/simple_animal/hostile/poison/giant_spider/nurse/midwife
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/midwife
 	name = "broodmother"
 	desc = ""
 	icon_state = "midwife"
@@ -144,17 +182,17 @@
 	health = 40
 	var/datum/action/innate/spider/comm/letmetalkpls
 
-/mob/living/simple_animal/hostile/poison/giant_spider/nurse/midwife/Initialize()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/midwife/Initialize()
 	. = ..()
 	letmetalkpls = new
 	letmetalkpls.Grant(src)
 
-/mob/living/simple_animal/hostile/poison/giant_spider/nurse/midwife/Destroy()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/midwife/Destroy()
 	QDEL_NULL(letmetalkpls)
 	return ..()
 
 //hunters have the most poison and move the fastest, so they can find prey
-/mob/living/simple_animal/hostile/poison/giant_spider/hunter
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/hunter
 	desc = ""
 	icon_state = "hunter"
 	icon_living = "hunter"
@@ -167,7 +205,7 @@
 	move_to_delay = 5
 
 //vipers are the rare variant of the hunter, no IMMEDIATE damage but so much poison medical care will be needed fast.
-/mob/living/simple_animal/hostile/poison/giant_spider/hunter/viper
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/hunter/viper
 	name = "viper"
 	desc = ""
 	icon_state = "viper"
@@ -184,7 +222,7 @@
 	gold_core_spawnable = NO_SPAWN
 
 //tarantulas are really tanky, regenerating (maybe), hulky monster but are also extremely slow, so.
-/mob/living/simple_animal/hostile/poison/giant_spider/tarantula
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/tarantula
 	name = "tarantula"
 	desc = ""
 	icon_state = "tarantula"
@@ -202,7 +240,7 @@
 	gold_core_spawnable = NO_SPAWN
 	var/slowed_by_webs = FALSE
 
-/mob/living/simple_animal/hostile/poison/giant_spider/tarantula/Moved(atom/oldloc, dir)
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/tarantula/Moved(atom/oldloc, dir)
 	. = ..()
 	if(slowed_by_webs)
 		if(!(locate(/obj/structure/spider/stickyweb) in loc))
@@ -212,7 +250,7 @@
 		add_movespeed_modifier(MOVESPEED_ID_TARANTULA_WEB, priority=100, multiplicative_slowdown=3)
 		slowed_by_webs = TRUE
 
-/mob/living/simple_animal/hostile/poison/giant_spider/ice //spiders dont usually like tempatures of 140 kelvin who knew
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/ice //spiders dont usually like tempatures of 140 kelvin who knew
 	name = "giant ice spider"
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
@@ -221,7 +259,7 @@
 	color = rgb(114,228,250)
 	gold_core_spawnable = NO_SPAWN
 
-/mob/living/simple_animal/hostile/poison/giant_spider/nurse/ice
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/ice
 	name = "giant ice spider"
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
@@ -229,7 +267,7 @@
 	poison_type = /datum/reagent/consumable/frostoil
 	color = rgb(114,228,250)
 
-/mob/living/simple_animal/hostile/poison/giant_spider/hunter/ice
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/hunter/ice
 	name = "giant ice spider"
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
@@ -238,35 +276,35 @@
 	color = rgb(114,228,250)
 	gold_core_spawnable = NO_SPAWN
 
-/mob/living/simple_animal/hostile/poison/giant_spider/handle_automated_action()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/handle_automated_action()
 	if(!..()) //AIStatus is off
 		return 0
 	if(AIStatus == AI_IDLE)
 		//1% chance to skitter madly away
 		if(!busy && prob(1))
 			stop_automated_movement = TRUE
-			Goto(pick(urange(20, src, 1)), move_to_delay)
+			Goto(pick(urange(6, src, 1)), move_to_delay)
 			addtimer(CALLBACK(src, PROC_REF(do_action)), 5 SECONDS)
 		return 1
 
-/mob/living/simple_animal/hostile/poison/giant_spider/proc/do_action()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/proc/do_action()
 	stop_automated_movement = FALSE
 	walk(src,0)
 
-/mob/living/simple_animal/hostile/poison/giant_spider/nurse/proc/GiveUp(C)
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/proc/GiveUp(C)
 	if(busy == MOVING_TO_TARGET)
 		if(cocoon_target == C && get_dist(src,cocoon_target) > 1)
 			cocoon_target = null
 		busy = FALSE
 		stop_automated_movement = FALSE
 
-/mob/living/simple_animal/hostile/poison/giant_spider/nurse/handle_automated_action()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/handle_automated_action()
 	if(..())
 		var/list/can_see = view(src, 10)
 		if(!busy && prob(30))	//30% chance to stop wandering and do something
 			//first, check for potential food nearby to cocoon
 			for(var/mob/living/C in can_see)
-				if(C.stat && !istype(C, /mob/living/simple_animal/hostile/poison/giant_spider) && !C.anchored)
+				if(C.stat && !istype(C, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider) && !C.anchored)
 					cocoon_target = C
 					busy = MOVING_TO_TARGET
 					Goto(C, move_to_delay)
@@ -305,12 +343,12 @@
 		busy = SPIDER_IDLE
 		stop_automated_movement = FALSE
 
-/mob/living/simple_animal/hostile/poison/giant_spider/nurse/proc/cocoon()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/proc/cocoon()
 	if(stat != DEAD && cocoon_target && !cocoon_target.anchored)
 		if(cocoon_target == src)
 			to_chat(src, span_warning("I can't wrap yourself!"))
 			return
-		if(istype(cocoon_target, /mob/living/simple_animal/hostile/poison/giant_spider))
+		if(istype(cocoon_target, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider))
 			to_chat(src, span_warning("I can't wrap other spiders!"))
 			return
 		if(!Adjacent(cocoon_target))
@@ -355,9 +393,9 @@
 	button_icon_state = "lay_web"
 
 /datum/action/innate/spider/lay_web/Activate()
-	if(!istype(owner, /mob/living/simple_animal/hostile/poison/giant_spider))
+	if(!istype(owner, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider))
 		return
-	var/mob/living/simple_animal/hostile/poison/giant_spider/S = owner
+	var/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/S = owner
 
 	if(!isturf(S.loc))
 		return
@@ -400,9 +438,9 @@
 	action.UpdateButtonIcon()
 
 /obj/effect/proc_holder/wrap/Click()
-	if(!istype(usr, /mob/living/simple_animal/hostile/poison/giant_spider/nurse))
+	if(!istype(usr, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse))
 		return TRUE
-	var/mob/living/simple_animal/hostile/poison/giant_spider/nurse/user = usr
+	var/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/user = usr
 	activate(user)
 	return TRUE
 
@@ -419,18 +457,18 @@
 /obj/effect/proc_holder/wrap/InterceptClickOn(mob/living/caller, params, atom/target)
 	if(..())
 		return
-	if(ranged_ability_user.incapacitated() || !istype(ranged_ability_user, /mob/living/simple_animal/hostile/poison/giant_spider/nurse))
+	if(ranged_ability_user.incapacitated() || !istype(ranged_ability_user, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse))
 		remove_ranged_ability()
 		return
 
-	var/mob/living/simple_animal/hostile/poison/giant_spider/nurse/user = ranged_ability_user
+	var/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/user = ranged_ability_user
 
 	if(user.Adjacent(target) && (ismob(target) || isobj(target)))
 		var/atom/movable/target_atom = target
 		if(target_atom.anchored)
 			return
 		user.cocoon_target = target_atom
-		INVOKE_ASYNC(user, TYPE_PROC_REF(/mob/living/simple_animal/hostile/poison/giant_spider/nurse, cocoon))
+		INVOKE_ASYNC(user, TYPE_PROC_REF(/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse, cocoon))
 		remove_ranged_ability()
 		return TRUE
 
@@ -445,17 +483,17 @@
 
 /datum/action/innate/spider/lay_eggs/IsAvailable()
 	if(..())
-		if(!istype(owner, /mob/living/simple_animal/hostile/poison/giant_spider/nurse))
+		if(!istype(owner, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse))
 			return 0
-		var/mob/living/simple_animal/hostile/poison/giant_spider/nurse/S = owner
+		var/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/S = owner
 		if(S.fed)
 			return 1
 		return 0
 
 /datum/action/innate/spider/lay_eggs/Activate()
-	if(!istype(owner, /mob/living/simple_animal/hostile/poison/giant_spider/nurse))
+	if(!istype(owner, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse))
 		return
-	var/mob/living/simple_animal/hostile/poison/giant_spider/nurse/S = owner
+	var/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/S = owner
 
 	var/obj/structure/spider/eggcluster/E = locate() in get_turf(S)
 	if(E)
@@ -490,27 +528,27 @@
 
 /datum/action/innate/spider/set_directive/IsAvailable()
 	if(..())
-		if(!istype(owner, /mob/living/simple_animal/hostile/poison/giant_spider))
+		if(!istype(owner, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider))
 			return FALSE
-		var/mob/living/simple_animal/hostile/poison/giant_spider/S = owner
+		var/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/S = owner
 		if(S.playable_spider)
 			return FALSE
 		return TRUE
 
 /datum/action/innate/spider/set_directive/Activate()
-	if(!istype(owner, /mob/living/simple_animal/hostile/poison/giant_spider/nurse))
+	if(!istype(owner, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse))
 		return
-	var/mob/living/simple_animal/hostile/poison/giant_spider/nurse/S = owner
+	var/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/S = owner
 	if(!S.playable_spider)
 		S.directive = stripped_input(S, "Enter the new directive", "Create directive", "[S.directive]")
 		message_admins("[ADMIN_LOOKUPFLW(owner)] set its directive to: '[S.directive]'.")
 		log_game("[key_name(owner)] set its directive to: '[S.directive]'.")
 
-/mob/living/simple_animal/hostile/poison/giant_spider/Login()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/Login()
 	. = ..()
 	GLOB.spidermobs[src] = TRUE
 
-/mob/living/simple_animal/hostile/poison/giant_spider/Destroy()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/Destroy()
 	GLOB.spidermobs -= src
 	return ..()
 
@@ -520,7 +558,7 @@
 	button_icon_state = "command"
 
 /datum/action/innate/spider/comm/IsAvailable()
-	if(!istype(owner, /mob/living/simple_animal/hostile/poison/giant_spider/nurse/midwife))
+	if(!istype(owner, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/midwife))
 		return FALSE
 	return TRUE
 
@@ -536,14 +574,14 @@
 		return
 	var/my_message
 	my_message = span_spider("<b>Command from [user]:</b> [message]")
-	for(var/mob/living/simple_animal/hostile/poison/giant_spider/M in GLOB.spidermobs)
+	for(var/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/M in GLOB.spidermobs)
 		to_chat(M, my_message)
 	for(var/M in GLOB.dead_mob_list)
 		var/link = FOLLOW_LINK(M, user)
 		to_chat(M, "[link] [my_message]")
 	usr.log_talk(message, LOG_SAY, tag="spider command")
 
-/mob/living/simple_animal/hostile/poison/giant_spider/handle_temperature_damage()
+/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/handle_temperature_damage()
 	if(bodytemperature < minbodytemp)
 		adjustBruteLoss(20)
 	else if(bodytemperature > maxbodytemp)

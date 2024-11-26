@@ -9,7 +9,7 @@
 
 /proc/is_in_zweb(my_z, compare_z)
 	if(!my_z || !compare_z)
-		return
+		return FALSE
 	if(my_z == compare_z)
 		return TRUE
 	if(my_z > compare_z)

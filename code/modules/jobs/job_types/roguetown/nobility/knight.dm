@@ -5,16 +5,16 @@
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 	allowed_patrons = ALL_DIVINE_PATRONS
-	tutorial = "A knight with expert training; Born in a far away land and raised as a squire from a young age, now you make Rockhill your home. It is up to you to decide what path you will take, and who you may call your Lord."
+	tutorial = "A knight with expert training; Born in a far away land and raised as a squire from a young age, now you make Stone Hedge your home. It is up to you to decide what path you will take, and who you may call your Lord."
 	display_order = JDO_KNIGHT
-	whitelist_req = TRUE
+	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/knight
 	give_bank_account = 22
-	min_pq = 1
+	min_pq = 0
 	max_pq = null
 
 	cmode_music = 'sound/music/combat_guard2.ogg'
@@ -58,19 +58,19 @@
 	else
 		r_hand = /obj/item/rogueweapon/mace/goden/steel
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE) //Knight should NOT be 1 skill level away from Legenedary skills across fucking 3 weapon skills.
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/shields, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE) //Already Expert at Swords, polearms and crossbows. 5 - master, 4 - Expert.
-		H.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE) 
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/polearms, 4, TRUE) //Knight should NOT be 1 skill level away from Legenedary skills across fucking 3 weapon skills.
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/shields, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, 3, TRUE) //Already Expert at Swords, polearms and crossbows. 5 - master, 4 - Expert.
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 4, TRUE)
 		H.change_stat("strength", 4)
 		H.change_stat("perception", 1)
 		H.change_stat("intelligence", 2)
@@ -82,4 +82,3 @@
 	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC) //These traits are fine? Needs a reducation else where. Likely equipment could do with a reduction.
-	

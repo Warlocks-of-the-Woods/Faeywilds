@@ -4,15 +4,11 @@
 /datum/species/moth
 	name = "Fluvian"
 	id = "moth"
-	desc = "<b>Fluvian</b><br>\
-		Natives to the Great Forests of Dendor, the Fluvians are a mothlike race, astute and proud, though not very strong. \
-		It is said that Eora, somewhat jealous of Noc's own accomplishment with the Aasimar, plucked a palmful of moon-dust from Noc's mane, and salted it upon Humens and other creatures to create something which mimicks a fraction of her beauty. \
-		Intelligent and agile, Fluvians are usually found in managerial positions such as archivists and stewards. \
-		The strength of Fluvian males and females are equal, a unique trait for this strange race. \
-		The Fluvians venerate Eora, though a few of them worship other gods such as Noc, Dendor, Xylix and Pestra."
-
+	desc = "A race that hails from the far-away land of Deine-Coad, a grassy, forested land. We are an astute, proud people, albeit slightly weak of constitution. \
+	The creation myth of the Fluvian is that Eora, to emulate even a shred of her grace, plucked a palmful of moon-dust from Noc's mane and salted it upon Humens and other Creachers to create something which mimicked a fraction of her beauty. \
+	We are delicate of constiution and strength, but intelligent and agile. Due to our unique biology, the males and females of our race are equal in strength."
+	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_NOFALLDAMAGE1, TRAIT_ZJUMP,)
 	species_traits = list(EYECOLOR,LIPS,STUBBLE,MUTCOLORS,HAIR)
-	inherent_traits = list(TRAIT_NOMOBSWAP)
 	possible_ages = ALL_AGES_LIST
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	limbs_icon_m = 'icons/mob/species/moth_m.dmi'
@@ -33,8 +29,8 @@
 		OFFSET_NECK_F = list(0,0), OFFSET_MOUTH_F = list(0,0), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1)
 		)
-	specstats = list("strength" = -1, "perception" = 1, "intelligence" = 1, "constitution" = -1, "endurance" = 1, "speed" = 0, "fortune" = 0)
-	specstats_f = list("strength" = -1, "perception" = 1, "intelligence" = 2, "constitution" = -2, "endurance" = 0, "speed" = 1, "fortune" = 0)
+	specstats = list("strength" = -1, "perception" = 1, "intelligence" = 2, "constitution" = -2, "endurance" = 1, "speed" = 1, "fortune" = 1)
+	specstats_f = list("strength" = -1, "perception" = 1, "intelligence" = 2, "constitution" = -2, "endurance" = 1, "speed" = 1, "fortune" = 1)
 	race_bonus = list(STAT_INTELLIGENCE = 1)
 	enflamed_icon = "widefire"
 	attack_verb = "slash"
@@ -50,6 +46,7 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
+		ORGAN_SLOT_ANUS = /obj/item/organ/filling_organ/anus,
 		ORGAN_SLOT_ANTENNAS = /obj/item/organ/antennas/moth,
 		ORGAN_SLOT_NECK_FEATURE = /obj/item/organ/neck_feature/moth_fluff,
 		ORGAN_SLOT_WINGS = /obj/item/organ/wings/moth,
@@ -72,6 +69,7 @@
 		/datum/customizer/organ/penis/lizard,
 		/datum/customizer/organ/breasts/animal,
 		/datum/customizer/organ/belly/animal,
+		/datum/customizer/organ/butt/animal,
 		/datum/customizer/organ/vagina/animal,
 		)
 	body_marking_sets = list(
@@ -90,6 +88,8 @@
 		/datum/body_marking_set/moth/lovers,
 	)
 	body_markings = list(
+		/datum/body_marking/flushed_cheeks,
+		/datum/body_marking/eyeliner,
 		/datum/body_marking/moth/grayscale/reddish,
 		/datum/body_marking/moth/grayscale/royal,
 		/datum/body_marking/moth/grayscale/gothic,
@@ -105,6 +105,7 @@
 		/datum/body_marking/moth/grayscale/lovers,
 	)
 	descriptor_choices = list(
+		/datum/descriptor_choice/height,
 		/datum/descriptor_choice/body,
 		/datum/descriptor_choice/stature,
 		/datum/descriptor_choice/face,
@@ -113,6 +114,8 @@
 		/datum/descriptor_choice/voice,
 		/datum/descriptor_choice/prominent_one,
 		/datum/descriptor_choice/prominent_two,
+		/datum/descriptor_choice/prominent_three,
+		/datum/descriptor_choice/prominent_four,
 	)
 
 /datum/species/moth/check_roundstart_eligible()

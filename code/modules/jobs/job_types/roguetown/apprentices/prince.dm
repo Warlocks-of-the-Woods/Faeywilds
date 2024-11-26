@@ -4,9 +4,9 @@
 	flag = PRINCE
 	department_flag = APPRENTICES
 	faction = "Station"
-	total_positions = 2
-	spawn_positions = 2
-	allowed_races = RACES_ALL_KINDS //Maybe a system to force-pick lineage based on king and queen should be implemented.
+	total_positions = 0
+	spawn_positions = 0
+	allowed_races = RACES_ALL_KINDSPLUS //Maybe a system to force-pick lineage based on king and queen should be implemented.
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_ADULT)
 	spells = list(
@@ -14,7 +14,6 @@
 		/obj/effect/proc_holder/spell/self/convertrole/servant,
 		/obj/effect/proc_holder/spell/self/convertrole/guard,
 		/obj/effect/proc_holder/spell/self/convertrole/bog,
-	/obj/effect/proc_holder/spell/self/convertrole/mercenary
 	)
 	tutorial = "One of the many legal and recognized claimants to the Rockhill title, irregardless of kinship to the lord, your heritage has bought you a \"free\" ride through life. You’ve never felt the gnawing of the winter, never known the bite of hunger and certainly have never known a honest day's work. You are as free as any bird in the sky, and you may revel in your debauchery for as long as your parents remain in their favourable position: But someday you’ll have to grow up, and that will be the day your carelessness will cost you more than a few mammons."
 
@@ -51,20 +50,20 @@
 	backr = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(/obj/item/roguekey/manor = 1)
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/maces, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1 , TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 1 , TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sewing, 1, TRUE)
 		H.change_stat("perception", -1)
 		H.change_stat("strength", -2)
 		H.change_stat("endurance", -1)
@@ -92,8 +91,34 @@
 		pants = /obj/item/clothing/under/roguetown/tights
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/guard
 		belt = /obj/item/storage/belt/rogue/leather
-		shoes = /obj/item/clothing/shoes/roguetown/nobleboot
-	if(H.gender == FEMALE)
+		beltl = /obj/item/storage/keyring/royal
+		beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
+		backr = /obj/item/storage/backpack/rogue/satchel
+		if(H.mind)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 2, TRUE)
+			H.change_stat("perception", 1)
+			H.change_stat("strength", 1)
+			H.change_stat("constitution", 1)
+			H.change_stat("endurance", -2) //a life free from hard labor
+			H.change_stat("speed", 1)
+			H.change_stat("intelligence", 2)
+
+	else
+		beltl = /obj/item/storage/keyring/royal
+		head = /obj/item/clothing/head/roguetown/hennin
+		neck = /obj/item/storage/belt/rogue/pouch/coins/rich
 		belt = /obj/item/storage/belt/rogue/leather/cloth/lady
 		head = /obj/item/clothing/head/roguetown/hennin
 		armor = /obj/item/clothing/suit/roguetown/armor/silkcoat
@@ -101,19 +126,19 @@
 		shoes = /obj/item/clothing/shoes/roguetown/shortboots
 		pants = /obj/item/clothing/under/roguetown/tights/stockings/silk/random
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, pick(0,0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, pick(0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3 , TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, pick(0,1), TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, pick(0,0,1), TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, pick(0,1), TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/cooking, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sewing, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 3 , TRUE)
 		H.change_stat("perception", -1)
 		H.change_stat("strength", -2)
 		H.change_stat("constitution", 1)
@@ -129,7 +154,7 @@
 	..()
 	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NORUN, TRAIT_GENERIC) 
+	ADD_TRAIT(H, TRAIT_NORUN, TRAIT_GENERIC)
 	belt = /obj/item/storage/belt/rogue/leather
 	beltl = /obj/item/roguekey/manor
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
@@ -147,19 +172,19 @@
 		shoes = /obj/item/clothing/shoes/roguetown/shortboots
 		pants = /obj/item/clothing/under/roguetown/tights/stockings/silk/random
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, pick(0,0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, pick(0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1 , TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, pick(0,1), TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, pick(0,0,1), TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, pick(0,1), TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/cooking, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sewing, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 1 , TRUE)
 		H.change_stat("strength", -2)
 		H.change_stat("perception", -2)
 		H.change_stat("intelligence", -2)

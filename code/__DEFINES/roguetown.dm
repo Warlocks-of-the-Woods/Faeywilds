@@ -34,21 +34,25 @@
 	/datum/species/vulpkanin,\
 	/datum/species/anthromorphbig,\
 	/datum/species/moth,\
-	/datum/species/dracon,
+	/datum/species/dracon,\
+	/datum/species/seelie,\
+	/datum/species/demihuman,\
+	/datum/species/tabaxi,\
+	/datum/species/lizardfolk,\
+	/datum/species/anthromorph,\
+	/datum/species/anthromorphsmall,\
+	/datum/species/elf/dark,\
 
 #define RACES_TOLERATED \
-	/datum/species/elf/dark,\
-	/datum/species/tieberian,\
 	/datum/species/lizardfolk,\
-	/datum/species/tabaxi,\
-	/datum/species/akula,\
-	/datum/species/anthromorph,\
-	/datum/species/demihuman
+	/datum/species/kobold,\
+	/datum/species/halforc
 
 #define RACES_SHUNNED \
-	/datum/species/halforc,\
-	/datum/species/anthromorphsmall,\
-	/datum/species/kobold
+	/datum/species/tieberian,\
+	/datum/species/akula,\
+
+#define RACES_VERY_SHUNNED \
 
 #define RACES_DESPISED \
 	/datum/species/goblinp,\
@@ -57,6 +61,7 @@
 	/datum/species/seelie,\
 
 #define RACES_ALL_KINDS list(RACES_DESPISED, RACES_SHUNNED, RACES_TOLERATED, RACES_RESPECTED)
+#define RACES_VERY_SHUNNED_UP list(RACES_SHUNNED, RACES_TOLERATED, RACES_VERY_SHUNNED, RACES_RESPECTED)
 
 #define RACES_ALL_KINDSPLUS list(RACES_DESPISED, RACES_SHUNNED, RACES_TOLERATED, RACES_RESPECTED, RACES_SEELIE)
 
@@ -149,11 +154,51 @@
 	/datum/species/anthromorphbig,\
 	/datum/species/demihuman,\
 )
-#define ALL_CLERIC_PATRONS list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/necra, /datum/patron/divine/pestra, /datum/patron/divine/eora, /datum/patron/divine/xylix, /datum/patron/divine/ravox, /datum/patron/divine/malum, /datum/patron/divine/abyssor)
+#define ALL_CLERIC_PATRONS list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/necra, /datum/patron/divine/pestra, /datum/patron/divine/eora, /datum/patron/divine/xylix, /datum/patron/divine/ravox, /datum/patron/divine/malum, /datum/patron/divine/abyssor, /datum/patron/inhumen/zizo, /datum/patron/inhumen/graggar, /datum/patron/inhumen/matthios, /datum/patron/inhumen/baotha)
 
 #define ALL_ACOLYTE_PATRONS list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/pestra, /datum/patron/divine/eora) // Currently unused.
 
-#define ALL_DIVINE_PATRONS list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/ravox, /datum/patron/divine/necra, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora)
+#define ALL_DIVINE_PATRONS list(\
+	/datum/patron/divine/astrata,\
+	/datum/patron/divine/noc,\
+	/datum/patron/divine/dendor,\
+	/datum/patron/divine/abyssor,\
+	/datum/patron/divine/ravox,\
+	/datum/patron/divine/necra,\
+	/datum/patron/divine/xylix,\
+	/datum/patron/divine/pestra,\
+	/datum/patron/divine/malum,\
+	/datum/patron/divine/eora\
+)
+
+#define TEN_CURSES list(\
+	/datum/curse/astrata,\
+	/datum/curse/noc,\
+	/datum/curse/ravox,\
+	/datum/curse/necra,\
+	/datum/curse/xylix,\
+	/datum/curse/pestra,\
+	/datum/curse/eora\
+)
+
+#define INHUMEN_CURSES list(\
+	/datum/curse/zizo,\
+	/datum/curse/graggar,\
+	/datum/curse/matthios,\
+	/datum/curse/baotha\
+)
+
+#define SPECIAL_CURSES list(\
+	/datum/curse/atheism\
+)
+
+#define ALL_CURSES list(\
+	SPECIAL_CURSES,\
+	TEN_CURSES,\
+	INHUMEN_CURSES\
+)
+
+#define ALL_NON_INHUMEN_PATRONS list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/ravox, /datum/patron/divine/necra, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora, /datum/patron/old_god)
 
 #define PLATEHIT "plate"
 #define CHAINHIT "chain"
@@ -211,6 +256,7 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_PILGRIM 		"CAT_PILGRIM"  		// Pilgrim classes
 #define CTAG_ADVENTURER 	"CAT_ADVENTURER"  	// Adventurer classes
 #define CTAG_MERCENARY		"CAT_MERCENARY"		// Mercenary classes
+#define CTAG_SELLSWORD		"CAT_SELLSWORD"		// Sellsword classes
 #define CTAG_TOWNER 		"CAT_TOWNER"  		// Villager class - Villagers can use it
 #define CTAG_ANTAG 			"CAT_ANTAG"  		// Antag class - results in an antag
 #define CTAG_BANDIT			"CAT_BANDIT"		// Bandit class - Tied to the bandit antag really

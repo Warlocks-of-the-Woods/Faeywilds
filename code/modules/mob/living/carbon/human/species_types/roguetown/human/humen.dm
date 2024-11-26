@@ -33,7 +33,7 @@
 		OFFSET_ID = list(0,1), OFFSET_GLOVES = list(0,1), OFFSET_WRISTS = list(0,1),\
 		OFFSET_CLOAK = list(0,1), OFFSET_FACEMASK = list(0,1), OFFSET_HEAD = list(0,1), \
 		OFFSET_FACE = list(0,1), OFFSET_BELT = list(0,1), OFFSET_BACK = list(0,1), \
-		OFFSET_NECK = list(0,1), OFFSET_MOUTH = list(0,1), OFFSET_PANTS = list(0,1), \
+		OFFSET_NECK = list(0,1), OFFSET_MOUTH = list(0,1), OFFSET_PANTS = list(0,0), \
 		OFFSET_SHIRT = list(0,1), OFFSET_ARMOR = list(0,1), OFFSET_HANDS = list(0,1), OFFSET_UNDIES = list(0,1), \
 		OFFSET_ID_F = list(0,-1), OFFSET_GLOVES_F = list(0,0), OFFSET_WRISTS_F = list(0,0), OFFSET_HANDS_F = list(0,0), \
 		OFFSET_CLOAK_F = list(0,0), OFFSET_FACEMASK_F = list(0,-1), OFFSET_HEAD_F = list(0,-1), \
@@ -41,8 +41,8 @@
 		OFFSET_NECK_F = list(0,-1), OFFSET_MOUTH_F = list(0,-1), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1), \
 		)
-	specstats = list("strength" = 0, "perception" = 1, "intelligence" = -1, "constitution" = 0, "endurance" = 1, "speed" = -1, "fortune" = 0)
-	specstats_f = list("strength" = -1, "perception" = 0, "intelligence" = 2, "constitution" = -1, "endurance" = 0, "speed" = 1, "fortune" = 0)
+	specstats = list("strength" = 1, "perception" = 1, "intelligence" = 2, "constitution" = 1, "endurance" = 1, "speed" = 0, "fortune" = 0)
+	specstats_f = list("strength" = 1, "perception" = 1, "intelligence" = 2, "constitution" = 1, "endurance" = 1, "speed" = 0, "fortune" = 0)
 	race_bonus = list(STAT_INTELLIGENCE = 1)
 	enflamed_icon = "widefire"
 	customizers = list(
@@ -56,9 +56,12 @@
 		/datum/customizer/organ/penis/human,
 		/datum/customizer/organ/breasts/human,
 		/datum/customizer/organ/belly/human,
+		/datum/customizer/organ/butt/human,
 		/datum/customizer/organ/vagina/human,
 		)
 	body_markings = list(
+		/datum/body_marking/flushed_cheeks,
+		/datum/body_marking/eyeliner,
 		/datum/body_marking/tonage,
 	)
 
@@ -70,8 +73,8 @@
 		"Frostlander" = SKIN_COLOR_GRENZELHOFT,
 		"Umberite" = SKIN_COLOR_HAMMERHOLD,
 		"Grenzelhoft" = SKIN_COLOR_AVAR,
-		"Rockhill" = SKIN_COLOR_ROCKHILL,
-		"Forester" = SKIN_COLOR_OTAVA,
+		"StoneHedge" = SKIN_COLOR_STONEHEDGE,
+		"Heartfell" = SKIN_COLOR_OTAVA,
 		"Highlander" = SKIN_COLOR_ETRUSCA,
 		"Moravian" = SKIN_COLOR_GRONN,
 		"Gizan" = SKIN_COLOR_GIZA,
@@ -103,4 +106,3 @@
 	"red - blood" = "822b2b"
 
 	))
-

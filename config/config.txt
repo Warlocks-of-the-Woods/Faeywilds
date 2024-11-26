@@ -4,6 +4,7 @@ $include game_options.txt
 $include dbconfig.txt
 $include comms.txt
 $include antag_rep.txt
+$include discord.txt
 
 # You can use the @ character at the beginning of a config option to lock it from being edited in-game
 # Example usage:
@@ -14,30 +15,30 @@ $include antag_rep.txt
 # There are various options which are hard-locked for security reasons.
 
 ## Server name: This appears at the top of the screen in-game and in the BYOND hub. Uncomment and replace 'tgstation' with the name of your choice.
-SERVERNAME Roguetown
+SERVERNAME Dream Keep
 
 ## Server tagline: This will appear right below the server's title.
-# SERVERTAGLINE A generic TG-based server
+SERVERTAGLINE M-RP / H-RP Medieval Fantasy: DnD Inspired Setting! (18+)
 
 ## Server SQL name: This is the name used to identify the server to the SQL DB, distinct from SERVERNAME as it must be at most 32 characters.
 # SERVERSQLNAME tgstation
 
 ## Station name: The name of the station as it is referred to in-game. If commented out, the game will generate a random name instead.
-STATIONNAME Roguetown
+STATIONNAME | The Dreamhold | Adventurer State |
 
 ## Put on byond hub: Uncomment this to put your server on the byond hub.
-#HUB
+HUB
 
 ## Lobby time: This is the amount of time between rounds that players have to setup their characters and be ready.
-LOBBY_COUNTDOWN 780
+LOBBY_COUNTDOWN 600
 
 ## Round End Time: This is the amount of time after the round ends that players have to murder death kill each other.
-ROUND_END_COUNTDOWN 180
+ROUND_END_COUNTDOWN 60
 
 ## Comment this out if you want to use the SQL based admin system, the legacy system uses admins.txt.
 ## You need to set up your database to use the SQL based system.
 ## This flag is automatically enabled if SQL_ENABLED isn't
-ADMIN_LEGACY_SYSTEM
+#ADMIN_LEGACY_SYSTEM
 
 ##Uncomment this to stop any admins loaded by the legacy system from having their rank edited by the permissions panel
 #PROTECT_LEGACY_ADMINS
@@ -53,7 +54,7 @@ ADMIN_LEGACY_SYSTEM
 ENABLE_LOCALHOST_RANK
 
 ## Uncomment to enable the age prompt system; It asks players for their date of birth upon entry and denies players below a certain age.
-#AGE_PROMPT_SYSTEM
+AGE_PROMPT_SYSTEM
 
 ## Uncomment this entry to have certain jobs require your account to be at least a certain number of days old to select. You can configure the exact age requirement for different jobs by editing
 ## the minimal_player_age variable in the files in folder /code/game/jobs/job/.. for the job you want to edit. Set minimal_player_age to 0 to disable age requirement for that job.
@@ -168,7 +169,7 @@ ALLOW_ADMIN_ASAYCOLOR
 ID_CONSOLE_JOBSLOT_DELAY 30
 
 ## allow players to initiate a restart vote
-#ALLOW_VOTE_RESTART
+ALLOW_VOTE_RESTART
 
 ## allow players to initiate a mode-change vote
 #ALLOW_VOTE_MODE
@@ -176,11 +177,11 @@ ID_CONSOLE_JOBSLOT_DELAY 30
 ## allow players to initiate a map-change vote
 #ALLOW_VOTE_MAP
 
-## min delay (deciseconds) between voting sessions (default 10 minutes) (Outdated? Handled in compile options. ROUND_EXTENSION_TIME)
+## min delay (deciseconds) between voting sessions (default 10 minutes)
 VOTE_DELAY 6000
 
 ## time period (deciseconds) which voting session will last (default 1 minute)
-VOTE_PERIOD 1800
+VOTE_PERIOD 1200
 
 ## prevents dead players from voting or starting votes
 # NO_DEAD_VOTE
@@ -195,7 +196,7 @@ VOTE_PERIOD 1800
 # DONT_DEL_NEWMOB
 
 ## set a hosted by name for unix platforms
-HOSTEDBY k
+HOSTEDBY Foxen
 
 ## Set to jobban "Guest-" accounts from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.
 ## Set to 1 to jobban them from those positions, set to 0 to allow them.
@@ -238,16 +239,16 @@ USEBLACKLIST
 # SERVER ss13.example.com:2506
 
 ## Discod address
-DISCORDURL https://discord.gg/bx9c7ha5Qk
+DISCORDURL https://discord.gg/YTp2GTzwyv
 
 ## Wiki address
-WIKIURL https://wiki.moviesfreepremium.xyz/blackstone
+WIKIURL 
 
 ## Rules address
-RULESURL https://wiki.moviesfreepremium.xyz/blackstone/rules
+RULESURL 
 
 ## Github address
-GITHUBURL https://github.com/Blackstone-SS13/BLACKSTONE
+GITHUBURL https://github.com/StoneHedgeSS13/StoneHedge
 
 ## Round specific stats address
 ## Link to round specific parsed logs; IE statbus. It is appended with the RoundID automatically by ticker/Reboot()
@@ -266,7 +267,7 @@ GITHUBURL https://github.com/Blackstone-SS13/BLACKSTONE
 # GITHUBREPOID 3234987
 
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
-# BANAPPEALS http://justanotherday.example.com
+BANAPPEALS https://discord.gg/YTp2GTzwyv
 
 ## System command that invokes youtube-dl, used by Play Internet Sound.
 ## You can install youtube-dl with
@@ -274,7 +275,7 @@ GITHUBURL https://github.com/Blackstone-SS13/BLACKSTONE
 ## from https://github.com/rg3/youtube-dl/releases
 ## or your package manager
 ## The default value assumes youtube-dl is in your system PATH
-# INVOKE_YOUTUBEDL youtube-dl
+INVOKE_YOUTUBEDL youtube-dl
 
 ## In-game features
 ##Toggle for having jobs load up from the .txt
@@ -319,19 +320,19 @@ NOTE_STALE_DAYS 365.2422
 ##Note: all population caps can be used with each other if desired.
 
 ## Uncomment for 'soft' population caps, players will be warned while joining if the living crew exceeds the listed number.
-#SOFT_POPCAP 100
+#SOFT_POPCAP 35
 
 ## Message for soft cap
-SOFT_POPCAP_MESSAGE Be warned that the server is currently serving a high number of users, consider using alternative game servers.
+SOFT_POPCAP_MESSAGE Be warned that the server is currently serving a high number of users, Consider checking out the other servers!
 
 ## Uncomment for 'hard' population caps, players will not be allowed to spawn if the living crew exceeds the listed number, though they may still observe or wait for the living crew to decrease in size.
-HARD_POPCAP 100
+HARD_POPCAP 60
 
 ## Message for hard cap
-HARD_POPCAP_MESSAGE Too many people are alive. Wait for those living to die or donate to our patreon for a reserved slot.
+HARD_POPCAP_MESSAGE Too many people are alive. Wait for people to die or consider visiting a larger server.
 
 ## Uncomment for 'extreme' population caps, players will not be allowed to join the server if living crew exceeds the listed number.
-#EXTREME_POPCAP 200
+#EXTREME_POPCAP 100
 
 ## Message for extreme cap
 EXTREME_POPCAP_MESSAGE The server is currently serving a high number of users, find alternative servers.
@@ -460,10 +461,10 @@ MINUTE_CLICK_LIMIT 400
 ## Various messages to be sent to game chats
 ## Uncommenting these will enable them, by default they will be broadcast to Game chat channels on TGS3 or non-admin channels on TGS4
 ## If using TGS4, the string option can be set as a chat channel tag to limit the message to channels of that tag type (case-sensitive)
-##i.e. CHAT_ANNOUNCE_NEW_GAME chat_channel_tag
+##i.e. CHANNEL_ANNOUNCE_NEW_GAME chat_channel_tag
 
 ## Send a message with the station name starting a new game. Also required for the notify function
-#CHAT_ANNOUNCE_NEW_GAME
+#CHANNEL_ANNOUNCE_NEW_GAME
 
 #CHANNEL_ANNOUNCE_NEW_GAME_MESSAGE A new round is beggining!!
 

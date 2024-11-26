@@ -4,12 +4,10 @@
 /datum/species/akula
 	name = "Axian"
 	id = "akula"
-	desc = "<b>Axian</b><br>\
-		A race of sharklike people, Axian settlements are dotted along the coastline of the continents. \
-		A society mainly consisting of fishermen, the Axians ply their trade, and are some of the best sailors in all of Grimoria. \
-		Some Axians go so far as to put down the rod and take up the cutlass, roaming the seas as pirates. \
-		Clever and strong, the Axians can make the most of bad situations, and rarely give up. Abyssor, Malum and Ravox are their preferred gods of worship."
-
+	desc = "An empire, now a diaspora. \
+	In old times, the empire of Ei'doan was a mighty mercantile and colonial force that ruled the seas. A century of steady decline saw them cede, lose. or abandon most of our overseas colonies. \
+	Many Akula who had come to these colonies during the empire's height simply stayed, due to marrying into certain families, or to keep their livelihoods. It is not rare to find one of my kind in nobility, or townhood, or as a wanderer. \
+	Though a strong naval tradition has left us sharp-witted and strong, we are poorly-adapted to see well in such a boggy, rocky locale."
 	species_traits = list(EYECOLOR,LIPS,STUBBLE,MUTCOLORS)
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_WATERBREATHING)
 	possible_ages = ALL_AGES_LIST
@@ -24,7 +22,7 @@
 		OFFSET_ID = list(0,1), OFFSET_GLOVES = list(0,1), OFFSET_WRISTS = list(0,1),\
 		OFFSET_CLOAK = list(0,1), OFFSET_FACEMASK = list(0,1), OFFSET_HEAD = list(0,1), \
 		OFFSET_FACE = list(0,1), OFFSET_BELT = list(0,1), OFFSET_BACK = list(0,1), \
-		OFFSET_NECK = list(0,1), OFFSET_MOUTH = list(0,1), OFFSET_PANTS = list(0,1), \
+		OFFSET_NECK = list(0,1), OFFSET_MOUTH = list(0,1), OFFSET_PANTS = list(0,0), \
 		OFFSET_SHIRT = list(0,1), OFFSET_ARMOR = list(0,1), OFFSET_HANDS = list(0,1), OFFSET_UNDIES = list(0,1), \
 		OFFSET_ID_F = list(0,-1), OFFSET_GLOVES_F = list(0,0), OFFSET_WRISTS_F = list(0,0), OFFSET_HANDS_F = list(0,0), \
 		OFFSET_CLOAK_F = list(0,0), OFFSET_FACEMASK_F = list(0,-1), OFFSET_HEAD_F = list(0,-1), \
@@ -32,9 +30,15 @@
 		OFFSET_NECK_F = list(0,-1), OFFSET_MOUTH_F = list(0,-1), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1), \
 		)
-	specstats = list("strength" = 0, "perception" = 0, "intelligence" = -1, "constitution" = 1, "endurance" = 1, "speed" = 0, "fortune" = 0)
-	specstats_f = list("strength" = 0, "perception" = 0, "intelligence" = -1, "constitution" = 1, "endurance" = 1, "speed" = 0, "fortune" = 0)
-	race_bonus = list(STAT_ENDURANCE = 1)
+	specstats = list(
+		"strength" = 1,
+		"perception" = 0,
+		"intelligence" = -1,
+		"constitution" = 1,
+		"endurance" = 1,
+		"speed" = 1,
+		"fortune" = 1
+		)
 	enflamed_icon = "widefire"
 	attack_verb = "slash"
 	attack_sound = 'sound/blank.ogg'
@@ -49,7 +53,8 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
-		ORGAN_SLOT_TAIL = /obj/item/organ/tail/akula,
+		ORGAN_SLOT_ANUS = /obj/item/organ/filling_organ/anus,
+		//ORGAN_SLOT_TAIL = /obj/item/organ/tail/akula, //Commenting out due to use of customizer organs.
 		ORGAN_SLOT_SNOUT = /obj/item/organ/snout/akula,
 		)
 	bodypart_features = list(
@@ -64,10 +69,13 @@
 		/datum/customizer/bodypart_feature/face_detail,
 		/datum/customizer/bodypart_feature/underwear,
 		/datum/customizer/organ/snout/akula,
+		/datum/customizer/organ/tail/axian,
+		/datum/customizer/organ/ears/axian,
 		/datum/customizer/organ/testicles/anthro,
 		/datum/customizer/organ/penis/lizard,
 		/datum/customizer/organ/breasts/human,
 		/datum/customizer/organ/belly/human,
+		/datum/customizer/organ/butt/human,
 		/datum/customizer/organ/vagina/human_anthro,
 		)
 	body_marking_sets = list(
@@ -75,6 +83,8 @@
 		/datum/body_marking_set/belly,
 	)
 	body_markings = list(
+		/datum/body_marking/flushed_cheeks,
+		/datum/body_marking/eyeliner,
 		/datum/body_marking/belly,
 		/datum/body_marking/bellyslim,
 		/datum/body_marking/butt,
@@ -84,6 +94,7 @@
 		/datum/body_marking/tiger/dark,
 	)
 	descriptor_choices = list(
+		/datum/descriptor_choice/height,
 		/datum/descriptor_choice/body,
 		/datum/descriptor_choice/stature,
 		/datum/descriptor_choice/face,
@@ -92,6 +103,8 @@
 		/datum/descriptor_choice/voice,
 		/datum/descriptor_choice/prominent_one,
 		/datum/descriptor_choice/prominent_two,
+		/datum/descriptor_choice/prominent_three,
+		/datum/descriptor_choice/prominent_four,
 	)
 
 /datum/species/akula/check_roundstart_eligible()
@@ -129,3 +142,32 @@
 	returned["mcolor2"] = second_color
 	returned["mcolor3"] = second_color
 	return returned
+
+/datum/species/akula/random_name(gender,unique,lastname)
+	var/randname
+	if(gender == MALE)
+		randname = pick(world.file2list("strings/names/roguetown/axianmale.txt"))
+	if(gender == FEMALE)
+		randname = pick(world.file2list("strings/names/roguetown/axianfemale.txt"))
+	if(prob(33))
+		//Prefix
+		var/prefix = pick(world.file2list("strings/names/roguetown/axianprefix.txt"))
+		randname = "[prefix] [randname]"
+	else
+		//Suffix
+		var/suffix = pick(world.file2list("strings/names/roguetown/axiansuffix.txt"))
+		randname = "[randname] [suffix]"
+	return randname
+
+/datum/species/akula/on_species_gain(mob/living/carbon/C, datum/species/old_species)
+	..()
+	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
+
+/datum/species/akula/on_species_loss(mob/living/carbon/C)
+	. = ..()
+	UnregisterSignal(C, COMSIG_MOB_SAY)
+
+/*
+/datum/species/akula/get_accent(mob/living/carbon/human/H)
+	return strings("pirate_replacement.json", "full")
+*/

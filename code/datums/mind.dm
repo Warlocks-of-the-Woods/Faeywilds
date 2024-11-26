@@ -86,13 +86,17 @@
 
 	var/lastrecipe
 
+	var/datum/sleep_adv/sleep_adv = null
+
 /datum/mind/New(key)
 	src.key = key
 	soulOwner = src
 	martial_art = default_martial_art
+	sleep_adv = new /datum/sleep_adv(src)
 
 /datum/mind/Destroy()
 	SSticker.minds -= src
+	QDEL_NULL(sleep_adv)
 	if(islist(antag_datums))
 		QDEL_LIST(antag_datums)
 	return ..()
@@ -202,7 +206,7 @@
 		return
 	var/contents = "<center>People that [name] knows:</center><BR>"
 	for(var/P in known_people)
-		if(known_people.Find(P)) //Vrell - safety check in case someone gets deleted durring this process since apparently that's an issue we're having.
+		if(known_people.Find(P)) // Safety check in case someone gets deleted during this process
 			var/fcolor = known_people[P]["VCOLOR"]
 			if(!fcolor)
 				continue
@@ -216,7 +220,6 @@
 	var/datum/browser/popup = new(user, "PEOPLEIKNOW", "", 260, 400)
 	popup.set_content(contents)
 	popup.open()
-
 
 /datum/mind/proc/get_language_holder()
 	if(!language_holder)
@@ -264,6 +267,7 @@
 	if(active || force_key_move)
 		testing("dotransfer to [new_character]")
 		new_character.key = key		//now transfer the key to link the client to our new body
+	new_character.update_fov_angles()
 
 
 	///Adjust experience of a specific skill
@@ -274,25 +278,25 @@
 	switch(skill_experience[S])
 		if(SKILL_EXP_LEGENDARY to INFINITY)
 			known_skills[S] = SKILL_LEVEL_LEGENDARY
-			
+
 		if(SKILL_EXP_MASTER to SKILL_EXP_LEGENDARY)
 			known_skills[S] = SKILL_LEVEL_MASTER
-			
+
 		if(SKILL_EXP_EXPERT to SKILL_EXP_MASTER)
 			known_skills[S] = SKILL_LEVEL_EXPERT
-			
+
 		if(SKILL_EXP_JOURNEYMAN to SKILL_EXP_EXPERT)
 			known_skills[S] = SKILL_LEVEL_JOURNEYMAN
-			
+
 		if(SKILL_EXP_APPRENTICE to SKILL_EXP_JOURNEYMAN)
 			known_skills[S] = SKILL_LEVEL_APPRENTICE
-			
+
 		if(SKILL_EXP_NOVICE to SKILL_EXP_APPRENTICE)
 			known_skills[S] = SKILL_LEVEL_NOVICE
-			
+
 		if(0 to SKILL_EXP_NOVICE)
 			known_skills[S] = SKILL_LEVEL_NONE
-			
+
 	if(isnull(old_level) || known_skills[S] == old_level)
 		return //same level or we just started earning xp towards the first level.
 	if(silent)
@@ -300,6 +304,7 @@
 	// ratio = round(skill_experience[S]/limit,1) * 100
 	// to_chat(current, "<span class='nicegreen'> My [S.name] is around [ratio]% of the way there.")
 	//TODO add some bar hud or something, i think i seen a request like that somewhere
+	add_sleep_experience(skill, amt, TRUE) //adds same of the experience to your eepytime.
 	if(known_skills[S] >= old_level)
 		if(known_skills[S] > old_level)
 			to_chat(current, span_nicegreen("My [S.name] grows to [SSskills.level_names[known_skills[S]]]!"))
@@ -377,7 +382,7 @@
 			known_skills[S] = SKILL_LEVEL_NOVICE
 		if(0 to SKILL_EXP_NOVICE)
 			known_skills[S] = SKILL_LEVEL_NONE
-	if(isnull(old_level) || known_skills[S] == old_level)
+	if(known_skills[S] == old_level)
 		return //same level or we just started earning xp towards the first level.
 	if(silent)
 		return
@@ -917,6 +922,8 @@
 /datum/mind/proc/AddSpell(obj/effect/proc_holder/spell/S)
 	if(!S)
 		return
+	if(has_spell(S))
+		return
 	spell_list += S
 	S.action.Grant(current)
 
@@ -1049,7 +1056,8 @@
 	mind.assigned_role = ROLE_PAI
 	mind.special_role = ""
 
-
+/datum/mind/proc/add_sleep_experience(skill, amt, silent = FALSE)
+	sleep_adv.add_sleep_experience(skill, amt, silent)
 
 /datum/mind/proc/get_learning_boon(skill)
 	return 1 + (get_skill_level(skill) / 10)

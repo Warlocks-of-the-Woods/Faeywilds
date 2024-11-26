@@ -22,29 +22,29 @@
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backr = /obj/item/rogue/instrument/guitar
 	beltl = /obj/item/rogueweapon/sword/rapier/dec
-	beltr = /obj/item/rogueweapon/huntingknife
+	beltr = /obj/item/rogueweapon/huntingknife/idagger/silver/elvish
 	backpack_contents = list(/obj/item/book/rogue/tales1, /obj/item/book/rogue/blackmountain, /obj/item/book/rogue/tales3)
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/misc/music, 6, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE) //Futureproofing, does nothing for now.
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3 , TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/masonry, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/music, 6, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/magic/holy, 2, TRUE) //Futureproofing, does nothing for now.
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 3 , TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/masonry, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/carpentry, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/cooking, 1, TRUE)
 		H.change_stat("speed", 2)
 		H.change_stat("perception", 2)
 		H.change_stat("intelligence", 1)
 		H.change_stat("endurance", 1)
 	H.verbs |= /mob/living/carbon/human/proc/ventriloquate
-	
+
 	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_EMPATH, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
@@ -85,25 +85,25 @@
 	beltr = /obj/item/rogueweapon/huntingknife/idagger/steel
 	backpack_contents = list(/obj/item/book/rogue/nitebeast, /obj/item/flashlight/flare/torch/lantern, /obj/item/flint)
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/misc/music, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE) //Futureproofing, does nothing for now.
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3 , TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/masonry, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/music, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/magic/holy, 1, TRUE) //Futureproofing, does nothing for now.
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 3 , TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/masonry, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/carpentry, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/cooking, 1, TRUE)
 		H.change_stat("perception", 2)
 		H.change_stat("speed", 1)
 		H.change_stat("intelligence", 1)
 		H.change_stat("endurance", 1)
-	
+
 	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_EMPATH, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)

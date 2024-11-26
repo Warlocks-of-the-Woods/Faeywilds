@@ -35,8 +35,8 @@
 	if(M == user)
 		user.visible_message(span_notice("[user] swallows a gulp of [src]."), \
 			span_notice("I swallow a gulp of [src]."))
-		if(HAS_TRAIT(M, TRAIT_VORACIOUS))
-			M.changeNext_move(CLICK_CD_MELEE * 0.5) //chug! chug! chug!
+//		if(HAS_TRAIT(M, TRAIT_VORACIOUS))
+//			M.changeNext_move(CLICK_CD_MELEE * 0.5) //chug! chug! chug!
 
 	else
 		M.visible_message(span_danger("[user] attempts to feed [M] the contents of [src]."), \
@@ -236,7 +236,7 @@
 		icon_state = "tea_empty"
 
 /obj/item/reagent_containers/food/drinks/mug/tea
-	name = "Duke Purple tea"
+	name = "Monarch Purple tea"
 	desc = ""
 	list_reagents = list(/datum/reagent/consumable/tea = 30)
 

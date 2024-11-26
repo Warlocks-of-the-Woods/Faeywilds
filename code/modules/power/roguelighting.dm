@@ -300,7 +300,7 @@
 		else
 			if(!on)
 				return
-		if (alert(usr, "Feed [W] to the fire?", "ROGUETOWN", "Yes", "No") != "Yes")
+		if (alert(usr, "Feed [W] to the fire?", "DREAM KEEP", "Yes", "No") != "Yes")
 			return
 		qdel(W)
 		user.visible_message(span_warning("[user] feeds [W] to [src]."))
@@ -884,7 +884,7 @@
 						food = C
 			if(istype(attachment, /obj/item/reagent_containers/glass/bucket/pot))
 				if(attachment.reagents)
-					attachment.reagents.expose_temperature(400, 0.033)
+					attachment.reagents.expose_temperature(1000, 0.033)
 					if(attachment.reagents.chem_temp > 374)
 						boilloop.start()
 					else

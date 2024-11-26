@@ -2,30 +2,30 @@
 	name = "Foresworn"
 	tutorial = "Perhaps a mercenary, perhaps a deserter - at one time, you killed for a master in return for gold. Now you live with no such master over your head - and take what you please."
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 	outfit = /datum/outfit/job/roguetown/bandit/foresworn
 	category_tags = list(CTAG_BANDIT)
 	cmode_music = 'sound/music/combat_bandit2.ogg'
 
 /datum/outfit/job/roguetown/bandit/foresworn/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/axes, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/polearms, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/axes, 2, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 2, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 2, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/craft/carpentry, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/sewing, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 3, TRUE)
 	belt = /obj/item/storage/belt/rogue/leather
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson

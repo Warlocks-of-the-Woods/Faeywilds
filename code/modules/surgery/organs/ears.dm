@@ -29,9 +29,6 @@
 	// Multiplier for both long term and short term ear damage
 	var/damage_multiplier = 1
 
-	///is it.. fuckable?
-	var/fuckable = FALSE
-
 /obj/item/organ/ears/Insert(mob/living/carbon/M, special, drop_if_replaced)
 	. = ..()
 	for(var/datum/wound/facial/ears/ear_wound as anything in M.get_wounds())
@@ -114,13 +111,13 @@
 /obj/item/organ/ears/penguin/Insert(mob/living/carbon/human/H, special = 0, drop_if_replaced = TRUE)
 	. = ..()
 	if(istype(H))
-		to_chat(H, span_notice("I suddenly feel like you've lost my balance."))
+		to_chat(H, span_notice("I suddenly feel like I've lost my balance."))
 		waddle = H.AddComponent(/datum/component/waddling)
 
 /obj/item/organ/ears/penguin/Remove(mob/living/carbon/human/H,  special = 0)
 	. = ..()
 	if(istype(H))
-		to_chat(H, span_notice("My sense of balance comes back to you."))
+		to_chat(H, span_notice("My sense of balance comes back to me."))
 		QDEL_NULL(waddle)
 
 /obj/item/organ/ears/bronze
@@ -150,38 +147,32 @@
 
 /obj/item/organ/ears/anthro
 	name = "wild-kin ears"
-	fuckable = TRUE
 
 /obj/item/organ/ears/lupian
 	name = "lupian ears"
-	fuckable = TRUE
 
 /obj/item/organ/ears/vulpkanin
 	name = "vulpkian ears"
 	accessory_type = /datum/sprite_accessory/ears/fox
-	fuckable = TRUE
 
-/obj/item/organ/ears/tajaran
-	name = "tajaran ears"
+/obj/item/organ/ears/tabaxi
+	name = "tabaxi ears"
 
 /obj/item/organ/ears/elf
 	name = "elf ears"
 	accessory_type = /datum/sprite_accessory/ears/elf
-	fuckable = TRUE //i guess
 
 /obj/item/organ/ears/elfw
 	name = "wood elf ears"
 	accessory_type = /datum/sprite_accessory/ears/elfw
-	fuckable = TRUE //i guess
 
 /obj/item/organ/ears/tiefling
 	name = "tiefling ears"
 	accessory_type = /datum/sprite_accessory/ears/elfw
-	fuckable = TRUE //i guess
 
 /obj/item/organ/ears/akula
 	name = "axian ears"
-	accessory_type = /datum/sprite_accessory/ears/sergal
+	accessory_type = /datum/sprite_accessory/ears/shark
 
 /obj/item/organ/ears/halforc
 	name = "halforc ears"

@@ -4,6 +4,16 @@
 	icon = 'icons/roguetown/clothing/wrists.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/wrists.dmi'
 	sleevetype = "shirt"
+	w_class = WEIGHT_CLASS_SMALL
+
+/obj/item/clothing/wrists/roguetown/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/storage/concrete)
+	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+	if(STR)
+		STR.max_combined_w_class = 3
+		STR.max_w_class = WEIGHT_CLASS_NORMAL
+		STR.max_items = 1
 
 /obj/item/clothing/wrists/roguetown/bracers
 	name = "bracers"
@@ -46,10 +56,10 @@
 	smeltresult = /obj/item/ash
 	sewrepair = TRUE
 /obj/item/clothing/wrists/roguetown/bracers/carapace/dragon
-	name = "dragon bracers"
-	desc = "Fiber bracers lined with dragonbone to protect your wrists"
-	color = "red"
-	armor = list("blunt" = 80, "slash" = 100, "stab" = 60, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 60, "acid" = 0)
+	name = "dragonscale bracers"
+	desc = "Fiber bracers lined with dragonscale to protect your wrists"
+	color = "#9e5761"
+	armor = list("blunt" = 80, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 60, "acid" = 0)
 
 /obj/item/clothing/wrists/roguetown/bracers/leather
 	name = "leather bracers"
@@ -95,8 +105,8 @@
 	smeltresult = /obj/item/ash
 
 /obj/item/clothing/wrists/roguetown/hiddenblade
-	name = "bracers"
-	desc = "Bracers with a hidden blade within."
+	name = "leather bracers"
+	desc = "Leather bracers worn on the wrists... With a hidden blade within."
 	body_parts_covered = ARMS
 	icon_state = "lbracers"
 	item_state = "lbracers"
@@ -104,29 +114,34 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = PLATEHIT
 	max_integrity = 150
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = TRUE
 	smeltresult = /obj/item/ingot/steel
 	var/extended = FALSE
 	var/obj/item/rogueweapon/huntingknife/idagger/steel/parrying/hidden/hid
 
+/obj/item/clothing/wrists/roguetown/hiddenblade/dropped(mob/user)
+	. = ..()
+	if(extended)
+		toggleblades(user)
+
 /obj/item/clothing/wrists/roguetown/hiddenblade/attack_right(mob/user)
 	toggleblades(user)
 
-/obj/item/clothing/wrists/roguetown/hiddenblade/attackby(obj/A, mob/user, params)
-	if(istype(A, /obj/item/rogueweapon/huntingknife/idagger/steel/parrying/hidden))
+/obj/item/clothing/wrists/roguetown/hiddenblade/attackby(obj/A, mob/living/carbon/human/user, params)
+	if(src == user.get_item_by_slot(SLOT_WRISTS) && (istype(A, /obj/item/rogueweapon/huntingknife/idagger/steel/parrying/hidden) || !A)) //blade or empty hand.
 		toggleblades(user)
 		return ..()
 
 /obj/item/clothing/wrists/roguetown/hiddenblade/proc/toggleblades(mob/user)
-	hid = user.get_active_held_item()
 
 	if(extended)
 		if(istype(user.get_active_held_item(), /obj/item/rogueweapon/huntingknife/idagger/steel/parrying/hidden))
 			user.dropItemToGround(hid, TRUE)
 			user.visible_message("<span class='info'>A blade retracts into [user]'s bracer.</span>", "<span class='notice'>My hidden blade retracts into my bracer.</span>")
 			extended = FALSE
+			qdel(hid)
 			REMOVE_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
-	else
+	else if(!user.get_active_held_item()) //empty hand
 		hid = new(user,1)
 		ADD_TRAIT(hid, TRAIT_NODROP, TRAIT_GENERIC)
 		ADD_TRAIT(hid, TRAIT_NOEMBED, TRAIT_GENERIC)
@@ -140,5 +155,4 @@
 	name = "hidden blade"
 	desc = ""
 	embedding = list("embedded_pain_multiplier" = 0, "embed_chance" = 0, "embedded_fall_chance" = 0)
-	item_flags = DROPDEL
 	slot_flags = null

@@ -5,11 +5,14 @@
 	name = "Elf"
 	id = "elfw"
 	desc = "<b>Elf</b><br>\
-		Elves are a lithe, graceful race, many of them spread out across the world not unlike Humens. \
-		They largely prefer to live in nature, and make for some of the best rangers in all of Grimoria. \
-		The most obvious feature of an elf is their sharp ears, and generally slim form. \
-		Like Humens and Dwarves, Elf skin tones are determined by the place of their birth. \
-		The elves worship the divine pantheon, though their preferred god is largely dictated by where they're born."
+	The Elves are marked apart from other races by their ethereal grace and long lives. \
+	Like Humens, they live throughout the lands of Grimoria. \
+	Yet, unlike other races, they prefer to dwell in lands untouched by civilization - such as Avalonth and their Lush Forests of Magick.<br>\
+	Elves can be difficult to distinguish from Humens at a glance until one is better acquainted with them. \
+	They are lighter and often more slender than men and bear fairy-like features upon their faces and ears.<br>\
+	The Elves commonly worship the Nature Deities in much the same way that Fae Folk or Sylvans do, though they tend towards older practices others may no longer recall.<br>\
+	<br>\
+	Magic comes easily to us, and we are swifter than other races. However, our bodies are weak and fragile."
 
 	skin_tone_wording = "Tribal Identity"
 
@@ -42,27 +45,28 @@
 		OFFSET_NECK_F = list(0,-1), OFFSET_MOUTH_F = list(0,-1), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1), \
 		)
-	specstats = list("strength" = -2, "perception" = 1, "intelligence" = 2, "constitution" = -1, "endurance" = 0, "speed" = 2, "fortune" = 0)
-	specstats_f = list("strength" = -4, "perception" = 1, "intelligence" = 2, "constitution" = -2, "endurance" = 0, "speed" = 3, "fortune" = 0)
+	specstats = list("strength" = -2, "perception" = 2, "intelligence" = 2, "constitution" = -2, "endurance" = 1, "speed" = 3, "fortune" = 0)
+	specstats_f = list("strength" = -2, "perception" = 2, "intelligence" = 2, "constitution" = -2, "endurance" = 1, "speed" = 3, "fortune" = 0)
 	race_bonus = list(STAT_ENDURANCE = 1)
 	enflamed_icon = "widefire"
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
-		ORGAN_SLOT_EYES = /obj/item/organ/eyes,
+		ORGAN_SLOT_EYES = /obj/item/organ/eyes/night_vision/elf,
 		ORGAN_SLOT_EARS = /obj/item/organ/ears/elfw,
 		ORGAN_SLOT_TONGUE = /obj/item/organ/tongue,
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
+		ORGAN_SLOT_ANUS = /obj/item/organ/filling_organ/anus,
 		)
 	bodypart_features = list(
 		/datum/bodypart_feature/hair/head,
 		/datum/bodypart_feature/hair/facial,
 	)
 	customizers = list(
-		/datum/customizer/organ/eyes/humanoid,
+		/datum/customizer/organ/eyes/elf,
 		/datum/customizer/bodypart_feature/hair/head/humanoid,
 		/datum/customizer/bodypart_feature/hair/facial/humanoid,
 		/datum/customizer/bodypart_feature/accessory,
@@ -72,9 +76,12 @@
 		/datum/customizer/organ/penis/human,
 		/datum/customizer/organ/breasts/human,
 		/datum/customizer/organ/belly/human,
+		/datum/customizer/organ/butt/human,
 		/datum/customizer/organ/vagina/human,
 		)
 	body_markings = list(
+		/datum/body_marking/flushed_cheeks,
+		/datum/body_marking/eyeliner,
 	)
 
 /datum/species/elf/wood/get_span_language(datum/language/message_language)

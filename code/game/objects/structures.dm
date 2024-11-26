@@ -13,6 +13,7 @@
 	var/mob/living/structureclimber
 	var/broken = 0 //similar to machinery's stat BROKEN
 	var/hammer_repair
+	var/leanable = FALSE
 //	move_resist = MOVE_FORCE_STRONG
 
 /obj/structure/Initialize()
@@ -27,6 +28,8 @@
 		GLOB.redstone_objs += src
 		. = INITIALIZE_HINT_LATELOAD
 	GLOB.cameranet.updateVisibility(src)
+	if(leanable)
+		AddComponent(/datum/component/leanable)
 
 /obj/structure/Bumped(atom/movable/AM)
 	..()
@@ -121,7 +124,7 @@
 	if(!ishuman(user))
 		adjusted_climb_time = 0 //simple mobs instantly climb
 	if(HAS_TRAIT(user, TRAIT_FREERUNNING)) //do you have any idea how fast I am???
-		adjusted_climb_time *= 0.8
+		adjusted_climb_time *= 0.5
 	adjusted_climb_time -= user.STASPD * 2
 	adjusted_climb_time = max(adjusted_climb_time, 0)
 //	if(adjusted_climb_time)
@@ -157,9 +160,11 @@
 	if(max_integrity)
 		var/healthpercent = (obj_integrity/max_integrity) * 100
 		switch(healthpercent)
-			if(50 to 99)
-				return  "It looks slightly damaged."
+			if(75 to 99)
+				return span_info("It looks slightly damaged.")
+			if(50 to 75)
+				return span_info("It looks damaged.")
 			if(25 to 50)
-				return  "It appears heavily damaged."
+				return  span_warning("It appears heavily damaged.")
 			if(1 to 25)
 				return  span_warning("It's falling apart!")

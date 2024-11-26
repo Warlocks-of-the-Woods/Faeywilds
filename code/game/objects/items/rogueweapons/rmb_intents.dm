@@ -26,15 +26,25 @@
 				I = L.get_active_held_item()
 				if(I?.associated_skill)
 					theirskill = L.mind.get_skill_level(I.associated_skill)
-		if(ourskill > theirskill)
-			if(istype(user.rmb_intent, /datum/rmb_intent/feint))
-				perc += (ourskill - theirskill)*15
-			else
-				perc += (ourskill - theirskill)*10
-	if(user.STAINT < L.STAINT)
-		perc -= 15
+		perc += (ourskill - theirskill)*20 	//skill is of the essence
+		perc += (user.STAINT - L.STAINT)*15	//but it's also a mindgame
+		perc += (user.STASPD - L.STASPD)*15 	//a swift feint can still fool a slow opponent
+
+
+
 	if(L.d_intent == INTENT_DODGE)
-		perc = 0
+		if(!L.mind && !user.has_status_effect(/datum/status_effect/debuff/feintcd))//Feinting an NPC will now perform a 'Trip' combat manuever. This feature is designed as a way to counter the AI's ability to dodge attacks that have a hit delay by constantly moving around..
+			if(prob(80) || istype(user.rmb_intent, /datum/rmb_intent/feint))//Guaranteed if you're actually in a feinting stance.
+				L.Knockdown(30)
+				L.Immobilize(30)
+				to_chat(user, span_notice("[L] is tripped up by my combat maneuver and momentarily stunned!"))
+				user.apply_status_effect(/datum/status_effect/debuff/feintcd)
+			else
+				to_chat(user, span_warning("[L] avoids my trip maneuver... 80%"))
+			return
+		else
+			perc = 0
+
 	if(!L.cmode)
 		perc = 0
 	if(L.has_status_effect(/datum/status_effect/debuff/feinted))
@@ -42,13 +52,20 @@
 	if(user.has_status_effect(/datum/status_effect/debuff/feintcd))
 		perc -= rand(10,30)
 	user.apply_status_effect(/datum/status_effect/debuff/feintcd)
-	perc = CLAMP(perc, 0, 99)
-	if(prob(perc))
-		L.apply_status_effect(/datum/status_effect/debuff/feinted)
-		L.changeNext_move(4)
-		L.Immobilize(5)
-		to_chat(user, span_notice("[L] fell for my feint attack!"))
-		to_chat(L, span_danger("I fall for [user]'s feint attack!"))
+	perc = CLAMP(perc, 0, 90) //no zero risk superfeinting
+	if(prob(perc)) //feint intent increases the immobilize duration significantly
+		if(istype(user.rmb_intent, /datum/rmb_intent/feint))
+			L.apply_status_effect(/datum/status_effect/debuff/feinted)
+			L.changeNext_move(10)
+			L.Immobilize(30)
+			to_chat(user, span_notice("[L] fell for my feint attack!"))
+			to_chat(L, span_danger("I fall for [user]'s feint attack!"))
+		else
+			L.apply_status_effect(/datum/status_effect/debuff/feinted)
+			L.changeNext_move(5)
+			L.Immobilize(10)
+			to_chat(user, span_notice("[L] fell for my feint attack!"))
+			to_chat(L, span_danger("I fall for [user]'s feint attack!"))
 	else
 		if(user.client?.prefs.showrolls)
 			to_chat(user, span_warning("[L] did not fall for my feint... [perc]%"))

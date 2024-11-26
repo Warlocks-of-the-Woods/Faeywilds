@@ -101,7 +101,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/obj/item/organ/heart/mutant_heart = /obj/item/organ/heart
 	var/obj/item/organ/eyes/mutanteyes = /obj/item/organ/eyes
 	var/obj/item/organ/ears/mutantears = /obj/item/organ/ears
-	var/obj/item/mutanthands
 	var/obj/item/organ/tongue/mutanttongue = /obj/item/organ/tongue
 	var/obj/item/organ/tail/mutanttail = null
 
@@ -129,17 +128,19 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
-		//ORGAN_SLOT_TESTICLES = /obj/item/organ/testicles,
+		//ORGAN_SLOT_TESTICLES = /obj/item/organ/filling_organ/testicles,
 		//ORGAN_SLOT_PENIS = /obj/item/organ/penis,
-		//ORGAN_SLOT_BREASTS = /obj/item/organ/breasts,
+		//ORGAN_SLOT_BREASTS = /obj/item/organ/filling_organ/breasts,
 		//ORGAN_SLOT_BELLY = /obj/item/organ/belly,
-		//ORGAN_SLOT_VAGINA = /obj/item/organ/vagina,
+		//ORGAN_SLOT_VAGINA = /obj/item/organ/filling_organ/vagina,
+		ORGAN_SLOT_ANUS = /obj/item/organ/filling_organ/anus,
 		)
 	/// List of bodypart features of this species
 	var/list/bodypart_features
 
 	/// List of descriptor choices this species gets in preferences customization
 	var/list/descriptor_choices = list(
+		/datum/descriptor_choice/height,
 		/datum/descriptor_choice/body,
 		/datum/descriptor_choice/stature,
 		/datum/descriptor_choice/face,
@@ -148,8 +149,31 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		/datum/descriptor_choice/voice,
 		/datum/descriptor_choice/prominent_one,
 		/datum/descriptor_choice/prominent_two,
+		/datum/descriptor_choice/prominent_three,
+		/datum/descriptor_choice/prominent_four,
 	)
 
+	var/list/specstats = list(
+		"strength" = 0, 
+		"perception" = 0, 
+		"intelligence" = 0, 
+		"constitution" = 0, 
+		"endurance" = 0, 
+		"speed" = 0, 
+		"fortune" = 0
+		)
+	var/list/specstats_m = list(
+		"constitution" = 1, 
+		"intelligence" = -1,
+	)
+	var/list/specstats_f = list(
+		"strength" = -1, 
+		"speed" = 1,
+	)
+	var/list/specskills
+	var/list/specskills_m
+	var/list/specskills_f
+	var/obj/item/mutanthands
 
 	/// List of organ customizers for preferences to customize organs.
 	var/list/customizers
@@ -162,6 +186,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/list/languages = list(/datum/language/common)
 	/// Some species have less than standard gender locks
 	var/gender_swapping = FALSE
+	var/stress_examine = FALSE
+	var/stress_desc = null
 
 ///////////
 // PROCS //
@@ -180,7 +206,9 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	if(!body_marking_sets)
 		return
 	if(!body_markings)
-		body_markings = list()
+		body_markings = list(
+		/datum/body_marking/flushed_cheeks,
+		/datum/body_marking/eyeliner,)
 	var/datum/body_marking_set/bodyset
 	for(var/set_type in body_marking_sets)
 		bodyset = GLOB.body_marking_sets_by_type[set_type]
@@ -562,7 +590,9 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(BODY_FRONT_LAYER)
 			return "FRONT"
 		if(BODY_FRONT_FRONT_LAYER)
-			return "FFRONT"
+			return "FRONT"
+		if(BODY_FRONT_FRONT_FRONT_LAYER)
+			return "FRONT"
 		if(BODY_UNDER_LAYER)
 			return "UNDER"
 
@@ -592,6 +622,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 	var/is_nudist = HAS_TRAIT(H, TRAIT_NUDIST)
 	var/is_retarded = HAS_TRAIT(H, TRAIT_RETARD_ANATOMY)
+	var/is_BOOBS = HAS_TRAIT(H, TRAIT_ENDOWMENT)
 	var/num_arms = H.get_num_arms(FALSE)
 	var/num_legs = H.get_num_legs(FALSE)
 
@@ -650,6 +681,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			if(H.wear_armor)
 				return FALSE
 			if(is_nudist)
+				return FALSE
+			if(is_BOOBS && !I.can_hold_endowed && H.gender == FEMALE)
+				if(!disable_warning)
+					to_chat(H, span_warning("I can't squeeze MY TITS in!.."))
 				return FALSE
 			if(I.blocking_behavior & BULKYBLOCKS)
 				if(H.cloak)
@@ -727,6 +762,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			if(H.wear_pants)
 				return FALSE
 			if(is_nudist)
+				return FALSE
+			if(is_BOOBS && !I.can_hold_endowed && H.gender == MALE)
+				if(!disable_warning)
+					to_chat(H, span_warning("I can't squeeze MY JUNK in!.."))
 				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_PANTS) )
 				return FALSE
@@ -881,7 +920,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		return TRUE
 	if(HAS_TRAIT(H, TRAIT_CHUNKYFINGERS))
 		return do_after(H, 5 MINUTES, target = H)
-//	H.visible_message(span_notice("[H] start putting on [I]..."), span_notice("I start putting on [I]..."))
+	if(I.equip_delay_self >= 10)
+		H.visible_message(span_smallnotice("[H] start putting on [I]..."), span_smallnotice("I start putting on [I]..."))
 	if(I.edelay_type)
 		return move_after(H, minone(I.equip_delay_self-H.STASPD), target = H)
 	else
@@ -956,6 +996,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 //		hunger_rate *= H.physiology.hunger_mod
 		H.adjust_nutrition(-hunger_rate)
 
+/* deprecated shitty ass old milk stuff from hearthstone -vide
 		if(H.getorganslot(ORGAN_SLOT_BREASTS))
 			if(H.nutrition > NUTRITION_LEVEL_HUNGRY && H.getorganslot(ORGAN_SLOT_BREASTS).lactating && H.getorganslot(ORGAN_SLOT_BREASTS).milk_max > H.getorganslot(ORGAN_SLOT_BREASTS).milk_stored) //Vrell - numbers may need to be tweaked for balance but hey this works for now.
 				var/milk_to_make = min(hunger_rate, H.getorganslot(ORGAN_SLOT_BREASTS).milk_max - H.getorganslot(ORGAN_SLOT_BREASTS).milk_stored)
@@ -966,13 +1007,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				var/milk_to_take = min(hunger_rate, H.getorganslot(ORGAN_SLOT_BREASTS).milk_stored)
 				H.getorganslot(ORGAN_SLOT_BREASTS).milk_stored -= milk_to_take
 				H.adjust_nutrition(milk_to_take)
-
+*/
 	if (H.hydration > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
 		// THEY HUNGER
 		var/hunger_rate = HUNGER_FACTOR
 //		hunger_rate *= H.physiology.hunger_mod
 		H.adjust_hydration(-hunger_rate)
-
 
 	if (H.nutrition > NUTRITION_LEVEL_FULL)
 		if(H.overeatduration < 600) //capped so people don't take forever to unfat
@@ -1016,20 +1056,20 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 //				H.apply_status_effect(/datum/status_effect/debuff/fat)
 		if(NUTRITION_LEVEL_FAT to INFINITY)
 			H.add_stress(/datum/stressevent/stuffed)
-			H.remove_stress(list(/datum/stressevent/peckish,/datum/stressevent/hungry,/datum/stressevent/starving))
+			H.remove_stress_list(list(/datum/stressevent/peckish,/datum/stressevent/hungry,/datum/stressevent/starving))
 		if(NUTRITION_LEVEL_FED to NUTRITION_LEVEL_FAT)
-			H.remove_stress(list(/datum/stressevent/peckish,/datum/stressevent/hungry,/datum/stressevent/starving))
+			H.remove_stress_list(list(/datum/stressevent/peckish,/datum/stressevent/hungry,/datum/stressevent/starving))
 		if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
 			H.add_stress(/datum/stressevent/peckish)
-			H.remove_stress(list(/datum/stressevent/stuffed,/datum/stressevent/hungry,/datum/stressevent/starving))
+			H.remove_stress_list(list(/datum/stressevent/stuffed,/datum/stressevent/hungry,/datum/stressevent/starving))
 			H.apply_status_effect(/datum/status_effect/debuff/hungryt1)
 		if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
 			H.add_stress(/datum/stressevent/hungry)
-			H.remove_stress(list(/datum/stressevent/stuffed,/datum/stressevent/peckish,/datum/stressevent/starving))
+			H.remove_stress_list(list(/datum/stressevent/stuffed,/datum/stressevent/peckish,/datum/stressevent/starving))
 			H.apply_status_effect(/datum/status_effect/debuff/hungryt2)
 		if(0 to NUTRITION_LEVEL_STARVING)
 			H.add_stress(/datum/stressevent/starving)
-			H.remove_stress(list(/datum/stressevent/stuffed,/datum/stressevent/peckish,/datum/stressevent/hungry))
+			H.remove_stress_list(list(/datum/stressevent/stuffed,/datum/stressevent/peckish,/datum/stressevent/hungry))
 			H.apply_status_effect(/datum/status_effect/debuff/hungryt3)
 			if(prob(3))
 				playsound(get_turf(H), pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
@@ -1038,18 +1078,18 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 //		if(HYDRATION_LEVEL_WATERLOGGED to INFINITY)
 //			H.apply_status_effect(/datum/status_effect/debuff/waterlogged)
 		if(HYDRATION_LEVEL_SMALLTHIRST to HYDRATION_LEVEL_FULL)
-			H.remove_stress(list(/datum/stressevent/drym,/datum/stressevent/thirst,/datum/stressevent/parched))
+			H.remove_stress_list(list(/datum/stressevent/drym,/datum/stressevent/thirst,/datum/stressevent/parched))
 		if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_SMALLTHIRST)
 			H.add_stress(/datum/stressevent/drym)
-			H.remove_stress(list(/datum/stressevent/parched,/datum/stressevent/thirst))
+			H.remove_stress_list(list(/datum/stressevent/parched,/datum/stressevent/thirst))
 			H.apply_status_effect(/datum/status_effect/debuff/thirstyt1)
 		if(HYDRATION_LEVEL_DEHYDRATED to HYDRATION_LEVEL_THIRSTY)
 			H.add_stress(/datum/stressevent/thirst)
-			H.remove_stress(list(/datum/stressevent/parched,/datum/stressevent/drym))
+			H.remove_stress_list(list(/datum/stressevent/parched,/datum/stressevent/drym))
 			H.apply_status_effect(/datum/status_effect/debuff/thirstyt2)
 		if(0 to HYDRATION_LEVEL_DEHYDRATED)
 			H.add_stress(/datum/stressevent/parched)
-			H.remove_stress(list(/datum/stressevent/thirst,/datum/stressevent/drym))
+			H.remove_stress_list(list(/datum/stressevent/thirst,/datum/stressevent/drym))
 			H.apply_status_effect(/datum/status_effect/debuff/thirstyt3)
 
 
@@ -1212,7 +1252,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(!target.lying_attack_check(user))
 			return 0
 
-		var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = user.used_intent.blade_class)
+		var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = user.used_intent.blade_class, damage = damage)
 
 		target.lastattacker = user.real_name
 		if(target.mind)
@@ -1420,8 +1460,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				target.mind.attackedme[user.real_name] = world.time
 			var/selzone = accuracy_check(user.zone_selected, user, target, /datum/skill/combat/unarmed, user.used_intent)
 			var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
-			var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT)
 			var/damage = user.get_punch_dmg() * 1.4
+			var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT, damage = damage)
 			if(HAS_TRAIT(user, TRAIT_MARTIALARTIST))
 				damage *= 1.5
 			target.next_attack_msg.Cut()

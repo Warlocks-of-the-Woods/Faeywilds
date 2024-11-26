@@ -49,7 +49,7 @@
 /datum/stressevent/dismembered
 	timer = 40 MINUTES
 	stressadd = 5
-	desc = span_red("MY LIMB IS GONE!!!")
+	desc = span_boldred("MY LIMB IS GONE!!!")
 
 /datum/stressevent/dwarfshaved
 	timer = 40 MINUTES
@@ -69,8 +69,8 @@
 	return desc
 
 /datum/stressevent/viewdismember
-	timer = 20 MINUTES
-	max_stacks = 10
+	timer = 15 MINUTES
+	max_stacks = 5
 	stressadd = 2
 	desc = span_red("I've seen men lose their limbs.")
 
@@ -79,22 +79,33 @@
 	timer = 1 MINUTES
 	max_stacks = 10
 	stressadd = 1
-//	desc = span_red("I saw something horrible!")
+	stressadd_per_extra_stack = 1
+	desc = span_red("I saw something horrible!")
 
 /datum/stressevent/viewgib
 	timer = 5 MINUTES
 	stressadd = 2
-//	desc = span_red("I saw something ghastly.")
+	desc = span_red("I saw something ghastly.")
 
 /datum/stressevent/bleeding
 	timer = 2 MINUTES
 	stressadd = 1
 	desc = list(span_red("I think I'm bleeding."),span_red("I'm bleeding."))
 
+/datum/stressevent/bleeding/can_apply(mob/living/user)
+	if(user.has_flaw(/datum/charflaw/masochist))
+		return FALSE
+	return TRUE
+
 /datum/stressevent/painmax
 	timer = 1 MINUTES
 	stressadd = 2
 	desc = span_red("THE PAIN!")
+
+/datum/stressevent/painmax/can_apply(mob/living/user)
+	if(user.has_flaw(/datum/charflaw/masochist))
+		return FALSE
+	return TRUE
 
 /datum/stressevent/freakout
 	timer = 15 SECONDS
@@ -104,7 +115,7 @@
 /datum/stressevent/felldown
 	timer = 1 MINUTES
 	stressadd = 1
-//	desc = span_red("I fell. I'm a fool.")
+	desc = span_red("I fell. I'm a fool.")
 
 /datum/stressevent/hatezizo
 	timer = 99999 MINUTES
@@ -129,7 +140,7 @@
 /datum/stressevent/virginchurch
 	timer = 999 MINUTES
 	stressadd = 10
-	desc = span_red("I have broken my oath of chastity to The Gods!")
+	desc = span_boldred("I have broken my oath of chastity to The Gods!")
 
 /datum/stressevent/badmeal
 	timer = 3 MINUTES
@@ -140,12 +151,14 @@
 	timer = 3 MINUTES
 	stressadd = 2
 	max_stacks = 3
+	stressadd_per_extra_stack = 2
 	desc = span_red("I puked!")
 
 /datum/stressevent/vomitself
 	timer = 3 MINUTES
 	stressadd = 2
 	max_stacks = 3
+	stressadd_per_extra_stack = 2
 	desc = span_red("I puked on myself!")
 
 /datum/stressevent/cumbad
@@ -155,13 +168,13 @@
 
 /datum/stressevent/cumcorpse
 	timer = 1 MINUTES
-	stressadd = 20
-	desc = span_red("What have I done?")
+	stressadd = 10
+	desc = span_boldred("What have I done?")
 
-/datum/stressevent/blueb
+/datum/stressevent/loinache
 	timer = 1 MINUTES
 	stressadd = 2
-	desc = span_red("My loins ache!")
+	desc = list(span_red("My loins took a bad beating!"),span_red("My loins got slammed badly!"),span_red("My loins got beaten badly!"))
 
 /datum/stressevent/leechcult
 	timer = 1 MINUTES
@@ -213,7 +226,6 @@
 	stressadd = 2
 	desc = span_red("They are plotting against me in evil tongues...")
 
-
 /datum/stressevent/crowd
 	timer = 2 MINUTES
 	stressadd = 2
@@ -229,12 +241,17 @@
 	stressadd = 5
 	desc = span_red("No! Get the Jester away from me!")
 
+/datum/stressevent/jesterphobia
+	timer = 4 MINUTES
+	stressadd = 5
+	desc = span_boldred("No! Get the Jester away from me!")
+
 /datum/stressevent/coldhead
 	timer = 60 SECONDS
 	stressadd = 1
-//	desc = span_red("My head is cold and ugly.")
+	desc = span_red("My head is cold.")
 
-/datum/stressevent/sleeptime
+/datum/stressevent/sleepytime
 	timer = 0
 	stressadd = 1
 	desc = span_red("I'm tired.")
@@ -247,7 +264,8 @@
 /datum/stressevent/tortured
 	stressadd = 3
 	max_stacks = 5
-	desc = span_red("I'm broken.")
+	stressadd_per_extra_stack = 2
+	desc = span_boldred("I'm broken.")
 	timer = 60 SECONDS
 
 /datum/stressevent/confessed
@@ -285,5 +303,15 @@
 
 /datum/stressevent/ooc_ic
 	stressadd = 6
-	desc = span_red("Bad omen! I've broken some kind of wall...")
+	desc = span_boldred("Bad omen! I've broken some kind of wall...")
 	timer = 5 MINUTES
+
+/datum/stressevent/sleepfloor
+	stressadd = 3
+	desc = "I slept on the floor. It was uncomfortable."
+	timer = 1 MINUTES
+
+/datum/stressevent/sleepfloornoble
+	stressadd = 6
+	desc = "I slept on the floor! What am I?! An animal?!"
+	timer = 3 MINUTES

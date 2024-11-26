@@ -4,6 +4,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/masks.dmi'
 	body_parts_covered = FACE
 	slot_flags = ITEM_SLOT_MASK
+	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/clothing/mask/rogue/spectacles
 	name = "spectacles"
@@ -79,7 +80,7 @@
 
 /obj/item/clothing/mask/rogue/facemask
 	name = "iron mask"
-	desc = "An iron mask which protects the fact and obscures it."
+	desc = "An iron mask which protects the eyes, nose and mouth while also obscuring the face it."
 	icon_state = "imask"
 	max_integrity = 100
 	blocksound = PLATEHIT
@@ -95,11 +96,13 @@
 	experimental_onhip = TRUE
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/iron
+	clothing_flags = CANT_SLEEP_IN
 
 /obj/item/clothing/mask/rogue/facemask/prisoner/Initialize()
 	. = ..()
 	name = "cursed mask"
 	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
+	clothing_flags = null
 
 /obj/item/clothing/mask/rogue/facemask/prisoner/dropped(mob/living/carbon/human/user)
 	. = ..()
@@ -107,12 +110,24 @@
 		return
 	qdel(src)
 
+/obj/item/clothing/mask/rogue/facemask/gold
+	name = "gold mask"
+	desc = "A golden mask commonly found in the Zybantine Empire, worn by nobles. Gold is softer than iron therefore it is easier to break than iron masks."
+	icon_state = "goldmask"
+	max_integrity = 75
+	smeltresult = /obj/item/ingot/gold
+
 /obj/item/clothing/mask/rogue/facemask/steel
 	name = "steel mask"
-	desc = "A mask of steel to both protect and hide the face."
+	desc = "A mask of steel which protects the eyes, nose and mouth while also obscuring the face."
 	icon_state = "smask"
 	max_integrity = 200
 	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/mask/rogue/facemask/steel/hound
+	name = "hound mask"
+	desc = "A steel mask, this one looks more comfortable for Lupians."
+	icon_state = "smask_hound"
 
 /obj/item/clothing/mask/rogue/shepherd
 	name = "halfmask"
@@ -149,7 +164,7 @@
 	name = "plague mask"
 	desc = "What better laboratory than the blood-soaked battlefield?"
 	icon_state = "physmask"
-	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDEEARS
 	body_parts_covered = FACE|EARS|EYES|MOUTH|NECK
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	sewrepair = TRUE
@@ -225,15 +240,6 @@
 	desc = "Masks often worn by Pestran acolytes. It is similar in design to the mask worn by plague doctors, only modified in such a way to feature three bird's heads instead of one. One for the cure. One for the disease. And one for the compassion towards those who suffer with illness as Pestra does."
 	icon_state = "pestramask"
 	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
-	body_parts_covered = FACE|EARS|EYES|MOUTH|NECK
-	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
-	sewrepair = TRUE
-
-/obj/item/clothing/mask/rogue/goldmask
-	name = "gold mask"
-	desc = "A golden mask commonly found in the Zybantine Empire, worn by nobles."
-	icon_state = "goldmask"
-	flags_inv = HIDEFACE|HIDEFACIALHAIR
 	body_parts_covered = FACE|EARS|EYES|MOUTH|NECK
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	sewrepair = TRUE

@@ -102,19 +102,19 @@
 #define STEWARD		(1<<3)
 #define KNIGHT		(1<<4)
 #define GUARD_CAPTAIN		(1<<5)
-#define JUDGE	(1<<6)
+#define JUDGE		(1<<6)
 #define HOSTAGE		(1<<7)
 #define NOBLE		(1<<8)
 
 #define GARRISON		(1<<1)
 
-//#define GUARDSMAN	(1<<0)
-#define ROYALGUARD	(1<<0)
-#define DUNGEONEER	(1<<1)
-#define GATEMASTER	(1<<2)
-#define BOGGUARD	(1<<3)
-//#define BOGMASTER	(1<<5)
-#define SHERIFF		(1<<4)
+#define GUARDSMAN	(1<<0)
+#define ROYALGUARD	(1<<1)
+#define DUNGEONEER	(1<<2)
+#define GATEMASTER	(1<<3)
+#define BOGGUARD	(1<<4)
+#define BOGMASTER	(1<<5)
+#define SHERIFF		(1<<6)
 
 #define CHURCHMEN		(1<<2)
 
@@ -169,8 +169,10 @@
 #define PRISONERB	(1<<16)
 #define PRISONERC	(1<<17)
 #define LUNATIC		(1<<18)
-#define MIGRANT 	(1<<19)
-#define BANDIT		(1<<20)
+#define MIGRANT (1<<19)
+#define SEELIE		(1<<20)
+#define PRISONERD	(1<<21)
+#define BANDIT		(1<<22)
 
 #define APPRENTICES	(1<<6)
 
@@ -184,10 +186,8 @@
 #define MAGEAPPRENTICE	(1<<7)
 
 #define MERCENARIES		(1<<0)
-#define DESERT_RIDER	(1<<1)
-#define GRENZELHOFT		(1<<2)
-#define VETERAN		(1<<3)
-#define SEELIE		(1<<4)
+#define VETERAN		(1<<1)
+#define SELLSWORD		(1<<2)
 
 #define TRIBAL		(1<<8)
 
@@ -251,7 +251,7 @@
 #define JDO_SHERIFF 8.5
 #define JDO_TOWNGUARD 8.6
 #define JDO_DUNGEONEER 8.7
-// #define JDO_BOGMASTER 9
+#define JDO_BOGMASTER 9
 #define JDO_BOGGUARD 9.1
 
 #define JDO_PRIEST 10
@@ -292,11 +292,10 @@
 #define JDO_MIGRANT 32.3
 
 #define JDO_MERCENARY 31
-#define JDO_GRENZELHOFT 31.1
-#define JDO_DESERT_RIDER 31.2
 #define JDO_VET 31.3
 #define JDO_SEELIE 31.4
-#define JDO_BANDIT 31.5
+#define JDO_SELLSWORD 31.5
+#define JDO_BANDIT 31.6
 
 #define JDO_VAGRANT 33
 #define JDO_VAGABOND 34
@@ -306,6 +305,7 @@
 #define JDO_PRISONERC 35.2
 #define JDO_HOSTAGE 35.3
 #define JDO_LUNATIC 35.4
+#define JDO_PRISONERD 35.5
 
 #define JDO_CHIEFTAIN 36
 #define JDO_TRIBALCOOK 37
@@ -386,13 +386,12 @@
 #define WANDERER_ROLES \
 	/datum/job/roguetown/pilgrim,\
 	/datum/job/roguetown/adventurer,\
-	/datum/job/roguetown/mercenary/desert_rider,\
-	/datum/job/roguetown/mercenary/grenzelhoft,\
-	/datum/job/roguetown/seelie,\
+	/datum/job/roguetown/mercenary,\
 	/datum/job/roguetown/bandit
 
 #define GARRISON_ROLES \
 	/datum/job/roguetown/bogguardsman,\
+	/datum/job/roguetown/bogmaster,\
 	/datum/job/roguetown/dungeoneer,\
 	/datum/job/roguetown/gatemaster,\
 	/datum/job/roguetown/manorguard,\

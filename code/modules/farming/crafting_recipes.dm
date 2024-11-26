@@ -47,6 +47,17 @@
 	craftdiff = -2
 	time = 4 */
 
+/datum/crafting_recipe/roguetown/sandpowder
+	name = "ground sand"
+	result = /obj/item/rogueore/sand
+	reqs = list(/obj/item/natural/stone = 1)
+	structurecraft = /obj/structure/fluff/millstone
+	verbage_simple = "mill"
+	verbage = "mills"
+	craftdiff = -2
+	time = 4
+
+
 /datum/crafting_recipe/roguetown/structure/plough
 	name = "plough"
 	result = /obj/structure/plough

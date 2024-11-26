@@ -22,8 +22,6 @@ SUBSYSTEM_DEF(nightshift)
 	var/high_security_mode = FALSE
 
 /datum/controller/subsystem/nightshift/Initialize()
-	if(!CONFIG_GET(flag/enable_night_shifts))
-		can_fire = FALSE
 	current_tod = "night"
 	return ..()
 
@@ -80,7 +78,7 @@ SUBSYSTEM_DEF(nightshift)
 			SSdroning.play_area_sound(areal, src.client)
 		SSdroning.play_loop(areal, src.client)
 	if(todd == "night")
-		if(HAS_TRAIT(src, TRAIT_NOROGSTAM))
+		if(HAS_TRAIT(src, TRAIT_NOROGSTAM) || HAS_TRAIT(src, TRAIT_NOSLEEP))
 			return ..()
 		if(tiredness >= 100)
 			apply_status_effect(/datum/status_effect/debuff/sleepytime)
@@ -89,5 +87,5 @@ SUBSYSTEM_DEF(nightshift)
 		apply_status_effect(/datum/status_effect/debuff/sleepytime)
 		if(HAS_TRAIT(src, TRAIT_NIGHT_OWL))
 			add_stress(/datum/stressevent/night_owl)
-/*		else
-			add_stress(/datum/stressevent/sleepytime)  Sleep advancement. We don't have this so editted out. */
+		else
+			add_stress(/datum/stressevent/sleepytime)

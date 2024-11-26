@@ -2,7 +2,7 @@
 	name = "Rogue Mage"
 	tutorial = "Those fools at the academy laughed at you and cast you from the ivory tower of higher learning and magickal practice. No matter - you will ascend to great power one day, but first you need wealth - vast amounts of it. Show those fools in the town what REAL magic looks like."
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 	outfit = /datum/outfit/job/roguetown/bandit/roguemage
 	category_tags = list(CTAG_BANDIT)
 	cmode_music = 'sound/music/combat_bandit_mage.ogg'
@@ -23,25 +23,25 @@
 
 	r_hand = /obj/item/rogueweapon/woodstaff
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE) //needs climbing to get into hideout
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/alchemy, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/magic/arcane, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/polearms, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 3, TRUE) //needs climbing to get into hideout
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/alchemy, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/magic/arcane, 2, TRUE)
 		if(H.age == AGE_OLD)
 			head = /obj/item/clothing/head/roguetown/wizhat/gen
 			armor = /obj/item/clothing/suit/roguetown/shirt/robe
-			H.mind.adjust_skillrank(/datum/skill/magic/arcane, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/magic/arcane, 1, TRUE)
 			H.change_stat("speed", -1)
 			H.change_stat("intelligence", 1)
 			H.change_stat("perception", 1)

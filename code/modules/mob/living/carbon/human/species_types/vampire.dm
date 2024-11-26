@@ -22,8 +22,10 @@
 /datum/species/vampire/on_species_gain(mob/living/carbon/human/C, datum/species/old_species)
 	. = ..()
 	to_chat(C, "[info_text]")
+	C.faction = list("undead")
 	C.skin_tone = "albino"
 	C.update_body(0)
+	C.update_body_parts(TRUE)
 	if(isnull(batform))
 		batform = new
 		C.AddSpell(batform)
@@ -150,4 +152,3 @@
 	cooldown_min = 50
 	die_with_shapeshifted_form =  FALSE
 	shapeshift_type = /mob/living/simple_animal/hostile/retaliate/gaseousform
-

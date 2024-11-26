@@ -3,17 +3,17 @@
 	flag = HAND
 	department_flag = NOBLEMEN
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/job/roguetown/hand
 	display_order = JDO_HAND
-	tutorial = "You owe everything to your liege. Once, you were just a humble friend- now you are one of the most important men within the Duchy itself. You have played spymaster and confidant to the Noble-Family for so long that you are a vault of intrigue, something you exploit with potent conviction. Let no man ever forget whose ear you whisper into. You've killed more men with those lips than any blademaster could ever claim to."
-	whitelist_req = TRUE
+	tutorial = "You owe everything to your liege. Once, you were just a humble friend- now you are one of the most important men within the kingdom itself. You have played spymaster and confidant to the Noble-Family for so long that you are a vault of intrigue, something you exploit with potent conviction. Let no man ever forget whose ear you whisper into. You've killed more men with those lips than any blademaster could ever claim to."
+	whitelist_req = FALSE
 	give_bank_account = 44
-	min_pq = 2
+	min_pq = 3
 	max_pq = null
 
 /*
@@ -23,7 +23,7 @@
 	if(!player.ckey)
 		return
 	for(var/mob/dead/new_player/Lord in GLOB.player_list)
-		if(Lord.mind.assigned_role == "King")
+		if(Lord.mind.assigned_role == "Monarch")
 			if(Lord.brohand == player.ckey)
 				return TRUE
 */
@@ -38,19 +38,19 @@
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel = 1, /obj/item/storage/keyring/hand = 1)
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/shields, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sneaking, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/stealing, 3, TRUE)
 		H.change_stat("strength", 2)
 		H.change_stat("perception", 3)
 		H.change_stat("intelligence", 3)

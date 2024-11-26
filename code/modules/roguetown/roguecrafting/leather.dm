@@ -87,6 +87,12 @@
 	reqs = list(/obj/item/natural/hide = 1)
 	sellprice = 10	//Costs about ~6 to make, sells well.
 
+/datum/crafting_recipe/roguetown/leather/leatherskirt
+	name = "leather skirt"
+	result = list(/obj/item/clothing/under/roguetown/trou/skirt)
+	reqs = list(/obj/item/natural/hide = 1)
+	sellprice = 10
+
 /datum/crafting_recipe/roguetown/leather/shoes
 	name = "leather shoes (x3)"
 	result = list(/obj/item/clothing/shoes/roguetown/simpleshoes,
@@ -119,6 +125,18 @@
 	sellprice = 19	//Costs about ~13 to make, very good resale.
 	craftdiff = 1	//Slightly harder craft.
 
+/datum/crafting_recipe/roguetown/leather/bandana
+	name = "leather bandana"
+	result = /obj/item/clothing/head/roguetown/helmet/bandana
+	reqs = list(/obj/item/natural/hide = 1)
+	sellprice = 27
+
+/datum/crafting_recipe/roguetown/leather/tricorn
+	name = "leather tricorn"
+	result = /obj/item/clothing/head/roguetown/helmet/tricorn
+	reqs = list(/obj/item/natural/hide = 1)
+	sellprice = 27
+
 /datum/crafting_recipe/roguetown/leather/hood
 	name = "leather hood"
 	result = /obj/item/clothing/head/roguetown/roguehood
@@ -150,6 +168,12 @@
 	reqs = list(/obj/item/natural/hide = 2)
 	sellprice = 24	//Costs about ~12 to make.
 
+/datum/crafting_recipe/roguetown/leather/bra
+	name = "leather bra armor"
+	result = /obj/item/clothing/suit/roguetown/armor/leather/bikini/bra
+	reqs = list(/obj/item/natural/hide = 2)
+	sellprice = 26
+
 /datum/crafting_recipe/roguetown/leather/hidearmor
 	name = "hide armor"
 	result = /obj/item/clothing/suit/roguetown/armor/leather/hide
@@ -172,6 +196,13 @@
 				/obj/item/natural/fur = 1)
 	sellprice = 28	//Costs about ~16 to make. So, HIGH resale.
 	craftdiff = 2	//Harder craft.
+
+/datum/crafting_recipe/roguetown/leather/hidebra
+	name = "hide bra armor"
+	result = /obj/item/clothing/suit/roguetown/armor/leather/hide/bikini/bra
+	reqs = list(/obj/item/natural/hide = 2,
+				/obj/item/natural/fur = 1)
+	sellprice = 26
 
 
 /datum/crafting_recipe/roguetown/leather/cloak
@@ -229,6 +260,11 @@
 	reqs = list(/obj/item/natural/hide = 1,/obj/item/grown/log/tree/small = 1)
 	sellprice = 16	//Costs about ~10 to make.
 	craftdiff = 1	//Slightly harder craft.
+
+/datum/crafting_recipe/roguetown/leather/vest/sailor
+	name = "leather sea jacket"
+	result = /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor
+	reqs = list(/obj/item/natural/hide = 2)
 
 /datum/crafting_recipe/roguetown/leather/volfhelm
 	name = "volf helmet"
@@ -414,3 +450,21 @@
 	name = "black leather belt"
 	result = /obj/item/storage/belt/rogue/leather/blackleather
 	reqs = list(/obj/item/natural/hide = 1)
+
+//firearm slop
+/datum/crafting_recipe/roguetown/leather/firepowderflask
+	name = "firepowder flask"
+	result = /obj/item/powderflask
+	reqs = list(/obj/item/natural/hide = 1,
+				/obj/item/natural/fibers = 1,
+				/obj/item/reagent_containers/powder/gunpowder = 1,
+				)
+	craftdiff = 1
+
+/datum/crafting_recipe/roguetown/leather/bulletpouch
+	name = "bullet pouch"
+	result = /obj/item/ammopouch
+	reqs = list(/obj/item/natural/hide = 1,
+				/obj/item/natural/fibers = 1,
+				)
+	craftdiff = 1

@@ -133,17 +133,29 @@
 			return parse_zone(zone)
 		return affecting.name
 
-/mob/living/carbon/proc/find_used_grab_limb(mob/living/user) //for finding the exact limb or inhand to grab
+/mob/living/carbon/proc/find_used_grab_limb(mob/living/user, var/override_zone = null) //for finding the exact limb or inhand to grab
 	var/used_limb = BODY_ZONE_CHEST
 	var/missing_nose = HAS_TRAIT(src, TRAIT_MISSING_NOSE)
 	var/obj/item/bodypart/affecting
-	affecting = get_bodypart(check_zone(user.zone_selected))
-	if(user.zone_selected && affecting)
-		if(user.zone_selected in affecting.grabtargets)
-			if(missing_nose && user.zone_selected == BODY_ZONE_PRECISE_NOSE)
+	if(isnull(override_zone))
+		affecting = get_bodypart(check_zone(user.zone_selected))
+		if(user.zone_selected && affecting)
+			if(user.zone_selected in affecting.grabtargets)
+				if(missing_nose && user.zone_selected == BODY_ZONE_PRECISE_NOSE)
+					used_limb = BODY_ZONE_HEAD
+				else
+					used_limb = user.zone_selected
+			else
+				used_limb = affecting.body_zone
+		return used_limb
+
+	affecting = get_bodypart(check_zone(override_zone))
+	if(override_zone && affecting)
+		if(override_zone in affecting.grabtargets)
+			if(missing_nose && override_zone == BODY_ZONE_PRECISE_NOSE)
 				used_limb = BODY_ZONE_HEAD
 			else
-				used_limb = user.zone_selected
+				used_limb = override_zone
 		else
 			used_limb = affecting.body_zone
 	return used_limb
@@ -188,6 +200,7 @@
 	if(!lying_attack_check(user, I))
 		return
 	affecting = get_bodypart(check_zone(useder)) //precise attacks, on yourself or someone you are grabbing
+	user.mob_timers[MT_SNEAKATTACK] = world.time //Stops you from sneaking after hitting someone else.
 	if(!affecting) //missing limb
 		to_chat(user, span_warning("Unfortunately, there's nothing there."))
 		return FALSE
@@ -195,12 +208,22 @@
 	I.funny_attack_effects(src, user)
 	var/statforce = get_complex_damage(I, user)
 	if(statforce)
-	
 		if(HAS_TRAIT(user, TRAIT_CIVILIZEDBARBARIAN) && I.improvised)
 			statforce *= 1.5
 
 		next_attack_msg.Cut()
 		affecting.bodypart_attacked_by(user.used_intent.blade_class, statforce, crit_message = TRUE)
+		if(!can_see_cone(user) || user.alpha < 15)//Dreamkeep change -- Attacks from
+			if(user.mind && !HAS_TRAIT(src, TRAIT_BLINDFIGHTING) && !user.has_status_effect(/datum/status_effect/debuff/stealthcd))
+				var/sneakmult = 2 + (user.mind.get_skill_level(/datum/skill/misc/sneaking))
+				user.used_intent.penfactor = 100
+				statforce *= sneakmult
+				user.apply_status_effect(/datum/status_effect/debuff/stealthcd)
+				to_chat(src, span_userdanger("SNEAK ATTACK!!! MY ARMOR IS BYPASSED FOR MASSIVE DAMAGE!"))
+				to_chat(user, span_userdanger("SNEAK ATTACK!!! THEIR ARMOR IS BYPASSED FOR MASSIVE DAMAGE!"))
+				user.mind.adjust_experience(/datum/skill/misc/sneaking, user.STAINT * 5, FALSE)
+			else
+				user.used_intent.penfactor = initial(user.used_intent.penfactor)//Sanity check to make sure intent penfactor gets reset when the attack isn't a sneak attack.
 		apply_damage(statforce, I.damtype, affecting)
 		if(I.damtype == BRUTE && affecting.status == BODYPART_ORGANIC)
 			if(prob(statforce))
@@ -256,9 +279,9 @@
 		var/datum/disease/D = thing
 		if(D.spread_flags & DISEASE_SPREAD_CONTACT_SKIN)
 			ContactContractDisease(D)
-	
+
 	if(!user.cmode)
-		var/try_to_fail = !istype(user.rmb_intent, /datum/rmb_intent/weak)
+		var/try_to_fail = istype(user.rmb_intent, /datum/rmb_intent/strong)
 		var/list/possible_steps = list()
 		for(var/datum/surgery_step/surgery_step as anything in GLOB.surgery_steps)
 			if(!surgery_step.name)
@@ -424,7 +447,7 @@
 //		if(buckled)
 //			to_chat(M, span_warning("I need to unbuckle [src] first to do that!"))
 //			return
-//		M.visible_message(span_notice("[M] shakes [src] trying to get [p_them()] up!"), span_notice("I shake [src] trying to get [p_them()] up!"))					
+//		M.visible_message(span_notice("[M] shakes [src] trying to get [p_them()] up!"), span_notice("I shake [src] trying to get [p_them()] up!"))
 //	else
 	M.visible_message(span_notice("[M] shakes [src]."), \
 				span_notice("I shake [src] to get [p_their()] attention."))
@@ -449,7 +472,7 @@
 		if(Wing == null)
 			to_chat(M, span_warning("They cant stand without their wings!"))
 			return
-	
+
 	set_resting(FALSE)
 
 	playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
@@ -554,5 +577,5 @@
 /mob/living/carbon/can_hear()
 	. = FALSE
 	var/obj/item/organ/ears/ears = getorganslot(ORGAN_SLOT_EARS)
-	if(istype(ears) && !ears.deaf)
+	if((istype(ears) && !ears.deaf) || (src.stat == DEAD)) // 2nd check so you can hear messages when beheaded
 		. = TRUE

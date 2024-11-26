@@ -1,6 +1,4 @@
-/datum/species
-	var/amtfail = 0
-
+//stolen from azure cause fuck it why not, it was not working.
 /datum/species/proc/get_accent_list(mob/living/carbon/human/H, type)
 	switch(H.char_accent)
 		if("No accent")
@@ -25,8 +23,6 @@
 			return strings("spanish_replacement.json", type)
 		if("Half Orc accent")
 			return strings("middlespeak.json", type)
-		if("Valley Girl accent")
-			return strings("valley_replacement.json", type)
 		if("Urban Orc accent")
 			return strings("norf_replacement.json", type)
 		if("Hissy accent")

@@ -41,7 +41,7 @@
 	new /obj/item/clothing/suit/roguetown/armor/gambeson(src)
 	new /obj/item/rogueweapon/mace/cudgel(src)
 	new /obj/item/rope/chain(src)
-	
+
 /datum/roguestock/import/townguard
 	name = "Watchman Equipment Crate"
 	desc = "Starting kit for a new Watchman."
@@ -71,6 +71,36 @@
 	new /obj/item/reagent_containers/glass/bottle/rogue/healthpot(src)
 	new /obj/item/reagent_containers/glass/bottle/rogue/healthpot(src)
 	new /obj/item/reagent_containers/glass/bottle/rogue/healthpot(src)
+
+/datum/roguestock/import/antipregger
+	name = "Crate of Anti Pregnancy Potions"
+	desc = "Pink that fixes mistakes."
+	item_type = /obj/structure/closet/crate/chest/steward/redpotion
+	export_price = 70
+	importexport_amt = 1
+
+/obj/structure/closet/crate/chest/steward/redpotion/Initialize()
+	. = ..()
+	new /obj/item/reagent_containers/glass/bottle/rogue/antipregnancy(src)
+	new /obj/item/reagent_containers/glass/bottle/rogue/antipregnancy(src)
+	new /obj/item/reagent_containers/glass/bottle/rogue/antipregnancy(src)
+	new /obj/item/reagent_containers/glass/bottle/rogue/antipregnancy(src)
+	new /obj/item/reagent_containers/glass/bottle/rogue/antipregnancy(src)
+
+/datum/roguestock/import/perfume
+	name = "Crate of perfumes"
+	desc = "To keep the stench away."
+	item_type = /obj/structure/closet/crate/chest/steward/perfume
+	export_price = 60
+	importexport_amt = 1
+
+/obj/structure/closet/crate/chest/steward/perfume/Initialize()
+	. = ..()
+	new /obj/item/perfume/random(src)
+	new /obj/item/perfume/random(src)
+	new /obj/item/perfume/random(src)
+	new /obj/item/perfume/random(src)
+	new /obj/item/perfume/random(src)
 
 /datum/roguestock/import/knight
 	name = "Knight Equipment Crate"
@@ -184,18 +214,3 @@
 	new /obj/item/natural/stone(src)
 	new /obj/item/roguebin(src)
 	new /obj/item/reagent_containers/glass/bucket/wooden(src)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

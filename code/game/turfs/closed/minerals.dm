@@ -73,8 +73,8 @@
 					S.forceMove(get_turf(user))
 
 /turf/closed/mineral/turf_destruction(damage_flag)
-	if(lastminer.goodluck(2) && mineralType)
-//		to_chat(lastminer, span_notice("Bonus ducks!"))
+	if(lastminer && lastminer.goodluck(2) && mineralType) // Check if lastminer is not null
+//        to_chat(lastminer, span_notice("Bonus ducks!"))
 		new mineralType(src)
 	gets_drilled(lastminer, give_exp = FALSE)
 	queue_smooth_neighbors(src)
@@ -92,17 +92,18 @@
 			if(prob(23))
 				new rockType(src)
 		SSblackbox.record_feedback("tally", "ore_mined", mineralAmt, mineralType)
-	else if(user.goodluck(2))
+	else if(user && user.goodluck(2)) // Check if user is not null
 		var/newthing = pickweight(list(/obj/item/natural/rock/salt = 2, /obj/item/natural/rock/iron = 1, /obj/item/natural/rock/coal = 2))
-//		to_chat(user, span_notice("Bonus ducks!"))
+//        to_chat(user, span_notice("Bonus ducks!"))
 		new newthing(src)
-//	if(ishuman(user))
-//		var/mob/living/carbon/human/H = user
-//		if(give_exp)
-//			if (mineralType && (mineralAmt > 0))
-//				H.mind.adjust_experience(/datum/skill/mining, initial(mineralType.mine_experience) * mineralAmt)
-//			else
-//				H.mind.adjust_experience(/datum/skill/mining, 4)
+//    if(ishuman(user))
+//        var/mob/living/carbon/human/H = user
+//        if(give_exp)
+//            if (mineralType && (mineralAmt > 0))
+//                H.mind.adjust_experience(/datum/skill/labor/mining, initial(mineralType.mine_experience) * mineralAmt)
+//            else
+//                H.mind.adjust_experience(/datum/skill/labor/mining, 4)
+
 
 	for(var/obj/effect/temp_visual/mining_overlay/M in src)
 		qdel(M)
@@ -568,7 +569,7 @@
 		to_chat(usr, span_warning("Only a more advanced species could break a rock such as this one!"))
 		return FALSE
 	var/mob/living/carbon/human/H = user
-	if(H.mind.get_skill_level(/datum/skill/mining) >= SKILL_LEVEL_LEGENDARY)
+	if(H.mind.get_skill_level(/datum/skill/labor/mining) >= SKILL_LEVEL_LEGENDARY)
 		. = ..()
 	else
 		to_chat(usr, span_warning("The rock seems to be too strong to destroy. Maybe I can break it once I become a master miner."))
@@ -611,19 +612,19 @@
 	turf_type = /turf/open/floor/rogue/naturalstone
 	above_floor = /turf/open/floor/rogue/naturalstone
 	baseturfs = list(/turf/open/floor/rogue/naturalstone)
-	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 5,/turf/closed/mineral/rogue/iron = 15,/turf/closed/mineral/rogue/coal = 25)
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/cinnabar = 8, /turf/closed/mineral/rogue/salt = 5,/turf/closed/mineral/rogue/iron = 15,/turf/closed/mineral/rogue/coal = 25, /turf/closed/mineral/rogue/sand = 8, /turf/closed/mineral/rogue/gem = 1, /turf/closed/mineral/rogue/gold = 1, /turf/closed/mineral/rogue/silver = 1, /turf/closed/mineral/rogue/copper = 5)
 	mineralChance = 23
 
 
 /turf/closed/mineral/random/rogue/med
 	icon_state = "minrandmed"
 	mineralChance = 10
-	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 5,/turf/closed/mineral/rogue/gold = 3,/turf/closed/mineral/rogue/iron = 33,/turf/closed/mineral/rogue/coal = 14, /turf/closed/mineral/rogue/gem = 1)
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/cinnabar = 5, /turf/closed/mineral/rogue/salt = 5,/turf/closed/mineral/rogue/gold = 3,/turf/closed/mineral/rogue/silver = 3,/turf/closed/mineral/rogue/iron = 33,/turf/closed/mineral/rogue/coal = 14, /turf/closed/mineral/rogue/gem = 2, /turf/closed/mineral/rogue/sand = 5, /turf/closed/mineral/rogue/copper = 5)
 
 /turf/closed/mineral/random/rogue/high
 	icon_state = "minrandhigh"
 	mineralChance = 33
-	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 5,/turf/closed/mineral/rogue/gold = 9,/turf/closed/mineral/rogue/iron = 33,/turf/closed/mineral/rogue/coal = 19, /turf/closed/mineral/rogue/gem = 3)
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/cinnabar = 5, /turf/closed/mineral/rogue/salt = 5,/turf/closed/mineral/rogue/gold = 9,/turf/closed/mineral/rogue/silver = 9,/turf/closed/mineral/rogue/iron = 33,/turf/closed/mineral/rogue/coal = 19, /turf/closed/mineral/rogue/gem = 4, /turf/closed/mineral/rogue/sand = 5, /turf/closed/mineral/rogue/copper = 5)
 
 
 //begin actual mineral turfs
@@ -640,7 +641,7 @@
 	canSmoothWith = list(/turf/closed/mineral/random/rogue, /turf/closed/mineral/rogue)
 	turf_type = /turf/open/floor/rogue/naturalstone
 	baseturfs = /turf/open/floor/rogue/naturalstone
-	mineralAmt = 1
+	mineralAmt = 2
 	above_floor = /turf/open/floor/rogue/naturalstone
 	mineralType = null
 	rockType = null
@@ -654,10 +655,33 @@
 	spreadChance = 5
 	spread = 1
 
+/turf/closed/mineral/rogue/silver
+	icon_state = "mingold"
+	mineralType = /obj/item/rogueore/silver
+	rockType = /obj/item/natural/rock/silver
+	spreadChance = 5
+	spread = 1
+
+/turf/closed/mineral/rogue/copper
+	icon_state = "mingold"
+	mineralType = /obj/item/rogueore/copper
+	rockType = /obj/item/natural/rock/copper
+	spreadChance = 5
+	spread = 1
+
 /turf/closed/mineral/rogue/salt
 	icon_state = "mingold"
 	mineralType = /obj/item/reagent_containers/powder/salt
 	rockType = /obj/item/natural/rock/salt
+	mineralAmt = 5
+	spreadChance = 33
+	spread = 15
+
+/turf/closed/mineral/rogue/sand
+	icon_state = "mingold"
+	mineralType = /obj/item/rogueore/sand
+	rockType = /obj/item/natural/rock/sand
+	mineralAmt = 10
 	spreadChance = 33
 	spread = 15
 
@@ -672,8 +696,16 @@
 	icon_state = "mingold"
 	mineralType = /obj/item/rogueore/coal
 	rockType = /obj/item/natural/rock/coal
+	mineralAmt = 2
 	spreadChance = 33
 	spread = 11
+
+/turf/closed/mineral/rogue/cinnabar
+	icon_state = "mingold"
+	mineralType = /obj/item/rogueore/cinnabar
+	rockType = /obj/item/natural/rock/cinnabar
+	spreadChance = 23
+	spread = 5
 
 /turf/closed/mineral/rogue/gem
 	icon_state = "mingold"

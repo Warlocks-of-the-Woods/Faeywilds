@@ -122,7 +122,7 @@
 /mob/living/simple_animal/hostile/rogue/ghost/wraith/Life()
 	. = ..()
 	if(!target)
-		if(prob(90))
+		if(prob(40))
 			emote(pick("idle"), TRUE)
 
 

@@ -8,7 +8,7 @@
 	/// Stamina cost per action, modified by up to 2.5x cost by the force toggle
 	var/stamina_cost = 0.5
 	/// Whether the action requires both participants to be on the same tile
-	var/check_same_tile = TRUE
+	var/check_same_tile = FALSE //changing this to false by request, just use it if it really needs to be in same tile -- vide
 	/// Whether the same tile check can be bypassed by an aggro grab on the person
 	var/aggro_grab_instead_same_tile = TRUE
 	/// Whether the action is forbidden from being done while incapacitated (stun, handcuffed)
@@ -17,21 +17,30 @@
 	var/require_grab = FALSE
 	/// If a grab is required, this is the required state of it
 	var/required_grab_state = GRAB_AGGRESSIVE
+	/// Vrell - used for determining if the user/target should be gagged
+	var/gags_user = FALSE
+	var/gags_target = FALSE
 
-/datum/sex_action/proc/can_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
+/datum/sex_action/proc/can_perform(mob/living/user, mob/living/target)
 	return TRUE
 
-/datum/sex_action/proc/on_start(mob/living/carbon/human/user, mob/living/carbon/human/target)
+/datum/sex_action/proc/on_start(mob/living/user, mob/living/target)
+	if(gags_user)
+		user.mouth_blocked = TRUE
+	if(gags_target)
+		target.mouth_blocked = TRUE
+
+/datum/sex_action/proc/on_perform(mob/living/user, mob/living/target)
 	return
 
-/datum/sex_action/proc/on_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
-	return
+/datum/sex_action/proc/on_finish(mob/living/user, mob/living/target)
+	if(gags_user)
+		user.mouth_blocked = FALSE
+	if(gags_target)
+		target.mouth_blocked = FALSE
 
-/datum/sex_action/proc/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)
-	return
-
-/datum/sex_action/proc/is_finished(mob/living/carbon/human/user, mob/living/carbon/human/target)
+/datum/sex_action/proc/is_finished(mob/living/user, mob/living/target)
 	return FALSE
 
-/datum/sex_action/proc/shows_on_menu(mob/living/carbon/human/user, mob/living/carbon/human/target)
+/datum/sex_action/proc/shows_on_menu(mob/living/user, mob/living/target)
 	return TRUE

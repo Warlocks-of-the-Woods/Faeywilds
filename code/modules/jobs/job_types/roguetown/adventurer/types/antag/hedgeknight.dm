@@ -2,7 +2,7 @@
 	name = "Hedge Knight"
 	tutorial = "A noble fallen from grace, your tarnished armor sits upon your shoulders as a heavy reminder of the life you've lost. Take back what is rightfully yours."
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 	outfit = /datum/outfit/job/roguetown/bandit/hedgeknight
 	category_tags = list(CTAG_BANDIT)
 	cmode_music = 'sound/music/combat_bandit2.ogg'
@@ -28,18 +28,18 @@
 	r_hand = /obj/item/rogueweapon/greatsword/zwei
 	backr = /obj/item/storage/backpack/rogue/satchel/black
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger = 1)
-	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/riding, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/labor/butchering, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/polearms, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 4, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 2, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 3, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 4, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/craft/cooking, 1, TRUE)
+	H.mind.adjust_skillrank_up_to(/datum/skill/labor/butchering, 1, TRUE)
 	H.change_stat("strength", 4)
 	H.change_stat("endurance", 2)
 	H.change_stat("constitution", 2)
@@ -48,5 +48,6 @@
 	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC) //hey buddy you hear about roleplaying
+	ADD_TRAIT(H, TRAIT_PERFECT_TRACKER, TRAIT_GENERIC)//forest police benefit so they can track their targets.
 	H.verbs |= /mob/proc/haltyell
 	H.ambushable = FALSE

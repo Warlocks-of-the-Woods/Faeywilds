@@ -47,7 +47,6 @@
 	H.smart_equipbag(SLOT_BACK_L) // These fucking shits are reversed in the UI, so keep it like this for symmetry
 	return TRUE
 
-
 /datum/keybinding/human/fixeye
 	hotkey_keys = list("F")
 	name = "fix_eye"

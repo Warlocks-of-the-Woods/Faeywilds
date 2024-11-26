@@ -12,8 +12,15 @@
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	destroy_sound = 'sound/misc/woodhit.ogg'
 	climbable = FALSE
-	static_debris = list(/obj/item/grown/log/tree = 1)
+	static_debris = list(/obj/item/grown/log/tree/large = 1)
 	obj_flags = CAN_BE_HIT | BLOCK_Z_IN_UP | BLOCK_Z_OUT_DOWN
+	max_integrity = 400
+	leanable = TRUE
+
+/obj/structure/flora/newtree/fire_act(added, maxstacks)
+	if(added <= 5)
+		return
+	return ..()
 
 /obj/structure/flora/newtree/MouseDrop_T(atom/movable/O, mob/user)
 	. = ..()
@@ -76,7 +83,7 @@
 
 	for(var/obj/structure/flora/newtree/D in UPNT)//theoretically you'd be able to break trees through a floor but no one is building floors under a tree so this is probably fine
 		D.obj_destruction(damage_flag)
-	for(var/obj/item/grown/log/tree/I in UPNT)
+	for(var/obj/item/grown/log/tree/large/I in UPNT)
 		UPNT.zFall(I)
 
 	for(var/DI in GLOB.cardinals)

@@ -74,7 +74,7 @@
   * This proc is dangerously laggy, avoid it or die
   */
 /proc/stars(n, pr)
-	n = html_encode(n)
+	n = strip_html_simple(n)
 	if (pr == null)
 		pr = 25
 	if (pr <= 0)
@@ -93,12 +93,12 @@
 			t = text("[]*", t)
 	if(n > MAX_BROADCAST_LEN)
 		t += "..." //signals missing text
-	return sanitize(t)
+	return t
 /**
   * Makes you speak like you're drunk
   */
 /proc/slur(n)
-	var/phrase = html_decode(n)
+	var/phrase = strip_html_simple(n)
 	var/leng = length_char(phrase)
 	var/counter=length_char(phrase)
 	var/newphrase=""
@@ -133,7 +133,7 @@
 
 /// Makes you talk like you got cult stunned, which is slurring but with some dark messages
 /proc/cultslur(n) // Inflicted on victims of a stun talisman
-	var/phrase = html_decode(n)
+	var/phrase = strip_html_simple(n)
 	var/leng = length_char(phrase)
 	var/counter=length_char(phrase)
 	var/newphrase=""
@@ -175,7 +175,7 @@
 
 ///Adds stuttering to the message passed in
 /proc/stutter(n)
-	var/te = html_decode(n)
+	var/te = strip_html_simple(n)
 	var/t = ""//placed before the message. Not really sure what it's for.
 	n = length_char(n)//length_char of the entire word
 	var/p = null
@@ -195,7 +195,7 @@
 						n_letter = text("[n_letter]-[n_letter]")
 		t = text("[t][n_letter]")//since the above is ran through for each letter, the text just adds up back to the original word.
 		p++//for each letter p is increased to find where the next letter will be.
-	return copytext_char(sanitize(t),1,MAX_MESSAGE_LEN)
+	return copytext_char(t,1,MAX_MESSAGE_LEN)
 
 ///Convert a message to derpy speak
 /proc/derpspeech(message, stuttering)
@@ -549,7 +549,8 @@
 			hud_used.def_intent.update_icon()
 	update_inv_hands()
 
-GLOBAL_DATUM_INIT(combat_indicator, /mutable_appearance, mutable_appearance('modular_hearthstone/icons/mob/indicator.dmi', "combat", FLY_LAYER))
+//feels and looks like garbage covered in fire.
+//GLOBAL_DATUM_INIT(combat_indicator, /mutable_appearance, mutable_appearance('modular_hearthstone/icons/mob/indicator.dmi', "combat", FLY_LAYER))
 
 /mob/verb/toggle_cmode()
 	set name = "cmode-change"
@@ -559,27 +560,27 @@ GLOBAL_DATUM_INIT(combat_indicator, /mutable_appearance, mutable_appearance('mod
 	if(isliving(src))
 		L = src
 	var/client/client = L.client
-	if(L.IsSleeping())
+	if(L.IsSleeping() || L.surrendering)
 		if(cmode)
 			playsound_local(src, 'sound/misc/comboff.ogg', 100)
 			SSdroning.play_area_sound(get_area(src), client)
-			cmode = FALSE
+			set_cmode(FALSE)
 		if(hud_used)
 			if(hud_used.cmode_button)
 				hud_used.cmode_button.update_icon()
 		return
 	if(cmode)
 		playsound_local(src, 'sound/misc/comboff.ogg', 100)
-		cut_overlay(GLOB.combat_indicator)
+//		cut_overlay(GLOB.combat_indicator)
 
 		SSdroning.play_area_sound(get_area(src), client)
-		cmode = FALSE
-		if(client && HAS_TRAIT(src, TRAIT_SCREENSHAKE))
-			animate(client, pixel_y)
+		set_cmode(FALSE)
+		if(client && HAS_TRAIT(src, TRAIT_SCHIZO_AMBIENCE) && !HAS_TRAIT(src, TRAIT_SCREENSHAKE))
+			animate(client, pixel_y) // stops screenshake if you're not on 4th wonder yet.
 	else
-		cmode = TRUE
+		set_cmode(TRUE)
 		playsound_local(src, 'sound/misc/combon.ogg', 100)
-		add_overlay(GLOB.combat_indicator)
+//		add_overlay(GLOB.combat_indicator)
 
 		if(L.cmode_music)
 			SSdroning.play_combat_music(L.cmode_music, client)
@@ -589,6 +590,15 @@ GLOBAL_DATUM_INIT(combat_indicator, /mutable_appearance, mutable_appearance('mod
 	if(hud_used)
 		if(hud_used.cmode_button)
 			hud_used.cmode_button.update_icon()
+
+/mob/proc/set_cmode(var/new_cmode)
+	if(cmode == new_cmode)
+		return
+	cmode = new_cmode
+	if(new_cmode)
+		SEND_SIGNAL(src, COMSIG_MOB_CMODE_ENABLED, src)
+	else
+		SEND_SIGNAL(src, COMSIG_MOB_CMODE_DISABLED, src)
 
 /mob
 	var/last_aimhchange = 0

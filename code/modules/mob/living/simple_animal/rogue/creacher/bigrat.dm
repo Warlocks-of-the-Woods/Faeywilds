@@ -181,3 +181,5 @@
 			return "foreleg"
 	return ..()
 
+/mob/living/simple_animal/hostile/retaliate/rogue/bigrat/shapeshift
+	erpable = TRUE

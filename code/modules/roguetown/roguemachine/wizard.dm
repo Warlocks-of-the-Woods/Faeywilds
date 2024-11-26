@@ -57,7 +57,7 @@
 		if(mana > 0)
 			to_chat(user, span_notice("Added [mana] arcyne ink."))
 			SSlibrary.give_ink_library(mana, "manual insertion")
-			qdel(P)
+			P.reagents.remove_reagent(/datum/reagent/medicine/manapot, mana)
 			update_icon()
 			playsound(loc, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
 			return attack_hand(user)
@@ -177,7 +177,7 @@
 	contents += "MANA INK: [SSlibrary.library_value]<BR>"
 
 	var/mob/living/carbon/human/H = user
-	if(H.job == "Arch-Mage" || "Mage Apprentice" || "Archivist")
+	if(H.job == "Magician" || "Magicians Apprentice" || "Archivist")
 		if(canread)
 			contents += "<a href='?src=[REF(src)];secrets=1'>Secrets</a>"
 		else

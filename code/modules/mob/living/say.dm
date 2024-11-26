@@ -103,7 +103,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		to_chat(src, span_warning("That message contained a word prohibited in IC chat! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[message]\"</span>"))
 		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
 		return
-	
+
 	var/static/regex/ooc_regex = regex(@"^(?=.*[\(\)\[\]\<\>\{\}]).*$") //Yes, i know.
 	if(findtext_char(message, ooc_regex))
 		emote("me", 1, "mumbles incoherently.")
@@ -142,10 +142,10 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 
 	if(check_whisper(original_message, forced) || !can_speak_basic(original_message, ignore_spam, forced))
 		return
-	//RATWOOD SUBTLER START
+
 	if(check_subtler(original_message, forced) || !can_speak_basic(original_message, ignore_spam, forced))
 		return
-	//RATWOOD SUBTLER END
+
 	if(in_critical)
 		if(!(crit_allowed_modes[message_mode]))
 			return
@@ -168,14 +168,14 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	if(!language)
 		language = get_default_language()
 
-	// if(language.signlang)
-	// 	var/mob/M = src
-	// 	var/emote = pick(language.signlang_verb)
-	// 	M.emote(emote)
+	if(language.signlang)
+		var/mob/M = src
+		var/emote = pick(language.signlang_verb)
+		M.emote(emote)
 
-	// Detection of language needs to be before inherent channels, because
-	// AIs use inherent channels for the holopad. Most inherent channels
-	// ignore the language argument however.
+	//Detection of language needs to be before inherent channels, because
+	//AIs use inherent channels for the holopad. Most inherent channels
+	//ignore the language argument however.
 
 	if(saymode && !saymode.handle_message(src, message, language))
 		return
@@ -258,6 +258,18 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		return
 	return message_language.spans
 
+// Whether the mob can see runechat from the speaker, assuming he will see his message on the text box
+/mob/proc/can_see_runechat(atom/movable/speaker)
+	if(!client || !client.prefs)
+		return FALSE
+	if(!client.prefs.chat_on_map)
+		return FALSE
+	if(stat >= UNCONSCIOUS)
+		return FALSE
+	if(!ismob(speaker) && !client.prefs.see_chat_non_mob)
+		return FALSE
+	return TRUE
+
 /mob/living/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, message_mode, original_message)
 	. = ..()
 	if(!client)
@@ -273,9 +285,8 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		deaf_type = 2 // Since you should be able to hear myself without looking
 
 	// Create map text prior to modifying message for goonchat
-	if(client?.prefs)
-		if (client?.prefs.chat_on_map && stat != UNCONSCIOUS && (client.prefs.see_chat_non_mob || ismob(speaker)) && can_hear())
-			create_chat_message(speaker, message_language, raw_message, spans, message_mode)
+	if(can_see_runechat(speaker) && can_hear())
+		create_chat_message(speaker, message_language, raw_message, spans, message_mode)
 	// Recompose message for AI hrefs, language incomprehension.
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mode)
 	show_message(message, MSG_AUDIBLE, deaf_message, deaf_type)
@@ -314,10 +325,12 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 					continue
 				if(!(M.client.prefs.chat_toggles & CHAT_GHOSTEARS)) //they're talking normally and we have hearing at any range off
 					continue
-		if(!is_in_zweb(src.z,M.z))
+		if(!is_in_zweb(src.z, M.z))
 			continue
 		listening |= M
 		the_dead[M] = TRUE
+
+	log_seen(src, null, listening, original_message, SEEN_LOG_SAY)
 
 	var/eavesdropping
 	var/eavesrendered
@@ -326,10 +339,13 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		eavesrendered = compose_message(src, message_language, eavesdropping, , spans, message_mode)
 
 	var/rendered = compose_message(src, message_language, message, , spans, message_mode)
+	var/turf/self_turf = get_turf(src)
+	var/self_z = self_turf.z
 	for(var/_AM in listening)
 		var/atom/movable/AM = _AM
+		var/turf/movable_turf = get_turf(AM)
 		if(!Zs_too && !isobserver(AM))
-			if(AM.z != src.z)
+			if(movable_turf.z != self_z)
 				continue
 		if(eavesdrop_range && get_dist(source, AM) > message_range && !(the_dead[AM]))
 			AM.Hear(eavesrendered, src, message_language, eavesdropping, , spans, message_mode, original_message)

@@ -58,6 +58,11 @@
 	var/immune_to_genderswap = FALSE
 	var/armor_class = ARMOR_CLASS_NONE
 
+	///for skirts etc that allow passage to fun lands.
+	var/genitalaccess = FALSE
+	///for bra only body armors that allow groin interactions.
+	var/is_bra = FALSE
+
 	sellprice = 1
 
 /obj/item
@@ -319,6 +324,12 @@
 	if(!damaged_clothes)
 		update_clothes_damaged_state(TRUE)
 	var/brokemessage = FALSE
+	// So, what this does is it iterates over all vars on the object, and then it sets them to zero.
+	// Including the ones that don't represent armor values. This is BAD. 
+	// Also, accessing a type's variables with [] will stop working in 1641. You can do the same with .vars[] there but please don't
+	// Frankly just rewrite armor entirely. This system just sucks. This proc in particular should probably just set a broken flag,
+	// and code taking into account armor should check if an armor piece is not broken.
+
 	for(var/x in armor)
 		if(armor[x] > 0)
 			brokemessage = TRUE

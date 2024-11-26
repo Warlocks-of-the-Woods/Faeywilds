@@ -98,10 +98,15 @@
 		return 0
 
 /datum/intent/proc/get_releasedrain()
+	var/actualdrain = 0
 	if(releasedrain)
-		return releasedrain
-	else
-		return 0
+		if(mastermob.mind && masteritem)
+			if(masteritem.associated_skill)
+				var/userskill = mastermob.mind.get_skill_level(masteritem.associated_skill) + 1 //Yes, this means a novice fighter should be able to swing the same weapon for twice as long as an untrained user before needing a break.
+				actualdrain = releasedrain / userskill
+		else
+			actualdrain = releasedrain
+	return actualdrain
 
 /datum/intent/proc/parrytime()
 	return 0
@@ -394,10 +399,10 @@
 	chargetime = 0
 	noaa = TRUE
 	rmb_ranged = TRUE
-	releasedrain = 0
-	misscost = 5
+	releasedrain = 10
+	misscost = 8
 	candodge = TRUE
-	canparry = FALSE
+	canparry = TRUE
 	item_d_type = "blunt"
 
 /datum/intent/unarmed/grab/rmb_ranged(atom/target, mob/user)
@@ -477,6 +482,60 @@
 	canparry = TRUE
 	item_d_type = "stab"
 
+/datum/intent/unarmed/ascendedclaw
+	name = "claw"
+	icon_state = "inchop"
+	attack_verb = list("claws", "mauls", "eviscerates")
+	animname = "cut"
+	blade_class = BCLASS_CHOP
+	hitsound = "genslash"
+	penfactor = 230
+	damfactor = 40
+	candodge = TRUE
+	canparry = TRUE
+	miss_text = "slashes the air!"
+	miss_sound = "bluntwooshlarge"
+
+/datum/intent/simple/sting
+	name = "sting"
+	icon_state = "instrike"
+	attack_verb = list("stings")
+	animname = "blank22"
+	blade_class = BCLASS_STAB
+	hitsound = "smallslash"
+	chargetime = 0
+	penfactor = 1
+	swingdelay = 0
+	candodge = FALSE
+	canparry = FALSE
+	miss_text = "stings the air!"
+
+/datum/intent/simple/bigbite
+	name = "big bite"
+	icon_state = "instrike"
+	attack_verb = list("gnashes", "viciously bites")
+	animname = "blank22"
+	blade_class = BCLASS_CHOP
+	hitsound = "smallslash"
+	chargetime = 0
+	penfactor = 20
+	swingdelay = 1
+	candodge = TRUE
+	canparry = TRUE
+
+/datum/intent/simple/stab
+	name = "stab"
+	icon_state = "instrike"
+	attack_verb = list("impales", "stabs")
+	animname = "blank22"
+	blade_class = BCLASS_STAB
+	hitsound = "smallslash"
+	chargetime = 0
+	penfactor = 25
+	swingdelay = 1
+	candodge = TRUE
+	canparry = TRUE
+	miss_text = "stabs the air!"
 
 /datum/intent/simple/axe
 	name = "hack"

@@ -1,8 +1,9 @@
 
+/* useless
 /mob/living/simple_animal/hostile/rogue/werewolf
 	name = "WEREWOLF"
-	desc = ""
-	icon = 'icons/roguetown/mob/monster/werewolf.dmi'
+	desc = "Why, what big claws and sharp  teeth it has!"
+	icon = 'modular_stonehedge/icons/roguetown/mob/monster/werewolf.dmi'
 	icon_state = "wwolf_m"
 	icon_living = "wwolf_m"
 	icon_dead = "wwolf_m"
@@ -30,3 +31,4 @@
 	..()
 	regenerate_icons()
 	ADD_TRAIT(src, TRAIT_SIMPLE_WOUNDS, TRAIT_GENERIC)
+	*/

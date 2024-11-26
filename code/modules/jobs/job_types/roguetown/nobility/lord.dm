@@ -2,16 +2,18 @@ GLOBAL_VAR(lordsurname)
 GLOBAL_LIST_EMPTY(lord_titles)
 
 /datum/job/roguetown/lord
-	title = "Duke"
+	title = "Monarch"
 	f_title = "Duchess"
 	flag = LORD
 	department_flag = NOBLEMEN
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	selection_color = JCOLOR_NOBLE
-	allowed_races = RACES_SHUNNED_UP
-	allowed_patrons = ALL_DIVINE_PATRONS
+	allowed_races = list(
+		/datum/species/elf/dark,
+		/datum/species/elf/wood,
+	)
 	allowed_sexes = list(MALE, FEMALE)
 
 	spells = list(
@@ -20,21 +22,20 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		/obj/effect/proc_holder/spell/self/convertrole/servant,
 		/obj/effect/proc_holder/spell/self/convertrole/guard,
 		/obj/effect/proc_holder/spell/self/convertrole/bog,
-	/obj/effect/proc_holder/spell/self/convertrole/mercenary
 	)
 	outfit = /datum/outfit/job/roguetown/lord
 	visuals_only_outfit = /datum/outfit/job/roguetown/lord/visuals
 
 	display_order = JDO_LORD
-	tutorial = "Elevated upon your throne through a web of intrigue and political upheaval, you are the absolute authority of these lands and at the center of every plot within it. Every man, woman and child is envious of your position and would replace you in less than a heartbeat: Show them the error in their ways."
+	tutorial = "The Elven Legacy of this city and it's ancient Curse have made the Dreamhold a strange place to see your line appointed. You take pride in the ancient duty. Perhaps as keen as your ancesters before you - to keep vigil of the dream keep and watch over the wyrd portals. You rule over the beauty and magick of the Dream Dales, and this is your legacy. Show them your wisdom."
 	whitelist_req = FALSE
-	min_pq = 1
+	min_pq = 5
 	max_pq = null
 	give_bank_account = 1000
 	required = TRUE
 
 /datum/job/roguetown/exlord //just used to change the lords title
-	title = "Duke Emeritus"
+	title = "Monarch Emeritus"
 	f_title = "Duchess Emeritus"
 	flag = LORD
 	department_flag = NOBLEMEN
@@ -71,27 +72,27 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	belt = /obj/item/storage/belt/rogue/leather/plaquegold
 	l_hand = /obj/item/rogueweapon/lordscepter
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1)
-	id = /obj/item/clothing/ring/active/nomag	
+	id = /obj/item/clothing/ring/active/nomag
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/tights/black
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 		armor = /obj/item/clothing/suit/roguetown/armor/leather/vest/black
-		shoes = /obj/item/clothing/shoes/roguetown/boots	
+		shoes = /obj/item/clothing/shoes/roguetown/boots
 		if(H.mind)
-			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/polearms, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 4, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 4, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 4, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 3, TRUE)
 			if(H.age == AGE_OLD)
-				H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
+				H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 1, TRUE)
 			H.change_stat("strength", 1)
 			H.change_stat("intelligence", 3)
 			H.change_stat("endurance", 3)
@@ -112,16 +113,16 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		belt = /obj/item/storage/belt/rogue/leather/plaquegold
 		shoes = /obj/item/clothing/shoes/roguetown/shortboots
 		if(H.mind)
-			H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 4, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 4, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 4, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 3, TRUE)
 			if(H.age == AGE_OLD)
-				H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
+				H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 1, TRUE)
 			H.change_stat("intelligence", 3)
 			H.change_stat("endurance", 3)
 			H.change_stat("speed", 2)
@@ -131,7 +132,8 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NOSEGRAB, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-//	SSticker.rulermob = H
+	ADD_TRAIT(H, TRAIT_GOODLOVER, TRAIT_GENERIC)
+	//SSticker.rulermob = H
 
 /datum/outfit/job/roguetown/lord/visuals/pre_equip(mob/living/carbon/human/H)
 	..()

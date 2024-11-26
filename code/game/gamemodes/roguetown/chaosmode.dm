@@ -104,7 +104,7 @@
 	var/lord_dead = FALSE
 	for(var/mob/living/carbon/human/H in GLOB.human_list)
 		if(H.mind)
-			if((H.job == "King" || H.job == "Queen") && (SSticker.rulermob == H))
+			if((H.job == "Monarch" || H.job == "Queen") && (SSticker.rulermob == H))
 				lord_found = TRUE
 				if(H.stat == DEAD)
 					lord_dead = TRUE
@@ -165,10 +165,10 @@
 /datum/game_mode/chaosmode/proc/pick_bandits()
 	//BANDITS
 	banditgoal = rand(200,400)
-	restricted_jobs = list("King",
+	restricted_jobs = list("Monarch",
 	"Queen",
 	"Merchant",
-	"Priest")
+	"Prophet")
 	var/num_bandits = 0
 	if(num_players() >= 10)
 		num_bandits = CLAMP(round(num_players() / 2), 1, 5)
@@ -234,18 +234,18 @@
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_maniac()
-	restricted_jobs = list("King",
+	restricted_jobs = list("Monarch",
 	"Queen",
 	"Prisoner",
-	"Dungeoneer",
-	"Inquisitor",
+	"Beastmaster",
+	"Witcher",
 	"Confessor",
 	"Watchman",
 	"Man at Arms",
 	"Veteran",
-	"Acolyte",
-	"Cleric",
-	"Guard Captain")
+	"Priest",
+	"Priest",
+	"Watchmen Captain")
 	antag_candidates = get_players_for_role(ROLE_NBEAST)
 	var/datum/mind/villain = pick_n_take(antag_candidates)
 	if(villain)
@@ -270,7 +270,7 @@
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_vampires()
-	restricted_jobs = list("Acolyte","Priest","Adventurer","Confessor","Watchman","Veteran","Man at Arms","Guard Captain")
+	restricted_jobs = list("Priest","Prophet","Adventurer","Confessor","Watchman","Veteran","Man at Arms","Watchmen Captain")
 /*	var/num_vampires = rand(1,3)
 #ifdef TESTSERVER
 	num_vampires = 100
@@ -297,7 +297,7 @@
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_werewolves()
-	restricted_jobs = list("Acolyte","Priest","Adventurer","Confessor","Watchman","Veteran","Man at Arms","Guard Captain")
+	restricted_jobs = list("Priest","Prophet","Adventurer","Confessor","Watchman","Veteran","Man at Arms","Watchmen Captain")
 /*	var/num_werewolves = rand(1,3)
 #ifdef TESTSERVER
 	num_werewolves = 100

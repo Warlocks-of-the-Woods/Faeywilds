@@ -15,6 +15,7 @@
 	var/datum/bodypart_feature/underwear/undies_feature
 	var/covers_breasts = FALSE
 	sewrepair = TRUE
+	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/undies/attack(mob/M, mob/user, def_zone)
 	if(ishuman(M))

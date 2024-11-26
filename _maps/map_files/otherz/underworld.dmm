@@ -1,177 +1,233 @@
-"a" = (/obj/structure/table/reinforced,/obj/item/t_scanner,/obj/item/gun/ballistic/revolver/last_resort,/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"b" = (/turf/open/floor/plating/dirt/dark,/area/rogue/underworld)
-"c" = (/obj/effect/landmark/underworldsafe,/turf/open/floor/plating/dirt/dark,/area/rogue/underworld)
-"d" = (/obj/structure/underworld/barrier,/turf/open/floor/plating/dirt/dark,/area/rogue/underworld)
-"e" = (/turf/open/floor/rogue/underworld/road,/area/rogue/underworld)
-"f" = (/obj/structure/underworld/barrier,/turf/open/floor/rogue/churchrough,/area/rogue/underworld)
-"g" = (/obj/structure/underworld/barrier,/turf/open/floor/rogue/underworld/road,/area/rogue/underworld)
-"h" = (/obj/machinery/light/rogue/campfire/densefire{fueluse = 1800000},/turf/open/floor/rogue/underworld/road,/area/rogue/underworld)
-"i" = (/obj/effect/landmark/underworld,/turf/open/floor/rogue/underworld/road,/area/rogue/underworld)
-"j" = (/obj/structure/underworld/carriage{pixel_x = -100},/turf/open/floor/rogue/churchrough,/area/rogue/underworld)
-"k" = (/turf/open/floor/rogue/churchrough,/area/rogue/underworld)
-"l" = (/obj/effect/landmark/underworldsafe,/turf/open/floor/rogue/underworld/road,/area/rogue/underworld)
-"n" = (/obj/structure/flora/roguetree/underworld,/turf/open/floor/rogue/underworld/road,/area/rogue/underworld)
-"o" = (/obj/effect/landmark/underworldcoin,/turf/open/floor/rogue/underworld/road,/area/rogue/underworld)
-"p" = (/obj/structure/underworld/carriageman{pixel_x = -15; pixel_y = -20},/turf/open/floor/rogue/churchrough,/area/rogue/underworld)
-"r" = (/obj/machinery/telecomms/server{name = "cyberspace server"},/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"s" = (/obj/structure/cable,/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"t" = (/turf/closed/wall/mineral/rogue/pipe{dir = 1; icon_state = "iron_corner"},/area/rogue/underworld)
-"u" = (/obj/structure/disposalpipe/segment{dir = 8},/obj/item/paper/fluff,/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"v" = (/obj/structure/stairs{dir = 1; icon_state = "stairs"},/obj/item/paper/fluff,/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"w" = (/turf/closed/wall/mineral/rogue/pipe{dir = 8; icon_state = "iron_corner"},/area/rogue/underworld)
-"y" = (/obj/machinery/light/small{dir = 8},/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"z" = (/obj/structure/disposalpipe/junction/yjunction,/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"A" = (/obj/structure/chair/wood/rogue/throne{name = "cyberthrone"},/obj/effect/landmark/treyliam,/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"B" = (/turf/closed/wall/mineral/rogue/pipe{dir = 4; icon_state = "iron_line"},/area/rogue/underworld)
-"C" = (/obj/structure/disposalpipe/broken{dir = 4},/turf/open/floor/rogue/underworld/road,/area/rogue/underworld)
-"D" = (/obj/structure/cable,/obj/item/paper/fluff,/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"E" = (/obj/machinery/computer{dir = 8},/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"G" = (/obj/machinery/blackbox_recorder,/obj/structure/cable,/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"H" = (/obj/item/paper/fluff,/obj/machinery/light/small{dir = 4},/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"I" = (/turf/closed/wall/mineral/rogue/pipe{icon_state = "iron_corner"},/area/rogue/underworld)
-"K" = (/obj/machinery/computer{dir = 8},/obj/structure/disposalpipe/segment{dir = 8},/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"L" = (/obj/structure/disposalpipe/broken{dir = 1},/turf/open/floor/rogue/underworld/road,/area/rogue/underworld)
-"N" = (/turf/closed/wall/mineral/rogue/pipe{dir = 4; icon_state = "iron_corner"},/area/rogue/underworld)
-"O" = (/obj/structure/cable_bridge,/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"P" = (/turf/closed/wall/mineral/rogue/pipe{icon_state = "iron_line"},/area/rogue/underworld)
-"Q" = (/obj/structure/stairs{dir = 1; icon_state = "stairs"},/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"R" = (/obj/machinery/light/small,/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"S" = (/obj/machinery/computer{dir = 4},/obj/structure/disposalpipe/segment{dir = 8},/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"T" = (/obj/structure/disposalpipe/segment{dir = 8},/turf/closed/wall/mineral/rogue/pipe{icon_state = "iron_line"},/area/rogue/underworld)
-"U" = (/obj/item/paper/fluff,/obj/machinery/light/small,/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"V" = (/obj/structure/disposalpipe/segment,/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"W" = (/obj/machinery/door/airlock/maniac,/turf/open/floor/plasteel/maniac,/area/rogue/underworld)
-"X" = (/obj/structure/disposalpipe/segment,/turf/closed/wall/mineral/rogue/pipe{dir = 4; icon_state = "iron_line"},/area/rogue/underworld)
-"Y" = (/obj/structure/closet/crate/secure/weapon{locked = 0; name = "cyberspace disks crate"},/obj/item/disk/holodisk{name = "SPACE STATION 13"},/obj/item/disk/holodisk{name = "BLACKSTONE"},/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
-"Z" = (/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
+"ax" = (/obj/structure/underworld/barrier,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"az" = (/obj/structure/flora/grass/jungle/b,/obj/structure/chair/stool/rogue,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"aS" = (/obj/structure/flora/grass/jungle/b,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"bf" = (/obj/structure/flora/grass/jungle{icon_state = "grassa1"},/mob/living/simple_animal/butterfly,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"bu" = (/obj/effect/wisp,/turf/open/floor/fakespace,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"bG" = (/turf/closed/wall/mineral/rogue/wooddark,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"bK" = (/obj/structure/flora/roguetree/underworld,/turf/open/floor/rogue/dirt,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"dn" = (/obj/structure/flora/grass/jungle/b,/obj/effect/wisp,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"ds" = (/obj/effect/landmark/underworldsafe,/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"dB" = (/obj/structure/flora/roguetree/happyrandom,/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"dH" = (/obj/structure/flora/grass/jungle/b,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"dX" = (/obj/item/toy/cards/deck,/obj/structure/table/wood{icon_state = "tablewood1"; dir = 1},/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"em" = (/obj/structure/flora/grass/jungle/b,/obj/effect/landmark/underworldsafe,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"ew" = (/obj/structure/chair/bench{dir = 8},/turf/open/floor/rogue/blocks/stone/stonepattern3,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"eW" = (/obj/structure/flora/ausbushes/ppflowers,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"fV" = (/obj/structure/flora/grass/jungle{icon_state = "grassa2"},/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"gh" = (/obj/structure/flora/grass/jungle/b,/turf/open/floor/rogue/ruinedwood/spiral,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"gD" = (/turf/open/floor/rogue/ruinedwood/spiral,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"ha" = (/obj/structure/flora/roguetree/underworld,/obj/structure/spacevine,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"hm" = (/obj/structure/portal,/turf/open/floor/rogue/blocks/stone,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"ht" = (/turf/closed/wall/mineral/rogue/wooddark/vertical,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"hU" = (/obj/structure/table/wood{icon_state = "tablewood1"; dir = 1},/turf/open/floor/rogue/hexstone,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"iH" = (/turf/closed/wall/mineral/rogue/wooddark/window,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"iL" = (/obj/effect/landmark/underworldsafe,/turf/open/floor/rogue/blocks/stone,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"iV" = (/obj/structure/fluff/statue/gargoyle/moss,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"jQ" = (/obj/effect/wisp,/obj/structure/flora/grass/jungle,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"lA" = (/obj/structure/flora/grass/jungle/b,/turf/open/floor/rogue/blocks/stone,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"lF" = (/turf/open/floor/rogue/naturalstone,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"lU" = (/obj/effect/wisp,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"mO" = (/mob/living/carbon/spirit,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"mS" = (/obj/effect/landmark/underworldcoin,/turf/open/floor/fakespace,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"mW" = (/obj/structure/spacevine,/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"no" = (/turf/closed/wall/mineral/rogue/decostone/mossy/cand,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"nP" = (/obj/structure/flora/roguetree/underworld,/obj/structure/flora/roguetree/underworld,/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"oj" = (/obj/structure/flora/roguetree/burnt,/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"pi" = (/obj/machinery/light/rogue/wallfire/candle/blue/l,/obj/structure/spacevine,/obj/structure/flora/grass/jungle/b,/turf/open/floor/rogue/ruinedwood/spiral,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"pk" = (/obj/structure/flora/grass/jungle,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"pu" = (/obj/structure/spacevine,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"px" = (/obj/structure/flora/roguetree/happyrandom,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"pz" = (/obj/effect/wisp,/turf/open/floor/rogue/dirt,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"qI" = (/obj/structure/fluff/clock,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"qW" = (/obj/structure/chair/bench/couchablack,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"ri" = (/obj/structure/flora/grass/jungle{icon_state = "grassa2"},/obj/structure/flora/grass/jungle/b,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"rR" = (/obj/effect/landmark/underworldsafe,/turf/open/floor/fakespace,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"sc" = (/obj/structure/flora/roguetree/happyrandom{icon_state = "t8"; desc = "An old, beloved tree that even elves could love."},/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"sZ" = (/turf/open/floor/rogue/dirt,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"tC" = (/obj/item/reagent_containers/glass/cup/skull,/obj/item/reagent_containers/glass/cup/skull,/obj/item/reagent_containers/glass/cup/skull,/obj/item/reagent_containers/glass/cup/skull,/obj/item/reagent_containers/glass/cup/skull,/obj/structure/table/wood,/turf/open/floor/rogue/hexstone,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"uS" = (/turf/closed/wall/shroud,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"vG" = (/obj/structure/flora/grass/jungle/b,/mob/living/carbon/spirit,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"wt" = (/obj/structure/underworld/carriage{pixel_x = -100},/turf/open/floor/rogue/blocks/stone/stonepattern3,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"wO" = (/obj/effect/wisp,/turf/open/floor/rogue/blocks/stone/stonepattern3,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"xc" = (/obj/structure/flora/grass/jungle{icon_state = "grassa2"},/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"yv" = (/obj/structure/spacevine,/turf/open/floor/rogue/dirt,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"zb" = (/obj/structure/chair/stool/rogue,/turf/open/floor/rogue/ruinedwood/spiral,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"zx" = (/obj/structure/flora/roguetree/underworld,/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"zU" = (/obj/machinery/light/rogue/wallfire/candle/blue,/obj/structure/closet/crate/roguecloset/lord,/obj/item/reagent_containers/glass/bottle/rogue/milk,/obj/item/reagent_containers/glass/bottle/rogue/milk,/obj/structure/flora/grass/jungle/b,/obj/item/reagent_containers/glass/bottle/rogue/milk,/obj/item/reagent_containers/glass/bottle/rogue/milk,/obj/item/reagent_containers/glass/bottle/rogue/milk,/turf/open/floor/rogue/hexstone,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"zY" = (/mob/living/simple_animal/butterfly,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Be" = (/obj/effect/landmark/underworldsafe,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Bw" = (/obj/structure/flora/junglebush/b,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Bx" = (/turf/open/floor/rogue/blocks/stone,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"By" = (/obj/effect/wisp,/obj/structure/spacevine,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"BC" = (/obj/structure/spacevine,/obj/structure/flora/grass/jungle/b,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"BP" = (/obj/effect/wisp,/obj/structure/flora/grass/jungle{icon_state = "grassa2"},/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"BV" = (/obj/structure/spacevine,/obj/structure/closet/crate/chest,/obj/item/natural/feather,/obj/item/natural/feather,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/turf/open/floor/rogue/ruinedwood/spiral,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Cj" = (/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Ct" = (/obj/effect/landmark/underworldsafe,/obj/structure/spacevine,/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"CD" = (/obj/effect/wisp,/obj/structure/flora/grass/jungle/b,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"CR" = (/obj/machinery/light/rogue/wallfire/candle/blue,/obj/structure/closet/crate/roguecloset/lord,/obj/item/reagent_containers/glass/bottle/rogue/wine,/obj/item/reagent_containers/glass/bottle/rogue/wine,/obj/item/reagent_containers/glass/bottle/rogue/wine,/obj/item/reagent_containers/glass/bottle/rogue/wine,/obj/item/reagent_containers/glass/bottle/rogue/wine,/turf/open/floor/rogue/hexstone,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"CV" = (/obj/structure/flora/roguetree/happyrandom{icon_state = "t3"; desc = "An old, beloved tree that even elves could love."},/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Dh" = (/obj/machinery/light/rogue/wallfire/candle/blue/l,/turf/open/floor/rogue/hexstone,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"EF" = (/obj/structure/flora/grass/jungle/b,/mob/living/simple_animal/butterfly,/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"EU" = (/obj/structure/flora/grass/jungle/b,/turf/open/floor/rogue/naturalstone,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"EX" = (/obj/structure/flora/grass/jungle/b,/obj/structure/fluff/statue/gargoyle/moss,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Fu" = (/obj/structure/chair/stool/rogue,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Gc" = (/obj/structure/flora/grass/jungle,/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Gf" = (/turf/open/floor/rogue/blocks/stone/stonepattern3,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Gp" = (/obj/machinery/light/rogue/wallfire/candle/blue/r,/turf/open/floor/rogue/ruinedwood/spiral,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"HB" = (/turf/closed/wall/mineral/rogue/stone/moss,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"In" = (/turf/open/floor/rogue/hexstone,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Jj" = (/obj/structure/spacevine,/turf/open/floor/fakespace,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"JO" = (/obj/structure/flora/grass/jungle/b,/obj/effect/wisp,/turf/open/floor/rogue/naturalstone,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Kj" = (/obj/effect/wisp,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Kn" = (/obj/structure/flora/grass/jungle{icon_state = "grassa1"},/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"KE" = (/turf/closed/wall/mineral/rogue/wooddark/horizontal,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Li" = (/obj/effect/landmark/underworldsafe,/obj/machinery/light/rogue/firebowl/standing/blue,/turf/open/floor/rogue/blocks/stone/stonepattern3,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Ll" = (/obj/structure/flora/roguetree/happyrandom{icon_state = "t6"; desc = "An old, beloved tree that even elves could love."},/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Ln" = (/obj/machinery/light/rogue/wallfire/candle/blue/r,/obj/structure/flora/grass/jungle/b,/turf/open/floor/rogue/ruinedwood/spiral,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"LR" = (/obj/structure/flora/grass/jungle/b,/obj/machinery/light/rogue/firebowl/standing/blue,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"LY" = (/obj/structure/table/wood{icon_state = "tablewood1"; dir = 1},/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Mp" = (/obj/structure/spacevine,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Mq" = (/obj/structure/flora/grass/jungle{icon_state = "grassa2"},/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Nb" = (/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Np" = (/mob/living/simple_animal/butterfly,/turf/open/floor/rogue/blocks/stone/stonepattern3,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Ox" = (/obj/effect/wisp,/obj/structure/chair/bench,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"PG" = (/obj/effect/landmark/underworldsafe,/turf/open/floor/rogue/blocks/stone/stonepattern3,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"PX" = (/obj/effect/landmark/underworld,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Qd" = (/obj/machinery/light/rogue/firebowl/standing/blue,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Qj" = (/obj/effect/landmark/underworldsafe,/obj/machinery/light/rogue/firebowl/standing/blue,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"QB" = (/obj/structure/mineral_door/wood/fancywood,/turf/open/floor/rogue/ruinedwood/spiral,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"QL" = (/obj/structure/flora/grass/jungle/b,/obj/effect/wisp,/turf/open/floor/rogue/blocks/stone/stonepattern3,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Rm" = (/obj/structure/chair/bench/couchablack/r,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Rn" = (/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"RG" = (/obj/structure/chair/stool/rogue,/obj/structure/flora/grass/jungle/b,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Sb" = (/obj/effect/wisp,/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Sc" = (/obj/structure/flora/grass/jungle/b,/turf/open/floor/rogue/blocks/stone/stonepattern3,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Sg" = (/obj/structure/table/wood{icon_state = "tablewood1"; dir = 1},/turf/open/floor/rogue/ruinedwood/spiral,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Sw" = (/obj/structure/underworld/carriageman{pixel_x = -15; pixel_y = -20},/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Ty" = (/obj/structure/well/fountain,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Uo" = (/obj/structure/flora/roguetree/happyrandom,/turf/open/floor/rogue/dirt,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Uv" = (/mob/living/simple_animal/butterfly,/turf/open/floor/rogue/dirt,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"UB" = (/obj/structure/flora/roguetree/stump/log,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"UU" = (/turf/open/floor/fakespace,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Vj" = (/obj/structure/underworld/barrier,/turf/open/floor/rogue/blocks/stone/stonepattern3,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"VQ" = (/obj/structure/flora/ausbushes/brflowers,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"VX" = (/obj/effect/landmark/underworldsafe,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Wb" = (/obj/structure/underworld/barrier,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Wn" = (/obj/structure/flora/grass/jungle,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Wx" = (/obj/structure/flora/junglebush/c,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"WU" = (/obj/structure/flora/roguetree/underworld,/obj/structure/spacevine,/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"WV" = (/obj/structure/flora/roguetree/underworld,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Xl" = (/obj/effect/wisp,/obj/structure/flora/ausbushes/brflowers,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Xm" = (/obj/structure/flora/roguetree/happyrandom{icon_state = "t3"; desc = "An old, beloved tree that even elves could love."},/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Xv" = (/obj/structure/flora/grass/jungle{icon_state = "grassa2"},/mob/living/carbon/spirit,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"XT" = (/obj/machinery/light/rogue/firebowl/standing/blue,/turf/open/floor/rogue/cobblerock,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"XZ" = (/obj/structure/flora/roguetree/burnt,/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Yh" = (/obj/structure/chair/bench{dir = 8},/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Yq" = (/obj/structure/underworld/barrier,/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Yx" = (/obj/structure/flora/roguetree/happyrandom{icon_state = "t12"; desc = "An old, beloved tree that even elves could love."},/turf/open/floor/grass,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"YW" = (/obj/structure/flora/grass/jungle/b,/turf/open/water/cleanshallow,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
+"Zr" = (/obj/structure/flora/grass/jungle/b,/turf/open/floor/rogue/dirt,/area/rogue/under/cavewet/bogcaves/sunkencity/psydon{first_time_text = "Twilight Shores"; name = "Twilight Shores"})
 
 (1,1,1) = {"
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeetWBBBWw
-eeeeeeeeeeeeeneeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeeeeeeeneeeeeeeeneeeeeeeneeeeeeeneeeeeeneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeePvOZOQP
-eeeneeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeneneeeeneneeeeeneneeneeeneeeeeneeeeeneeeeeeeeeeeeeeeeeeeeeeeeeeePyDZsHP
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeneeneneeeeeeneneeeneeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeePrsAsEP
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeneeeeeneeeenneeeeeeeeeeeeneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeePssaDGP
-eeeeeeeeeeeeneeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeneeeeeeneeeneneeeneeeneeneeeeeeeeeeeeneneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeCTSuzuKT
-eeeeeeeeeeeeeeeenneeeeneeeeeeeeeeeeeeeeeeneeeeeeeneeeeeneneeeenneeeeneeeeeeeeeneeeeeeeeeneneeenneeeeeeeeeeeeneeeeeeeeeenePZUVRYP
-eeeeeeeneeeeeeeeeeeeeeeeeeeeneeeeeeeeeneeeenneneneeneneeeeeeeeeeeeeeeeeeneeeeeeeeneeneeeeeeneeeeeeenneeeeeeeeeeeeeeeeeeeeIBBXBBN
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeneneeeeeeeeelllllllllllllleeeeeeeeeeeeeeneneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeLeee
-eeeeeeeeeeeeeeeeeeeeeeeebbbbbbbbbbbbbeneeeeenebbbbeleeeeebbbbbbbbccccccbbbbbbeeenneneebbbbbbbbbbbbbbbbbeeeeebbbbbbbbbbbbeeeebbbb
-bbbbeeeeeeeeeeebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcbbbbbbbbbbbbbbbbbbcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbebbbbbbbbbbbbbbbbbbbbbbbb
-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcbbbbbbbdddddbbbbbbcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcbbbbbbbdfjdbbbbbbbcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-eeeeeeeeeeeebbbbbbbbbbbbbbbbbbbbbbbeeeeeebbbbbbbbbbleeebbbbbkkbbbbbeeelbbbbbbbbbbbbeeeeeeeeeeeebbbbbbbbbbbbbbbbbbbeeeeeeebbbbeee
-nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnneekkennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
-nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnneeeneeeeeeeeeenneeeeeeekkeeeeeenneeeeeeeeeeeeneeeeeeeennennnennennneeeeoennnnneeeeeenneeeen
-nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnneeeeeeeeeeeeeenneeeeeeekpgeeeeenneeeeoeeeeeeennneeeeennnnnnnennnnnneeennnnneeeeennnnnneeeen
-nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnneeeeeneeennneenneeeeeeekkeeeeeenneeeeennnnnneeeeeeeeennnneeeeeeeeeeeenneeeeeeeneennnnneeeen
-neeeeeeeeeeeeeennnnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeheieheennnneennnneeeeeennnneeeeeeeeeeeeeeeeeeeenneeeeeeeeeeneeeeeeeen
-neeeeeoeeeeneeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeennnneeeeeeeeeeenneeeennneeeeeeennnneeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeeneeeen
-neeeeeeeeneneeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeennenneeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeeeennnnen
-neeeeeeeeenneeeeeeeeeennneeennneeenneeneeeeeeeneeeeeennneeeeeeeeeeneenneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeennneen
-neeeeeeeeeeeeeeeeeneeeeeneeeeeeennennnnnnneeeeeeeeeeennnneeeennnnnneneeeeeeeneeeeeeeeeeeeeeeeeeeeenneeeeeenneeeeeeeeennnnnnnnnen
-neeeeeeeeenneeeeeeeeeeeeenneeeeonneeeeennneeeeeeeennnnnnneeeeeennnnenenneeeeenneeeeeeeeeennneeeeeenneeeeeenneeeeeeeennnnneeeennn
-neeeeeeeeeeeeneeeeneeneeennneeeenneeeeennnnnnnnnnnnnnnenneeeeeeeeeneneeeeeeeenneeeeenneeennneeeeeeeeeeeeeeennneeeeeenneeeeeeennn
-neeeeeeeeeenneeeeeeeneeeeneeeeeennneeeeennnnnnnneeeeeeenneeeeeeennneenneeeeeeeneeeeenneeennneeeeeeenneeeeeeennnneeeeeeeeeeeeeenn
-neeeeeeeneeeeeeeeeeeeeeeennnnnneeeeeeeenneennneeeeeeeeennneeeeeeenneeeeeeeeeeenneeeenoeeennneeeeeeenneeeeeeeeenneeeeeeeeeeeeeenn
-neeeeeeeeeeeeeeeeeneneenenneeeeeeenneenneeeeneeeeeeeeeenneeeeeeeenneeeeeeeeeeenneeeeneeeennneeeeeeeeeeeeeeeeeenneeeeeeeeeeeeennn
-neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneeeenneeneeeeeeeeeeeennneeeeeeennneeeeeeeenneeeeeeeneeeeeeeeeeeeeeeeeeeeeeeeeeenenneeeeoeennnn
-neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeenneeeeeeeenneeeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeennonnneeeeeenenneeeeeeeneen
-neeeeeeeeeeneeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeneenneeeeeeeenneeeeeeeeeeeeenennnneeeeeeeeeeeeeeennnnneeeeeennenneeeeeeeeenn
-neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennnnnllllnnneennnnneeeeeeeennneeeeeeeeneeeeeeenneeeeeeeeennenneeeenneeenn
-neeeeeeeeeeeeeeeneeeeeeeennneeeeeeeeeeeeeeeeeeeeeeeenneeennneeeeeeeeennnnneeeeeeeennneeeeeeeeneeeeeeenneeeeeeeeenneeeeeenneeennn
-neeenneeeeeeeeeeeeeeeeeeennneeeenennnnneeeeeeeeeeeenneeeeeeeeeeeeeeeeeennnneeeeeeennnenneeeeeeeeeeeeenneeeeeeeeenneeeennneeeennn
-neeenneeneeeeeeeeeeeeeeeennneeeenennnnneennneeeneeenneeeeeeeeeeeeeeeeeennnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeennn
-neeeeeoeeeeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeeeeennnnneeeneeeeeeenneeneeeeneeeneeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeennen
-neeeeeeeeeeeeeeneeeeeeeeeeeeeenneeeeeeneeeeeeeeeeeeeneeeeeeeeeeeenneeneeeeeneeeeeeeeeeeeeeeeeeeeeennneeeeeeeenneeeneeeeeeeeennen
-neeennnnneeeeeeeeeeeennnnneeeenneeeeeeneeeeeeeeeeeenneeeeeeeeeeeeeeneeneeeeneeeeeeeeeeeeeeeeeeeeeeenneeeenneeeeeeeeenneeeennneen
-neennnnnneeeeeeeeeeeennnnneeeeeeeeeeeeeeeoeeeeeneeenneneeeeenneeeeeneenneeeneeennnnenneeeeeeeeeeeeeeeneeeeeeeeeeeeeeennnnnnneeen
-neennneeeeeeeeeeeeeeeeeeeeeeeeeeennneeeeeeeeeeeneeeneeeeeeeenneeeeeneeeeennneeennnnenneeeeeeeeeeeeeeeenneeenneeeeeeeeeeeeeeeeeen
-neeeeeeeeneeeeeeeeeeeeeeeeeeeeeeennneeeeeeeeeeeeeeeennneennnnneeeeeeeeeeennenneeeeeeeeeeenneeeenneeeeennneeeeeeeeeeeeeeeennnnnen
-neeeeeeeeneennnnnneeeeeeeeeeeeeeennneeeennneeeeneeeeeeeeennenennneeeeeeeneeeeeeeeeeeeeeeenneeeenneeeeeenneeeeeeenneeeeeeennnnnen
-neeeeenneeeeeeeeeeeeeeeeeeeeeennnnnneeeeennneeeneeennneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeennnneeeeeennnnnen
-neeeeenneeeeeeeeeeeeeeeeeeeeeennnnnneeeeeenneeeeennnnneeeeeeeeeeeeeneeeeeeeeneneeeeeeeennoeeeennneeeeeeeeeeneeennnneeeeennnnnnen
-neeeeeennnenneeeeeeennnneennneeeeeeeeeeeeeenneneeeennneeeeeeeeeeeeeneeeeeeeeeennneeeeeennnnneennneeeeeeeeeennnnnnnneeeeeennnneen
-nnneeeeennenneeeeeeennnneeeeeeeeeeeeeeeeeeeeeneeeeeennenneeeeeeeeeeeeeeeeeeeeeenneneeeeennnneeeeeeeeeeeeeeeennennnneeeeeenneeeen
-nnneeeeeeeeneeeeeeenneeneeeeeeeeeeeeeeeeeeeeenneeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeennnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennneeeenen
-nnneeeeeeeeneeeeeeeeeeeeeeeeeennnneeeenneeeeeenneeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeeeeeeenneoeeeeennneeeenen
-neeeeeeeneeeeeeneeeeeeeeeeeeeeennneennneeeeeeennneeeeeeeeneeeeeeeeeeeeeeneeeeeeeeeennneeeeeeeenennnennenneeeenneeeeenneeeeenneen
-neeeeneeneeeeeeeeeeeeeeeeeeeeeeeeeeennneeeeeeeenneeeeeeeennnnneeeeeeeeeeneeeeeeeeeenneeeeeeenneeeeeeeeeeeeeeenneeeennneeeeenneen
-neeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeennneeeenneeeneeeeeeeeeeeenneeeeeeenneeeeeeeeeeenneeeeneennnnnneeneeneeeeeennneennnennnnnneen
-neeeenneeeeeeeeeeenneeeeeeeeneeeeeeeeeeeeeenneeenneeennneeeeennneeeeennneeeeeeeeeeeneeeeeneennneeeeenneneeeeeeeeeeeeeeennnnneeen
-neeeenneeeeeeenneeenneeeeeeeeeeeeenneeeeeeenneoeeneeennneeeeeeeeeeeeennneeeeeeeeeenneeeeneennneeeeeeeneneeeeeeeneeeeeeeeeeeeeeen
-neeeenneeeennnnneeenneeeenneeeeeeennnnneeeeeeeeeeneeenneeeeeeeeeeeeeeneeeeeeeeeeeenneeeennnnneeneeeeeeeeneeeeeeeeeeeeeeeeeeeeeen
-neeeeeeeeeeeeenneeeeeeeeenneeeeeeeeennnneenneeeeeneeeeeeeeeeeeeeeeeneeeeeeeeeeeeennneeeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeeeeeen
-neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennneeennnenneeeeeneeeeeeeeeeeeennnneeeeeeeeeeeeenneeeeeeeeeeeeeeeeeeennneeeeeeeeeeeeeeeeeeeeeeen
-neeeeeeeneeeeeeeeeeeeeeeeeeeeeeennneeeeneeeeeeeeeennnnnneeeeeeennnneeeeennneeeeenneeeeeeeeeeneeenneeennneeeeeeeeeeeeeeeeeeeeeeen
-neeeeeeeeeeeeeeeeeeenennnneeeeennneeeeeeeeeeeeeeeennnnnneeeeeeneeeeeeeeennneeeeenneeeeeeeeeennnnneeeeeeeeeeeeeeeeeeeeeeeeeeneeen
-neennneeeenneeeeeeeeeennneeeeeennneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennnnnnneeeeenneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeen
-nnnnneeeeenneeennneenennneeeeeennneeenneeeeeeeeeeeeeeeeeeeeeeeeeeeennnnnnnneeeeenneeeeennneeeeeeeeeeeeeeeeeennneeeeeeeneeeeneeen
-nnnnneeeeeeeeeeeeeeeeeeeeeeeeeennneeenneeneeeneeeeeeeeeeeeeeeeneeeenneeeeeeeeeeeneenneennneeeeeeeeeeeeeeeeeeneeeeeeeeenneneneeen
-nnnnneeeeneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeenneneeennneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeneeeeeeeennnnnneeeen
-nneeeeeeeeneeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeennennnnnneeoenneeeeeeeeeeeeeeeeeeenneeennnneeeeeeeeeeenneeneeennnneen
-nneeeneeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeneeeeeeeeneeeeeeeeeennnnnnnnneeeenneeeeeeeeeeeeeeeeeeenneennnneneeeeeeeeeeeeeneeoeeeeeeen
-nneeeeeeeeeeeennneeennnnneeeeeeeeeeeeeenneeeeeeeeeeeeeeeeeennnnnnnnneeeenneeeennnnnneeeeeeeeeeeenneennneeeeeeeeeeeeenneeeeeeeeen
-nneeeeeeeeeeeennneeennnnneenneeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeneeennnnneeeennnnnnneeeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeeeeeen
-nneneeeennnnnennneeeeeeeeeeeeeeeenneeeenneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennneeeeeeeeeeeeeeeoenneeeeeeneeeeeeeeeeeeeeeen
-nneeeneennnnneneeeeeeeeeeeeeeeeeenneeeeeneeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeeennneeeennneeeeneeeeeneeeeen
-nnneeeeeeeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeenneeeeeeennnnneeeeeeeeeeeeeeenneeeeeeeeeeeeeeeneeeeeeeeeeenneeennnneeeeen
-neeeeeeeeeeeeeeeeeeeeeeeeennnnneeeeeeeeeeeeeeeenneeeeeennnneeeeeeennnnnneeeeeeeeennneenneeeneeeeeeeeeeeennneeeeeeennnneenneeneen
-neeeeeeeeeeenneeeeeeeeeeeennnnneeeeeeeeeeeeeeeennneeeeeeennnneeeeeeeeeeneeeeeeeeennneeennnnnnneeeeeeeeennneeeeeeeeeeeeeeneeeneen
-neeeeeeneeeenneeeeeeeennnennnnneeeeeeeeeeeeeeeeennneeeeeeennnneeeeeeeeennneennneeeeeeeennnnnnnnnnneeeeeennnnnneeeeeeeeeeeeennnnn
-neeeeeeeeeneeeennnneeennneeeeeeeeeeenneeeeeeeeeeeeneeeeeeeeennnneeeeeeeeeeeeeeeeeeeeeeennnnnnennneeeeeeeeeeeeeeeeeeeeeeeeeeeennn
-nenneeeeeeneeeennnneeeeeeeeeeeeenneenneeeeeeeeeeeenneeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeennennnneeeeeeeeeeeeeeeeeeenneeeeeeeennnn
-nenneeeeeeneeeeeeeeeeeeeeeeeeeeenneeeeeenneeeeeeeennneeeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeennnneenneeeeneeeeeeeeeeeeeeeeeeeeeennen
-nenneeeeeeneeeeeeeeeeeeeeeeeennneeeeeennnnneeeeeeennneeeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeennneeneeeeneeeeenneeeeeeeeeeeeeeeeeen
-nenneeeeeeneeeeeeeeeeeeeeeeeennneeeeeennnnneeeeeeeeeeeeeeeeeeeeeeneeeennneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennneeeeeeeeeeeeeeen
-neneneeeeennnneeeeeeeeeeeeeennnnenneeeeeeeeeeeeeeeeeeeeeennnneeeennnnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennneeeeeeeeeeeeen
-neeeneeeeeennneeeennnnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennnnnnnnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeen
-neeennnnneeeeeenneeeeeeeeeeeeeeoeeeeeeeeeeeeeeeeeeeeeeeeeeeennnneeeeeeeeeeeeeeennneeeennnnnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeen
-neeeennnneeeeeeeeeeeeeeeeeeeeeeeeeeeennnnnnenneeeeeeeeeeeeeeonneeeeeeeeeeeeeeeennneeeennnnnnnnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeen
-neeeennnneeeeeeeeeeeeeeeeennnneeeeeeneeeeeeenneeeeennneeeeeeenneeeeeeeeeenneeeeenneeeennnnneenennneeeeeeeeeeeeeeeeeeeeeeeeeeneen
-neeeennnnnneeeeeeennnneeenneeeeeeeeeeeeeeeeeeeeeeennnneeennnnneeeeeeeeeeenneeeeenneeeeeeeeeeeneeenneeeeeeeeeeeeeeeeeeeeeeeenneen
-neeeennnnnneeeeneeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennneeeeeeeeeeeeeeeneeen
-neeeennnnnnneeeneeeeeeeeenneeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeeeeeeenneeeeeeenneeeeeeeeeeeeeeeeeeeeeeennneeeeeeeeeeeeenenneeen
-neeneeeeeeeeeeeeeeeeeeeeennnnnneeeeeeeeenneeeeeeenneeeeeeeeeeeeeeeeeeenneeeeeeenneeeenneeeeeeeeeeeenneeenneeeeeeeeeeeeennnnneeen
-neeeeeeeeeeeenneeeeeeeeeeeennnneeeeeeeeeeeeeeeeeeneeeeeeeennnnneeeeeeeneeeeeeeenneeeeennneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeen
-neneeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeennneeeeeeeeeenneneenneeeeeeennnneeeeeeeeeeeeeeeeeeeeeeennnnnennnneeeen
-neneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeeenneneeeeeeeeeeeeeennneeeeeeeeeeeeeeeeennnnneeeeeeeeeeeeen
-neeennneennnneeeeeeeeeeeeeeeeeeeeeeeennnneeeeeeeeeeneeeeeeeneeeeeeeeeeeeeeeeeeeeeeeeeeeeeennnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeen
-nenneeeeennnneeeeeeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeneeeeeneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeeeeeennnneeeeeeeeeeen
-neenneeeeeeeeeeeeeeeeeeeeeeeeeeeennnneeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennnnneeeeeeeeennneeeeeeeeen
-neeeeeeeennnneeeeeeeeeeeeeeeeeeeennneeoeeeeeeeenneeeeeeeeeneeeeeeneeeeeeeeeeeeenneeeeeeeeeeeneeeeeeenneeeeeeeeeeeeeeenneeeeeeeen
-neeeeeeeennnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennneeeeeeeeeeeeeeneeeeeeeeeeeennneeeeeeeeeeeneeeeeeneoeeeeeeeeeeeeeeeeeeeeeeeeen
-neeeeeeeeeeeeeeeeeeeeeeeennnneeeeeeeeeeeeeeeeeeennneeeeeeeeeeeeeenennneeennnnenneeeeeeeeeeeeeeeeeeeneeeeeeeenneeeeeeeeeeeeeeeeen
-neeeeeeeeeeeeeeeeeenneeeeeenneeeeeeeeeeeeeeeeeeenneneeeeeeeeeeneeeeeeeeeeeeeeeneeeeeeeennneeeeeeeeeeennneeeennnneeeeeeeeeeeneeen
-nenneeeeeeeeeeeeeenneeeeeeeeeeeeeeeeeenneeeeeeennnnneeeeeeeeennneeeeeeeeeeeenneeeeeeennenneneeeeeeeeenneeeeeeeeeenneeeeeeeeneeen
-neeeeeeeeeeeeeennnnneennneeeeeeeeneennnneeeeeeeennneeeeenneeennneeeeeeeeeeeenneeeeeeeeeenneneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeen
-neeennnnennneeennneeeenneeeeeeennnnnnnnnneeeeennnnneeeeeneeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeneeeeneeeeen
-neeeeeeeeenneeennneeeenneeeeeeennnnnnneneeeeeennneeeeeeneeeeeeeeeeneeeeeeeeeeeenneeeeeeeeeeeeeenneeeeeeeeeeeeenneeeenneenneeeeen
-neoeeeeeeeeeeneeeeeeeenneeeeneennnnnnneneeeeeeeeeeeeeeeneeeeeeeeenneeeeeeeeeeeennnnnneeeeeeeeeenneeeeeeeeeeeeenneeeeenneneeeeeen
-neeeeeeeeeeeeneeeeeeennneeeeeeennnnnnnnenneeeeeeeeeeeeeneeeeeneeenneeeeeeeeeeeeeennnnnneeeeeeeeeennnneeeeeeeeeeeeneeeennneeeeeen
-neeeeeeeeeeeeeeeeeeeennneeeeeeeeennnnneeeneeeeeeeeeeeeeneeeeeeeenneeeeeeeeenneeeeeeeeeneeeeeeeeeeeeenneeneeeeeeenneeeeeeeeneeeen
-neeeeeeeeeeeeeeeeeeeeeennneeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeeenneeeeneeeennneeeeenneeeeeeeeeeeeeeeeeeennneeeeeeeeeeeeeeenneeen
-neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeennnneneeeeeeeeeennneeeeenneeeennnenneeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeennneeeneeen
-neeneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeennneneeeeeeeeennneeeeeenneeeeeenneeeeeeeeeeennneeeeeeeeeeeeeeeeeeeeeeeneeeeeeeeen
-neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneneeeeennneeeeeeeennneeeeeeeeeeeeeeeeennneeennneennneeeenenneeeeennneeeeeeen
-neeneeeeeennneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennneeeeeeeeeeeeeeenneeeeeeeeeeeeeeeeeeneeeeeeneeeeennnnnneeeeeeeenennneeeeen
-neeneeeeeennneennnnneeeeeeeeeeeennneeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeeennneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneenneeeen
-neeneennneeeeeeeeeeeennneeeeeeenneeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeeennnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneennneen
-neeneennneeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeneeeeennneeeneeeeeeeeeeeneeneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenennennen
-neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennnneeeeeeeeeeneeeeennneeeennnnnenneeennnneeeeeeeeeeeeeeeneeeeeenennnnnneeeenneeeeeeeeeeeennenen
-neeeeeeeeeeennneeeeeeeeeeeeeeeeeennneeeeeeeeenneeeeennneeeeeeeeennneeeeeeeeeeeeoeneeeeeeennnennnneeeeeeeeeeeeeeeeeeeeeeeeeeennnn
-neeeeeeeeeeennneeeeeeeeeenneeeeeeeeeneeeeeeeenneeeennnneeeeeeeeeeeeeeeeeeeeeneeenneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenn
-neeeeeeeeeeeneeeeeeeeeeeenneeneeeeeeeeeeeennneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeen
-neeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeeeeennnnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeenneeeeeeeeen
-neeenneeeeeeeeeeenneeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennneeeeeeeeeeenneeoeeeeeeen
-neeenneeeeeeeeeeenneneeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennnneeeeeeeeeeeeeeeeeeeeen
-neeeeeeeeeeeeeeeeeeeneeeneeeeeennneeeneeeeeeeeeeeeeeeeeeeeeeeeeeeneeneeeeeeeeeeeeeeeeeeeenenneeeeeeeeeeeeeeeeeennneeeeeeeeeeeeen
-neeeeeennneennneeeeeneeeneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeeeeeeeeeeennneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeen
-neeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeeeeeneeeeeeeeeeeeeeeeeeoenneeennnnnnenneeeeeenneeeeeeeeneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenn
-nennneeeeeeeeoeeeeeeneeeeeenneeeeeeeeeneeenneeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeennennneeeeeeeeenneeeeeneeeeeeeeeeeeeeeeeeeeeeennnn
-nennneeeeeeeeeeeeeeeneeeeeenneeeeeeeeeeneenneeeeeeeeeeeeeeeeeeenneennnnneeeeeeennnneeeeeeeeeeennnennneeeeeeeeeeeeeeeeeeeeenenenn
-neeeeeeeenneeenneeeeneeeeeenneennnneennnneeeeeeeeeeeeeeeeeeeeeeennnneeennnnnnnnneenneeeeeeeeeenenenneeeeeeeeeeeeeeeeeeeeennnennn
-nennnneeeeennnnnennnnnnnnnneeeennnneennnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennneeeeeeeeeeeeeeeennnnneeeeeeeeeeeeeeeeeeeeenneeenen
-neeeeeeeeeennnnnennnnnnnnneeeeeeeeennnnnneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeenneeeeeeeeeeeeeeeennnneeeeeeeeeeeeeeeeeeennnnennnnn
-neeeeeeeeeeeeeeeeeennnneneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeennnnn
-nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUmSUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUmSUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUmSUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnmWmWRnRnmWRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUdsrRrRdsrRrRrRrRrRrRrRrRrRrRdsdsdsdsXmUUUUUUUUUUUURnRnUURnRnRnmWmWmWmWmWRnUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnzxmWRnUURnRnUUdsUUUUUURnRnXmUUUUUURnRnXmRnRnRnRnRnRndsRnUUUUbuRnRnRnRnRnRnRnRnRnRnRnXmRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnzxWUmWRnRnRnRndsXmUUUUXmRnRnRnRnRnRnRnRnRnXmRnXmRnRndsRnUURnRnRnRnRnzxRnRnRnRnRnRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnzxmWRnRnXmRndsRnRnRnRnUURnRnYqYqYqYqYqRnRnUURnRnXmdsRnRnRnUURnXmRnzxzxnPnPzxzxRnRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnXmRnUUzxRnRnRnRnRndsUURnRnRnRnRnRnVjaxwtYqRnRnojRnmWmWRndsRnRnRnRnRnRnRnRnmWmWzxzxzxzxRnRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnUUUURnRnXmRnRnRnBeCjCjCjRnRnojdBNbNbGfRnRnRnRnRnpuCjCjCtmWRnRnRnRnRnRnRnRnRnmWzxnPnPzxzxzxRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnmWmWRnUUUURnRnRnRnRnWVWVWVCjWVWVWViVNbNbNbiVCjCjWVWVpuWVWVhaCjCjCjsZsZsZRnRnRnRnRnRnzxzxmWRnRnmWRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnmWWURnRnRnsZsZCjpxpuWVCjLlCjUBdHQdNbGfNbCjQdpxpuUUCjWVWVpuCjCjpxCjCjCjsZlFlFXZlUbKbKyvRnRnmWmWRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnzxzxmWRnRnsZsZCjCjpuWVCjzYdHKnxcdHGfGfNbWbCjCjeWCjpxWVWVpupxdHCjCjCjCjlUCjCjCjCjCjCjsZRnRnmWmWRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnzxWURnRnsZpxCjCjCjWVCjCjXlxcCjCjNbNbNbSwCjCjlUCjCjWVCjCjCjdndHCjCjCjuSuSuSuSCjCjCjsZRnRnRnmWUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUURnRnRnWUmWsZsZpuCjpxCjWVpxCjCjCjKndHGfPXNbCjCjCjCjWVCjWVCjCjCjCjdHCjpxuSHBHBHBHBuSCjCjsZRnRnRnRnUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnmWWURnRnsZCjCjpuCjCjWVWVWVCjCjCjdHNbNbGfCjzYCjRnWVCjCjpxCjpxCjCjHBHBHBHBHBHBHBHBHBpxlFlFRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnWUzxRnsZlUCjpupupxCjpuWVXZRnRniVNbGfaSiVCjRnRnWVpxCjCjXZmOCjCjHBuSuShmBxGfGfHBHBHBCjbKzxzxRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnmWmWRnsZCjCjmOpupuCjpuWVCjCjRnCjNbaSaSdHCjRnXZWVCjCjCjCjlUCjCjHBuSwOGfGfGfScQLBxuSCjsZRnzxRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnUURnRnRnRnsZCjWVCjCjCjCjCjWVWVXZCjCjNbNbNbWVCjWVWVWVdHdHpxCjCjCjpxHBScGfGfNpGfBxScBxuSCjsZRnRnzxRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnUUUURnRnsZsZWVCjCjzYCjpxCjWVWVWVCjCjNbNbNbCjpxCjWVWVCjdHCjdHdHCjCjHBlAScGfGfGfBxGfuSHBCjsZsZRnzxRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnUUUURnsZsZdHCjdHlUCjxcCjpuWVWVpxLRGfNbGfCjQdXZpuWVCjdHCjCjdHdHCjHBBxGfGfGfGfScScuSHBpxlUsZRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnUUUURnsZsZdHdHKndHxcxcCjCjWVCjCjdHScNbNbCjCjCjCjWVpxlUCjCjCjdHCjnoGfGfGfGfGflUdHdHnoCjCjsZRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUXmRnRnUURnsZyvCjdHdHKnridHCjCjWVCjdHCjGfNbNbdHCjCjCjCjCjCjCjCjCjCjCjCjPGPGiLiLBeBeBeemdHCjCjlFRnmWRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnsZpuWVpuCjxcKndHzYlUWVpxCjdHNbNbNbdHdHscCjpxCjCjdHCjCjCjCjCjCjdHdHCjCjCjCjCjCjdHJOsZRnmWRnUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnyvCjWVCjBPxcKnKndHCjCjBeVQdHScNbNbCjdHdHCjBeCjCjCjdHdHCjzYCjCjCjdHWnCjRnRnRnzYCjEUZrRnmWmWUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnyvWVWVWVridHCjCjCjdHCjBeCjiVNbGfNbiVCjeWCjBeCjCjCjCjdHCjCjCjdHdHWnGcYWYWRnRnCjCjCjZrYWmWmWUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnXmRnRnyvbKpupuCjCjdHWVCjCjCjBeCjCjGfNbNbCjCjCjCjBeCjCjlUCjCjCjCjCjBwYWGcMqRnYWRnRnCjCjCjsZYWYWRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnRnmWsZsZsZsZsZyvyvWVCjCjCjBeBeLiVXVXQjBeBeBeCjCjCjCjCjdHCjCjCjRnRnMqMqRnRnRnWxCjpusZRnRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUURnRnRnRnRnRnzxRnRnRnRnRnsZsZyvsZCjXZKndHCjaSNbGfCjCjCjCjXZCjpuCjCjdHdnCjCjRnRnMqYWRnRnCjCjCjWVyvRnRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnmWzxzxmWRnRnRnRnRnsZsZpuCjdHKnxcdHNbaSNbGfCjCjCjCjCjpupupxWVdHCjCjCjRnRnEFdHCjlUCjyvbKnPRnRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnmWmWRnzxRnRnRnRnRnRnsZCjCjCjdHxcxcdHCjGfNbNbaSEXCjCjCjCjpuRnWVpupupxCjCjCjCjCjCjCjCjyvRnzxRnRnXmRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnRnzxzxRnRnRnRnRnRnRnsZCjCjCVdHXvbfKneWCjGfNbNbaSQdYxpuLlpuRnzxzxzxyvpzCjCjdHCjCjlFsZRnzxzxRnRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnzxRnRnRnUURnXmRnRnCjCjCjCjCjdHxcxcKndHCjCjGfNbNbNbOxpupupuCVRnzxRnmWRnsZsZZrZrlFsZRnRnzxzxmWmWmWRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnRnRnUUUURnRnRnCjCjCjpxCjCjCjdHxcdHdHdHiVGfNbGfNbGfWnKnpuCjCjRnzxzxmWmWRnRnRnRnRnRnmWRnzxzxzxmWRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnRnRnUUUURnRnRnCjCVCjlUCjCVdHbGiHbGbGlUGfXTNbNbNbNbGfLRKnCjCVRnRnzxzxRnRnRnRnRnRnRnRnmWmWRnzxmWRnUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnXmUURnRnRnRnCjCjCjCjCjCjiHzUtCCRbGKEiHbGNbNbNbNbKjNbCjKnVQCjRnRnzxzxRnRnRnRnXmRnRnRnRnzxzxRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnmWRnRnRnRnRnRnRnCVCjCjCVCjCjbGDhInInhUzbLnbGNbGfNbGfNbewCVKnCjCjRnRnRnRnRnRnRnRnRnRnRnRnRnRnRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnmWmWRnRnRnXmRnRnCjCjpxCjlUCjhtInhUhUhUzbgDiHNbGfTyNbNbScWnjQCjCjsZRnRnXmRnRnRnRnRnRnRnRnRnRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnmWRnRnRnRnRnRnRnCjpupuCjByCjiHgDzbzbzbgDgDQBVXNbNbNbNbQdxcdHCjpxsZRnRnRnRnRnUUUURnRnRnRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUURnRnRnRnRnRnRnRnRnCVCjpuCjCjpuhtgDgDgDgDgDgDQBVXNbNbNbGfCjCjdHvGCjCjRnRnRnRnUUUUUUUURnRnRnRnmWRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnRnUURnRnCjCjpupuCVpubGpigDgDgDgDgDiHGfNbNbGfYhCVCjzYCjCjCVRnRnRnRnRnRnUUUUUURnXmRnmWRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUURnRnRnXmRnUUUUzxzxRnCVCjpuCjdHiHBVghzbSgzbGpbGNbNbGfNbQdCjCjlUCjCjlFRnXmRnRnRnRnRnUUUUUURnRnmWRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnUUUUzxzxzxCjCjpxCjCDxcbGiHKEiHKEiHbGNbaSGfNbCjCjlUCjCjsZRnRnRnRnRnRnRnRnUUUUUURnRnmWmWRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnmWRnRnUUUUUUzxnPRnRnCVCjCjCjaSFuMppueWdnxcQdNbScaSNbqICjCjCjCjsZRnRnRnUURnRnRnXmUUUURnRnRnRnmWRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnmWRnRnUURnRnnPnPRnRnsZlFCjzYaSdXLYBCqWRmdHCjNbNbNbNbCjCjCjCjUoRnXmRnRnUURnRnRnRnUUUUzxRnRnRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUmWmWRnRnRnRnzxzxzxRnRnsZsZCVCjpkRGRGfVLYLYNbdHGfNbNbGfCjCjCVlFRnRnRnRnUUUUzxzxRnRnRnRnzxRnRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnmWmWRnzxzxnPzxRnRnRnRnRnsZlFCjCjzYaSFuazCjCjCjCjNbCjCjVQsZsZRnRnRnRnRnUUUUzxRnmWRnRnzxzxzxzxRnRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnmWRnzxnPzxzxRnRnRnRnRnRnRnsZsZsZCjsZsZCjdHsZsZpzCjCjsZsZsZRnSbRnRnmWRnUURnzxRnmWmWmWRnRnzxnPzxRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUURnRnRnzxzxRnRnRnRnRnRnRnSbRnRnRnsZsZRnRnsZsZRnRnRnsZUvRnRnRnRnRnRnmWmWRnnPzxRnRnRnRnmWmWRnRnzxzxzxzxUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnRnmWRnRnRnXmRnRnRnRnRnRnRnRnRnRnRnRnRnRnRnRnRnRnRnRnRnRnmWRnzxnPRnRnRnRnRnRnmWRnRnzxzxRnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnRnRnRnmWmWRnUURnRnRnRnRnRnRnUUUURnRnUURnRnRnRnRnRnRnUURnRnRnRnzxzxzxRnRnRnRnXmRnRnRnUURnzxRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnXmRnUUmWJjUUbuRnUUUUUURnRnUUUUUURnUUUUUURnSbUUUUUUUUSbRnRnzxUUUUzxzxRnUURnRnRnUURnUURnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURnRnUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUURnUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUbuUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUmSUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUmSUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUmSUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
 "}

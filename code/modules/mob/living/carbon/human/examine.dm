@@ -1,6 +1,4 @@
 /mob/living/carbon/human/proc/on_examine_face(mob/living/carbon/human/user)
-	if(!istype(user))
-		return
 	if(user.mind)
 		user.mind.i_know_person(src)
 /*	var/datum/species/self_species = dna.species
@@ -10,7 +8,7 @@
 		if(HAS_TRAIT(user, TRAIT_XENOPHOBIC))
 			event_type = /datum/stressevent/shunned_race_xenophobic
 		var/datum/stressevent/event = user.add_stress(event_type)
-		event.desc = self_species.stress_desc /Editted out of 21 traits port, likely from sleep adv pr*/
+		event.desc = self_species.stress_desc */
 	if(user.has_flaw(/datum/charflaw/paranoid) && (STASTR - user.STASTR) > 1)
 		user.add_stress(/datum/stressevent/parastr)
 	if(HAS_TRAIT(user, TRAIT_JESTERPHOBIA) && job == "Jester")
@@ -20,6 +18,7 @@
 
 /mob/living/carbon/human/examine(mob/user)
 	var/observer_privilege = isobserver(user)
+	var/aghost_privilege = isadminobserver(user)
 	var/t_He = p_they(TRUE)
 	var/t_his = p_their()
 //	var/t_him = p_them()
@@ -124,18 +123,11 @@
 			if(virginity)
 				. += "<span class='userdanger'>VIRGIN!</span>"
 
-		if(real_name in GLOB.outlawed_players)
-			. += "<span class='userdanger'>OUTLAW!</span>"
-		if(mind && mind.special_role)
-		else
-			if(mind && mind.special_role == "Bandit")
-				. += "<span class='userdanger'>BANDIT!</span>"
-			if(mind && mind.special_role == "Vampire Lord")
-				. += "<span class='userdanger'>A MONSTER!</span>"
-
 		if(name in GLOB.outlawed_players)
 			. += span_userdanger("OUTLAW!")
 
+		if(istype(get_item_by_slot(SLOT_NECK), /obj/item/clothing/neck/roguetown/slavecollar)||istype(get_item_by_slot(SLOT_NECK), /obj/item/clothing/neck/roguetown/gorget/prisoner/servant))
+			. += span_notice("It's a slave.")
 		if(mind)
 			var/mob/living/carbon/human/H = mind.current
 			if(H.enemies.Find(name))
@@ -153,8 +145,6 @@
 					commie_text = span_userdanger("BANDIT!")
 			if(mind.special_role == "Vampire Lord" && !mind.has_antag_datum(/datum/antagonist/vampirelord/).disguised)
 				. += span_userdanger("A MONSTER!")
-			if(mind.assigned_role == "Lunatic")
-				. += span_userdanger("LUNATIC!")
 			if(HAS_TRAIT(src, TRAIT_PUNISHMENT_CURSE))
 				. += span_userdanger("CURSED!")
 		if(HAS_TRAIT(src, TRAIT_NORTHMAN) && HAS_TRAIT(user, TRAIT_NORTHMAN))
@@ -436,6 +426,7 @@
 					msg += "[m1] a shitfaced, slobbering wreck."
 
 			//Stress
+			var/stress = get_stress_amount()
 			if(HAS_TRAIT(user, TRAIT_EMPATH))
 				switch(stress)
 					if(20 to INFINITY)
@@ -511,12 +502,51 @@
 			if(-INFINITY to -5)
 				. += span_warning("<B>[t_He] look[p_s()] much weaker than I.</B>")
 
+		//The Nymphomaniac Underground
+		if((!appears_dead) && stat == CONSCIOUS && src.has_flaw(/datum/charflaw/addiction/lovefiend))
+			var/datum/charflaw/addiction/bonercheck = src.charflaw
+			if((bonercheck) && (bonercheck.sated == 0))
+				if(user.has_flaw(/datum/charflaw/addiction/lovefiend)) //Takes one to know one
+					switch(rand(1,5))
+						if(1)
+							. += span_love("I can sense [m2] <B>need</B> for fun...")
+						if(2)
+							. += span_love("[m1] <B>aching</B> for a release.")
+						if(3)
+							. += span_love("A carnal need <B>stirs</B> within [m2] core.")
+						if(4)
+							. += span_love("I can practically feel [m2] <B>horniness</B>...")
+						if(5)
+							. += span_love("Embers of desire <B>smolder</B> within [m2].")
+				else if(Adjacent(user)) //No nympho, but close enough to notice.
+					switch(rand(1,4))
+						if(1)
+							. += span_love("[m1] shifting their legs quite a bit...")
+						if(2)
+							. += span_love("I can see [m2] is a bit restless...")
+						if(3)
+							. += span_love("[m2] seem distracted...")
+						if(4)
+							. += span_love("[m1] restless, for some reason.")
+
 	if(maniac)
 		var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
-		if(heart?.inscryption && (heart.inscryption_key in maniac.key_nums))
-			. += span_danger("[t_He] know[p_s()] [heart.inscryption_key], I AM SURE OF IT!")
+		if(heart)
+			var/inscryption_key = LAZYACCESS(heart.inscryption_keys, maniac) // SPECIFICALLY the key that WE wrote
+			if(inscryption_key && (inscryption_key in maniac.key_nums))
+				. += span_danger("[t_He] know[p_s()] [inscryption_key], I AM SURE OF IT!")
 
-	if(Adjacent(user))
+	if(aghost_privilege)
+		var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
+		if(heart && heart.maniacs)
+			for(var/datum/antagonist/maniac/M in heart.maniacs)
+				var/K = LAZYACCESS(heart.inscryptions, M)
+				var/W = LAZYACCESS(heart.maniacs2wonder_ids, M)
+				var/N = M.owner?.name
+				. += span_notice("Inscryption[N ? " by [N]'s " : ""][W ? "Wonder #[W]" : ""]: [K ? K : ""]")
+
+
+	if(Adjacent(user) || aghost_privilege)
 		if(observer_privilege)
 			var/static/list/check_zones = list(
 				BODY_ZONE_HEAD,
@@ -539,73 +569,24 @@
 				. += "<a href='?src=[REF(src)];check_hb=1'>Listen to Heartbeat</a>"
 
 	var/list/lines = build_cool_description(get_mob_descriptors(obscure_name, user), src) //vardefine for descriptors
-
-
-	if(!obscure_name && headshot_link && alias)
-		. += "<a href='?src=[REF(src)];task=view_headshotnew;'>View Infocard (New)</a>"
-//		. += "<a href='?src=[REF(src)];task=view_erp_preferences;'>View ERP Preferences</a>"
-		for(var/line in lines)        //this line
-			. += span_info(line)	// and this line are responsible for placing descriptor position
-	if(!obscure_name && nsfw_headshot_link && user.client.prefs.nsfw && headshot_link && get_location_accessible(src, BODY_ZONE_CHEST) && get_location_accessible(src, BODY_ZONE_PRECISE_GROIN) || !obscure_name && nsfw_info && user.client.prefs.nsfw && headshot_link && get_location_accessible(src, BODY_ZONE_CHEST) && get_location_accessible(src, BODY_ZONE_PRECISE_GROIN))
-		. += "<a href='?src=[REF(src)];task=view_nsfw_headshot;'>View NSFW Info</a>"
-
-	if(!obscure_name && headshot_link)
-		if(!obscure_name && headshot_link && alias)
-	 	return
-		. += "<a href='?src=[REF(src)];task=view_headshot;'>View Infocard</a>"
-//		. += "<a href='?src=[REF(src)];task=view_erp_preferences;'>View ERP Preferences</a>"
-		for(var/line in lines)        //this line
-			. += span_info(line)	// and this line are responsible for placing descriptor position
-	if(!obscure_name && nsfw_headshot_link && user.client.prefs.nsfw && headshot_link && get_location_accessible(src, BODY_ZONE_CHEST) && get_location_accessible(src, BODY_ZONE_PRECISE_GROIN) || !obscure_name && nsfw_info && user.client.prefs.nsfw && headshot_link && get_location_accessible(src, BODY_ZONE_CHEST) && get_location_accessible(src, BODY_ZONE_PRECISE_GROIN))
-		. += "<a href='?src=[REF(src)];task=view_nsfw_headshot;'>View NSFW Info</a>"
-
-
-
-	if(!obscure_name && flavor_text)
-		if(!obscure_name && headshot_link)
-	 	return
-		. += "<a href='?src=[REF(src)];task=view_flavor;'>View Description</a>"
-//		. += "<a href='?src=[REF(src)];task=view_erp_preferences;'>View ERP Preferences</a>"
-		for(var/line in lines)        //this line
-			. += span_info(line)	// and this line are responsible for placing descriptor position
-	if(!obscure_name && nsfw_headshot_link && user.client.prefs.nsfw && flavor_text && !headshot_link && get_location_accessible(src, BODY_ZONE_CHEST) && get_location_accessible(src, BODY_ZONE_PRECISE_GROIN) || !obscure_name && nsfw_info && user.client.prefs.nsfw && flavor_text && !headshot_link && get_location_accessible(src, BODY_ZONE_CHEST) && get_location_accessible(src, BODY_ZONE_PRECISE_GROIN))
-		. += "<a href='?src=[REF(src)];task=view_nsfw_headshot;'>View NSFW Info</a>"
-
-
-
-	if(!obscure_name && ooc_notes)
-		if(!obscure_name && headshot_link)
-			return
-		if(!obscure_name && flavor_text)
-			return
-		. += "<a href='?src=[REF(src)];task=view_ooc_notes;'>View OOC Notes</a>"
-//		. += "<a href='?src=[REF(src)];task=view_erp_preferences;'>View ERP Preferences</a>"
-		for(var/line in lines)        //this line
-			. += span_info(line)	// and this line are responsible for placing descriptor position
-	if(!obscure_name && nsfw_headshot_link && user.client.prefs.nsfw && ooc_notes && !flavor_text && !headshot_link && get_location_accessible(src, BODY_ZONE_CHEST) && get_location_accessible(src, BODY_ZONE_PRECISE_GROIN) || !obscure_name && nsfw_info && user.client.prefs.nsfw && ooc_notes && !flavor_text && !headshot_link && get_location_accessible(src, BODY_ZONE_CHEST) && get_location_accessible(src, BODY_ZONE_PRECISE_GROIN))
-		. += "<a href='?src=[REF(src)];task=view_nsfw_headshot;'>View NSFW Info</a>"
-
-
-
-	if(!obscure_name)
-		if(!obscure_name && headshot_link)
-			return
-		if(!obscure_name && flavor_text)
-			return
-		if(!obscure_name && ooc_notes)
-			return
-//		. += "<a href='?src=[REF(src)];task=view_erp_preferences;'>View ERP Preferences</a>"
-		for(var/line in lines)        //this line
-			. += span_info(line)	// and this line are responsible for placing descriptor position
-	if(!obscure_name && nsfw_headshot_link && user.client.prefs.nsfw && !ooc_notes && !flavor_text && !headshot_link && get_location_accessible(src, BODY_ZONE_CHEST) && get_location_accessible(src, BODY_ZONE_PRECISE_GROIN)  || !obscure_name && nsfw_info && user.client.prefs.nsfw && !ooc_notes && !flavor_text && !headshot_link && get_location_accessible(src, BODY_ZONE_CHEST) && get_location_accessible(src, BODY_ZONE_PRECISE_GROIN))
-		. += "<a href='?src=[REF(src)];task=view_nsfw_headshot;'>View NSFW Info</a>"
-
-
 	var/trait_exam = common_trait_examine()
 	if(!isnull(trait_exam))
 		. += trait_exam
 
 	var/traitstring = get_trait_string()
+	for(var/line in lines)
+		. += span_info(line)
+
+	if(!obscure_name && headshot_link)
+		. += "<a href='?src=[REF(src)];task=view_headshot;'>View face closely</a>"
+	if(nudeshot_link && !wear_shirt && !wear_armor)
+		. += "<a href='?src=[REF(src)];task=view_nudeshot;'>View body closely</a>"
+	if(!obscure_name && flavor_text && !headshot_link)
+		. += "<a href='?src=[REF(src)];task=view_flavor;'>View Description</a>"
+	if(!obscure_name && ooc_notes && !headshot_link)
+		. += "<a href='?src=[REF(src)];task=view_ooc_notes;'>View OOC Notes</a>"
+	if(!obscure_name && nsfw_info && !headshot_link)
+		. += "<a href='?src=[REF(src)];task=view_nsfw_notes;'>View NSFW Notes</a>"
 
 	var/perpname = get_face_name(get_id_name(""))
 	if(perpname && (HAS_TRAIT(user, TRAIT_SECURITY_HUD) || HAS_TRAIT(user, TRAIT_MEDICAL_HUD)))

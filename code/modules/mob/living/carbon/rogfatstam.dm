@@ -1,4 +1,5 @@
 /mob/living/proc/update_rogfat() //update hud and regen after last_fatigued delay on taking
+	maxrogfat = maxrogstam / 10
 	var/athletics_skill = 0
 	if(mind)
 		athletics_skill = mind.get_skill_level(/datum/skill/misc/athletics)
@@ -34,7 +35,7 @@
 	if(HAS_TRAIT(src, TRAIT_NOSLEEP))
 		return TRUE
 	if(m_intent == MOVE_INTENT_RUN)
-		mind.adjust_experience(/datum/skill/misc/athletics, (STAINT*0.02))
+		mind.adjust_experience(/datum/skill/misc/athletics, (STAINT*0.08))
 	rogstam += added
 	if(rogstam > maxrogstam)
 		rogstam = maxrogstam
@@ -88,7 +89,6 @@
 			if(isseelie(C))  //Add wingcheck here
 				C.visible_message(span_warning("[C] falls from the air!"), span_warning("I fall down in exhaustion!"))
 				addtimer(CALLBACK(C, TYPE_PROC_REF(/mob/living/carbon/human, Knockdown), 10), 10)
-				C.heart_attack()
 			if(!HAS_TRAIT(C, TRAIT_NOHUNGER))
 				if(C.nutrition <= 0)
 					if(C.hydration <= 0)
@@ -114,13 +114,13 @@
 		emote("breathgasp", forced = TRUE)
 		addtimer(CALLBACK(src, PROC_REF(adjustOxyLoss), 110), 30)
 
-/mob/living/proc/freak_out()
+/mob/living/proc/freak_out() // currently solely used for vampire snowflake stuff
 	return
 
-/mob/proc/do_freakout_scream()
+/mob/proc/do_freakout_scream() // currently solely used for vampire snowflake stuff
 	emote("scream", forced=TRUE)
 
-/mob/living/carbon/freak_out()
+/mob/living/carbon/freak_out(add_stress = TRUE) // currently solely used for vampire snowflake stuff
 	if(mob_timers["freakout"])
 		if(world.time < mob_timers["freakout"] + 10 SECONDS)
 			flash_fullscreen("stressflash")
@@ -129,15 +129,11 @@
 	shake_camera(src, 1, 3)
 	flash_fullscreen("stressflash")
 	changeNext_move(CLICK_CD_EXHAUSTED)
-	add_stress(/datum/stressevent/freakout)
-	if(stress >= 30)
-		heart_attack()
-	else
-		emote("fatigue", forced = TRUE)
-		if(stress > 15)
-			addtimer(CALLBACK(src, TYPE_PROC_REF(/mob, do_freakout_scream)), rand(30,50))
+	Stun(20)
+	if(add_stress)
+		add_stress(/datum/stressevent/freakout)
+	emote("fatigue", forced = TRUE)
 	if(hud_used)
-//		var/list/screens = list(hud_used.plane_masters["[OPENSPACE_BACKDROP_PLANE]"],hud_used.plane_masters["[BLACKNESS_PLANE]"],hud_used.plane_masters["[GAME_PLANE_UPPER]"],hud_used.plane_masters["[GAME_PLANE_FOV_HIDDEN]"], hud_used.plane_masters["[FLOOR_PLANE]"], hud_used.plane_masters["[GAME_PLANE]"], hud_used.plane_masters["[LIGHTING_PLANE]"])
 		var/matrix/skew = matrix()
 		skew.Scale(2)
 		//skew.Translate(-224,0)

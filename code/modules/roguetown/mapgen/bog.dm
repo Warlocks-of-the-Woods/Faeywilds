@@ -1,5 +1,5 @@
 //genstuff
-/obj/effect/landmark/mapGenerator/rogue/bog
+/obj/effect/landmark/mapGenerator/rogue/boga
 	mapGeneratorType = /datum/mapGenerator/bog
 	endTurfX = 255
 	endTurfY = 400
@@ -13,17 +13,18 @@
 
 /datum/mapGeneratorModule/bog
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
-	allowed_turfs = list(/turf/open/floor/rogue/dirt)
+	allowed_turfs = list(/turf/open/floor/rogue/dirt,/turf/open/floor/rogue/grass)
 	excluded_turfs = list(/turf/open/floor/rogue/dirt/road)
-	spawnableAtoms = list(/obj/structure/flora/newtree = 30,
-							/obj/structure/flora/roguegrass/bush = 25,
-							/obj/structure/flora/roguegrass = 26,
-							/obj/structure/flora/roguegrass/maneater = 13,
-							/obj/item/natural/stone = 23,
-							/obj/item/natural/rock = 6,
-							/obj/item/grown/log/tree/stick = 16,
-							/obj/structure/flora/roguetree/stump/log = 3,
-							/obj/structure/flora/roguetree/stump = 4,
+	spawnableAtoms = list(/obj/structure/flora/newtree=30,
+							/obj/structure/flora/roguegrass/bush=25,
+							/obj/structure/flora/roguegrass=26,
+							/obj/structure/flora/roguegrass/maneater=13,
+							/obj/item/natural/stone=23,
+							/obj/item/natural/rock=6,
+							/obj/item/grown/log/tree/stick=16,
+							/obj/structure/flora/roguetree/stump/log=3,
+							/obj/structure/flora/roguetree/stump=4,
+							/obj/effect/mob_spawner =5,
 							/obj/structure/closet/dirthole/closed/loot=3,
 							/obj/item/reagent_containers/food/snacks/grown/rogue/sweetleaf = 4,
 							/obj/structure/flora/roguegrass/maneater/real=3,
@@ -31,7 +32,7 @@
 							/obj/structure/flora/wildplant/wild_herbs = 2)
 	spawnableTurfs = list(/turf/open/floor/rogue/dirt/road=2,
 						/turf/open/water/swamp=1)
-	allowed_areas = list(/area/rogue/outdoors/bog, /area/rogue/outdoors/rtfield)
+	allowed_areas = list(/area/rogue/outdoors/woods,/area/rogue/outdoors/bog,/area/rogue/outdoors/rtfield)
 
 /datum/mapGeneratorModule/bogroad
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -60,4 +61,27 @@
 							/obj/item/natural/stone = 6,
 							/obj/item/natural/rock = 1,
 							/obj/item/grown/log/tree/stick = 3,
-							/obj/structure/flora/roguetree/stump/log = 3)
+							/obj/structure/flora/roguetree/stump/log = 3,
+							/datum/spacevine_controller = 1)
+
+//incase overwritten
+/datum/mapGeneratorModule/dreamkeep
+	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
+	allowed_turfs = list(/turf/open/floor/rogue/dirt,/turf/open/floor/rogue/grass)
+	excluded_turfs = list(/turf/open/floor/rogue/dirt/road)
+	spawnableAtoms = list(/obj/structure/flora/newtree=30,
+							/obj/structure/flora/roguegrass/bush=25,
+							/obj/structure/flora/roguegrass=26,
+							/obj/structure/flora/roguegrass/maneater=13,
+							/obj/item/natural/stone=23,
+							/obj/item/natural/rock=6,
+							/obj/item/grown/log/tree/stick=16,
+							/obj/structure/flora/roguetree/stump/log=3,
+							/obj/structure/flora/roguetree/stump=4,
+							/obj/structure/closet/dirthole/closed/loot=3,
+							/obj/item/reagent_containers/food/snacks/grown/rogue/sweetleaf=4,
+							/obj/structure/flora/roguegrass/maneater/real=3,
+							)
+	spawnableTurfs = list(/turf/open/floor/rogue/dirt/road=2,
+						/turf/open/water/swamp=1)
+	allowed_areas = list(/area/rogue/outdoors/woods,/area/rogue/outdoors/bog,/area/rogue/outdoors/rtfield)

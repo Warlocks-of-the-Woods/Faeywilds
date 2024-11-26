@@ -164,6 +164,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		if(SSticker.current_state <= GAME_STATE_PREGAME)
 			if(ready != tready)
 				ready = tready
+				if(ready && client && client.prefs.defiant)
+					to_chat(src, span_userdanger("Remember : Defiant ERP protection is only enabled while COMBAT mode is active. AHELP if necessary."))
 		//if it's post initialisation and they're trying to observe we do the needful
 		if(!SSticker.current_state < GAME_STATE_PREGAME && tready == PLAYER_READY_TO_OBSERVE)
 			ready = tready
@@ -183,6 +185,10 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	if(href_list["late_join"])
 		if(!SSticker?.IsRoundInProgress())
 			to_chat(usr, span_boldwarning("The game is starting. You cannot join yet."))
+			return
+
+		if(client && client.prefs.is_active_migrant())
+			to_chat(usr, span_boldwarning("You are in the migrant queue."))
 			return
 
 		if(client && client.prefs.is_active_migrant())
@@ -287,7 +293,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	var/list/dat = list()
 	dat += GLOB.roleplay_readme
 	if(dat)
-		var/datum/browser/popup = new(src, "Primer", "HEARTHSTONE", 460, 550)
+		var/datum/browser/popup = new(src, "Primer", "DREAM KEEP", 460, 550)
 		popup.set_content(dat.Join())
 		popup.open()
 
@@ -548,9 +554,9 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 				if(SHUTTLE_CALL)
 					if(SSshuttle.emergency.timeLeft(1) > initial(SSshuttle.emergencyCallTime)*0.5)
 						SSticker.mode.make_antag_chance(humanc)
+*/
 
-	if(humanc && CONFIG_GET(flag/roundstart_traits))
-		SSquirks.AssignQuirks(humanc, humanc.client, TRUE)*/
+	SSquirks.AssignQuirks(humanc, humanc.client, TRUE)
 	if(humanc)
 		var/fakekey = character.ckey
 		if(ckey in GLOB.anonymize)
@@ -586,6 +592,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	for(var/datum/job/prioritized_job in SSjob.prioritized_jobs)
 		if(prioritized_job.current_positions >= prioritized_job.total_positions)
 			SSjob.prioritized_jobs -= prioritized_job
+	if(client && client.prefs.defiant)
+		to_chat(src, span_userdanger("Remember : Defiant ERP protection is only enabled while COMBAT mode is active. AHELP if necessary."))
 	dat += "<table><tr><td valign='top'>"
 	var/column_counter = 0
 
@@ -743,6 +751,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		var/area/joined_area = get_area(new_character.loc)
 		if(joined_area)
 			joined_area.on_joining_game(new_character)
+		new_character.update_fov_angles()
 		new_character = null
 		qdel(src)
 

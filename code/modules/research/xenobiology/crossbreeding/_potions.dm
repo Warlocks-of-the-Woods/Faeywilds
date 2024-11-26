@@ -73,7 +73,7 @@ Slimecrossing Potions
 	icon = 'icons/roguetown/items/cooking.dmi'
 	icon_state = "lovebottle"
 
-/obj/item/slimepotion/lovepotion/attack(mob/living/M, mob/user)
+/obj/item/slimepotion/lovepotion/attack(mob/living/carbon/human/M, mob/user)
 	if(!isliving(M) || M.stat == DEAD)
 		to_chat(user, span_warning("The love potion only works on living things, sicko!"))
 		return ..()
@@ -84,7 +84,12 @@ Slimecrossing Potions
 		to_chat(user, span_warning("I can't drink the love potion. What are you, a narcissist?"))
 		return ..()
 	if(M.has_status_effect(STATUS_EFFECT_INLOVE))
-		to_chat(user, span_warning("[M] is already lovestruck!"))
+		to_chat(user, span_warning("[M] is already lovestruck! This will undo the effects..."))
+		M.remove_status_effect(STATUS_EFFECT_INLOVE)
+		M.remove_curse(/datum/curse/baotha, TRUE)
+		M.faction = initial(M.faction)
+		to_chat(M, span_notice("I am freed of the effects of love potion."))
+		qdel(src)
 		return ..()
 
 	M.visible_message(span_danger("[user] starts to feed [M] a love potion!"),
@@ -94,11 +99,38 @@ Slimecrossing Potions
 		return
 	to_chat(user, span_notice("I feed [M] the love potion!"))
 	to_chat(M, span_notice("I develop feelings for [user], and anyone [user.p_they()] like."))
-	if(M.mind)
-		M.mind.store_memory("You are in love with [user].")
 	M.faction |= "[REF(user)]"
 	M.apply_status_effect(STATUS_EFFECT_INLOVE, user)
+	M.add_curse(/datum/curse/baotha, TRUE)
 	qdel(src)
+
+/obj/item/slimepotion/endowpotion
+	name = "endowment potion"
+	desc = "Makes one uncomfortably endowed for about 10 minutes. It has <b>3 uses</b> left."
+	icon = 'modular_stonehedge/icons/roguetown/items/cooking.dmi'
+	icon_state = "endowbottle"
+	var/uses = 3
+
+/obj/item/slimepotion/endowpotion/attack(mob/living/M, mob/user)
+	if(!isliving(M) || M.stat == DEAD)
+		to_chat(user, span_warning("The love potion only works on living things, sicko!"))
+		return ..()
+
+	if(M.has_status_effect(STATUS_EFFECT_ENDOWED))
+		to_chat(user, span_warning("[M] is already endowed! This will reset the duration..."))
+	M.visible_message(span_danger("[user] starts to feed [M] an endowment potion!"),
+		span_danger("[user] starts to feed you an endowment potion!"))
+	if(!do_after(user, 25, target = M))
+		return
+	uses--
+	desc = "Makes one uncomfortably endowed for about 10 minutes.  It has <b>[uses] uses</b> left."
+	if(uses <= 0)
+		to_chat(M, span_notice("The potion is useless now."))
+		qdel(src)
+	to_chat(user, span_notice("I feed [M] the love potion!"))
+	if(M.has_status_effect(STATUS_EFFECT_ENDOWED))
+		M.remove_status_effect(STATUS_EFFECT_ENDOWED)
+	M.apply_status_effect(STATUS_EFFECT_ENDOWED)
 
 //Pressure potion - Charged Dark Blue
 /obj/item/slimepotion/spaceproof

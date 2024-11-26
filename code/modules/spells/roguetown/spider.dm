@@ -5,9 +5,11 @@
 	desc = "Spin webs where you stand"
 	range = -1
 	overlay_state = "null"
-	releasedrain = 10
-	charge_max = 3 SECONDS
-	sound = 'sound/blank.ogg'
+	releasedrain = 5
+	charge_max = 30
+	cast_without_targets = TRUE
+	sound = 'sound/magic/webspin.ogg'
+	associated_skill = /datum/skill/magic/arcane
 	invocation = null
 	invocation_type = "none" //can be none, whisper, emote and shout
 	antimagic_allowed = TRUE

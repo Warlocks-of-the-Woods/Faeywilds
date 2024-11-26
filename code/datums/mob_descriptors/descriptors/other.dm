@@ -1,57 +1,29 @@
-// /datum/mob_descriptor/defiant
-// 	name = "Defiant"
-// 	slot = MOB_DESCRIPTOR_SLOT_NOTHING
-// 	verbage = "looks"
-// 	describe = "defiant!"
-// 	show_obscured = TRUE
-
-// /datum/mob_descriptor/defiant/can_describe(mob/living/described)
-// 	if(!described.defiant)
-// 		return FALSE
-// 	return TRUE
-
-// /datum/mob_descriptor/defiant/can_user_see(mob/living/described, mob/user)
-// 	// Always see if you yourself are
-// 	if(user == described)
-// 		return TRUE
-// 	// Ghosts can see
-// 	if(!isliving(user))
-// 		return TRUE
-// 	var/mob/living/living_user = user
-// 	// Other defiants can not see
-// 	if(living_user.defiant)
-// 		return FALSE
-// 	// Further than 2 tiles dont see it
-// 	if(get_dist(described, living_user) > 2)
-// 		return FALSE
-// 	return TRUE
-
-/datum/mob_descriptor/nsfw
-	name = "Frisky"
+/datum/mob_descriptor/defiant
+	name = "Defiant"
 	slot = MOB_DESCRIPTOR_SLOT_NOTHING
 	verbage = "looks"
-	describe = "frisky!"
+	describe = "defiant!"
 	show_obscured = TRUE
 
-/datum/mob_descriptor/nsfw/can_describe(mob/living/described)
-	if(!described.nsfw)
+/datum/mob_descriptor/defiant/can_describe(mob/living/described)
+	if(!described.client?.prefs.defiant)
 		return FALSE
 	return TRUE
 
-/datum/mob_descriptor/nsfw/can_user_see(mob/living/described, mob/user)
+/datum/mob_descriptor/defiant/can_user_see(mob/living/described, mob/user)
 	// Always see if you yourself are
 	if(user == described)
 		return TRUE
 	// Ghosts can see
 	if(!isliving(user))
 		return TRUE
-	var/mob/living/living_user = user
-	// Other NSFW can not see
-	if(living_user.nsfw)
+	//var/mob/living/living_user = user
+	// Other defiants can not see - Commented out for now so people don't ZAPE
+	/*if(living_user.defiant)
 		return FALSE
-	// Further than 2 tiles dont see it
+	// Further than 2 tiles dont see it - Commented out for now to always know who you can't ZAPE
 	if(get_dist(described, living_user) > 2)
-		return FALSE
+		return FALSE*/
 	return TRUE
 
 /datum/mob_descriptor/age
@@ -96,18 +68,22 @@
 	var/mob/living/carbon/human/H = described
 	var/obj/item/organ/penis/penis = H.getorganslot(ORGAN_SLOT_PENIS)
 	var/adjective
-	switch(penis.penis_size)
+	switch(penis.organ_size)
 		if(1)
 			adjective = "a small"
 		if(2)
 			adjective = "an average"
 		if(3)
 			adjective = "a large"
+		if(4)
+			adjective = "a massive"
+		if(5)
+			adjective = "a colossal"
 	var/used_name
 	if(penis.erect_state != ERECT_STATE_HARD && penis.sheath_type != SHEATH_TYPE_NONE)
 		switch(penis.sheath_type)
 			if(SHEATH_TYPE_NORMAL)
-				if(penis.penis_size == 3)
+				if(penis.organ_size >= 3)
 					used_name = "a fat sheath"
 				else
 					used_name = "a sheath"
@@ -127,7 +103,7 @@
 	if(!ishuman(described))
 		return FALSE
 	var/mob/living/carbon/human/H = described
-	var/obj/item/organ/testicles/testes = H.getorganslot(ORGAN_SLOT_TESTICLES)
+	var/obj/item/organ/filling_organ/testicles/testes = H.getorganslot(ORGAN_SLOT_TESTICLES)
 	if(!testes)
 		return FALSE
 	if(H.underwear)
@@ -141,16 +117,56 @@
 
 /datum/mob_descriptor/testicles/get_description(mob/living/described)
 	var/mob/living/carbon/human/H = described
-	var/obj/item/organ/testicles/testes = H.getorganslot(ORGAN_SLOT_TESTICLES)
+	var/obj/item/organ/filling_organ/testicles/testes = H.getorganslot(ORGAN_SLOT_TESTICLES)
 	var/adjective
-	switch(testes.ball_size)
+	switch(testes.organ_size)
 		if(1)
 			adjective = "a small"
 		if(2)
 			adjective = "an average"
 		if(3)
 			adjective = "a large"
+		if(4)
+			adjective = "a massive"
+		if(5)
+			adjective = "a gigantic"
 	return "[adjective] pair of balls"
+
+/datum/mob_descriptor/butt
+	name = "butt"
+	slot = MOB_DESCRIPTOR_SLOT_BUTT
+	verbage = "has"
+	show_obscured = FALSE
+
+/datum/mob_descriptor/butt/can_describe(mob/living/described)
+	if(!ishuman(described))
+		return FALSE
+	var/mob/living/carbon/human/H = described
+	var/obj/item/organ/butt/buttie = H.getorganslot(ORGAN_SLOT_BUTT)
+	if(!buttie)
+		return FALSE
+	if(H.underwear)
+		return FALSE
+	if(!get_location_accessible(H, BODY_ZONE_PRECISE_GROIN))
+		return FALSE
+	return TRUE
+
+/datum/mob_descriptor/butt/get_description(mob/living/described)
+	var/mob/living/carbon/human/H = described
+	var/obj/item/organ/butt/buttie = H.getorganslot(ORGAN_SLOT_BUTT)
+	var/adjective
+	switch(buttie.organ_size)
+		if(1)
+			adjective = "a small"
+		if(2)
+			adjective = "an average"
+		if(3)
+			adjective = "a large"
+		if(4)
+			adjective = "a massive"
+		if(5)
+			adjective = "a colossal"
+	return "[adjective] ass"
 
 /datum/mob_descriptor/vagina
 	name = "vagina"
@@ -162,7 +178,7 @@
 	if(!ishuman(described))
 		return FALSE
 	var/mob/living/carbon/human/H = described
-	var/obj/item/organ/vagina/vagina = H.getorganslot(ORGAN_SLOT_VAGINA)
+	var/obj/item/organ/filling_organ/vagina/vagina = H.getorganslot(ORGAN_SLOT_VAGINA)
 	if(!vagina)
 		return FALSE
 	if(H.underwear)
@@ -173,13 +189,15 @@
 
 /datum/mob_descriptor/vagina/get_description(mob/living/described)
 	var/mob/living/carbon/human/H = described
-	var/obj/item/organ/vagina/vagina = H.getorganslot(ORGAN_SLOT_VAGINA)
+	var/obj/item/organ/filling_organ/vagina/vagina = H.getorganslot(ORGAN_SLOT_VAGINA)
 	var/vagina_type
 	switch(vagina.accessory_type)
 		if(/datum/sprite_accessory/vagina/human)
 			vagina_type = "plain vagina"
 		if(/datum/sprite_accessory/vagina/hairy)
 			vagina_type = "hairy vagina"
+		if(/datum/sprite_accessory/vagina/extrahairy)
+			vagina_type = "very hairy vagina"
 		if(/datum/sprite_accessory/vagina/spade)
 			vagina_type = "spade vagina"
 		if(/datum/sprite_accessory/vagina/furred)
@@ -188,19 +206,21 @@
 			vagina_type = "gaping vagina"
 		if(/datum/sprite_accessory/vagina/cloaca)
 			vagina_type = "cloaca"
+		if(/datum/sprite_accessory/vagina/goblin)
+			vagina_type = "very hairy vagina"
 	return "a [vagina_type]"
 
 /datum/mob_descriptor/breasts
 	name = "breasts"
 	slot = MOB_DESCRIPTOR_SLOT_BREASTS
 	verbage = "has"
-	show_obscured = TRUE
+	show_obscured = FALSE
 
 /datum/mob_descriptor/breasts/can_describe(mob/living/described)
 	if(!ishuman(described))
 		return FALSE
 	var/mob/living/carbon/human/H = described
-	var/obj/item/organ/breasts/breasts = H.getorganslot(ORGAN_SLOT_BREASTS)
+	var/obj/item/organ/filling_organ/breasts/breasts = H.getorganslot(ORGAN_SLOT_BREASTS)
 	if(!breasts)
 		return FALSE
 	if(H.underwear && H.underwear.covers_breasts)
@@ -211,9 +231,9 @@
 
 /datum/mob_descriptor/breasts/get_description(mob/living/described)
 	var/mob/living/carbon/human/H = described
-	var/obj/item/organ/breasts/breasts = H.getorganslot(ORGAN_SLOT_BREASTS)
+	var/obj/item/organ/filling_organ/breasts/breasts = H.getorganslot(ORGAN_SLOT_BREASTS)
 	var/adjective
-	switch(breasts.breast_size)
+	switch(breasts.organ_size)
 		if(0)
 			adjective = "a flat"
 		if(1)
@@ -225,5 +245,27 @@
 		if(4)
 			adjective = "a large"
 		if(5)
+			adjective = "an extra large"
+		if(6)
+			adjective = "a massive"
+		if(7)
 			adjective = "an enormous"
+		if(8)
+			adjective = "a magnificent"
+		if(9)
+			adjective = "a towering"
+		if(10)
+			adjective = "a gigantic"
+		if(11)
+			adjective = "a titanic"
+		if(12)
+			adjective = "a gargantuan"
+		if(13)
+			adjective = "a colossal"
+		if(14)
+			adjective = "a unbelieveably big"
+		if(15)
+			adjective = "a godly gib"
+		if(16)
+			adjective = "a ungodly big"
 	return "[adjective] pair of breasts"

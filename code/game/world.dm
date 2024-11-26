@@ -2,6 +2,22 @@
 
 GLOBAL_VAR(restart_counter)
 
+//This runs before most anything else, for more info see:
+//https://github.com/Cyberboss/tgstation/blob/1afa69d66adfc810ab68c45a4fa5985c780ba6ff/code/game/world.dm#L10
+//But note that not all of this necessarily applies to us(particularly proccalls)
+
+/world/proc/Genesis(tracy_initialized = FALSE)
+	#ifdef USE_BYOND_TRACY
+	#warn USE_BYOND_TRACY is enabled
+	if(!tracy_initialized)
+		init_byond_tracy()
+		Genesis(tracy_initialized = TRUE)
+		return
+	#endif
+
+	init_debugger()
+	//Zirok was here
+
 /**
   * World creation
   *
@@ -29,6 +45,8 @@ GLOBAL_VAR(restart_counter)
 
 	make_datum_references_lists()	//initialises global lists for referencing frequently used datums (so that we only ever do it once)
 
+	InitTgs()
+
 	TgsNew(minimum_required_security_level = TGS_SECURITY_TRUSTED)
 	world.TgsInitializationComplete()
 	GLOB.revdata = new
@@ -51,6 +69,7 @@ GLOBAL_VAR(restart_counter)
 	load_poll_data()
 	/*faeywild: moved to tgsIntegration.dm
 	if(CONFIG_GET(string/channel_announce_new_game_message))
+		send2chat(new /datum/tgs_message_content(CONFIG_GET(string/channel_announce_new_game_message)), CONFIG_GET(string/channel_announce_new_game))
 		send2chat(new /datum/tgs_message_content(CONFIG_GET(string/channel_announce_new_game_message)), CONFIG_GET(string/chat_announce_new_game))
 	*/
 
@@ -92,6 +111,10 @@ GLOBAL_VAR(restart_counter)
 
 	update_status()
 
+/// Initializes TGS and loads the returned revising info into GLOB.revdata
+/world/proc/InitTgs()
+	TgsNew(new /datum/tgs_event_handler/impl, TGS_SECURITY_TRUSTED)
+	GLOB.revdata.load_tgs_info()
 
 /world/proc/HandleTestRun()
 	//trigger things to run the whole process
@@ -149,6 +172,7 @@ GLOBAL_VAR(restart_counter)
 	GLOB.world_cloning_log = "[GLOB.log_directory]/cloning.log"
 	GLOB.world_asset_log = "[GLOB.log_directory]/asset.log"
 	GLOB.world_attack_log = "[GLOB.log_directory]/attack.log"
+	GLOB.world_seen_log = "[GLOB.log_directory]/seen.log"
 	GLOB.world_pda_log = "[GLOB.log_directory]/pda.log"
 	GLOB.world_telecomms_log = "[GLOB.log_directory]/telecomms.log"
 	GLOB.world_manifest_log = "[GLOB.log_directory]/manifest.log"
@@ -165,6 +189,7 @@ GLOBAL_VAR(restart_counter)
 
 	start_log(GLOB.world_game_log)
 	start_log(GLOB.world_attack_log)
+	start_log(GLOB.world_seen_log)
 	start_log(GLOB.world_pda_log)
 	start_log(GLOB.world_telecomms_log)
 	start_log(GLOB.world_manifest_log)
@@ -189,8 +214,8 @@ GLOBAL_VAR(restart_counter)
 	log_runtime(GLOB.revdata.get_log_message())
 
 /world/Topic(T, addr, master, key)
-	return // Disable topics altogether
 	TGS_TOPIC //redirect to server tools if necessary
+	return // Disable topics altogether
 
 	var/static/list/topic_handlers = TopicHandlers()
 
@@ -255,12 +280,13 @@ GLOBAL_VAR(restart_counter)
 //	else
 //	to_chat(world, span_boldannounce("<b><u><a href='byond://winset?command=.reconnect'>CLICK TO RECONNECT</a></u></b>"))
 
-	var/round_end_sound = pick('sound/roundend/knave.ogg',
-	'sound/roundend/twohours.ogg',
-	'sound/roundend/rest.ogg',
-	'sound/roundend/gather.ogg',
-	'sound/roundend/dwarfs.ogg',
-	'sound/roundend/loveit.ogg')
+	var/round_end_sound = pick(
+		'sound/roundend/knave.ogg',
+		'sound/roundend/twohours.ogg',
+		'sound/roundend/rest.ogg',
+		'sound/roundend/gather.ogg',
+		'sound/roundend/dwarfs.ogg',
+	)
 	for(var/client/thing in GLOB.clients)
 		if(!thing)
 			continue
@@ -276,6 +302,7 @@ GLOBAL_VAR(restart_counter)
 		return
 
 	if(TgsAvailable())
+		send2chat(new /datum/tgs_message_content("Round ending!"), CONFIG_GET(string/channel_announce_new_game))
 /* Faeywild edit -> moved to ticker.dm. Is this moving thing too early? I dunno and I don't think I care enough. 
 		send2chat(new /datum/tgs_message_content("Round ending!"), CONFIG_GET(string/chat_announce_new_game))
 */
@@ -331,7 +358,8 @@ GLOBAL_VAR(restart_counter)
 		new_status += "<br>GAME STATUS: <b>PLAYING</b><br>"
 
 	if (SSticker.HasRoundStarted())
-		new_status += "Round Time: <b>[time2text(STATION_TIME_PASSED(), "hh:mm", 0)]</b>"
+		var/round_time = world.time - SSticker.round_start_time
+		new_status += "Round Time: <b>[round_time > MIDNIGHT_ROLLOVER ? "[round(round_time/MIDNIGHT_ROLLOVER)]:[gameTimestamp(format = "hh:mm")]" : gameTimestamp(format = "hh:mm")]<br>"
 	else
 		new_status += "Round Time: <b>NEW ROUND STARTING</b>"
 	new_status += "<br>Player[players == 1 ? "": "s"]: <b>[players]</b>"
@@ -446,3 +474,32 @@ GLOBAL_VAR(restart_counter)
 
 /world/proc/on_tickrate_change()
 	SStimer?.reset_buckets()
+
+/world/proc/init_byond_tracy()
+	var/library
+
+	switch (system_type)
+		if (MS_WINDOWS)
+			library = "prof.dll"
+		if (UNIX)
+			library = "libprof.so"
+		else
+			CRASH("Unsupported platform: [system_type]")
+
+	var/init_result = call_ext(library, "init")("block")
+	if (init_result != "0")
+		//para_tracy returns the filename on succesful init so this always runtimes, lol
+		CRASH("Error initializing byond-tracy: [init_result]")
+
+/world/proc/init_debugger()
+	var/dll = GetConfig("env", "AUXTOOLS_DEBUG_DLL")
+	if (dll)
+		call_ext(dll, "auxtools_init")()
+		enable_debugging()
+
+/world/Del()
+	var/dll = GetConfig("env", "AUXTOOLS_DEBUG_DLL")
+	if (dll)
+		call_ext(dll, "auxtools_shutdown")()
+
+	. = ..()

@@ -10,10 +10,8 @@
 /obj/item/book/granter/spell/spells5e/onlearned(mob/living/carbon/user)
 	..()
 	if(oneuse == TRUE)
-		name = "siphoned scroll"
-		desc = "A scroll once inscribed with magical scripture. The surface is now barren of knowledge, siphoned by someone else. It's utterly useless."
-		icon_state = "scroll"
-		user.visible_message(span_warning("[src] has had its magic ink ripped from the scroll!"))
+		qdel(src) //no need this trash.
+		user.visible_message(span_warning("[src] has had its magic ink ripped from the scroll, it disintegrates to dust!"))
 
 //backpack prepacked with scrolls for testing
 /obj/item/storage/backpack/rogue/backpack/spells5e/PopulateContents()

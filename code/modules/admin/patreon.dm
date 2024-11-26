@@ -34,7 +34,7 @@ GLOBAL_VAR(PatreonsLoaded)
 		GLOB.allpatreons |= ckey(line)
 
 	for(var/line in csvlist)
-		if(findtext(line, "ROGUETOWN SILVER"))
+		if(findtext(line, "DREAM KEEP SILVER"))
 			if(findtext(line, "Active patron"))
 				var/index = findtext(line, ",")
 				var/indexs = findtext(line, ",",index+1)
@@ -53,7 +53,7 @@ GLOBAL_VAR(PatreonsLoaded)
 		GLOB.allpatreons |= ckey(line)
 
 	for(var/line in csvlist)
-		if(findtext(line, "ROGUETOWN GOLD"))
+		if(findtext(line, "DREAM KEEP GOLD"))
 			if(findtext(line, "Active patron"))
 				var/index = findtext(line, ",")
 				var/indexs = findtext(line, ",",index+1)
@@ -72,7 +72,7 @@ GLOBAL_VAR(PatreonsLoaded)
 		GLOB.allpatreons |= ckey(line)
 
 	for(var/line in csvlist)
-		if(findtext(line, "ROGUETOWN MYTHRIL"))
+		if(findtext(line, "DREAM KEEP MYTHRIL"))
 			if(findtext(line, "Active patron"))
 				var/index = findtext(line, ",")
 				var/indexs = findtext(line, ",",index+1)
@@ -91,7 +91,7 @@ GLOBAL_VAR(PatreonsLoaded)
 		GLOB.allpatreons |= ckey(line)
 
 	for(var/line in csvlist)
-		if(findtext(line, "ROGUETOWN MERCHANT"))
+		if(findtext(line, "DREAM KEEP MERCHANT"))
 			if(findtext(line, "Active patron"))
 				var/index = findtext(line, ",")
 				var/indexs = findtext(line, ",",index+1)
@@ -110,7 +110,7 @@ GLOBAL_VAR(PatreonsLoaded)
 		GLOB.allpatreons |= ckey(line)
 
 	for(var/line in csvlist)
-		if(findtext(line, "ROGUETOWN LORD"))
+		if(findtext(line, "DREAM KEEP LORD"))
 			if(findtext(line, "Active patron"))
 				var/index = findtext(line, ",")
 				var/indexs = findtext(line, ",",index+1)
@@ -164,15 +164,15 @@ GLOBAL_VAR(PatreonsLoaded)
 	for(var/line in csvlist)
 		if(findtext(line, the_email))
 			if(findtext(line, "Active patron"))
-				if(findtext(line, "ROGUETOWN SILVER"))
+				if(findtext(line, "DREAM KEEP SILVER"))
 					return 1
-				if(findtext(line, "ROGUETOWN GOLD"))
+				if(findtext(line, "DREAM KEEP GOLD"))
 					return 2
-				if(findtext(line, "ROGUETOWN MYTHRIL"))
+				if(findtext(line, "DREAM KEEP MYTHRIL"))
 					return 3
-				if(findtext(line, "ROGUETOWN MERCHANT"))
+				if(findtext(line, "DREAM KEEP MERCHANT"))
 					return 4
-				if(findtext(line, "ROGUETOWN LORD"))
+				if(findtext(line, "DREAM KEEP LORD"))
 					return 5
 			return 0
 
@@ -246,7 +246,7 @@ GLOBAL_LIST_EMPTY(anonymize)
 //		to_chat(src, span_warning("Whitelisted players only."))
 //		return
 	if(client.prefs.anonymize == TRUE)
-		if(alert(src, "Disable Anonymize? (Not Recommended)", "ROGUETOWN", "YES", "NO") == "YES")
+		if(alert(src, "Disable Anonymize? (Not Recommended)", "DREAM KEEP", "YES", "NO") == "YES")
 			if(GLOB.respawncounts[client.ckey])
 				to_chat(src, span_warning("You have already spawned."))
 				return
@@ -257,7 +257,7 @@ GLOBAL_LIST_EMPTY(anonymize)
 	else
 		if(alert(src, "Enable Anonymize? This will hide your BYOND name from anyone except \
 		Dungeon Masters while playing here, useful for dealing with negative OOC bias or \
-		maintaining privacy from other BYOND users.", "ROGUETOWN", "YES", "NO") == "YES")
+		maintaining privacy from other BYOND users.", "DREAM KEEP", "YES", "NO") == "YES")
 			if(GLOB.respawncounts[client.ckey])
 				to_chat(src, span_warning("You have already spawned."))
 				return
@@ -295,10 +295,10 @@ GLOBAL_LIST_EMPTY(temporary_donators)
 	if(client)
 		if(client.patreonlevel())
 			return
-	var/name = input("Enter your patreon DISPLAY NAME exactly as it appears on Patreon.","ROGUETOWN") as text|null
+	var/name = input("Enter your patreon DISPLAY NAME exactly as it appears on Patreon.","DREAM KEEP") as text|null
 	if(!name)
 		return
-	var/email = input("Enter your patreon EMAIL ADDRESS exactly as it appears on Patreon.","ROGUETOWN") as text|null
+	var/email = input("Enter your patreon EMAIL ADDRESS exactly as it appears on Patreon.","DREAM KEEP") as text|null
 	if(!email)
 		return
 	if(!patreon_lookup(name) || !patreon_lookup(email) || !findtext(email, "@"))
@@ -337,15 +337,15 @@ GLOBAL_LIST_EMPTY(temporary_donators)
 		csvlist = world.file2list(csv_file)
 	for(var/line in csvlist)
 		if(findtext(line, email))
-			if(findtext(line, "ROGUETOWN SILVER"))
+			if(findtext(line, "DREAM KEEP SILVER"))
 				GLOB.patreont1 |= ckey
-			if(findtext(line, "ROGUETOWN GOLD"))
+			if(findtext(line, "DREAM KEEP GOLD"))
 				GLOB.patreont2 |= ckey
-			if(findtext(line, "ROGUETOWN MYTHRIL"))
+			if(findtext(line, "DREAM KEEP MYTHRIL"))
 				GLOB.patreont3 |= ckey
-			if(findtext(line, "ROGUETOWN MERCHANT"))
+			if(findtext(line, "DREAM KEEP MERCHANT"))
 				GLOB.patreont4 |= ckey
-			if(findtext(line, "ROGUETOWN LORD"))
+			if(findtext(line, "DREAM KEEP LORD"))
 				GLOB.patreont5 |= ckey
 			break
 
