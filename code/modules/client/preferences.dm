@@ -341,7 +341,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 			dat += "<BR>"
 			dat += "<b>Race Origin:</b> <a href='?_src_=prefs;preference=species;task=input'>[pref_species.name]</a>[spec_check(user) ? "" : " (!)"]<BR>"
-			dat += "<b>Race Name:</b> <a href='?_src_=prefs;preference=customracename;task=input'>Change: [custom_race_name]</a><BR>"
+//			dat += "<b>Race Name:</b> <a href='?_src_=prefs;preference=customracename;task=input'>Change: [custom_race_name]</a><BR>"
 //			dat += "<a href='?_src_=prefs;preference=species;task=random'>Random Species</A> "
 //			dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_SPECIES]'>Always Random Species: [(randomise[RANDOM_SPECIES]) ? "Yes" : "No"]</A><br>"
 
@@ -376,7 +376,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<b>Statpack:</b> <a href='?_src_=prefs;preference=statpack;task=input'>[statpack.name]</a><BR>"
 			dat += "<b>Loadout Item:</b> <a href='?_src_=prefs;preference=loadout_item;task=input'>[loadout ? loadout.name : "None"]</a><br>"
 			dat += "<b>__________________________</b><br>"
-			dat += "<b>Voice Type</b>: <a href='?_src_=prefs;preference=voicetype;task=input'>[voice_type]</a><BR>"
+//			dat += "<b>Voice Type</b>: <a href='?_src_=prefs;preference=voicetype;task=input'>[voice_type]</a><BR>"
 			dat += "<b>Voice Color:</b> <a href='?_src_=prefs;preference=voice;task=input'>Change</a><br>"
 			dat += "<b>Voice Pitch:</b> <a href='?_src_=prefs;preference=voice_pitch;task=input'>[voice_pitch]</a><br>"
 			dat += "<b><b>Accent:</b> <a href='?_src_=prefs;preference=char_accent;task=input'>[char_accent]</a><br>"
@@ -2449,9 +2449,8 @@ Slots: [job.spawn_positions]</span>
 	character.strengths = strengths
 	character.weakness = weakness
 	character.theme = theme
-*/
 	character.custom_race_name = custom_race_name
-
+*/
 	character.nsfw_info = nsfw_info
 	/*
 	// LETHALSTONE ADDITION BEGIN: additional customizations

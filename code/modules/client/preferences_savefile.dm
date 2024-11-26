@@ -483,7 +483,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		S["custom_race_name"]			>> custom_race_name
 	if(!valid_custom_race_name(null, custom_race_name, TRUE))
 		custom_race_name = null
-*/
+
 	S["alias"]			>> alias
 	if(!valid_alias(null, alias, TRUE))
 		alias = null
@@ -505,6 +505,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["theme"]			>> theme
 	if(!valid_theme(null, theme, TRUE))
 		theme = null
+*/
 
 	//try to fix any outdated data if necessary
 	if(needs_update >= 0)

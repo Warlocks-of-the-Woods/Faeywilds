@@ -3,7 +3,7 @@
 	var/race_name = dna.species.name
 
 
-
+/*
 	if(href_list["task"] == "view_headshot")
 		if(!ismob(usr))
 			return
@@ -15,8 +15,8 @@
 		popup.set_content(dat.Join())
 		popup.open(FALSE)
 		return
+*/
 
-/* old simple headshot
 	if(href_list["task"] == "view_headshot")
 		if(!ismob(usr))
 			return
@@ -28,7 +28,6 @@
 		popup.set_content(dat.Join())
 		popup.open(FALSE)
 		return
-*/
 
 	if(href_list["task"] == "view_nudeshot")
 		if(!ismob(usr))

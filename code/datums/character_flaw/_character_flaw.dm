@@ -191,31 +191,6 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	if(cnt > 6)
 		user.add_stress(/datum/stressevent/parablood)
 
-/datum/charflaw/greedy
-	name = "Greedy"
-	desc = "I can't get enough of mammons, I need more and more! I've also become good at knowing how much things are worth"
-	var/last_checked_mammons = 0
-	var/required_mammons = 0
-	var/next_mammon_increase = 0
-	var/last_passed_check = 0
-	var/first_tick = FALSE
-	var/extra_increment_value = 0
-
-/datum/charflaw/greedy/on_mob_creation(mob/user)
-	next_mammon_increase = world.time + rand(15 MINUTES, 25 MINUTES)
-	last_passed_check = world.time
-	ADD_TRAIT(user, TRAIT_SEEPRICES_SHITTY, "[type]")
-
-/datum/charflaw/greedy/flaw_on_life(mob/user)
-	if(!first_tick)
-		determine_starting_mammons(user)
-		first_tick = TRUE
-		return
-	if(world.time >= next_mammon_increase)
-		mammon_increase(user)
-	mammon_check(user)
-
-
 /datum/charflaw/isolationist
 	name = "Isolationist"
 	desc = "I don't like being near people. They might be trying to do something to me..."
