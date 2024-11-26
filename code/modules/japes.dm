@@ -3,7 +3,7 @@
 /mob/living/carbon/human/proc/ventriloquate()
 	set name = "Ventriloquism"
 	set category = "Japes"
-	
+
 	var/obj/item/grabbing/I = get_active_held_item()
 	if(!I)
 		to_chat(src, span_warning("I need to be holding or grabbing something!"))
@@ -14,7 +14,7 @@
 	I.say(message)
 	log_admin("[key_name(usr)] ventriloquated [I] at [AREACOORD(I)] to say \"[message]\"")
 
-// Ear Trick! Pull objects from behind someone's ear by the will of Xylix!
+// Ear Trick! Pull objects from behind someone's ear by the will of Art!
 
 /mob/living/carbon/human/proc/ear_trick()
 	set name = "Ear Trick"
@@ -54,6 +54,6 @@
 		/obj/item/reagent_containers/food/snacks/cracker,
 		/obj/item/natural/worms/leech,
 		)
-	
+
 	var/japery = pick(japery_list)
 	return japery

@@ -9,6 +9,7 @@ GLOBAL_LIST_INIT(bum_aggro, world.file2list("strings/rt/bumaggrolines.txt"))
 	dodgetime = 30
 	flee_in_pain = TRUE
 	possible_rmb_intents = list()
+	erpable = TRUE
 
 	wander = FALSE
 
@@ -41,7 +42,7 @@ GLOBAL_LIST_INIT(bum_aggro, world.file2list("strings/rt/bumaggrolines.txt"))
 
 /mob/living/carbon/human/species/human/northern/bum/after_creation()
 	..()
-	job = "Beggar"
+	job = "Low Life"
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOROGSTAM, TRAIT_GENERIC)

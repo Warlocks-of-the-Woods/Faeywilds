@@ -19,6 +19,7 @@
 		/datum/language/orcish,
 		/datum/language/draconic,
 		/datum/language/faexin,
+		/datum/language/canilunzt
 	))
 
 /obj/item/organ/tongue/Initialize(mapload)

@@ -17,10 +17,6 @@ SUBSYSTEM_DEF(library)
 		next_library_check = world.time + rand(5 MINUTES, 8 MINUTES)
 		var/list/stockpile_items = list()
 
-
-//		if(SSticker.current_state == GAME_STATE_PLAYING)
-
-
 		var/area/A = GLOB.areas_by_type[/area/rogue/indoors/town/library]
 		var/amt_to_generate = 0
 
@@ -47,7 +43,7 @@ SUBSYSTEM_DEF(library)
 		var/people_told = 0
 		for(var/mob/living/carbon/human/X in GLOB.human_list)
 			switch(X.job)
-				if("Court Magician", "Magicians Apprentice")
+				if("Magician", "Magicians Apprentice")
 					people_told += 1
 					send_ooc_note("Arcyne ink from library: +[amt_to_generate]", name = X.real_name)
 					if(people_told > 3)

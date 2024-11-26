@@ -1,13 +1,12 @@
 //Eora content from Stonekeep
 
 /obj/effect/proc_holder/spell/invoked/bud
-	name = "Eoran Bloom"
+	name = "Viiritri's Bloom"
 	desc = ""
 	clothes_req = FALSE
 	range = 7
 	overlay_state = "love"
 	sound = list('sound/magic/magnet.ogg')
-	req_items = list(/obj/item/clothing/neck/roguetown/psicross/eora)
 	releasedrain = 40
 	chargetime = 60
 	warnie = "spellwarning"
@@ -26,19 +25,18 @@
 	return FALSE
 
 /obj/effect/proc_holder/spell/invoked/eoracurse
-	name = "Eora's Curse"
+	name = "Charm"
 	overlay_state = "curse2"
 	releasedrain = 50
-	chargetime = 30
+	chargetime = 15
 	range = 7
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	chargedloop = null
-	req_items = list(/obj/item/clothing/neck/roguetown/psicross/eora)
 	sound = 'sound/magic/whiteflame.ogg'
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/skill/magic/arcane
 	antimagic_allowed = TRUE
-	charge_max = 10 SECONDS
+	charge_max = 5 SECONDS
 	miracle = FALSE
 
 /obj/effect/proc_holder/spell/invoked/eoracurse/cast(list/targets, mob/living/user)
@@ -61,16 +59,17 @@
 	range = 5
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
-	req_items = list(/obj/item/clothing/neck/roguetown/psicross/eora)
 	sound = 'sound/magic/heal.ogg'
-	invocation = "Embrace Eora's love!"
-	invocation_type = "shout"
+	invocation = "Enchanta Amoria!"
+	invocation_type = "whisper"
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross/eora)
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
 	charge_max = 10 SECONDS
-	miracle = TRUE
-	devotion_cost = 30
+	miracle = FALSE
+	devotion_cost = 0
 
+//Sex-pest spell; if you have ERP verbs on it lets you treat it as sexual stuff if opt in, otherwise spell of serenity/peace.
 /obj/effect/proc_holder/spell/invoked/enrapture/cast(list/targets, mob/living/user)
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
@@ -86,18 +85,16 @@
 		if(user.has_flaw(/datum/charflaw/addiction/lovefiend))
 			target.sate_addiction()
 			//ONLY IF YOU HAVE ERP PANEL ON - YOU HAVE TWO OPTIONS
-			if(target.client.prefs.sexable == TRUE)
-				var/choice = alert(target, "Do you wish to give into bliss?", "", "Yes", "No")
-				switch(choice)
-					//IF YOU CHOOSE YES - YOU RECIEVE SOME PLEASURE
-					if("Yes")
-						target.sexcon.perform_sex_action(target, 5, 0, TRUE)
-						target.visible_message(span_warning("[target] gives in to their desires!"), span_warning("I am overwhelmed by my desires!"))
-						return TRUE
-					if("No")
-						target.visible_message(span_warning("[target] doesn't give in to their desires!"), span_warning("I won't give in!"))
-						return TRUE
-				return TRUE
+			var/choice = alert(target, "Do you wish to give into bliss?", "", "Yes", "No")
+			switch(choice)
+				//IF YOU CHOOSE YES - YOU RECIEVE SOME PLEASURE
+				if("Yes")
+					target.sexcon.perform_sex_action(target, 5, 0, TRUE)
+					target.visible_message(span_warning("[target] gives in to their desires!"), span_warning("I am overwhelmed by my desires!"))
+					return TRUE
+				if("No")
+					target.visible_message(span_warning("[target] doesn't give in to their desires!"), span_warning("I won't give in!"))
+					return TRUE
 			return TRUE
 		return TRUE
 	return FALSE
@@ -105,4 +102,4 @@
 /datum/stressevent/enrapture
 	timer = 5 MINUTES
 	stressadd = -5
-	desc = "<span class='green'>I felt Eora's love.</span>"
+	desc = "<span class='green'>I feel.. h-hot..  g-getting hard to.. think..</span>"

@@ -20,11 +20,11 @@
 	///////////TIERS
 	in the list next to the name of the infusion there is a number. This number is the TIER of the infusion. higher level gems are required for higher level infusions.
 
-	tier/cost 1, toper : adds flavor
-	tier/cost 2, gemerald : minor effect (skill increases and okay traits)
-	tier/cost 3, saffira : normal effect or (okay spells, stat increases and good traits)
-	tier/cost 4, blortz : major effect (good spells and amazing traits)
-	tier/cost 5, dorpel or rontz or riddle of steel : potentially game changing effect
+	tier/cost 1, topaz : adds flavor
+	tier/cost 2, emerald : minor effect (skill increases and okay traits)
+	tier/cost 3, sapphire : normal effect or (okay spells, stat increases and good traits)
+	tier/cost 4, quartz : major effect (good spells and amazing traits)
+	tier/cost 5, dorpel or ruby or riddle of steel : potentially game changing effect
 
 	Hope that has been helpful in using this datum.
 	~Ham-Hole
@@ -514,7 +514,7 @@
 	
 	if(gem_used)
 		I.sellprice += gem_used.sellprice
-		//rontz is just gonna be as good as diamon or riddle of steel...
+		//ruby is just gonna be as good as diamon or riddle of steel...
 		if (istype(gem_used, /obj/item/roguegem/yellow))
 			tier = 1
 		else if (istype(gem_used, /obj/item/roguegem/green))

@@ -49,6 +49,17 @@ SUBSYSTEM_DEF(mapping)
 		config = load_map_config(error_if_missing = FALSE)
 #endif
 
+/datum/controller/subsystem/mapping/proc/spawn_random_travel_tiles()
+	spawn_random_travel_transition("vampexit", "vampin", TRAIT_VAMPMANSION, /obj/structure/fluff/traveltile/vampire)
+	spawn_random_travel_transition("banditexit", "banditin", TRAIT_BANDITCAMP, /obj/structure/fluff/traveltile/bandit)
+
+/datum/controller/subsystem/mapping/proc/spawn_random_travel_transition(travel_id, travel_goes_to_id, required_trait, path)
+	var/atom/location = get_free_travel_spawn_point()
+	if(!location)
+		log_world("Unable to find spot for random travel transition: [travel_id] [travel_goes_to_id]")
+		return
+	create_travel_tiles(location, travel_id, travel_goes_to_id, required_trait, path)
+
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 	HACK_LoadMapConfig()
 	if(initialized)
@@ -104,6 +115,7 @@ SUBSYSTEM_DEF(mapping)
 	setup_map_transitions()
 	generate_station_area_list()
 	initialize_reserved_level(transit.z_value)
+	spawn_random_travel_tiles()
 	return ..()
 
 /datum/controller/subsystem/mapping/proc/wipe_reservations(wipe_safety_delay = 100)
@@ -247,7 +259,9 @@ SUBSYSTEM_DEF(mapping)
 	//otherZ += load_map_config("_maps/map_files/otherz/smallswamp.json")
 	//otherZ += load_map_config("_maps/map_files/otherz/bog.json")
 	otherZ += load_map_config("_maps/map_files/otherz/underworld.json")
-	otherZ += load_map_config("_maps/deepnorth.json")
+	otherZ += load_map_config("_maps/map_files/otherz/forest.json")
+	otherZ += load_map_config("_maps/map_files/otherz/ashlands.json")
+	//otherZ += load_map_config("_maps/deepnorth.json")
 	#endif
 	#ifdef ROGUEWORLD
 	otherZ += load_map_config("_maps/map_files/otherz/rogueworld.json")

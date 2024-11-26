@@ -2,7 +2,7 @@
 /obj/structure/flora/wildplant
 	name = "wild plant"
 	desc = "It's a wild plant."
-	icon = 'icons/obj/flora/wildflora.dmi'
+	icon = 'modular_Stonehedge/icons/obj/flora/wildflora.dmi'
 	anchored = 1
 	density = 0
 	var/has_plod = TRUE
@@ -68,7 +68,7 @@
 /obj/structure/flora/wildtree/wildplant
 	name = "wild plant"
 	desc = "It's a wild plant."
-	icon = 'icons/obj/flora/wildflora.dmi'
+	icon = 'modular_Stonehedge/icons/obj/flora/wildflora.dmi'
 	anchored = 1
 	density = 1
 	var/has_plod = TRUE

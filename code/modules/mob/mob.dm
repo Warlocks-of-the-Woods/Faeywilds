@@ -192,7 +192,7 @@ GLOBAL_VAR_INIT(mobids, 1)
   * * vision_distance (optional) define how many tiles away the message can be seen.
   * * ignored_mob (optional) doesn't show any message to a given mob if TRUE.
   */
-/atom/proc/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs)
+/atom/proc/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, runechat_message = null, log_seen = NONE, log_seen_msg = null)
 	var/turf/T = get_turf(src)
 	if(!T)
 		return
@@ -214,9 +214,13 @@ GLOBAL_VAR_INIT(mobids, 1)
 		if(!msg)
 			continue
 		M.show_message(msg, MSG_VISUAL, blind_message, MSG_AUDIBLE)
+		if(runechat_message && M.can_see_runechat(src) && M.can_hear())
+			M.create_chat_message(src, raw_message = runechat_message, spans = list("emote"))
+	if(log_seen)
+		log_seen(src, null, hearers, (log_seen_msg ? log_seen_msg : message), log_seen)
 
 ///Adds the functionality to self_message.
-/mob/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs)
+/mob/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, runechat_message = null, log_seen = NONE, log_seen_msg = null)
 	. = ..()
 	if(self_message)
 		show_message(self_message, MSG_VISUAL, blind_message, MSG_AUDIBLE)
@@ -231,12 +235,16 @@ GLOBAL_VAR_INIT(mobids, 1)
   * * deaf_message (optional) is what deaf people will see.
   * * hearing_distance (optional) is the range, how many tiles away the message can be heard.
   */
-/atom/proc/audible_message(message, deaf_message, hearing_distance = DEFAULT_MESSAGE_RANGE, self_message)
+/atom/proc/audible_message(message, deaf_message, hearing_distance = DEFAULT_MESSAGE_RANGE, self_message, runechat_message = null, log_seen = NONE, log_seen_msg = null)
 	var/list/hearers = get_hearers_in_view(hearing_distance, src)
 	if(self_message)
 		hearers -= src
 	for(var/mob/M in hearers)
 		M.show_message(message, MSG_AUDIBLE, deaf_message, MSG_VISUAL)
+		if(runechat_message && M.can_see_runechat(src) && M.can_hear())
+			M.create_chat_message(src, raw_message = runechat_message, spans = list("emote"))
+	if(log_seen)
+		log_seen(src, null, hearers, (log_seen_msg ? log_seen_msg : message), log_seen)
 
 /**
   * Show a message to all mobs in earshot of this one
@@ -249,7 +257,7 @@ GLOBAL_VAR_INIT(mobids, 1)
   * * deaf_message (optional) is what deaf people will see.
   * * hearing_distance (optional) is the range, how many tiles away the message can be heard.
   */
-/mob/audible_message(message, deaf_message, hearing_distance = DEFAULT_MESSAGE_RANGE, self_message)
+/mob/audible_message(message, deaf_message, hearing_distance = DEFAULT_MESSAGE_RANGE, self_message, runechat_message = null, log_seen = NONE, log_seen_msg = null)
 	. = ..()
 	if(self_message)
 		show_message(self_message, MSG_AUDIBLE, deaf_message, MSG_VISUAL)
@@ -430,7 +438,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 		to_chat(src, span_warning("Something is there but I can't see it!"))
 		return
 
-	if(isturf(A.loc) && isliving(src))
+	if(isturf(A.loc) && isliving(src) && (src.m_intent != MOVE_INTENT_SNEAK))
 		face_atom(A)
 		visible_message(span_emote("[src] looks at [A]."))
 	var/list/result = A.examine(src)
@@ -468,7 +476,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	return TRUE
 
 /mob/proc/linepoint(atom/A as mob|obj|turf in view(), params)
-	if(world.time < lastpoint + 50)
+	if(world.time < lastpoint + 10)
 		return FALSE
 
 	if(stat)
@@ -713,16 +721,10 @@ GLOBAL_VAR_INIT(mobids, 1)
   */
 /mob/MouseDrop_T(atom/dropping, atom/user)
 	. = ..()
-	if(ismob(dropping) && dropping != user)
+	if(ismob(dropping) && dropping != user && src == user)
 		var/mob/M = dropping
-		if(ismob(user))
-			var/mob/U = user
-			if(!iscyborg(U) || !U.cmode || U.used_intent.type == INTENT_HARM)
-				M.show_inv(U)
-				return TRUE
-		else
-			M.show_inv(user)
-			return TRUE
+		M.show_inv(user)
+		return TRUE
 
 ///Is the mob muzzled (default false)
 /mob/proc/is_muzzled()
@@ -737,8 +739,6 @@ GLOBAL_VAR_INIT(mobids, 1)
 /mob/Stat()
 	..()
 	// && check_rights(R_ADMIN,0)
-	var/ticker_time = world.time - SSticker.round_start_time
-	var/time_left = SSticker.mode.round_ends_at - ticker_time
 	if(client && client.holder)
 		if(statpanel("Status"))
 			if (client)
@@ -749,13 +749,13 @@ GLOBAL_VAR_INIT(mobids, 1)
 				stat(null, "Next Map: [cached.map_name]")
 			stat(null, "Round ID: [GLOB.rogue_round_id ? GLOB.rogue_round_id : "NULL"]")
 //			stat(null, "Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")]")
-			stat(null, "Round Time: [time2text(STATION_TIME_PASSED(), "hh:mm:ss", 0)] [world.time - SSticker.round_start_time]")
-			if(SSticker.mode?.roundvoteend)
-				stat("Round End: [DisplayTimeText(time_left)]")
+			stat(null, "Round Time: [gameTimestamp("hh:mm:ss", world.time - SSticker.round_start_time)] [world.time - SSticker.round_start_time]")
 			stat(null, "Round TrueTime: [worldtime2text()] [world.time]")
 			stat(null, "TimeOfDay: [GLOB.tod]")
 			stat(null, "IC Time: [station_time_timestamp()] [station_time()]")
 			stat(null, "Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)")
+			if(check_rights(R_ADMIN,0))
+				stat(null, SSmigrants.get_status_line())
 			if(SSshuttle.emergency)
 				var/ETA = SSshuttle.emergency.getModeStr()
 				if(ETA)
@@ -763,9 +763,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	if(client)
 		if(statpanel("RoundInfo"))
 			stat("Round ID: [GLOB.rogue_round_id]")
-			stat("Round Time: [time2text(STATION_TIME_PASSED(), "hh:mm:ss", 0)] [world.time - SSticker.round_start_time]")
-			if(SSticker.mode?.roundvoteend)
-				stat("Round End: [DisplayTimeText(time_left)]")
+			stat("Round Time: [gameTimestamp("hh:mm:ss", world.time - SSticker.round_start_time)] [world.time - SSticker.round_start_time]")
 			stat("TimeOfDay: [GLOB.tod]")
 
 	if(client && client.holder && check_rights(R_ADMIN,0))
@@ -793,7 +791,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 			GLOB.cameranet.stat_entry()
 		if(statpanel("Tickets"))
 			GLOB.ahelp_tickets.stat_entry()
-			
+
 		if(length(GLOB.sdql2_queries))
 			if(statpanel("SDQL2"))
 				stat("Access Global SDQL2 List", GLOB.sdql2_vv_statobj)

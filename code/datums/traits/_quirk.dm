@@ -2,7 +2,7 @@
 //these are NOT "mob quirks" like GOTTAGOFAST, but exist as a medium to apply them and other different effects
 /datum/quirk
 	var/name = "Test Quirk"
-	var/desc = ""
+	var/desc = "Funny quirk that does nothing."
 	var/value = 0
 	var/human_only = TRUE
 	var/gain_text

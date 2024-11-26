@@ -515,10 +515,12 @@ Class Procs:
 		if(max_integrity)
 			var/healthpercent = (obj_integrity/max_integrity) * 100
 			switch(healthpercent)
-				if(50 to 99)
-					. += "It looks slightly damaged."
+				if(75 to 99)
+					. += span_info("It looks slightly damaged.")
+				if(50 to 75)
+					. += span_info("It looks damaged.")
 				if(25 to 50)
-					. += "It appears heavily damaged."
+					. += span_warning("It appears heavily damaged.")
 				if(0 to 25)
 					. += span_warning("It's falling apart!")
 //	if(user.research_scanner && component_parts)
@@ -607,7 +609,7 @@ Class Procs:
 	if(isalien(user))
 		adjusted_climb_time *= 0.25 //aliens are terrifyingly fast
 	if(HAS_TRAIT(user, TRAIT_FREERUNNING)) //do you have any idea how fast I am???
-		adjusted_climb_time *= 0.8
+		adjusted_climb_time *= 0.5
 	adjusted_climb_time -= user.STASPD * 2
 	adjusted_climb_time = max(adjusted_climb_time, 0)
 //	if(adjusted_climb_time)

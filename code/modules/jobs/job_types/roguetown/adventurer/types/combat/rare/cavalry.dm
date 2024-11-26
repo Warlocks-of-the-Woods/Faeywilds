@@ -1,12 +1,11 @@
 /datum/advclass/cavalry
 	name = "Cavalry" // Medium armor fighter, melee-focused, expert at 1 weapon + some wrestling proefficiency, mediocre at rest. 
 	tutorial = "You wandered off from your home seeking adventure, roaming to greener pastures for honor and chilvalry. You became an instrument of war, sitting atop a saiga, weapon and shield in hand! What will await here?"
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	outfit = /datum/outfit/job/roguetown/adventurer/cavalry
 	maximum_possible_slots = 4 // Seems like an OK number??? May remove cap otherwise but lower pick prob too
-	pickprob = 50 // might as well bring it down to KE
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED)
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/combat_cavalry.ogg' // Spanish guitars fuck, don't @ me
@@ -40,21 +39,21 @@
 				r_hand = /obj/item/rogueweapon/eaglebeak/lucerne
 			else
 				r_hand = /obj/item/rogueweapon/spear/billhook
-			H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/labor/butchering, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2 , TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/polearms, 4, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/cooking, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/labor/butchering, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 2 , TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/shields, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 1, TRUE)
 			ADD_TRAIT(H, TRAIT_SCHIZO_AMBIENCE, TRAIT_GENERIC)
 			H.change_stat("strength", 2)
 			H.change_stat("endurance", 1)
@@ -79,24 +78,24 @@
 			beltr = /obj/item/flashlight/flare/torch/lantern
 			backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1)
 			if(prob(1)) //If you're THAT lucky.
-				H.mind.adjust_skillrank(/datum/skill/combat/axes, 5, TRUE)
+				H.mind.adjust_skillrank_up_to(/datum/skill/combat/axes, 5, TRUE)
 				beltl = /obj/item/rogueweapon/stoneaxe/battle
 			else
-				H.mind.adjust_skillrank(/datum/skill/combat/axes, 4, TRUE)
+				H.mind.adjust_skillrank_up_to(/datum/skill/combat/axes, 4, TRUE)
 				beltl = /obj/item/rogueweapon/stoneaxe/woodcut/steel
-			H.mind.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2 , TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/labor/lumberjacking, 2, TRUE) //i mean, if you have axes, might as well?
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/shields, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 4, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 4, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/cooking, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 2 , TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/labor/lumberjacking, 2, TRUE) //i mean, if you have axes, might as well?
 			H.change_stat("perception", -2)
 			H.change_stat("endurance", 2)
 			H.change_stat("intelligence", -2)
@@ -119,20 +118,20 @@
 			beltr = /obj/item/flashlight/flare/torch/lantern
 			backpack_contents = list(/obj/item/rogueweapon/huntingknife = 1)
 			beltl = /obj/item/rogueweapon/flail
-			H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2 , TRUE)
-			H.mind.adjust_skillrank(/datum/skill/labor/butchering, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, 4, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/shields, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 2, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/cooking, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 2 , TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/labor/butchering, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 3, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 1, TRUE)
 			H.change_stat("perception", -2)
 			H.change_stat("endurance", 1)
 			H.change_stat("intelligence", -2)

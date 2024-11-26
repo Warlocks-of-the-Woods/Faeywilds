@@ -28,7 +28,7 @@
 /datum/status_effect/buff/druqks
 	id = "druqks"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/druqks
-	effectedstats = list("endurance" = 3,"speed" = 3,"fortune" = -5)
+	effectedstats = list("intelligence" = 5,"speed" = 3,"fortune" = -5)
 	duration = 10 SECONDS
 
 /datum/status_effect/buff/druqks/on_apply()
@@ -64,7 +64,7 @@
 /datum/status_effect/buff/ozium
 	id = "ozium"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/druqks
-	effectedstats = list("speed" = -99)
+	effectedstats = list("speed" = -5, "perception" = 2)
 	duration = 30 SECONDS
 
 /datum/status_effect/buff/ozium/on_apply()
@@ -80,7 +80,7 @@
 /datum/status_effect/buff/moondust
 	id = "moondust"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/druqks
-	effectedstats = list("speed" = 3, "endurance" = 3)
+	effectedstats = list("speed" = 4, "endurance" = 4, "perception" = -3)
 	duration = 30 SECONDS
 
 /datum/status_effect/buff/moondust/nextmove_modifier()
@@ -91,13 +91,14 @@
 	owner.add_stress(/datum/stressevent/moondust)
 
 /datum/status_effect/buff/moondust/on_remove()
-	owner.remove_stress(/datum/stressevent/moondust)
 	. = ..()
+	owner.apply_status_effect(/datum/status_effect/debuff/moondust_crash)
+
 
 /datum/status_effect/buff/moondust_purest
 	id = "purest moondust"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/druqks
-	effectedstats = list("speed" = 6, "endurance" = 6)
+	effectedstats = list("speed" = 5, "endurance" = 5, "perception" = -2)
 	duration = 40 SECONDS
 
 /datum/status_effect/buff/moondust_purest/nextmove_modifier()
@@ -108,8 +109,8 @@
 	owner.add_stress(/datum/stressevent/moondust_purest)
 
 /datum/status_effect/buff/moondust_purest/on_remove()
-	owner.remove_stress(/datum/stressevent/moondust_purest)
 	. = ..()
+	owner.apply_status_effect(/datum/status_effect/debuff/moondust_crash)
 
 /datum/status_effect/buff/weed
 	id = "weed"
@@ -177,6 +178,57 @@
 	name = "Speedy"
 	desc = "Must go faster!"
 	icon_state = "muscles"
+/atom/movable/screen/alert/status_effect/buff/featherfall
+	name = "Featherfall"
+	desc = "I am somewhat protected against falling from heights."
+	icon_state = "buff"
+
+/datum/status_effect/buff/featherfall
+	id = "featherfall"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/featherfall
+	duration = 1 MINUTES
+
+/datum/status_effect/buff/featherfall/on_apply()
+	. = ..()
+	to_chat(owner, span_warning("I feel lighter."))
+	ADD_TRAIT(owner, TRAIT_NOFALLDAMAGE1, MAGIC_TRAIT)
+
+/datum/status_effect/buff/featherfall/on_remove()
+	. = ..()
+	to_chat(owner, span_warning("The feeling of lightness fades."))
+	REMOVE_TRAIT(owner, TRAIT_NOFALLDAMAGE1, MAGIC_TRAIT)
+
+/atom/movable/screen/alert/status_effect/buff/darkvision
+	name = "Darkvision"
+	desc = "I can see in the dark somewhat."
+	icon_state = "buff"
+
+/datum/status_effect/buff/darkvision
+	id = "darkvision"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/darkvision
+	duration = 10 MINUTES
+
+/datum/status_effect/buff/darkvision/on_apply()
+	. = ..()
+	to_chat(owner, span_warning("The darkness fades somewhat."))
+	ADD_TRAIT(owner, TRAIT_DARKVISION, MAGIC_TRAIT)
+
+/datum/status_effect/buff/darkvision/on_remove()
+	. = ..()
+	to_chat(owner, span_warning("The darkness returns to normal."))
+	REMOVE_TRAIT(owner, TRAIT_DARKVISION, MAGIC_TRAIT)
+
+/atom/movable/screen/alert/status_effect/buff/haste
+	name = "Haste"
+	desc = "I am magically hastened."
+	icon_state = "buff"
+
+/datum/status_effect/buff/haste
+	id = "haste"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/haste
+	effectedstats = list("speed" = 3)
+	duration = 1 MINUTES
+
 /datum/status_effect/buff/seelie_drugs
 	id = "seelie drugs"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/druqks
@@ -222,3 +274,48 @@
 	name = "Seelie Blessing"
 	desc = "A nearby Seelie has brought me fortune."
 	icon_state = "stressg"
+
+/atom/movable/screen/alert/status_effect/buff/healing
+	name = "Healing Miracle"
+	desc = "Divine intervention relieves me of my ailments."
+	icon_state = "buff"
+
+/datum/status_effect/buff/healing
+	id = "healing"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/healing
+	duration = 10 SECONDS
+	var/healing_on_tick = 1
+
+/datum/status_effect/buff/healing/tick()
+	var/obj/effect/temp_visual/heal/H = new /obj/effect/temp_visual/heal(get_turf(owner))
+	H.color = "#FF0000"
+	var/list/wCount = owner.get_wounds()
+	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
+		owner.blood_volume = min(owner.blood_volume+10, BLOOD_VOLUME_NORMAL)
+	if(wCount.len > 0)
+		owner.heal_wounds(healing_on_tick)
+		owner.update_damage_overlays()
+	owner.adjustBruteLoss(-healing_on_tick, 0)
+	owner.adjustFireLoss(-healing_on_tick, 0)
+	owner.adjustOxyLoss(-healing_on_tick, 0)
+	owner.adjustToxLoss(-healing_on_tick, 0)
+	owner.adjustOrganLoss(ORGAN_SLOT_LUNGS, -healing_on_tick)
+	owner.adjustOrganLoss(ORGAN_SLOT_HEART, -healing_on_tick)
+	owner.adjustOrganLoss(ORGAN_SLOT_TONGUE, -healing_on_tick)
+	owner.adjustOrganLoss(ORGAN_SLOT_EARS, -healing_on_tick)
+	owner.adjustOrganLoss(ORGAN_SLOT_EYES, -healing_on_tick)
+	owner.adjustOrganLoss(ORGAN_SLOT_LIVER, -healing_on_tick)
+	owner.adjustOrganLoss(ORGAN_SLOT_APPENDIX, -healing_on_tick)
+	owner.adjustOrganLoss(ORGAN_SLOT_STOMACH, -healing_on_tick)
+	owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -healing_on_tick)
+	owner.adjustCloneLoss(-healing_on_tick, 0)
+
+/atom/movable/screen/alert/status_effect/buff/fortify
+	name = "Fortifying Miracle"
+	desc = "Divine intervention bolsters me and aids my recovery."
+	icon_state = "buff"
+
+/datum/status_effect/buff/fortify //Increases all healing while it lasts.
+	id = "fortify"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/fortify
+	duration = 1 MINUTES

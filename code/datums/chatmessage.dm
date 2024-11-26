@@ -118,12 +118,17 @@
 	// We dim italicized text to make it more distinguishable from regular text
 	var/tgt_color = extra_classes.Find("italics") ? target.chat_color_darkened : target.chat_color
 
+	var/font_size = 8
+	if(extra_classes.Find("emote"))
+		font_size = 7
+		tgt_color = "#adadad"
+
 	// Approximate text height
 	// Note we have to replace HTML encoded metacharacters otherwise MeasureText will return a zero height
 	// BYOND Bug #2563917
 	// Construct text
 	var/static/regex/html_metachars = new(@"&[A-Za-z]{1,7};", "g")
-	var/complete_text = {"<span style='font-size:8pt;font-family:"Pterra";color:[tgt_color];text-shadow:0 0 5px #000,0 0 5px #000,0 0 5px #000,0 0 5px #000;' class='center maptext [extra_classes != null ? extra_classes.Join(" ") : ""]' style='color: [tgt_color]'>[text]</span>"}
+	var/complete_text = {"<span style='font-size:[font_size]pt;font-family:"Pterra";color:[tgt_color];text-shadow:0 0 5px #000,0 0 5px #000,0 0 5px #000,0 0 5px #000;' class='center maptext [extra_classes != null ? extra_classes.Join(" ") : ""]' style='color: [tgt_color]'>[text]</span>"}
 
 	var/mheight
 	WXH_TO_HEIGHT(owned_by.MeasureText(complete_text, null, CHAT_MESSAGE_WIDTH), mheight)
@@ -140,7 +145,7 @@
 	if(!target || QDELETED(target))
 		return qdel(src)
 	approx_lines = max(1, mheight / CHAT_MESSAGE_APPROX_LHEIGHT)
-	message_loc = target
+	message_loc = get_atom_on_turf(target)
 	// Translate any existing messages upwards, apply exponential decay factors to timers
 	if (owned_by.seen_messages)
 //		var/idx = 1
@@ -217,8 +222,14 @@
 	if (originalSpeaker != src && speaker == src)
 		return
 
+	var/text
+	if(spans.Find("emote"))
+		text = raw_message
+	else
+		text = lang_treat(speaker, message_language, raw_message, spans, null, TRUE)
+
 	// Display visual above source
-	new /datum/chatmessage(lang_treat(speaker, message_language, raw_message, spans, null, TRUE), speaker, src, spans)
+	new /datum/chatmessage(text, speaker, src, spans)
 
 
 // Tweak these defines to change the available color ranges

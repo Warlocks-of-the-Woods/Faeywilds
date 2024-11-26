@@ -235,7 +235,7 @@
 			var/mob/living/carbon/human/B = A
 			B.buried = FALSE
 	..()
-	
+
 /obj/structure/closet/dirthole/open(mob/living/user)
 	if(opened)
 		return
@@ -308,4 +308,3 @@
 /obj/structure/closet/dirthole/post_unbuckle_mob()
 	. = ..()
 	update_abovemob()
-

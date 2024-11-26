@@ -1,5 +1,5 @@
 /datum/job/roguetown/undertaker
-	title = "Mortician"
+	title = "Gravesinger"
 	flag = GRAVEDIGGER
 	department_flag = CHURCHMEN
 	faction = "Station"
@@ -7,9 +7,9 @@
 	spawn_positions = 3
 
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 	allowed_patrons = ALL_DIVINE_PATRONS //gets set to necra on the outfit anyways lol
-	tutorial = "As an acolyte of Necra, you have been given the not-so-graceful task of putting the dead to rest instead of healing the living. It isn't a great job by any means, but surely Necra doesn't mind if you take a few trinkets from the dead, right?"
+	tutorial = "As an acolyte of a death god, you have been given the honor and rites  of putting the dead to rest instead of healing the living. Yamais bestows much wisdom in her reminders of our balance in life. Will you toil for her?"
 
 	outfit = /datum/outfit/job/roguetown/undertaker
 	display_order = JDO_GRAVEMAN
@@ -18,7 +18,7 @@
 	max_pq = null
 
 /datum/outfit/job/roguetown/undertaker
-	allowed_patrons = list(/datum/patron/divine/necra)
+	allowed_patrons = list(/datum/patron/divine/necra,/datum/patron/divine/pestra)
 
 /datum/outfit/job/roguetown/undertaker/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -36,18 +36,18 @@
 	backr = /obj/item/rogueweapon/shovel
 	backl = /obj/item/storage/backpack/rogue/satchel
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, rand(2, 3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/magic/holy, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/magic/holy, 3, TRUE)
 		if(H.age == AGE_OLD)
-			H.mind.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/magic/holy, 1, TRUE)
 		H.change_stat("strength", 1)
 		H.change_stat("constitution", 2)
 		H.change_stat("intelligence", -2)

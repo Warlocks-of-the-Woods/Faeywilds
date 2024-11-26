@@ -5,15 +5,13 @@
 	name = "Sissean"
 	id = "lizardfolk"
 	desc = "<b>Sissean</b><br>\
-		Similar to both the Drakians and Kobolds, Sisseans are a lizardlike people, with sharp claws and teeth. \
-		They prefer bogland to reside in, and many Sisseans live on the Island of Enigma, in some of its many bogs, a brave few even settling in the Terrorbog. \
-		Not as crafty or artistic as Humens, Elves or Dwarves, the Sisseans, like their Drakian cousins, much prefer martial roles to those of artisans or smiths. \
-		The Drakians look down on the Sisseans as being lesser, bog dwelling simpletons, but the Sisseans are largely content with their lot in life, and are a generally friendly people. \
-		They prefer to worship Abyssor in the Divine Pantheon, but others are known to worship Astrata, Ravox and Dendor."
-
+	Sisseans are semi-aquatic reptilian humanoids that have lived in the low bogs surrounding StoneHedge for centuries. \
+	Though not as inclined to industry as the dwarves, and not as crafty as the other Humen and Wild-Kin natives, our strength is enormous, eclipsed only perhaps by the Draken.\
+	Though we are less perceptive and slower than other races, our constitution and strength are impressive. \
+	We also have sharp claws and teeth."
 	skin_tone_wording = "Skin Colors"
 	species_traits = list(EYECOLOR,LIPS,STUBBLE,MUTCOLORS)
-	inherent_traits = list(TRAIT_NOMOBSWAP)
+	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_WILD_EATER, TRAIT_STRONGBITE,)
 	possible_ages = ALL_AGES_LIST
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mt.dmi'
@@ -26,7 +24,7 @@
 		OFFSET_ID = list(0,1), OFFSET_GLOVES = list(0,1), OFFSET_WRISTS = list(0,1),\
 		OFFSET_CLOAK = list(0,1), OFFSET_FACEMASK = list(0,1), OFFSET_HEAD = list(0,1), \
 		OFFSET_FACE = list(0,1), OFFSET_BELT = list(0,1), OFFSET_BACK = list(0,1), \
-		OFFSET_NECK = list(0,1), OFFSET_MOUTH = list(0,1), OFFSET_PANTS = list(0,1), \
+		OFFSET_NECK = list(0,1), OFFSET_MOUTH = list(0,1), OFFSET_PANTS = list(0,0), \
 		OFFSET_SHIRT = list(0,1), OFFSET_ARMOR = list(0,1), OFFSET_HANDS = list(0,1), OFFSET_UNDIES = list(0,1), \
 		OFFSET_ID_F = list(0,-1), OFFSET_GLOVES_F = list(0,0), OFFSET_WRISTS_F = list(0,0), OFFSET_HANDS_F = list(0,0), \
 		OFFSET_CLOAK_F = list(0,0), OFFSET_FACEMASK_F = list(0,-1), OFFSET_HEAD_F = list(0,-1), \
@@ -34,8 +32,8 @@
 		OFFSET_NECK_F = list(0,-1), OFFSET_MOUTH_F = list(0,-1), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1), \
 		)
-	specstats = list("strength" = 2, "perception" = 0, "intelligence" = -1, "constitution" = 1, "endurance" = 1, "speed" = -1, "fortune" = 0)
-	specstats_f = list("strength" = 1, "perception" = -1, "intelligence" = 2, "constitution" = 0, "endurance" = 1, "speed" = 0, "fortune" = 0)
+	specstats = list("strength" = 2, "perception" = 0, "intelligence" = -1, "constitution" = 1, "endurance" = 1, "speed" = 1, "fortune" = 0)
+	specstats_f = list("strength" = 2, "perception" = 0, "intelligence" = -1, "constitution" = 1, "endurance" = 1, "speed" = 1, "fortune" = 0)
 	race_bonus = list(STAT_CONSTITUTION = 1)
 	enflamed_icon = "widefire"
 	attack_verb = "slash"
@@ -51,7 +49,8 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
-		ORGAN_SLOT_TAIL = /obj/item/organ/tail/lizard,
+		ORGAN_SLOT_ANUS = /obj/item/organ/filling_organ/anus,
+		//ORGAN_SLOT_TAIL = /obj/item/organ/tail/lizard, //Commenting out due to use of customizer organs.
 		ORGAN_SLOT_SNOUT = /obj/item/organ/snout/lizard,
 		ORGAN_SLOT_TAIL_FEATURE = /obj/item/organ/tail_feature/lizard_spines,
 		ORGAN_SLOT_FRILLS = /obj/item/organ/frills/lizard,
@@ -73,6 +72,7 @@
 		/datum/customizer/organ/penis/lizard,
 		/datum/customizer/organ/breasts/animal,
 		/datum/customizer/organ/belly/animal,
+		/datum/customizer/organ/butt/animal,
 		/datum/customizer/organ/vagina/animal,
 		)
 	body_marking_sets = list(
@@ -82,6 +82,8 @@
 		/datum/body_marking_set/tiger_dark,
 	)
 	body_markings = list(
+		/datum/body_marking/flushed_cheeks,
+		/datum/body_marking/eyeliner,
 		/datum/body_marking/bellyscale,
 		/datum/body_marking/bellyscaleslim,
 		/datum/body_marking/bellyscaleslimsmooth,
@@ -98,6 +100,7 @@
 		/datum/language/draconic
 	)
 	descriptor_choices = list(
+		/datum/descriptor_choice/height,
 		/datum/descriptor_choice/body,
 		/datum/descriptor_choice/stature,
 		/datum/descriptor_choice/face,
@@ -106,6 +109,8 @@
 		/datum/descriptor_choice/voice,
 		/datum/descriptor_choice/prominent_one,
 		/datum/descriptor_choice/prominent_two,
+		/datum/descriptor_choice/prominent_three,
+		/datum/descriptor_choice/prominent_four,
 	)
 
 /datum/species/lizardfolk/check_roundstart_eligible()

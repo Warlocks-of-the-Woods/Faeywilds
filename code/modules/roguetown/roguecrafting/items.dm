@@ -168,7 +168,6 @@
 	reqs = list(/obj/item/rogueweapon/sickle = 1,
 				/obj/item/rope = 1,
 				/obj/item/grown/log/tree/small = 1)
-	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/goedendag
@@ -177,7 +176,6 @@
 	reqs = list(/obj/item/grown/log/tree/small = 1,
 				/obj/item/rope = 1,
 				/obj/item/rogueweapon/hoe = 1)
-	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/peasantwarflail
@@ -186,24 +184,37 @@
 	reqs = list(/obj/item/grown/log/tree/small = 1,
 				/obj/item/rope = 1,
 				/obj/item/rogueweapon/thresher = 1)
-	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
 
-/datum/crafting_recipe/roguetown/lproesthetic
+/datum/crafting_recipe/roguetown/larmprosthetic_w
 	name = "wood arm (L)"
-	result = list(/obj/item/bodypart/l_arm/rproesthetic)
+	result = list(/obj/item/bodypart/l_arm/rprosthetic)
 	reqs = list(/obj/item/grown/log/tree/small = 1,
 	/obj/item/roguegear = 1)
 	skillcraft = /datum/skill/craft/carpentry
 	craftdiff = 3
 
-/datum/crafting_recipe/roguetown/rproesthetic
+/datum/crafting_recipe/roguetown/rarmprosthetic_w
 	name = "wood arm (R)"
-	result = list(/obj/item/bodypart/r_arm/rproesthetic)
+	result = list(/obj/item/bodypart/r_arm/rprosthetic)
 	reqs = list(/obj/item/grown/log/tree/small = 1,
 	/obj/item/roguegear = 1)
 	skillcraft = /datum/skill/craft/carpentry
 	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/rlegprosthetic_w
+	name = "peg leg (R)"
+	result = list(/obj/item/bodypart/r_leg/rprosthetic)
+	reqs = list(/obj/item/grown/log/tree/small = 1)
+	skillcraft = /datum/skill/craft/carpentry
+	craftdiff = 1
+
+/datum/crafting_recipe/roguetown/llegprosthetic_w
+	name = "peg_leg (L)"
+	result = list(/obj/item/bodypart/l_leg/rprosthetic)
+	reqs = list(/obj/item/grown/log/tree/small = 1)
+	skillcraft = /datum/skill/craft/carpentry
+	craftdiff = 1
 
 /obj/item/rogueweapon/mace/woodclub/crafted
 	sellprice = 8
@@ -213,7 +224,7 @@
 	result = list(/obj/item/rogueweapon/woodstaff,
 	/obj/item/rogueweapon/woodstaff,
 	/obj/item/rogueweapon/woodstaff)
-	reqs = list(/obj/item/grown/log/tree = 1)
+	reqs = list(/obj/item/grown/log/tree/large = 1)
 
 /datum/crafting_recipe/roguetown/woodsword
 	name = "wood sword"
@@ -333,7 +344,7 @@
 				)
 	req_table = FALSE
 
-/*
+
 /datum/crafting_recipe/roguetown/poisonbolt //Coded, but commented out pending balance discussion.
 	name = "poisoned bolt"
 	result = /obj/item/ammo_casing/caseless/rogue/bolt/poison
@@ -341,7 +352,7 @@
 				/datum/reagent/berrypoison = 5)
 
 	req_table = TRUE
-*/
+
 /datum/crafting_recipe/roguetown/poisonarrow_five //Arrows and bolts can be smithed in batches of five. Makes sense for them to be dipped in batches of five, too
 	name = "poisoned arrow (x5)"
 	result = list(
@@ -400,7 +411,6 @@
 
 	req_table = FALSE
 
-/*
 /datum/crafting_recipe/roguetown/poisonbolt_five //Coded, but commented out pending balance discussion.
 	name = "poisoned bolts (x5)"
 	result = list(/obj/item/ammo_casing/caseless/rogue/bolt/poison = 5)
@@ -408,7 +418,7 @@
 				/datum/reagent/berrypoison = 25)
 
 	req_table = TRUE
-*/
+
 /datum/crafting_recipe/roguetown/poisonarrow_five_stone
 	name = "poisoned stone arrow (x5)"
 	result = list(
@@ -441,18 +451,39 @@
 
 	req_table = FALSE
 
+/datum/crafting_recipe/roguetown/bandage
+	name = "roll of bandages"
+	result = /obj/item/natural/bundle/cloth/bandage/full
+	reqs = list(/obj/item/natural/cloth = 3, /obj/item/ash = 1,)
+	craftdiff = 2
+	skillcraft = /datum/skill/misc/medicine
+
 /datum/crafting_recipe/roguetown/mortar
-	name = "stone mortar"
+	name = "mortar and pestle"
 	result = /obj/item/reagent_containers/glass/mortar
-	reqs = list(/obj/item/natural/stone = 1)
+	reqs = list(/obj/item/grown/log/tree/stick = 1, /obj/item/grown/log/tree/small = 1,)
+	craftdiff = 1
+	skillcraft = /datum/skill/craft/crafting
+
+/datum/crafting_recipe/roguetown/psteel
+	name = "pig iron mix"
+	result = /obj/item/rogueore/psteel
+	reqs = list(/obj/item/rogueore/coal = 1, /obj/item/ingot/iron = 2,)
+	craftdiff = 3
+	skillcraft = /datum/skill/craft/blacksmithing
+
+/datum/crafting_recipe/roguetown/whet
+	name = "whet stone"
+	result = /obj/item/natural/whet
+	reqs = list(/obj/item/natural/stone = 2)
 	craftdiff = 1
 
-/datum/crafting_recipe/roguetown/pestle
-	name = "stone pestle"
-	result = /obj/item/pestle
-	reqs = list(/obj/item/natural/stone = 1)
-	craftdiff = 1
-
+/datum/crafting_recipe/roguetown/rucksack
+	name = "Rucksack"
+	result = /obj/item/storage/backpack/rogue/backpack/rucksack
+	reqs = list(/obj/item/rope = 1, /obj/item/storage/roguebag/crafted = 1,)
+	craftdiff = 0
+	skillcraft = /datum/skill/craft/crafting
 
 /datum/crafting_recipe/roguetown/bag
 	name = "bag"
@@ -503,7 +534,7 @@
 	result = /obj/item/bait
 	reqs = list(/obj/item/storage/roguebag = 1,
 				/obj/item/reagent_containers/food/snacks/grown/wheat = 2)
-	req_table = TRUE
+	req_table = FALSE
 	subtype_reqs = TRUE
 
 /datum/crafting_recipe/roguetown/sbaita
@@ -511,7 +542,7 @@
 	result = /obj/item/bait/sweet
 	reqs = list(/obj/item/storage/roguebag = 1,
 				/obj/item/reagent_containers/food/snacks/grown/apple = 2)
-	req_table = TRUE
+	req_table = FALSE
 	subtype_reqs = TRUE
 
 /datum/crafting_recipe/roguetown/sbait
@@ -519,7 +550,7 @@
 	result = /obj/item/bait/sweet
 	reqs = list(/obj/item/storage/roguebag = 1,
 				/obj/item/reagent_containers/food/snacks/grown/berries/rogue = 2)
-	req_table = TRUE
+	req_table = FALSE
 	subtype_reqs = TRUE
 
 /datum/crafting_recipe/roguetown/bloodbait
@@ -527,7 +558,7 @@
 	result = /obj/item/bait/bloody
 	reqs = list(/obj/item/storage/roguebag = 1,
 				/obj/item/reagent_containers/food/snacks/rogue/meat = 2)
-	req_table = TRUE
+	req_table = FALSE
 	subtype_reqs = TRUE
 
 /datum/crafting_recipe/roguetown/pipe
@@ -638,7 +669,7 @@
 	sellprice = 4
 	verbage_simple = "craft"
 	verbage = "crafted"
-	craftdiff = 0	
+	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/bonearmor
 	name = "bone armor"
@@ -648,7 +679,7 @@
 	sellprice = 1
 	verbage_simple = "craft"
 	verbage = "crafted"
-	craftdiff = 0	
+	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/bonegreaves
 	name = "bone greaves"
@@ -658,7 +689,7 @@
 	sellprice = 1
 	verbage_simple = "craft"
 	verbage = "crafted"
-	craftdiff = 0	
+	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/antlerhood
 	name = "antlerhood"
@@ -675,15 +706,89 @@
 /datum/crafting_recipe/roguetown/boneaxe
 	name = "bone axe"
 	result = /obj/item/rogueweapon/stoneaxe/boneaxe
-	reqs = list(/obj/item/grown/log/tree/small = 1,
+	reqs = list(/obj/item/natural/stone = 1,
 				/obj/item/natural/bone = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 2
 
+
+///CONVERSIONS
+
+/datum/crafting_recipe/roguetown/leatherskirtconv
+	name = "leather pants to skirt"
+	result = list(/obj/item/clothing/under/roguetown/trou/skirt)
+	reqs = list(/obj/item/clothing/under/roguetown/trou/leather = 1)
+
+/datum/crafting_recipe/roguetown/larmorconvone
+	name = "leather armor to bikini"
+	result = /obj/item/clothing/suit/roguetown/armor/leather/bikini
+	reqs = list(/obj/item/clothing/suit/roguetown/armor/leather = 1)
+
+/datum/crafting_recipe/roguetown/larmorconvtwo
+	name = "leather bikini to bra"
+	result = /obj/item/clothing/suit/roguetown/armor/leather/bikini/bra
+	reqs = list(/obj/item/clothing/suit/roguetown/armor/leather/bikini = 1)
+
+/datum/crafting_recipe/roguetown/hidearmorconvone
+	name = "hide armor to bikini"
+	result = /obj/item/clothing/suit/roguetown/armor/leather/hide/bikini
+	reqs = list(/obj/item/clothing/suit/roguetown/armor/leather/hide = 1)
+
+/datum/crafting_recipe/roguetown/hidearmorconvtwo
+	name = "hide bikini to bra"
+	result = /obj/item/clothing/suit/roguetown/armor/leather/hide/bikini/bra
+	reqs = list(/obj/item/clothing/suit/roguetown/armor/leather/hide/bikini = 1)
+
+/datum/crafting_recipe/roguetown/furlinedankletsconv
+	name = "fur-lined boots to anklets"
+	result = /obj/item/clothing/shoes/roguetown/boots/furlinedanklets
+	reqs = list(/obj/item/clothing/shoes/roguetown/boots/furlinedboots = 1)
+	craftdiff = 1
+
+/datum/crafting_recipe/roguetown/studdedconvone
+	name = "studded armor to bikini"
+	result = list(/obj/item/clothing/suit/roguetown/armor/leather/studded/bikini)
+	reqs = list(/obj/item/clothing/suit/roguetown/armor/leather/studded = 1)
+
+/datum/crafting_recipe/roguetown/studdedconvtwo
+	name = "studded bikini to bra"
+	result = list(/obj/item/clothing/suit/roguetown/armor/leather/studded/bikini/bra)
+	reqs = list(/obj/item/clothing/suit/roguetown/armor/leather/studded/bikini = 1)
+
+/datum/crafting_recipe/roguetown/ichainkiniconv
+	name = "chainmail bikini to bra"
+	result = list(/obj/item/clothing/suit/roguetown/armor/chainmail/iron/bikini/bra)
+	reqs = list(/obj/item/clothing/suit/roguetown/armor/chainmail/iron/bikini = 1)
+
+/datum/crafting_recipe/roguetown/chainkiniconv
+	name = "chainmail bikini to bra"
+	result = list(/obj/item/clothing/suit/roguetown/armor/chainmail/bikini/bra)
+	reqs = list(/obj/item/clothing/suit/roguetown/armor/chainmail/bikini = 1)
+
+/datum/crafting_recipe/roguetown/halfplateconvone
+	name = "halfplate armor to bikini"
+	result = list(/obj/item/clothing/suit/roguetown/armor/plate/bikini)
+	reqs = list(/obj/item/clothing/suit/roguetown/armor/plate = 1)
+
+/datum/crafting_recipe/roguetown/halfplateconvtwo
+	name = "halfplate bikini to bra"
+	result = list(/obj/item/clothing/suit/roguetown/armor/plate/bikini/bra)
+	reqs = list(/obj/item/clothing/suit/roguetown/armor/plate/bikini = 1)
+
+/datum/crafting_recipe/roguetown/halfplateconvone
+	name = "fullplate armor to bikini"
+	result = list(/obj/item/clothing/suit/roguetown/armor/plate/full/bikini)
+	reqs = list(/obj/item/clothing/suit/roguetown/armor/plate/full = 1)
+
+/datum/crafting_recipe/roguetown/halfplateconvtwo
+	name = "fullplate bikini to bra"
+	result = list(/obj/item/clothing/suit/roguetown/armor/plate/full/bikini/bra)
+	reqs = list(/obj/item/clothing/suit/roguetown/armor/plate/full/bikini = 1)
+
 /datum/crafting_recipe/roguetown/bonespear
 	name = "bone spear"
 	result = /obj/item/rogueweapon/spear/bonespear
-	reqs = list(/obj/item/rogueweapon/woodstaff = 1,
+	reqs = list(/obj/item/natural/stone = 1,
 				/obj/item/natural/bone = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 3
@@ -696,7 +801,7 @@
 	sellprice = 1
 	verbage_simple = "craft"
 	verbage = "crafted"
-	craftdiff = 0		
+	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/banner
 	name = "battle standard"
@@ -704,6 +809,97 @@
 	reqs = list(/obj/item/grown/log/tree/stick = 1,
 				/obj/item/grown/log/tree/small = 1)
 	craftdiff = 1
+/datum/crafting_recipe/roguetown/briarmask
+	name = "briarmask"
+	result = /obj/item/clothing/head/roguetown/dendormask
+	reqs = list(/obj/item/grown/log/tree/stick = 4,
+				/obj/item/natural/fibers = 3)
+	skillcraft = /datum/skill/magic/druidic
+	craftdiff = 2 // druids & dendor clerics can craft
+
+// --------- GLASS -----------
+
+/datum/crafting_recipe/roguetown/glassbottle
+	name = "Glass bottle (x2)"
+	reqs = list(/obj/item/ingot/glass)
+	result = list(/obj/item/reagent_containers/glass/bottle/rogue,/obj/item/reagent_containers/glass/bottle/rogue)
+	skillcraft = /datum/skill/craft/smelting
+	structurecraft = /obj/machinery/light/rogue/smelter
+	always_availible = FALSE
+	craftdiff = 1
+
+/datum/crafting_recipe/roguetown/glasssyringe
+	name = "Glass syringe (x3)"
+	reqs = list(/obj/item/ingot/glass)
+	result = list(/obj/item/reagent_containers/syringe,/obj/item/reagent_containers/syringe,/obj/item/reagent_containers/syringe)
+	skillcraft = /datum/skill/craft/smelting
+	structurecraft = /obj/machinery/light/rogue/smelter
+	always_availible = FALSE
+	craftdiff = 2 //small and more detailed in workings i guess.
+
+//gunmaking slop
+/datum/crafting_recipe/roguetown/firingpim
+	name = "Firing pin"
+	reqs = list(/obj/item/ingot/iron)
+	result = list(/obj/item/firing_pin)
+	skillcraft = /datum/skill/craft/engineering
+	structurecraft = /obj/machinery/light/rogue/smelter
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/firearmstock
+	name = "Firearm stock"
+	reqs = list(/obj/item/grown/log/tree/small)
+	result = list(/obj/item/weaponcrafting/stock)
+	skillcraft = /datum/skill/craft/engineering
+	craftdiff = 1
+
+/datum/crafting_recipe/roguetown/firearmparts
+	name = "Firearm parts"
+	reqs = list(/obj/item/ingot/iron)
+	result = list(/obj/item/weaponcrafting/receiver)
+	skillcraft = /datum/skill/craft/engineering
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/firearmbarrel
+	name = "Firearm barrel"
+	reqs = list(/obj/item/ingot/iron)
+	result = list(/obj/item/weaponcrafting/barrel)
+	skillcraft = /datum/skill/craft/engineering
+	craftdiff = 1
+
+/datum/crafting_recipe/roguetown/arquebus
+	name = "Arquebus"
+	reqs = list(/obj/item/ingot/steel, /obj/item/weaponcrafting/barrel, /obj/item/weaponcrafting/receiver, /obj/item/grown/log/tree/small, /obj/item/weaponcrafting/stock, /obj/item/firing_pin)
+	result = list(/obj/item/gun/ballistic/arquebus)
+	skillcraft = /datum/skill/craft/engineering
+	craftdiff = 4 //le ultimate challenge
+
+/datum/crafting_recipe/roguetown/handgonne
+	name = "Handgonne"
+	reqs = list(/obj/item/ingot/steel, /obj/item/weaponcrafting/barrel, /obj/item/weaponcrafting/receiver, /obj/item/grown/log/tree/small, /obj/item/weaponcrafting/stock, /obj/item/firing_pin)
+	result = list(/obj/item/gun/ballistic/handgonne)
+	skillcraft = /datum/skill/craft/engineering
+	craftdiff = 4
+
+/datum/crafting_recipe/roguetown/arquebuspistol
+	name = "Arquebus pistol"
+	reqs = list(/obj/item/ingot/steel, /obj/item/weaponcrafting/barrel, /obj/item/weaponcrafting/receiver, /obj/item/grown/log/tree/small, /obj/item/firing_pin)
+	result = list(/obj/item/gun/ballistic/arquebus_pistol)
+	skillcraft = /datum/skill/craft/engineering
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/firearmramrod
+	name = "replacement ramrod"
+	reqs = list(/obj/item/ingot/iron)
+	result = list(/obj/item/ramrod)
+	skillcraft = /datum/skill/craft/engineering
+	craftdiff = 1
+
+/datum/crafting_recipe/roguetown/ironbullet
+	name = "iron bullets (x5)"
+	reqs = list(/obj/item/ingot/iron)
+	result = list(/obj/item/ammo_casing/caseless/rogue/bullet, /obj/item/ammo_casing/caseless/rogue/bullet, /obj/item/ammo_casing/caseless/rogue/bullet, /obj/item/ammo_casing/caseless/rogue/bullet, /obj/item/ammo_casing/caseless/rogue/bullet)
+	skillcraft = /datum/skill/craft/engineering
 
 
 /datum/crafting_recipe/roguetown/tarot_deck

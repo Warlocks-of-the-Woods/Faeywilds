@@ -8,6 +8,12 @@
 	var/plant_def_type
 	var/seed_identity = "some seed"
 
+/obj/item/seeds/Initialize()
+	. = ..()
+	if(plant_def_type)
+		var/datum/plant_def/def = GLOB.plant_defs[plant_def_type]
+		color = def.seed_color
+
 /obj/item/seeds/examine(mob/user)
 	. = ..()
 	var/show_real_identity = FALSE
@@ -29,7 +35,7 @@
 	if(soil)
 		try_plant_seed(user, soil)
 		return
-	else if(istype(T, /turf/open/floor/rogue/dirt))
+	else if(istype(T, /turf/open/floor/rogue/dirt)||istype(T, /turf/open/floor/rogue/grass))
 		to_chat(user, span_notice("I begin making a mound for the seeds..."))
 		if(do_after(user, get_farming_do_time(user, 10 SECONDS), target = src))
 			apply_farming_fatigue(user, 30)
@@ -108,11 +114,93 @@
 /obj/item/seeds/garlic
 	seed_identity = "garlic seeds"
 	plant_def_type = /datum/plant_def/garlic
+/obj/item/seeds/cabbage
+	seed_identity = "cabbage seeds"
+	plant_def_type = /datum/plant_def/cabbage
+
+/obj/item/seeds/pear
+	seed_identity = "pear seeds"
+	plant_def_type = /datum/plant_def/pear
+
+/obj/item/seeds/cherry
+	seed_identity = "cherry seeds"
+	plant_def_type = /datum/plant_def/cherry
+
+/obj/item/seeds/olive
+	seed_identity = "olive seeds"
+	plant_def_type = /datum/plant_def/olive
+
+/obj/item/seeds/nut
+	seed_identity = "rocknut seeds"
+	plant_def_type = /datum/plant_def/nut
+
+/obj/item/seeds/tomato
+	seed_identity = "tomato seeds"
+	plant_def_type = /datum/plant_def/tomato
 
 /obj/item/seeds/onion
 	seed_identity = "onion seeds"
 	plant_def_type = /datum/plant_def/onion
+/obj/item/seeds/garlic
+	seed_identity = "garlic seeds"
+	plant_def_type = /datum/plant_def/garlic
 
-/obj/item/seeds/cabbage
-	seed_identity = "cabbage seeds"
-	plant_def_type = /datum/plant_def/cabbage
+/obj/item/seeds/carrot
+	seed_identity = "carrot seeds"
+	plant_def_type = /datum/plant_def/carrot
+
+/obj/item/seeds/potato
+	seed_identity = "potato eyes"
+	plant_def_type = /datum/plant_def/potato
+
+/obj/item/seeds/eggplant
+	seed_identity = "eggplant seeds"
+	plant_def_type = /datum/plant_def/eggplant
+
+/obj/item/seeds/bean
+	seed_identity = "bean seeds"
+	plant_def_type = /datum/plant_def/bean
+
+/obj/item/seeds/radish
+	seed_identity = "radish seeds"
+	plant_def_type = /datum/plant_def/radish
+
+/obj/item/seeds/beet
+	seed_identity = "sugarbeet seeds"
+	plant_def_type = /datum/plant_def/beet
+
+/obj/item/seeds/bellpepper
+	seed_identity = "little tiefling eggs"
+	plant_def_type = /datum/plant_def/bellpepper
+
+/obj/item/seeds/peas
+	seed_identity = "pea seeds"
+	plant_def_type = /datum/plant_def/peas
+
+/obj/item/seeds/rice
+	seed_identity = "rice seeds"
+	plant_def_type = /datum/plant_def/rice
+
+/obj/item/seeds/cucumber
+	seed_identity = "cucumber seeds"
+	plant_def_type = /datum/plant_def/cucumber
+
+/obj/item/seeds/tea
+	seed_identity = "tea seeds"
+	plant_def_type = /datum/plant_def/tea
+
+/obj/item/seeds/mycelium
+	name = "spores"
+	icon_state = "mycelium"
+
+/obj/item/seeds/mycelium/plumphelmet
+	seed_identity = "plump helmet spores"
+	plant_def_type = /datum/plant_def/plumphelmet
+
+/obj/item/seeds/mycelium/trippy
+	seed_identity = "blue mushroom spores"
+	plant_def_type = /datum/plant_def/trippy
+
+/obj/item/seeds/mycelium/amanita
+	seed_identity = "red mushroom spores"
+	plant_def_type = /datum/plant_def/amanita

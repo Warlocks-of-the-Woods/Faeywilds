@@ -52,9 +52,6 @@
 	var/gamemode_ready = FALSE //Is the gamemode all set up and ready to start checking for ending conditions.
 	var/setup_error		//What stopepd setting up the mode.
 
-	var/roundvoteend = FALSE
-	var/round_ends_at
-
 	var/list/datum/mind/villains = list() //Murders Runtimes via shoving this into parent
 	var/list/datum/mind/liches = list()
 	var/list/datum/mind/vampires = list()
@@ -400,6 +397,8 @@
 		if(is_antag_banned(player.ckey, role))
 			continue
 		if(is_total_antag_banned(player.ckey))
+			continue
+		if(role == ROLE_BANDIT && isseelie(player.client?.prefs?.pref_species?.type))
 			continue
 		if(player.ready == PLAYER_READY_TO_PLAY && player.check_preferences())
 //			if(player.client && player.client.whitelisted() && !player.client.blacklisted())

@@ -73,14 +73,20 @@
 	icon = null
 	var/oldinv = invisibility
 	invisibility = INVISIBILITY_MAXIMUM
-	cmode = FALSE
+	set_cmode(FALSE)
 	if(client)
 		SSdroning.play_area_sound(get_area(src), client)
 //	stop_cmusic()
 
 	src.fully_heal(FALSE)
 
-	var/mob/living/carbon/human/species/werewolf/W = new (loc)
+	var/ww_path
+	if(gender == MALE)
+		ww_path = /mob/living/carbon/human/species/werewolf/male
+	else
+		ww_path = /mob/living/carbon/human/species/werewolf/female
+
+	var/mob/living/carbon/human/species/werewolf/W = new ww_path(loc)
 
 	W.set_patron(src.patron)
 	W.gender = gender
@@ -111,15 +117,10 @@
 	to_chat(W, span_userdanger("I transform into a horrible beast!"))
 	W.emote("rage")
 
-	W.stress = stress
-
 	W.mind.adjust_skillrank(/datum/skill/combat/wrestling, 6, TRUE)
 	W.mind.adjust_skillrank(/datum/skill/combat/unarmed, 6, TRUE)
 	W.mind.adjust_skillrank(/datum/skill/misc/climbing, 6, TRUE)
 
-	W.STASTR = 20
-	W.STACON = 20
-	W.STAEND = 20
 	if(isseelie(W.stored_mob))
 		W.change_stat("speed", -3)
 
@@ -135,6 +136,7 @@
 	ADD_TRAIT(W, TRAIT_BASHDOORS, TRAIT_GENERIC)
 	ADD_TRAIT(W, TRAIT_SHOCKIMMUNE, TRAIT_GENERIC)
 	ADD_TRAIT(W, TRAIT_STEELHEARTED, TRAIT_GENERIC)
+	ADD_TRAIT(W, TRAIT_TOLERANT, TRAIT_GENERIC)
 	ADD_TRAIT(W, TRAIT_BREADY, TRAIT_GENERIC)
 	ADD_TRAIT(W, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
 	ADD_TRAIT(W, TRAIT_ORGAN_EATER, TRAIT_GENERIC)
@@ -153,15 +155,15 @@
 	if(getorganslot(ORGAN_SLOT_PENIS))
 		W.internal_organs_slot[ORGAN_SLOT_PENIS] = /obj/item/organ/penis/internal
 	if(getorganslot(ORGAN_SLOT_TESTICLES))
-		W.internal_organs_slot[ORGAN_SLOT_TESTICLES] = /obj/item/organ/testicles
+		W.internal_organs_slot[ORGAN_SLOT_TESTICLES] = /obj/item/organ/filling_organ/testicles
 	if(getorganslot(ORGAN_SLOT_BREASTS))
-		W.internal_organs_slot[ORGAN_SLOT_BREASTS] = /obj/item/organ/breasts/internal
+		W.internal_organs_slot[ORGAN_SLOT_BREASTS] = /obj/item/organ/filling_organ/breasts/internal
 	if(getorganslot(ORGAN_SLOT_BELLY))
 		W.internal_organs_slot[ORGAN_SLOT_BELLY] = /obj/item/organ/belly/internal
 	if(getorganslot(ORGAN_SLOT_VAGINA))
-		W.internal_organs_slot[ORGAN_SLOT_VAGINA] = /obj/item/organ/vagina/internal
-
-	W.client.prefs.sexable = client.prefs.sexable
+		W.internal_organs_slot[ORGAN_SLOT_VAGINA] = /obj/item/organ/filling_organ/vagina/internal
+	if(getorganslot(ORGAN_SLOT_ANUS))
+		W.internal_organs_slot[ORGAN_SLOT_ANUS] = /obj/item/organ/filling_organ/anus
 
 /mob/living/carbon/human/proc/werewolf_untransform(dead,gibbed)
 	if(!stored_mob)
@@ -184,7 +186,6 @@
 	W.remove_status_effect(STATUS_EFFECT_STASIS)
 
 	REMOVE_TRAIT(W, TRAIT_NOMOOD, TRAIT_GENERIC)
-	stress = W.stress
 
 	mind.transfer_to(W)
 

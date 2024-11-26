@@ -153,22 +153,21 @@
 			direct = newdir
 			n = get_step(L, direct)
 
-	var/olddir = mob.dir
+	var/target_dir = get_dir(L, n)
 
-	. = ..()
-
-//	update_weather(TRUE)
-
-//	if(mob.m_intent == MOVE_INTENT_RUN) //backpedal and strafe slowdown for quick intent
+	//backpedal and strafe slowdown for quick intent
 	if(L.fixedeye || L.tempfixeye)
-		if(L.dir != direct)
+		if(L.dir != target_dir)
 			add_delay += 2
 			if(L.m_intent == MOVE_INTENT_RUN)
 				L.toggle_rogmove_intent(MOVE_INTENT_WALK)
 	else
-		if(L.dir != olddir)
-			if(L.m_intent == MOVE_INTENT_RUN)
+		if(L.dir != target_dir)
+			// Remove sprint intent if we change direction, but only if we sprinted atleast 1 tile
+			if(L.m_intent == MOVE_INTENT_RUN && L.sprinted_tiles > 0)
 				L.toggle_rogmove_intent(MOVE_INTENT_WALK)
+
+	. = ..()
 
 	if((direct & (direct - 1)) && mob.loc == n) //moved diagonally successfully
 		add_delay *= 2
@@ -597,6 +596,8 @@
 		rogue_sneaking = TRUE
 		return
 	var/turf/T = get_turf(src)
+	if(!T) //for runtimes.
+		return
 	var/light_amount = T.get_lumcount()
 	var/used_time = 50
 	if(mind)
@@ -613,11 +614,20 @@
 	else //not currently sneaking, check if we can sneak
 		if(light_amount < rogue_sneaking_light_threshhold && m_intent == MOVE_INTENT_SNEAK)
 			animate(src, alpha = 0, time = used_time)
+			for(var/mob/living/simple_animal/hostile/nearmob in viewers(12, src))
+				if(nearmob.target == src && !nearmob.Adjacent(src))
+					nearmob.LoseTarget()
+			for(var/mob/living/carbon/human/nearmob in viewers(12, src))
+				if(nearmob.target == src && !nearmob.Adjacent(src))
+					nearmob.back_to_idle()
 			spawn(used_time + 5) regenerate_icons()
 			rogue_sneaking = TRUE
 	return
 
 /mob/proc/toggle_rogmove_intent(intent, silent = FALSE)
+	// If we're becoming sprinting from non-sprinting, reset the counter
+	if(!(m_intent == MOVE_INTENT_RUN && intent == MOVE_INTENT_RUN))
+		sprinted_tiles = 0
 	switch(intent)
 		if(MOVE_INTENT_SNEAK)
 			m_intent = MOVE_INTENT_SNEAK

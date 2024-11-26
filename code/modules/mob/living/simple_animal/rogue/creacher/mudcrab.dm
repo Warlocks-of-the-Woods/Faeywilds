@@ -1,7 +1,7 @@
 //Look Sir, free crabs!
 /mob/living/simple_animal/hostile/retaliate/rogue/mudcrab
-	name = "bogcrab"
-	desc = ""
+	name = "mudcrab"
+	desc = "An omnivorous aquatic arthropod the size of a small dog, commonly found wherever bodies of water meet bodies of soil. Although mudcrabs can't be tamed, farmers and druids sometimes keep them in their gardens to clean up discarded foodstuffs when their composters are full. Their droppings happen to be useful for making fertilizer."
 	icon_state = "mudcrab"
 	icon_living = "mudcrab"
 	icon_dead = "mudcrab_dead"
@@ -12,6 +12,7 @@
 	turns_per_move = 5
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/rawcrab = 4, /obj/item/natural/carapace = 2)
 	faction = list("crabs")
+	food_type = list(/obj/item/reagent_containers/food/snacks)
 	response_help_continuous = "pets"
 	response_help_simple = "pet"
 	response_disarm_continuous = "gently pushes aside"
@@ -26,7 +27,7 @@
 	var/obj/item/inventory_mask
 	gold_core_spawnable = FRIENDLY_SPAWN
 
-/mob/living/simple_animal/mudcrabcrab/Life()
+/mob/living/simple_animal/hostile/retaliate/rogue/mudcrab/Life()
 	..()
 	//CRAB movement
 	if(!ckey && !stat)

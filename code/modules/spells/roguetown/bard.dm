@@ -304,7 +304,7 @@ proc/bard_insult_noun()
 		"baggage", 
 		"bandersnitch", 
 		"barnacle", 
-		"beggar", 
+		"low life", 
 		"blabberskite", 
 		"bladder", 
 		"bloater", 

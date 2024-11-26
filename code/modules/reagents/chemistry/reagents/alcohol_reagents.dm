@@ -14,6 +14,7 @@
 	taste_description = "alcohol"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	var/boozepwr = 65 //Higher numbers equal higher hardness, higher hardness equals more intense alcohol poisoning
+	hydration_factor = 5
 
 /*
 Boozepwr Chart
@@ -116,6 +117,12 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "vodka"
 	glass_name = "glass of vodka"
 	color = "#D9DFE0"
+/datum/reagent/consumable/ethanol/beer/mushroomwine
+	name = "Plump Helmet Wine"
+	boozepwr = 30
+	taste_description = "mushroom wine"
+	glass_name = "glass of mushroom wine"
+	color = "#5b182c"
 
 /datum/reagent/consumable/ethanol/beer/light
 	name = "Light Beer"
@@ -238,9 +245,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 /datum/reagent/consumable/ethanol/vodka
 	name = "Vodka"
 	description = "Number one drink AND fueling choice for Russians worldwide."
-	color = "#0064C8" // rgb: 0, 100, 200
+	color = "#AAAAAA77" // rgb: 170, 170, 170, 77 (alpha) (clear like water)
 	boozepwr = 65
-	taste_description = "grain alcohol"
+	taste_description = "vodka"
 	glass_icon_state = "ginvodkaglass"
 	glass_name = "glass of vodka"
 	glass_desc = ""
@@ -406,6 +413,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	glass_icon_state = "aleglass"
 	glass_name = "glass of ale"
 	glass_desc = ""
+	hydration_factor = 10
 
 /datum/reagent/consumable/ethanol/goldschlager
 	name = "Goldschlager"
@@ -1608,7 +1616,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	L.adjustBruteLoss(3 * min(5,volume)) //minimum 3 brute damage on ingestion to limit non-drink means of injury - a full 5 unit gulp of the drink trucks you for the full 15
 
 /datum/reagent/consumable/ethanol/sake
-	name = "Sake"
+	name = "Meejoo"
 	description = "A sweet rice wine of questionable legality and extreme potency."
 	color = "#DDDDDD"
 	boozepwr = 70
@@ -1616,6 +1624,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	glass_icon_state = "sakecup"
 	glass_name = "cup of sake"
 	glass_desc = ""
+	hydration_factor = 10
 
 /datum/reagent/consumable/ethanol/peppermint_patty
 	name = "Peppermint Patty"

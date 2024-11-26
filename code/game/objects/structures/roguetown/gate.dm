@@ -16,7 +16,6 @@ GLOBAL_LIST_EMPTY(biggates)
 	var/isSwitchingStates = FALSE
 	var/list/turfsy = list()
 	var/list/blockers = list()
-	var/gid
 	attacked_sound = list('sound/combat/hits/onmetal/sheet (1).ogg', 'sound/combat/hits/onmetal/sheet (2).ogg')
 	var/obj/structure/attached_to
 
@@ -110,23 +109,22 @@ GLOBAL_LIST_EMPTY(biggates)
 	flick("[base_state]_closing",src)
 	sleep(10)
 	for(var/turf/T in turfsy)
-		for(var/mob/living/L in T)
-			var/def_zone = BODY_ZONE_CHEST
-			if(iscarbon(L))
-				var/mob/living/carbon/C = L
-				if(C.mobility_flags & MOBILITY_STAND)
-					def_zone = pick(BODY_ZONE_CHEST, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM)
-				else
-					def_zone = BODY_ZONE_HEAD
-			var/obj/item/bodypart/BP = L.get_bodypart(def_zone)
-			if(BP)
-				L.visible_message(span_boldwarning("[src] comes crashing down on [L]'s [BP]!"), \
-						span_userdanger("[src] crushes my [BP]!"))
-				L.emote("agony")
-				BP.add_wound(/datum/wound/fracture)
-				BP.update_disabled()
-				L.apply_damage(90, BRUTE, def_zone)
-				L.Paralyze(80)
+		for(var/mob/living/M in T)
+			var/zone = ran_zone(probability = 0)
+			var/obj/item/bodypart/part = M.get_bodypart(check_zone(zone))
+			M.apply_damage(200, BRUTE, zone)
+			if(part)
+				if((istype(part, /obj/item/bodypart/chest) || istype(part, /obj/item/bodypart/head)) && prob(50))
+					part.add_wound(/datum/wound/slash/disembowel)
+				part.add_wound(/datum/wound/fracture)
+				part.dismember()
+				M.visible_message(span_warningbig("[M] is crushed by \the [src]!"), span_userdanger("OH [uppertext(M.patron.name)], MY [uppertext(part.name)]!!!"))
+			else if(!part)
+				M.visible_message(span_warningbig("[M] is crushed by \the [src]!"), span_userdanger("OH [uppertext(M.patron.name)], THE PAIN!!!"))
+			M.emote("agony")
+			step(M, pick(dir, turn(dir, 180)))
+			M.Knockdown(50)
+			M.Stun(50)
 	density = initial(density)
 	opacity = initial(opacity)
 	layer = initial(layer)
@@ -143,7 +141,6 @@ GLOBAL_LIST_EMPTY(biggates)
 	density = TRUE
 	anchored = TRUE
 	max_integrity = 0
-	var/gid
 	var/obj/structure/gate/attached_gate
 
 /obj/structure/winch/Initialize()
@@ -178,4 +175,3 @@ GLOBAL_LIST_EMPTY(biggates)
 		playsound(src, 'sound/foley/winch.ogg', 100, extrarange = 3)
 		if(do_after(user, used_time, target = user))
 			attached_gate.toggle()
-

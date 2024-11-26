@@ -13,13 +13,19 @@
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
 	charge_max = 1 SECONDS //very stupidly simple spell
-	miracle = TRUE
+	miracle = FALSE
 	devotion_cost = 0 //come on, this is very basic
 
 /obj/effect/proc_holder/spell/invoked/diagnose/cast(list/targets, mob/living/user)
 	if(ishuman(targets[1]))
 		var/mob/living/carbon/human/human_target = targets[1]
 		human_target.check_for_injuries(user)
+		if (human_target.reagents.has_reagent(/datum/reagent/infection/major))
+			to_chat(user, span_boldwarning("Streaks of black and yellow doubtlessly indicate an excess of melancholic humour."))
+		else if (human_target.reagents.has_reagent(/datum/reagent/infection))
+			to_chat(user, span_warning("Reddened and inflamed flesh accompanied by a brow flecked with sweat. Excess choleric, perhaps?"))
+		else if (human_target.reagents.has_reagent(/datum/reagent/infection/minor))
+			to_chat(user, span_warning("A slight yellowing indicates the barest presence of disrupted choleric humor."))
 		return TRUE
 	return FALSE
 
@@ -38,12 +44,12 @@
 	releasedrain = 30
 	chargedrain = 0
 	chargetime = 0
-	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	range = 2
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	sound = 'sound/gore/flesh_eat_03.ogg'
-	invocation_type = "none"
+	invocation = "Vita, Renovere.."
+	invocation_type = "whisper"
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
 	charge_max = 60 SECONDS //attaching a limb is pretty intense
@@ -112,9 +118,6 @@
 	. = ..()
 	if(ishuman(targets[1]))
 		var/mob/living/carbon/human/human_target = targets[1]
-		if(HAS_TRAIT(human_target, TRAIT_FAITHLESS)) //go find a surgeon, non-believer
-			to_chat(user, span_warning("Pestra's grace has no effect, they do not wish to aid a non-believer..."))
-			return FALSE
 		for(var/obj/item/bodypart/limb as anything in get_limbs(human_target, user))
 			if(human_target.get_bodypart(limb.body_zone) || !limb.attach_limb(human_target))
 				continue
@@ -145,7 +148,6 @@
 	no_early_release = TRUE
 	movement_interrupt = TRUE
 	chargedloop = /datum/looping_sound/invokeholy
-	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	sound = 'sound/magic/revive.ogg'
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
@@ -159,9 +161,6 @@
 	if(isliving(targets[1]))
 		testing("curerot1")
 		var/mob/living/target = targets[1]
-		if(HAS_TRAIT(target, TRAIT_FAITHLESS))
-			to_chat(user, span_warning("Pestra's grace has no effect, they do not wish to aid a non-believer..."))
-			return FALSE
 		if(target == user)
 			return FALSE
 		var/datum/antagonist/zombie/was_zombie = target.mind?.has_antag_datum(/datum/antagonist/zombie)
@@ -173,16 +172,21 @@
 					has_rot = TRUE
 					break
 		if(!has_rot)
-			to_chat(user, span_warning("Nothing happens."))
-			return FALSE
+			if (target.reagents.has_reagent(/datum/reagent/infection/major))
+				target.reagents.remove_reagent(/datum/reagent/infection/major, rand(5,10))
+				to_chat(user, span_notice("I settle some of [target]'s excess melancholic humour."))
+				return TRUE
+			else
+				to_chat(user, span_warning("Nothing happens."))
+				return FALSE
 		if(GLOB.tod == "night")
 			to_chat(user, span_warning("Let there be light."))
 		for(var/obj/structure/fluff/psycross/S in oview(5, user))
 			S.AOE_flash(user, range = 8)
 		testing("curerot2")
 		if(was_zombie)
-			if(was_zombie.become_rotman && prob(95)) //95% chance to NOT become a rotman
-				was_zombie.become_rotman = FALSE
+//			if(was_zombie.become_rotman && prob(95)) //95% chance to NOT become a rotman
+			was_zombie.become_rotman = FALSE
 			target.mind.remove_antag_datum(/datum/antagonist/zombie)
 			target.Unconscious(20 SECONDS)
 			target.emote("breathgasp")
@@ -215,6 +219,6 @@
 	for(var/obj/structure/fluff/psycross/S in oview(5, user))
 		found = S
 	if(!found)
-		to_chat(user, span_warning("I need a holy cross."))
+		to_chat(user, span_warning("I need a holy effigy."))
 		return FALSE
 	return TRUE

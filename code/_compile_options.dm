@@ -6,17 +6,14 @@
 #define MATURESERVER
 //#define TESTSERVER
 #define ALLOWPLAY
+//#define LOWMEMORYMODE
 
 #define RESPAWNTIME 0
 //0 test
 //12 minutes norma
 //#define ROUNDTIMERBOAT (300 MINUTES)
-#define INITIAL_ROUND_TIMER (150 MINUTES)
-#define ROUND_EXTENSION_TIME (60 MINUTES)
-#define ROUND_END_TIME (10 MINUTES)
-#define ROUND_END_TIME_VERBAL "10 minutes"
-//180 norma
-//60 test
+#define INITIAL_ROUND_TIMER (120 MINUTES) //2 hours
+#define ROUND_EXTENSION_TIME (30 MINUTES)
 
 #define MODE_RESTART
 //comment out if you want to restart the server instead of shutting down
@@ -77,3 +74,8 @@
 // A reasonable number of maximum overlays an object needs
 // If you think you need more, rethink it
 #define MAX_ATOM_OVERLAYS 100
+
+//Disable unimplemented proc/var warnings
+#ifdef OPENDREAM
+#pragma UnimplementedAccess disable
+#endif

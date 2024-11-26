@@ -60,47 +60,46 @@ GLOBAL_LIST_INIT(nonhuman_positions, list(
 	ROLE_PAI))
 
 GLOBAL_LIST_INIT(noble_positions, list(
-	"Duke",
-	"Duke Courtier",
+	"Monarch",
+	"Consort",
 	"Royal Heir",
-	"Knight Captain",
+	"Watchmen Captain",
 	"Judge",
-	"Royal Advisor",
+	"Councillor",
 	"Steward",
 	"Knight",
 	"Noble Guest",
 ))
 
 GLOBAL_LIST_INIT(courtier_positions, list(
-	"Arch-Mage",
-	"Court Physician",
+	"Magician",
+	"Physician",
 	"Jester",
-	"Butler",
+	"Head Butler",
 ))
 
 GLOBAL_LIST_INIT(garrison_positions, list(
-	//"Watchman",
-	"Royal Ranger",
-	// "Bog Master",
-	"Royal Knight",
-	"Dungeoneer",
+	"Watchman",
+	"Hedge Knight",
+	"Hedgemaster",
+	"Royal Guard",
+	"Beastmaster",
 	"Gatemaster",
-	"Sheriff",
+	"Watchmen Captain",
 ))
 
 GLOBAL_LIST_INIT(church_positions, list(
-	"Priest",
-	"Inquisitor",
+	"Prophet",
+	"Wytcher Captain",
 	"Confessor",
-	"Acolyte",
-	"Mortician",
-	"Templar Knight",
-	"Grandmaster Templar",
+	"Gravesinger",
+	"Paladin",
+	"Grandmaster",
 	"Druid",
 ))
 
 GLOBAL_LIST_INIT(yeoman_positions, list(
-	"Guildmaster",
+	"Merchant Prince",
 	"Innkeep",
 	"Archivist",
 	"Armorer",
@@ -117,7 +116,9 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 	"Soilson",
 	"Butcher",
 	"Cook",
-	"Lunatic",
+	"Shunned Slave",
+	"Public Servant",
+	"Dumb Whoreson",
 	"Miner",
 	"Hunter",
 	"Fisher",
@@ -128,8 +129,8 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 	"Nightswain",
 	"Docker",
 	"Prisoner",
-	"Low-life",
-	"Town Seelie",
+	"Low Life",
+	"Forest Seelie",
 	"Adventurer",
 	"Pilgrim",
 	"Bandit",
@@ -137,19 +138,18 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 
 GLOBAL_LIST_INIT(mercenary_positions, list(
 	"Mercenary",
-	"Grenzelhoft Mercenary",
-	"Desert Rider Mercenary",
-	"Veteran Mercenary",
+	"Sellsword",
+	"Guildmaster",
 ))
 
 GLOBAL_LIST_INIT(apprentices_positions, list(
 	"Squire",
 	"Clerk",
 	"Smithy Apprentice",
-	"Mage Apprentice",
+	"Magicians Apprentice",
 	"Churchling",
 	"Servant",
-	"Guildmaster Apprentice",
+	"Shophand",
 	"Vagabond",
 ))
 

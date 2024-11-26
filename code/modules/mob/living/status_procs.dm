@@ -92,6 +92,7 @@
 			K.duration = max(world.time + amount, K.duration)
 		else if(amount > 0)
 			K = apply_status_effect(STATUS_EFFECT_KNOCKDOWN, amount, updating)
+			check_funny_knockdown(src)
 		return K
 
 /mob/living/proc/SetKnockdown(amount, updating = TRUE, ignore_canstun = FALSE) //Sets remaining duration

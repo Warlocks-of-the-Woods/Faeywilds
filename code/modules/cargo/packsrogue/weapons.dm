@@ -69,9 +69,8 @@
 /*	- No, no more instant-stun weaponry.
 /datum/supply_pack/rogue/weapons/stunmace
 	name = "Stunmaces"
-	cost = 300
+	cost = 450
 	contains = list(
-					/obj/item/rogueweapon/mace/stunmace,
 					/obj/item/rogueweapon/mace/stunmace,
 					/obj/item/rogueweapon/mace/stunmace,
 				)
@@ -123,7 +122,7 @@
 
 /datum/supply_pack/rogue/weapons/arrow
 	name = "Arrows"
-	cost = 15
+	cost = 30
 	contains = list(
 					/obj/item/ammo_casing/caseless/rogue/arrow,
 					/obj/item/ammo_casing/caseless/rogue/arrow,
@@ -158,17 +157,17 @@
 
 /datum/supply_pack/rogue/weapons/quivers/bolts
 	name = "Quiver of Bolts"
-	cost = 50
+	cost = 100
 	contains = list(
 					/obj/item/quiver/bolts,
 					/obj/item/quiver/bolts,
 					/obj/item/quiver/bolts,
 				)
 
-/*
+
 /datum/supply_pack/rogue/weapons/Parrows
 	name = "Poisoned Arrows"
-	cost = 20
+	cost = 60
 	contains = list(/obj/item/ammo_casing/caseless/rogue/arrow/poison,
 					/obj/item/ammo_casing/caseless/rogue/arrow/poison,
 					/obj/item/ammo_casing/caseless/rogue/arrow/poison,
@@ -186,11 +185,11 @@
 					/obj/item/ammo_casing/caseless/rogue/arrow/poison,
 					/obj/item/ammo_casing/caseless/rogue/arrow/poison,
 					/obj/item/ammo_casing/caseless/rogue/arrow/poison)
-*/
+
 
 /datum/supply_pack/rogue/weapons/bolt
 	name = "Bolts"
-	cost = 15
+	cost = 30
 	contains = list(
 					/obj/item/ammo_casing/caseless/rogue/bolt,
 					/obj/item/ammo_casing/caseless/rogue/bolt,
@@ -213,32 +212,47 @@
 					/obj/item/ammo_casing/caseless/rogue/bolt,
 					/obj/item/ammo_casing/caseless/rogue/bolt,
 				)
-/*
+
+
 /datum/supply_pack/rogue/weapons/Pbolts
 	name = "Poisoned Bolts"
-	cost = 30
+	cost = 80
 	contains = list(/obj/item/ammo_casing/caseless/rogue/bolt/poison,
 					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
 					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
 					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
 					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
+					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
+					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
+					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
+					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
+					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
+					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
+					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
+					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
+					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
+					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
+					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
+					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
+					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
+					/obj/item/ammo_casing/caseless/rogue/bolt/poison,
 					/obj/item/ammo_casing/caseless/rogue/bolt/poison)
-*/
 
-/datum/supply_pack/rogue/weapons/matchlock
-	name = "Matchlock Musket"
-	cost = 400	//Pricey as shit, money-sink due to ammo cost along with musket cost. (Probably too much money, maybe reduce if too hard to get.)
-	contains = list(/obj/item/gun/ballistic/revolver/grenadelauncher/matchlock,
-					/obj/item/ammo_casing/caseless/rogue/bullet,
-					/obj/item/ammo_casing/caseless/rogue/bullet,
-					/obj/item/ammo_casing/caseless/rogue/bullet,
-					/obj/item/ammo_casing/caseless/rogue/bullet,
-					/obj/item/ammo_casing/caseless/rogue/bullet,
+/datum/supply_pack/rogue/weapons/arquebuspistol
+	name = "Arquebus Pistol"
+	cost = 150
+	contains = list(/obj/item/gun/ballistic/arquebus_pistol,
+					)
+
+/datum/supply_pack/rogue/weapons/arquebus
+	name = "Arquebus"
+	cost = 200
+	contains = list(/obj/item/gun/ballistic/arquebus,
 					)
 
 /datum/supply_pack/rogue/weapons/bullets
 	name = "Bullets"
-	cost = 150
+	cost = 60 //a raw iron is 10 to buy approx, smelt and work id say 60 is fine.
 	contains = list(
 					/obj/item/ammo_casing/caseless/rogue/bullet,
 					/obj/item/ammo_casing/caseless/rogue/bullet,
@@ -249,9 +263,18 @@
 
 /datum/supply_pack/rogue/weapons/ammopouch/bullets
 	name = "Ammo Pouch"
-	cost = 300
+	cost = 200 //they are empty.
 	contains = list(
-					/obj/item/ammopouch/bullets,
-					/obj/item/ammopouch/bullets,
-					/obj/item/ammopouch/bullets,
+					/obj/item/ammopouch,
+					/obj/item/ammopouch,
+					/obj/item/ammopouch,
+				)
+
+/datum/supply_pack/rogue/weapons/ammopouch/bullets
+	name = "Firepowder flasks"
+	cost = 150
+	contains = list(
+					/obj/item/powderflask,
+					/obj/item/powderflask,
+					/obj/item/powderflask,
 				)

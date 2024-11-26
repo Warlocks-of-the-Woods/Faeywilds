@@ -15,8 +15,8 @@
 	inherent_traits = list(TRAIT_NOMOBSWAP)
 	possible_ages = ALL_AGES_LIST
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
-	limbs_icon_m = 'icons/mob/species/kobold_male.dmi'
-	limbs_icon_f = 'icons/mob/species/kobold_female.dmi'
+	limbs_icon_m = 'icons/mob/species/anthro_small_male.dmi'
+	limbs_icon_f = 'icons/mob/species/anthro_small_female.dmi'
 	dam_icon = 'icons/roguetown/mob/bodies/dam/dam_male.dmi'
 	dam_icon_f = 'icons/roguetown/mob/bodies/dam/dam_female.dmi'
 	soundpack_m = /datum/voicepack/male/elf
@@ -33,7 +33,7 @@
 		OFFSET_ID_F = list(0,-5), OFFSET_GLOVES_F = list(0,-4), OFFSET_WRISTS_F = list(0,-4), OFFSET_HANDS_F = list(0,-4), \
 		OFFSET_CLOAK_F = list(0,0), OFFSET_FACEMASK_F = list(0,-5), OFFSET_HEAD_F = list(0,-5), \
 		OFFSET_FACE_F = list(0,-5), OFFSET_BELT_F = list(0,-4), OFFSET_BACK_F = list(0,-4), \
-		OFFSET_NECK_F = list(0,-5), OFFSET_MOUTH_F = list(0,-5), OFFSET_PANTS_F = list(0,0), \
+		OFFSET_NECK_F = list(0,-5), OFFSET_MOUTH_F = list(0,-5), OFFSET_BUTT = list(0,-4), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES = list(0,-4), OFFSET_UNDIES_F = list(0,-4), \
 		)
 	specstats = list("strength" = -1, "perception" = 1, "intelligence" = -2, "constitution" = -1, "endurance" = 1, "speed" = 2, "fortune" = 0)
@@ -53,7 +53,8 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
-		ORGAN_SLOT_TAIL = /obj/item/organ/tail/kobold,
+		ORGAN_SLOT_ANUS = /obj/item/organ/filling_organ/anus,
+		//ORGAN_SLOT_TAIL = /obj/item/organ/tail/kobold, //Commenting out due to use of customizer organs.
 		ORGAN_SLOT_SNOUT = /obj/item/organ/snout/lizard,
 		ORGAN_SLOT_FRILLS = /obj/item/organ/frills/lizard,
 		ORGAN_SLOT_HORNS = /obj/item/organ/horns,
@@ -65,6 +66,7 @@
 		/datum/customizer/bodypart_feature/accessory,
 		/datum/customizer/bodypart_feature/face_detail,
 		/datum/customizer/bodypart_feature/underwear,
+		/datum/customizer/organ/tail/kobold,
 		/datum/customizer/organ/snout/lizard,
 		/datum/customizer/organ/frills/lizard,
 		/datum/customizer/organ/horns/humanoid,
@@ -72,6 +74,7 @@
 		/datum/customizer/organ/penis/lizard,
 		/datum/customizer/organ/breasts/animal,
 		/datum/customizer/organ/belly/animal,
+		/datum/customizer/organ/butt/animal,
 		/datum/customizer/organ/vagina/animal,
 		)
 	body_marking_sets = list(
@@ -79,12 +82,15 @@
 		/datum/body_marking_set/kobold_scale,
 	)
 	body_markings = list(
+		/datum/body_marking/flushed_cheeks,
+		/datum/body_marking/eyeliner,
 	)
 	languages = list(
 		/datum/language/common,
 		/datum/language/draconic
 	)
 	descriptor_choices = list(
+		/datum/descriptor_choice/height,
 		/datum/descriptor_choice/body,
 		/datum/descriptor_choice/stature,
 		/datum/descriptor_choice/face,
@@ -93,6 +99,8 @@
 		/datum/descriptor_choice/voice,
 		/datum/descriptor_choice/prominent_one,
 		/datum/descriptor_choice/prominent_two,
+		/datum/descriptor_choice/prominent_three,
+		/datum/descriptor_choice/prominent_four,
 	)
 
 /datum/species/kobold/check_roundstart_eligible()

@@ -168,7 +168,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	var/swinging = FALSE
 
 	buckle_lying = FALSE
-	cmode = 1
+	cmode = TRUE
 
 	var/remains_type
 
@@ -182,6 +182,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	if(!loc)
 		stack_trace("Simple animal being instantiated in nullspace")
 	update_simplemob_varspeed()
+
 //	if(dextrous)
 //		AddComponent(/datum/component/personal_crafting)
 
@@ -232,10 +233,16 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	stop_automated_movement_when_pulled = TRUE
 	return
 
-//mob/living/simple_animal/examine(mob/user)
-//	. = ..()
-//	if(stat == DEAD)
-//		. += span_deadsay("Upon closer examination, [p_they()] appear[p_s()] to be dead.")
+/mob/living/simple_animal/examine(mob/user)
+	. = ..()
+/*
+	if(stat == DEAD)
+		. += span_deadsay("[p_they()] appear[p_s()] to be dead.")
+*/
+	if(gender == MALE)
+		. += span_info("It's a Male.")
+	else
+		. += span_info("It's a Female.")
 
 /mob/living/simple_animal/updatehealth()
 	..()
@@ -423,7 +430,8 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 				if(do_after(user, used_time, target = src))
 					gib()
 					if(user.mind)
-						adjust_experience(user, /datum/skill/labor/butchering, user.STAINT * 3)
+						var/mob/living/carbon/userh = user
+						userh.mind.adjust_experience(/datum/skill/labor/butchering, userh.STAINT * 4)
 	..()
 
 /mob/living/simple_animal/gib()
@@ -516,6 +524,8 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 
 /mob/living/simple_animal/proc/CanAttack(atom/the_target)
 	if(see_invisible < the_target.invisibility)
+		return FALSE
+	if(the_target.alpha <= 100) //if target has less than or exactly 100 alpha, does not attack.
 		return FALSE
 	if(ismob(the_target))
 		var/mob/M = the_target

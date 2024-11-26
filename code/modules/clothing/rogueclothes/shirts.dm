@@ -14,6 +14,7 @@
 	boobed = TRUE
 	sewrepair = TRUE
 	flags_inv = HIDEBOOB
+	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt
 	name = "shirt"
@@ -36,6 +37,9 @@
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt/purple
 	color = CLOTHING_PURPLE
+
+/obj/item/clothing/suit/roguetown/shirt/undershirt/brown
+	color = "#6b5445"
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt/lord
 	desc = ""
@@ -309,6 +313,7 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	var/picked = FALSE
+	colorgrenz = TRUE
 
 /obj/item/clothing/suit/roguetown/shirt/grenzelhoft/attack_right(mob/user)
 	..()
@@ -409,7 +414,7 @@
 		pic.appearance_flags = RESET_COLOR
 		if(get_detail_color())
 			pic.color = get_detail_color()
-		add_overlay(pic)	
+		add_overlay(pic)
 
 /obj/item/clothing/suit/roguetown/shirt/vest
 	name = "vest"

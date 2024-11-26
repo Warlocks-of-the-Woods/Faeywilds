@@ -179,9 +179,23 @@
 	var/used
 	var/total_dam = get_damage()
 	var/damage_dividend = (total_dam / max_damage)
-	if (user && dam)
+	var/from_behind = FALSE
+	if(user && (owner.dir == turn(get_dir(owner,user), 180)))
+		from_behind = TRUE
+	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
+	if(owner.resting)
+		dam += 30
+	if(from_behind || user.alpha <= 15)//Dreamkeep change -- Attacks from stealth should be much more likely to crit
+		if(user.mind && !HAS_TRAIT(owner, TRAIT_BLINDFIGHTING) && !user.has_status_effect(/datum/status_effect/debuff/stealthcd))
+			var/sneakmult = 2 + (user.mind.get_skill_level(/datum/skill/misc/sneaking))
+			dam += 30
+			dam *= sneakmult
+			user.apply_status_effect(/datum/status_effect/debuff/stealthcd)
+			to_chat(src, span_userdanger("SNEAK ATTACK!!! CRITICAL HIT CHANCE INCREASED!"))
+			to_chat(user, span_userdanger("SNEAK ATTACK!!! CRITICAL HIT CHANCE INCREASED!"))
+			user.mind?.adjust_experience(/datum/skill/misc/sneaking, user.STAINT * 5, TRUE)
 	if(bclass in GLOB.dislocation_bclasses)
 		used = round(damage_dividend * 20 + (dam / 3), 1)
 		if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
@@ -207,7 +221,7 @@
 			if((bclass in GLOB.artery_strong_bclasses) && istype(user.rmb_intent, /datum/rmb_intent/strong))
 				used += 10
 			else if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
-				used += 10
+				used += user.STAPER
 		if(prob(used))
 			attempted_wounds += /datum/wound/artery
 
@@ -225,9 +239,23 @@
 	var/total_dam = get_damage()
 	var/damage_dividend = (total_dam / max_damage)
 	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE)
+	var/from_behind = FALSE
+	if(user && (owner.dir == turn(get_dir(owner,user), 180)))
+		from_behind = TRUE
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
+	if(owner.resting)
+		dam += 30
+	if(from_behind || user.alpha <= 15)//Dreamkeep change -- Attacks from stealth should have greatly increased crit rate.
+		if(user.mind && !HAS_TRAIT(owner, TRAIT_BLINDFIGHTING) && !user.has_status_effect(/datum/status_effect/debuff/stealthcd))
+			var/sneakmult = 2 + (user.mind.get_skill_level(/datum/skill/misc/sneaking))
+			dam += 30
+			dam *= sneakmult
+			user.apply_status_effect(/datum/status_effect/debuff/stealthcd)
+			to_chat(src, span_userdanger("SNEAK ATTACK!!! CRITICAL HIT CHANCE INCREASED!"))
+			to_chat(user, span_userdanger("SNEAK ATTACK!!! CRITICAL HIT CHANCE INCREASED!"))
+			user.mind?.adjust_experience(/datum/skill/misc/sneaking, user.STAINT * 5, TRUE)
 	if ((bclass = BCLASS_PUNCH) && (user && dam))
 		if(user && HAS_TRAIT(user, TRAIT_PUGILIST))
 			dam += 15
@@ -257,7 +285,7 @@
 			if((bclass in GLOB.artery_strong_bclasses) && istype(user.rmb_intent, /datum/rmb_intent/strong))
 				used += 10
 			else if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
-				used += 10
+				used += user.STAPER
 		if(prob(used))
 			if((zone_precise == BODY_ZONE_PRECISE_STOMACH) && !resistance)
 				attempted_wounds += /datum/wound/slash/disembowel
@@ -286,6 +314,17 @@
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
+	if(owner.resting)
+		dam += 30
+	if(from_behind || user.alpha <= 15)//Dreamkeep change -- Attacks from stealth should have greatly increased crit rate.
+		if(user.mind && !HAS_TRAIT(owner, TRAIT_BLINDFIGHTING) && !user.has_status_effect(/datum/status_effect/debuff/stealthcd))
+			var/sneakmult = 2 + (user.mind.get_skill_level(/datum/skill/misc/sneaking))
+			dam += 30
+			dam *= sneakmult
+			user.apply_status_effect(/datum/status_effect/debuff/stealthcd)
+			to_chat(src, span_userdanger("SNEAK ATTACK!!! CRITICAL HIT CHANCE INCREASED!"))
+			to_chat(user, span_userdanger("SNEAK ATTACK!!! CRITICAL HIT CHANCE INCREASED!"))
+			user.mind?.adjust_experience(/datum/skill/misc/sneaking, user.STAINT * 5, TRUE)
 	if((bclass in GLOB.dislocation_bclasses) && (total_dam >= max_damage))
 		used = round(damage_dividend * 20 + (dam / 3), 1)
 		if(prob(used))
@@ -303,7 +342,7 @@
 		if(!owner.stat && !resistance && (zone_precise in knockout_zones) && (bclass != BCLASS_CHOP) && prob(used))
 			owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!</span>"
 			owner.flash_fullscreen("whiteflash3")
-			owner.Unconscious(1 SECONDS + (from_behind * 1 SECONDS))
+			owner.Unconscious(5 SECONDS + (from_behind * 10 SECONDS))
 			if(owner.client)
 				winset(owner.client, "outputwindow.output", "max-lines=1")
 				winset(owner.client, "outputwindow.output", "max-lines=100")
@@ -334,7 +373,7 @@
 					used += 10
 			else
 				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
-					used += 10
+					used += user.STAPER
 		var/artery_type = /datum/wound/artery
 		if(zone_precise == BODY_ZONE_PRECISE_NECK)
 			artery_type = /datum/wound/artery/neck
@@ -345,7 +384,7 @@
 					var/obj/item/organ/ears/my_ears = owner.getorganslot(ORGAN_SLOT_EARS)
 					if(!my_ears || has_wound(/datum/wound/facial/ears))
 						attempted_wounds += /datum/wound/fracture/head/ears
-					else 
+					else
 						attempted_wounds += /datum/wound/facial/ears
 				else if(zone_precise in eyestab_zones)
 					var/obj/item/organ/my_eyes = owner.getorganslot(ORGAN_SLOT_EYES)
@@ -381,7 +420,7 @@
 	if(!embedder || !can_embed(embedder))
 		return FALSE
 	if(owner && ((owner.status_flags & GODMODE) || HAS_TRAIT(owner, TRAIT_PIERCEIMMUNE)))
-		return FALSE 
+		return FALSE
 	LAZYADD(embedded_objects, embedder)
 	embedder.is_embedded = TRUE
 	embedder.forceMove(src)

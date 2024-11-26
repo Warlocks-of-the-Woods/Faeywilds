@@ -40,7 +40,7 @@
 	if(world.time > next_decree)
 		next_decree = world.time + rand(3 MINUTES, 8 MINUTES)
 		if(GLOB.lord_decrees.len)
-			say("The Duke Decrees: [pick(GLOB.lord_decrees)]", spans = list("info"))
+			say("The Monarch Decrees: [pick(GLOB.lord_decrees)]", spans = list("info"))
 
 /obj/structure/roguemachine/scomm/attack_hand(mob/living/user)
 	. = ..()
@@ -59,8 +59,8 @@
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	var/contents
-	if(SSticker.rulertype == "Duke")
-		contents += "<center>Duke'S DECREES<BR>"
+	if(SSticker.rulertype == "Monarch")
+		contents += "<center>MONARCH'S DECREES<BR>"
 	else
 		contents += "<center>Duchess'S DECREES<BR>"
 	contents += "-----------<BR><BR></center>"
@@ -160,9 +160,9 @@
 //SCOMSTONE                 SCOMSTONE
 
 /obj/item/scomstone
-	name = "emerald ring"
+	name = "scomstone ring"
 	icon_state = "ring_emerald"
-	desc = "A golden ring with an emerald gem."
+	desc = "A golden ring with a SCOM gem."
 	gripped_intents = null
 	dropshrink = 0.75
 	possible_item_intents = list(INTENT_GENERIC)
@@ -175,8 +175,8 @@
 	flags_1 = HEAR_1
 	muteinmouth = TRUE
 	var/listening = TRUE
-	var/speaking = TRUE
-	sellprice = 35
+	var/speaking = FALSE //Start muted its weird.
+	sellprice = 50
 //wip
 /obj/item/scomstone/attack_right(mob/user)
     user.changeNext_move(CLICK_CD_MELEE)

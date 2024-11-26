@@ -65,7 +65,7 @@
 /obj/projectile/magic/acidsplash5e
 	name = "acid bubble"
 	icon_state = "green_laser"
-	damage = 10
+	damage = 15
 	damage_type = BURN
 	flag = "magic"
 	range = 15
@@ -151,13 +151,12 @@
 /obj/effect/proc_holder/spell/self/bladeward5e/cast(mob/user = usr)
 	var/mob/living/target = user
 	target.apply_status_effect(/datum/status_effect/buff/bladeward5e)
-	ADD_TRAIT(target, TRAIT_BREADY, TRAIT_GENERIC)
 	user.visible_message("<span class='info'>[user] traces a warding sigil in the air.</span>", "<span class='notice'>I trace a a sigil of warding in the air.</span>")
 
 /datum/status_effect/buff/bladeward5e
 	id = "blade ward"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/bladeward5e
-	effectedstats = list("constitution" = 2)
+	effectedstats = list("constitution" = 3)
 	duration = 20 SECONDS
 	var/static/mutable_appearance/ward = mutable_appearance('icons/effects/beam.dmi', "purple_lightning", -MUTATIONS_LAYER)
 
@@ -176,7 +175,6 @@
 	var/mob/living/target = owner
 	target.cut_overlay(ward)
 	target.update_vision_cone()
-	REMOVE_TRAIT(target, TRAIT_BREADY, TRAIT_GENERIC)
 	. = ..()
 
 //==============================================
@@ -303,14 +301,10 @@
 		hand.bodypart = bodypart
 		hand.forceMove(target)
 		bodypart.add_embedded_object(hand, silent = TRUE, crit_message = FALSE)
-		if(user.zone_selected == BODY_ZONE_CHEST && !target.cmode && target.client.prefs.sexable) //must be out of combat mode and have erp panel allowed for this prompt to appear
-			target.visible_message(span_warning("A skeletal hand grips [target]'s [bodypart]!"), span_danger("A skeletal hand grips me [bodypart]!"))
-		//	var/choice = alert(target, "A skeletal hand attempts to grapple your private parts!", "", "Accept it!", "Fight it!")
-		//	switch(choice)
-		//	//IF YOU CHOOSE Accept it! - YOU RECIEVE PLEASURE
-		//		if("Accept it!")
-		//			hand.pleasureaccepted = TRUE
-		//		if("Fight it!")
+		target.visible_message(span_warning("A skeletal hand grips [target]'s [bodypart]!"), span_danger("A skeletal hand grips me [bodypart]!"))
+		if(user.zone_selected == BODY_ZONE_CHEST && !user.cmode && !target.cmode) //must be out of combat mode and have erp panel allowed for this prompt to appear
+			hand.pleasureaccepted = TRUE
+		else 
 			hand.pleasureaccepted = FALSE
 	return FALSE
 
@@ -326,7 +320,7 @@
 	max_integrity = 10
 
 	var/oxy_drain = 2
-	var/pleasure = 1
+	var/pleasure = 5 //pleasurable quicker since they bleed inevitably due embed
 	var/curprocs = 0
 	var/procsmax = 180
 	var/pleasureaccepted = FALSE
@@ -376,7 +370,7 @@
 				target.adjustOxyLoss(oxy_drain*mult*2)
 			if(BODY_ZONE_CHEST) //pleasure if erp, hurt if not
 				//if erp allowed & said yes to prompt pleasure them & combat mode OFF
-				if(target.client.prefs.sexable == TRUE && pleasureaccepted && !target.cmode)
+				if(pleasureaccepted && !target.cmode)
 					to_chat(host, "<span class='warning'>[host] is rubbed by a skeletal hand!</span>")
 					playsound(get_turf(host), pick('sound/misc/mat/insert (1).ogg','sound/misc/mat/insert (2).ogg'), 100, FALSE, -1)
 					target.sexcon.perform_sex_action(host, pleasure*mult*3, 0, TRUE)
@@ -1141,7 +1135,7 @@
 	overlay_state = "null"
 	releasedrain = 50
 	chargetime = 1
-	charge_max = 5 SECONDS
+	charge_max = 12 SECONDS
 	range = 3
 	warnie = "spellwarning"
 	movement_interrupt = FALSE
@@ -1150,7 +1144,7 @@
 	sound = 'sound/magic/whiteflame.ogg'
 	chargedloop = /datum/looping_sound/invokegen
 	associated_skill = /datum/skill/magic/arcane //can be arcane, druidic, blood, holy
-	cost = 1
+	cost = 2 // might even deserve a cost of 3
 
 	xp_gain = TRUE
 	miracle = FALSE
@@ -1361,7 +1355,7 @@
 //in the source material this would just be some sort of poison, since we have all sorts of potions, this is better.
 //my hope is that it doesn't work with love poiton...
 /obj/effect/proc_holder/spell/invoked/poisonspray5e
-	name = "Poison Spray"
+	name = "Poison Cloud" //renamed to better reflect wtf this does -- vide
 	overlay_state = "null"
 	releasedrain = 50
 	chargetime = 3
@@ -1523,7 +1517,7 @@
 /datum/status_effect/buff/rayoffrost5e
 	id = "frostbite"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/rayoffrost5e
-	duration = 3 SECONDS
+	duration = 6 SECONDS
 	var/static/mutable_appearance/frost = mutable_appearance('icons/roguetown/mob/coldbreath.dmi', "breath_m", ABOVE_ALL_MOB_LAYER)
 	effectedstats = list("speed" = -2)
 
@@ -1539,7 +1533,7 @@
 	target.update_vision_cone()
 	var/newcolor = rgb(136, 191, 255)
 	target.add_atom_colour(newcolor, TEMPORARY_COLOUR_PRIORITY)
-	addtimer(CALLBACK(target, TYPE_PROC_REF(/atom, remove_atom_colour), TEMPORARY_COLOUR_PRIORITY, newcolor), 3 SECONDS)
+	addtimer(CALLBACK(target, TYPE_PROC_REF(/atom, remove_atom_colour), TEMPORARY_COLOUR_PRIORITY, newcolor), 6 SECONDS)
 	target.add_movespeed_modifier(MOVESPEED_ID_ADMIN_VAREDIT, update=TRUE, priority=100, multiplicative_slowdown=4, movetypes=GROUND)
 
 /datum/status_effect/buff/rayoffrost5e/on_remove()

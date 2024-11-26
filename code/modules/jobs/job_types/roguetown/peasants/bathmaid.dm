@@ -11,7 +11,7 @@
 	allowed_races = RACES_ALL_KINDSPLUS
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 
-	tutorial = "Nobody would envy your lot in life, for the role of bath-servant is not something so idly taken. Such folk often come from a place of desperation, 'least usually: for any with true compassion or skill would seek position with a nunnery or the medical trade. Launder clothes and soothe wounds, that is your loathsome creed."
+	tutorial = "The Courtesans of the wood are renowned across the land. Such grace and Charisma coupled with beauty has inspired many bards and adventurers alike. You work for the Spymaster; attending to clientele from across the realms needs -- for a price."
 
 	outfit = /datum/outfit/job/roguetown/nightmaiden
 	display_order = JDO_WENCH
@@ -38,16 +38,21 @@
 	neck = /obj/item/storage/belt/rogue/pouch
 	r_hand = /obj/item/roguekey/nightmaiden
 	l_hand = /obj/item/rogue/instrument/harp
+	pants = /obj/item/clothing/under/roguetown/tights/stockings/fishnet/random //Added fishnet stockings to the wenches
 	backl = /obj/item/storage/backpack/rogue/satchel
 
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/music, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/lockpicking, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sneaking, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/stealing, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/music, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/lockpicking, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sewing, 3, TRUE)
 	ADD_TRAIT(H, TRAIT_GOODLOVER, TRAIT_GENERIC)
 	if(isseelie(H))
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/seelie_dust)
@@ -106,7 +111,7 @@
 	if(istype(target, /mob/living/carbon/human))
 		visible_message(span_info("[user] begins scrubbing [target] with the [src]."))
 		if(do_after(user, 50))
-			if(user.job == "Bath Wench")
+			if(HAS_TRAIT(user, TRAIT_GOODLOVER))
 				visible_message(span_info("[user] expertly scrubs and soothes [target] with the [src]."))
 				to_chat(target, span_love("I feel so relaxed and clean!"))
 				SEND_SIGNAL(target, COMSIG_ADD_MOOD_EVENT, "bathcleaned", /datum/mood_event/bathcleaned)

@@ -1,5 +1,5 @@
 /datum/job/roguetown/prisonerb
-	title = "Prisoner (Bog)"
+	title = "Prisoner (Underdark)"
 	flag = PRISONERB
 	department_flag = NOBLEMEN
 	faction = "Station"
@@ -25,15 +25,15 @@
 	neck = /obj/item/clothing/neck/roguetown/gorget/prisoner
 	shoes = /obj/item/clothing/shoes/roguetown/shortboots
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/music, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/lockpicking, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sneaking, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/music, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/lockpicking, 2, TRUE)
 		H.change_stat("intelligence", 1)
 		H.change_stat("fortune", 2)
 		var/datum/antagonist/new_antag = new /datum/antagonist/prisoner()
@@ -48,4 +48,4 @@
 		pants = /obj/item/clothing/under/roguetown/tights/random
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/random
 		armor = /obj/item/clothing/suit/roguetown/shirt/tunic/random
-		
+

@@ -364,7 +364,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 
 /obj/structure/kybraxor
 	name = "Kybraxor the Devourer"
-	desc = "The mad duke's hungriest pet."
+	desc = "The mad monarch's hungriest pet."
 	density = FALSE
 	nomouseover = TRUE
 	icon = 'icons/roguetown/misc/96x96.dmi'

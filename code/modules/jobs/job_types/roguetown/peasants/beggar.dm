@@ -6,7 +6,7 @@
 	total_positions = -1
 	spawn_positions = -1
 
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 	allowed_ages = ALL_AGES_LIST
 	outfit = /datum/outfit/job/roguetown/vagrant
 	bypass_lastclass = TRUE
@@ -18,9 +18,9 @@
 	display_order = JDO_VAGRANT
 	show_in_credits = FALSE
 	can_random = FALSE
-	
+
 	cmode_music = 'sound/music/combat_bum.ogg'
-	
+
 	/// Chance to become a wise beggar, if we still have space for more wise beggars
 	var/wise_chance = 10
 	/// Amount of wise beggars spawned as of now
@@ -42,6 +42,8 @@
 
 /datum/outfit/job/roguetown/vagrant/pre_equip(mob/living/carbon/human/H)
 	..()
+	ADD_TRAIT(H, TRAIT_NOSTINK, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_NASTY_EATER, TRAIT_GENERIC)
 	// wise beggar!!!
 	// guaranteed full beggar gear + random stats
 	if(is_wise)
@@ -59,11 +61,11 @@
 		r_hand = /obj/item/rogueweapon/woodstaff/wise // dog beating staff
 		l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/special // dog butchering knife
 		if(H.mind)
-			H.mind.adjust_skillrank(/datum/skill/misc/sneaking, rand(4,5), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/stealing, 5, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/climbing, rand(4,5), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE) //very good reading he is wise
-			H.mind.adjust_skillrank(/datum/skill/combat/polearms, rand(4,5), TRUE) // dog beating staff
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/sneaking, rand(4,5), TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/stealing, 5, TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, rand(4,5), TRUE)
+			H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 4, TRUE) //very good reading he is wise
+			H.mind.adjust_skillrank_up_to(/datum/skill/combat/polearms, rand(4,5), TRUE) // dog beating staff
 			H.STASTR = rand(9, 20)
 			H.STAINT = rand(9, 20)
 			H.STALUC = rand(9, 20)
@@ -104,9 +106,9 @@
 		if(prob(50))
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/vagrant/l
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, rand(3,5), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, rand(3,5), TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sneaking, rand(3,5), TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/stealing, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, rand(3,5), TRUE)
 		H.STALUC = rand(9, 20)
 	if(prob(5))
 		r_hand = /obj/item/rogueweapon/mace/woodclub
@@ -116,7 +118,7 @@
 		l_hand = /obj/item/rogueweapon/mace/woodclub
 	else
 		l_hand = null
-	H.mind.adjust_skillrank(/datum/skill/misc/lockpicking, pick(1,2,3,4,5), TRUE) //random lockpicking skill cool.
+	H.mind?.adjust_skillrank(/datum/skill/misc/lockpicking, pick(1,2,3,4,5), TRUE) //random lockpicking skill cool.
 	H.change_stat("strength", 1)
 	H.change_stat("constitution", 2) // look I get it human garbage. but no ones playing this shit with that.
 	H.change_stat("endurance", 1)
@@ -128,7 +130,7 @@
 	H.grant_language(/datum/language/thievescant)
 
 /datum/outfit/job/roguetown/vagrant
-	name = "Beggar"
+	name = "Low Life"
 	/// Whether or not we get wise gear and stats
 	var/is_wise = FALSE
 

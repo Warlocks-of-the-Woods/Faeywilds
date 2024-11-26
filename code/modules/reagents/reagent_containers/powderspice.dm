@@ -1,4 +1,14 @@
 /obj/item/reagent_containers/powder
+	name = "default powder"
+	desc = ""
+	icon = 'icons/roguetown/items/produce.dmi'
+	icon_state = "spice"
+	item_state = "spice"
+	possible_transfer_amounts = list()
+	volume = 15
+	sellprice = 10
+
+/obj/item/reagent_containers/powder/spice
 	name = "spice"
 	desc = ""
 	icon = 'icons/roguetown/items/produce.dmi'
@@ -133,10 +143,11 @@
 	qdel(src)
 */
 /obj/item/reagent_containers/powder/flour
-	name = "powder"
-	desc = ""
+	name = "mound of flour"
+	desc = "Add water and knead it"
 	gender = PLURAL
 	icon_state = "flour"
+	can_brew = TRUE
 	list_reagents = list(/datum/reagent/floure = 1)
 	grind_results = list(/datum/reagent/floure = 10)
 	volume = 1
@@ -200,13 +211,19 @@
 	desc = ""
 	gender = PLURAL
 	icon_state = "salt"
+	brew_reagent = /datum/reagent/alch/syrums
 	list_reagents = list(/datum/reagent/consumable/sodiumchloride = 15)
 	grind_results = list(/datum/reagent/consumable/sodiumchloride = 15)
 	volume = 1
 
+/obj/item/reagent_containers/powder/salt/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
+	new /obj/effect/decal/cleanable/food/salt(get_turf(src))
+	..()
+	qdel(src)
+
 /obj/item/reagent_containers/powder/ozium
-	name = "ozium"
-	desc = ""
+	name = "ozium powder"
+	desc = "painkiller"
 	icon = 'icons/roguetown/items/produce.dmi'
 	icon_state = "ozium"
 	possible_transfer_amounts = list()
@@ -214,6 +231,17 @@
 	list_reagents = list(/datum/reagent/ozium = 15)
 	grind_results = list(/datum/reagent/ozium = 15)
 	sellprice = 5
+
+/obj/item/reagent_containers/powder/gunpowder
+	name = "firepowder"
+	desc = "Not so useful in this state."
+	icon = 'modular_stonehedge/icons/roguetown/items/produce.dmi'
+	icon_state = "gunpowder"
+	possible_transfer_amounts = list()
+	volume = 15
+	list_reagents = list(/datum/reagent/gunpowder = 15)
+	grind_results = list(/datum/reagent/gunpowder = 15)
+	sellprice = 25
 
 /obj/item/reagent_containers/powder/heal
 	name = "healing powder"
@@ -254,7 +282,7 @@
 
 /obj/item/reagent_containers/powder/moondust
 	name = "moondust"
-	desc = ""
+	desc = "Give it a sniff, see if it smells like moondust to you."
 	icon = 'icons/roguetown/items/produce.dmi'
 	icon_state = "moondust"
 	possible_transfer_amounts = list()
@@ -269,6 +297,7 @@
 	. = 1
 
 /datum/reagent/moondust/on_mob_metabolize(mob/living/M)
+	narcolepsy_drug_up(M)
 	M.flash_fullscreen("can_you_see")
 	animate(M.client, pixel_y = 1, time = 1, loop = -1, flags = ANIMATION_RELATIVE)
 	animate(pixel_y = -1, time = 1, flags = ANIMATION_RELATIVE)
@@ -277,8 +306,11 @@
 	animate(M.client)
 
 /datum/reagent/moondust/on_mob_life(mob/living/carbon/M)
+	narcolepsy_drug_up(M)
 	if(M.reagents.has_reagent(/datum/reagent/moondust_purest))
 		M.Sleeping(40, 0)
+	else
+		M.Sleeping(-40)
 	if(M.has_flaw(/datum/charflaw/addiction/junkie))
 		M.sate_addiction()
 	M.apply_status_effect(/datum/status_effect/buff/moondust)
@@ -294,8 +326,8 @@
 	M.adjustToxLoss(10, 0)
 
 /obj/item/reagent_containers/powder/moondust/purest
-	name = "moondust"
-	desc = ""
+	name = "pure uncut moondust"
+	desc = "Give it a sniff, see if it smells like moondust to you."
 	icon = 'icons/roguetown/items/produce.dmi'
 	icon_state = "moondust_purest"
 	possible_transfer_amounts = list()
@@ -317,6 +349,7 @@
 	. = 1
 
 /datum/reagent/moondust_purest/on_mob_metabolize(mob/living/M)
+	narcolepsy_drug_up(M)
 	M.playsound_local(M, 'sound/ravein/small/hello_my_friend.ogg', 100, FALSE)
 	M.flash_fullscreen("can_you_see")
 	M.overlay_fullscreen("purest_kaif", /atom/movable/screen/fullscreen/purest)
@@ -328,8 +361,11 @@
 	M.clear_fullscreen("purest_kaif")
 
 /datum/reagent/moondust_purest/on_mob_life(mob/living/carbon/M)
+	narcolepsy_drug_up(M)
 	if(M.reagents.has_reagent(/datum/reagent/moondust))
 		M.Sleeping(40, 0)
+	else
+		M.Sleeping(-40)
 	if(M.has_flaw(/datum/charflaw/addiction/junkie))
 		M.sate_addiction()
 	M.apply_status_effect(/datum/status_effect/buff/moondust_purest)

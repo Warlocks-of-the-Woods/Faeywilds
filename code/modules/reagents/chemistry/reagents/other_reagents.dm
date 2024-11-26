@@ -157,6 +157,7 @@
 	..()
 
 /datum/reagent/water/gross
+	name = "Gross Water"
 	taste_description = "lead"
 
 /datum/reagent/water/gross/on_mob_life(mob/living/carbon/M)
@@ -172,7 +173,7 @@
 /turf/open
 	var/water_level = 0
 	var/last_water_update
-	var/max_water = 500
+	var/max_water = 15
 
 /turf/open/proc/add_water(amt)
 	if(!amt)
@@ -950,6 +951,14 @@
 	reagent_state = SOLID
 	color = "#D0D0D0" // rgb: 208, 208, 208
 	taste_description = "expensive yet reasonable metal"
+
+//could use in alchemy or some shit.
+/datum/reagent/glass
+	name = "Glass"
+	description = "Grinded up shards of glass, transparentish and sharp as hell, it's like sand but ascended... Quite literally is."
+	reagent_state = SOLID
+	color = "#b5d4ff"
+	taste_description = "glass"
 
 /datum/reagent/silver/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
 	if(M.has_bane(BANE_SILVER))

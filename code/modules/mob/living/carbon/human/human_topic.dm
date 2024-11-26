@@ -1,10 +1,10 @@
 /mob/living/carbon/human/Topic(href, href_list)
 	var/observer_privilege = isobserver(usr)
-	var/race_name = dna.species.name
+	//var/race_name = dna.species.name
 
 
-
-	if(href_list["task"] == "view_headshotnew")
+/*
+	if(href_list["task"] == "view_headshot")
 		if(!ismob(usr))
 			return
 		if(!valid_headshot_link(null, headshot_link, TRUE))
@@ -15,14 +15,28 @@
 		popup.set_content(dat.Join())
 		popup.open(FALSE)
 		return
+*/
+
 	if(href_list["task"] == "view_headshot")
 		if(!ismob(usr))
 			return
 		if(!valid_headshot_link(null, headshot_link, TRUE))
 			return
 		var/mob/user = usr
-		var/list/dat = list("<div align='center'><img style='max-width: 500px; max-height: 500px' src='[headshot_link]'/></div><br><font size=3><u>Description:</u><br>[replacetext(flavor_text, "\n", "<BR>")]<br><br><u><b>OOC NOTES:<br><b></u>[replacetext(ooc_notes, "\n", "<BR>")]</font>")
-		var/datum/browser/popup = new(user, "headshot", "<div align='center'>[src]</div>", 560, 570)
+		var/list/dat = list("<table width='100%' height='100%'><td align='center' valign='middle'><img src='[headshot_link]' width='560px' height='680px'></td></table>")
+		var/datum/browser/popup = new(user, "headshot", "<div align='center'>[src]</div>", 610, 730)
+		popup.set_content(dat.Join())
+		popup.open(FALSE)
+		return
+
+	if(href_list["task"] == "view_nudeshot")
+		if(!ismob(usr))
+			return
+		if(!valid_headshot_link(null, nudeshot_link, TRUE))
+			return
+		var/mob/user = usr
+		var/list/dat = list("<table width='100%' height='100%'><td align='center' valign='middle'><img src='[nudeshot_link]' width='560px' height='680px'></td></table>")
+		var/datum/browser/popup = new(user, "nudeshot", "<div align='center'>[src]</div>", 610, 730)
 		popup.set_content(dat.Join())
 		popup.open(FALSE)
 		return
@@ -48,12 +62,14 @@
 		popup.set_content(dat.Join())
 		popup.open(FALSE)
 		return
-	if(href_list["task"] == "view_nsfw_headshot")
+	if(href_list["task"] == "view_nsfw_notes")
 		if(!ismob(usr))
 			return
+		if(!valid_nsfw_info(null, nsfw_info, TRUE))
+			return
 		var/mob/user = usr
-		var/list/dat = list("<div align='center'><img style='max-width: 500px; max-height: 500px' src='[nsfw_headshot_link]'/></div><br><font size=3><u>NSFW Info:</u><br>[replacetext(nsfw_info, "\n", "<BR>")]<br><br>")
-		var/datum/browser/popup = new(user, "nsfw_headshot", "<div align='center'>[src]'s NSFW Information</div>", 560, 570)
+		var/list/dat = list("<font size=3><u><b>NSFW NOTES:<br><b></u>[replacetext(nsfw_info, "\n", "<BR>")]</font>")
+		var/datum/browser/popup = new(user, "nsfwinfo", 400, 100)
 		popup.set_content(dat.Join())
 		popup.open(FALSE)
 		return
@@ -170,12 +186,14 @@
 			// Display a warning if the user mocks up
 			to_chat(src, span_warning("I feel your [pocket_side] pocket being fumbled with!"))
 
+/*
 	if(href_list["task"] == "view_erp_preferences") //To know if they want to ERP
 		switch (client.prefs.sexable)
 			if(TRUE)
 				to_chat(usr, span_love("They allowed to use ERP Panel on them!"))
 			else
 				to_chat(usr, span_warning("They DID NOT ALLOW to use ERP Panel on them!"))
+*/
 
 ///////HUDs///////
 	if(href_list["hud"])

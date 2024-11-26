@@ -173,7 +173,7 @@
 		if(prob(23))
 			enemies = list()
 			src.visible_message(span_notice("[src] calms down."))
-			LoseTarget()
+			
 		else
 			return
 	..()
@@ -187,6 +187,9 @@
 	. = ..()
 	if(.)
 		if(enemies.len)
+			if(target)
+				if(target.alpha <= 100)
+					LoseTarget()
 			if(prob(5))
 				emote("cidle")
 			if(prob(deaggroprob))
@@ -210,9 +213,11 @@
 				growth_prog += 0.5
 				if(growth_prog >= 100)
 					if(isturf(loc))
+						//Spawn the adult & make it tamed if we are. Note that we do NOT transfer damage, reagents, or any state of the animal...
 						var/mob/living/simple_animal/A = new adult_growth(loc)
 						if(tame)
 							A.tame = TRUE
+							A.tamed() //We unfortunately have to do this because by this point Initialize has already ran.
 						qdel(src)
 						return
 			else

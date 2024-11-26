@@ -255,6 +255,7 @@
 	throw_speed = 1
 	throw_range = 1
 	icon_state = "beartrap"
+	w_class = WEIGHT_CLASS_NORMAL
 	desc = "A crude and rusty spring trap, used to snare interlopers, or prey on a hunt. Looks almost like falling apart."
 	var/rusty = TRUE
 	var/armed = 0
@@ -328,9 +329,11 @@
 
 /obj/item/restraints/legcuffs/beartrap/armed
 	armed = TRUE
+	w_class = WEIGHT_CLASS_BULKY
 
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage
 	armed = TRUE
+	w_class = WEIGHT_CLASS_BULKY
 	alpha = 80
 
 /obj/item/restraints/legcuffs/beartrap/Initialize()
@@ -354,6 +357,10 @@
 		if(prob(50 + (L.mind.get_skill_level(/datum/skill/craft/traps) * 10)))		//Used to be strength check, fuck off.
 			if(prob(50))
 				armed = !armed
+				if(!armed)
+					w_class = WEIGHT_CLASS_NORMAL
+				else
+					w_class = WEIGHT_CLASS_BULKY
 				update_icon()
 				to_chat(user, span_notice("[src] is now [armed ? "armed" : "disarmed"]"))
 				L.mind?.adjust_experience(/datum/skill/craft/traps, L.STAINT * boon, FALSE)
@@ -368,6 +375,7 @@
 					return
 
 /obj/item/restraints/legcuffs/beartrap/proc/close_trap()
+	w_class = WEIGHT_CLASS_NORMAL
 	armed = FALSE
 	alpha = 255
 	update_icon()

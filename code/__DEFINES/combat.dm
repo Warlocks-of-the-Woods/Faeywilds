@@ -176,6 +176,7 @@
 
 #define INTENT_SPLASH		/datum/intent/splash
 #define INTENT_POUR			/datum/intent/pour
+#define INTENT_FILL			/datum/intent/fill
 
 //Intent blade class for dismember class
 #define BCLASS_BLUNT		"blunt"

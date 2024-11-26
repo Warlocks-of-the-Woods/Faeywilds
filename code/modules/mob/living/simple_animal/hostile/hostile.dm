@@ -51,14 +51,14 @@
 	var/lose_patience_timer_id //id for a timer to call LoseTarget(), used to stop mobs fixating on a target they can't reach
 	var/lose_patience_timeout = 300 //30 seconds by default, so there's no major changes to AI behaviour, beyond actually bailing if stuck forever
 
-	var/del_on_deaggro = 0 //seconds to delete after losing aggro
+//	var/del_on_deaggro = 0 //seconds to delete after losing aggro /*Gisela moved it to living_defines */
 	var/last_aggro_loss = null
 
 	var/retreat_health
 
 	var/next_seek
 
-	cmode = 1
+	cmode = TRUE
 	setparrytime = 30
 	dodgetime = 30
 
@@ -207,12 +207,10 @@
 			. += A
 			continue
 
-
-
 /mob/living/simple_animal/hostile/proc/Found(atom/A)//This is here as a potential override to pick a specific target if available
 	if (isliving(A))
 		var/mob/living/living_target = A
-		if(living_target.alpha == 0 && living_target.rogue_sneaking) // is our target hidden? if they are, attempt to detect them once
+		if(living_target.alpha <= 0) // is our target hidden? if they are, attempt to detect them once
 			return npc_detect_sneak(living_target, simple_detect_bonus)
 	return
 
@@ -241,7 +239,18 @@
 		if(M.name in friends)
 			return FALSE
 
+	if(ishuman(the_target))
+		var/mob/living/carbon/human/th = the_target
+		if(th.sexcon.beingfucked) //dont touch the battlefucked
+			return FALSE
+		if(th.lying && !th.get_active_held_item()) //if is laying and holding nothing, and not in cmode. Ignore.
+			if(prob(4) && th.has_quirk(/datum/quirk/monsterhunter) && erpable) //tiny chance to trigger abuss.
+				fuckcd = 0
+			return FALSE
+
 	if(see_invisible < the_target.invisibility)//Target's invisible to us, forget it
+		return FALSE
+	if(the_target.alpha <= 100) //if target has less than or exactly 100 alpha, does not attack.
 		return FALSE
 	if(search_objects < 2)
 		if(isliving(the_target))

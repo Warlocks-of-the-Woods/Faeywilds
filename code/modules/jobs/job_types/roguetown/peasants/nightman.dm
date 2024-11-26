@@ -8,11 +8,9 @@
 	spawn_positions = 1
 
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 
-	tutorial = "You are renting out the bath-house in a joint operation with the barkeep. Providing security for the bathwenches and helping them find work, or a troublemaking rake that the others hate to tolerate. \
-		\
-		This role allows for full customization."
+	tutorial = "You are renting out the bath-house in a joint operation with the barkeep. Providing security for the Courtesans and helping them find work... And deal in other shady businesses behind closed doors."
 
 	allowed_ages = ALL_AGES_LIST
 	outfit = /datum/outfit/job/roguetown/nightman
@@ -27,18 +25,19 @@
 	belt = /obj/item/storage/belt/rogue/leather
 	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 	ADD_TRAIT(H, TRAIT_GOODLOVER, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger = 1)
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/lockpicking, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sneaking, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/stealing, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/lockpicking, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sewing, 3, TRUE)
 		H.change_stat("strength", 1)
 		H.change_stat("intelligence", -1)
 		H.grant_language(/datum/language/thievescant)

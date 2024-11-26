@@ -43,6 +43,20 @@
 	created_item = /obj/item/roguestatue/iron
 	i_type = "Valuables"
 
+/datum/anvil_recipe/valuables/special/ringf/obj/item/clothing/neck/roguetown/psicross
+	name = "flame ring (+1 Fat, +1 stone, +1 Fiber)"
+	req_bar = /obj/item/ingot/iron
+	created_item = /obj/item/clothing/ring/lantern
+	additional_items = list(/obj/item/reagent_containers/food/snacks/fat, /obj/item/natural/stone, /obj/item/natural/fibers)
+	i_type = "Valuables"
+
+/datum/anvil_recipe/valuables/special/ringp
+	name = "blessed ring (+1 Psicross)"
+	req_bar = /obj/item/ingot/iron
+	created_item = /obj/item/clothing/ringP
+	additional_items = list(/obj/item/clothing/neck/roguetown/psicross)
+	i_type = "Valuables"
+
 /datum/anvil_recipe/valuables/steel
 	name = "Statue"
 	req_bar = /obj/item/ingot/steel
@@ -80,42 +94,42 @@
 
 //Gold Rings
 /datum/anvil_recipe/valuables/emeringg
-	name = "Gemerald Ring (+1 Gemerald)"
+	name = "Emerald Ring (+1 Emerald)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/green)
 	created_item = /obj/item/clothing/ring/emerald
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/rubyg
-	name = "Rontz Ring (+1 Rontz)"
+	name = "Ruby Ring (+1 Ruby)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem)
 	created_item = /obj/item/clothing/ring/ruby
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/topazg
-	name = "Toper Ring (+1 Toper)"
+	name = "Topaz Ring (+1 Topaz)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/yellow)
 	created_item = /obj/item/clothing/ring/topaz
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/quartzg
-	name = "Blortz Ring (+1 Blortz)"
+	name = "Quartz Ring (+1 Quartz)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/blue)
 	created_item = /obj/item/clothing/ring/quartz
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/sapphireg
-	name = "Saffira Ring (+1 Saffira)"
+	name = "Sapphire Ring (+1 Sapphire)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/violet)
 	created_item = /obj/item/clothing/ring/sapphire
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/diamondg
-	name = "Dorpel Ring (+1 Dorpel)"
+	name = "Diamond Ring (+1 Diamond)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/diamond)
 	created_item = /obj/item/clothing/ring/diamond
@@ -125,49 +139,49 @@
 //BE AWARE THOSE RINGS SHOULD BE TURNED TO SILVER ONCE SILVER INGOTS ARE IN PLAY - Sarkness
 
 /datum/anvil_recipe/valuables/emerings
-	name = "Gemerald Ring (+1 Gemerald)"
+	name = "Emerald Ring (+1 Emerald)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/green)
 	created_item = /obj/item/clothing/ring/emeralds
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/rubys
-	name = "Rontz Ring (+1 Rontz)"
+	name = "Ruby Ring (+1 Ruby)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem)
 	created_item = /obj/item/clothing/ring/rubys
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/topazs
-	name = "Toper Ring (+1 Toper)"
+	name = "Topaz Ring (+1 Topaz)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/yellow)
 	created_item = /obj/item/clothing/ring/topazs
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/quartzs
-	name = "Blortz Ring (+1 Blortz)"
+	name = "Quartz Ring (+1 Quartz)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/blue)
 	created_item = /obj/item/clothing/ring/quartzs
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/sapphires
-	name = "Saffira Ring (+1 Saffira)"
+	name = "Sapphire Ring (+1 Sapphire)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/violet)
 	created_item = /obj/item/clothing/ring/sapphires
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/diamonds
-	name = "Dorpel Ring (+1 Dorpel)"
+	name = "Diamond Ring (+1 Diamond)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/diamond)
 	created_item = /obj/item/clothing/ring/diamonds
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/terminus
-	name = "Terminus Est (+1 Gold Bar, +1 Steel, +1 Rontz)"
+	name = "Terminus Est (+1 Gold Bar, +1 Steel, +1 Ruby)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/ingot/gold, /obj/item/ingot/steel, /obj/item/roguegem)
 	created_item = /obj/item/rogueweapon/sword/long/exe/cloth

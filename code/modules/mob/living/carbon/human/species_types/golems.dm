@@ -31,6 +31,7 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
+		ORGAN_SLOT_ANUS = /obj/item/organ/filling_organ/anus,
 		ORGAN_SLOT_ADAMANTINE_RESONATOR = /obj/item/organ/adamantine_resonator
 		)
 	var/info_text = "As an <span class='danger'>Iron Golem</span>, you don't have any special traits."
@@ -90,6 +91,7 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
+		ORGAN_SLOT_ANUS = /obj/item/organ/filling_organ/anus,
 		ORGAN_SLOT_ADAMANTINE_RESONATOR = /obj/item/organ/adamantine_resonator,
 		ORGAN_SLOT_VOICE = /obj/item/organ/vocal_cords/adamantine
 		)

@@ -1,9 +1,9 @@
 
-/datum/skill/mining
+/datum/skill/labor/mining
 	name = "Mining"
 	desc = ""
 
-/datum/skill/mining/get_skill_speed_modifier(level)
+/datum/skill/labor/mining/get_skill_speed_modifier(level)
 	switch(level)
 		if(SKILL_LEVEL_NONE)
 			return 1.3

@@ -13,6 +13,8 @@
 	var/list/song_list = list()
 	var/playing = FALSE
 	improvised = TRUE
+	w_class = WEIGHT_CLASS_NORMAL
+
 
 /obj/item/rogue/instrument/equipped(mob/living/user, slot)
 	. = ..()
@@ -49,7 +51,7 @@
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	if(!playing)
-		var/curfile = input(user, "Which song?", "Roguetown", name) as null|anything in song_list
+		var/curfile = input(user, "Which song?", "Stonehedge", name) as null|anything in song_list
 		if(!user)
 			return
 		if(user.mind)
@@ -177,7 +179,9 @@
 	icon_state = "harp"
 	song_list = list("Through Thine Window, He Glanced" = 'sound/music/instruments/harb (1).ogg',
 	"The Lady of Red Silks" = 'sound/music/instruments/harb (2).ogg',
-	"Eora Doth Watches" = 'sound/music/instruments/harb (3).ogg')
+	"The lover Doth Watch" = 'sound/music/instruments/harb (3).ogg',
+	"Gaias Enchantment" = 'sound/music/instruments/harb (4).ogg',
+	"Magic Leylines" = 'sound/music/instruments/harb (5).ogg',)
 
 /obj/item/rogue/instrument/flute
 	name = "flute"

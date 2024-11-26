@@ -12,6 +12,9 @@
 	color = "#7c6d5c"
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
+	w_class = WEIGHT_CLASS_NORMAL
+	genitalaccess = TRUE
+	is_bra = TRUE //so it lets bottom access.
 
 /obj/item/clothing/suit/roguetown/shirt/robe/monk
 	slot_flags = ITEM_SLOT_ARMOR
@@ -29,7 +32,7 @@
 /obj/item/clothing/suit/roguetown/shirt/robe/astrata
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "sun robe"
-	desc = "Robes worn by those in service to Astrata."
+	desc = "Robes worn by those in service to the sun."
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "astratarobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
@@ -43,7 +46,7 @@
 /obj/item/clothing/suit/roguetown/shirt/robe/noc
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "moon robe"
-	desc = "Robes worn by those in service to Noc."
+	desc = "Robes worn by those in service to the moon."
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "nocrobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
@@ -57,11 +60,11 @@
 /obj/item/clothing/suit/roguetown/shirt/robe/necromancer
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "necromancer robes"
-	desc = ""
+	desc = "Often worn by those who practice in the field of necromancy."
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "necromrobe"
-	icon = 'icons/roguetown/clothing/armor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
+	icon = 'modular_stonehedge/icons/roguetown/clothing/armor.dmi'
+	mob_overlay_icon = 'modular_stonehedge/icons/roguetown/clothing/onmob/armor.dmi'
 	sleeved = null
 	boobed = TRUE
 	color = null
@@ -71,7 +74,7 @@
 /obj/item/clothing/suit/roguetown/shirt/robe/dendor
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "briar robe"
-	desc = "Robes worn by Druid's in service to Dendor."
+	desc = "Robes worn by Druid's in service to nature."
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "dendorrobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
@@ -85,7 +88,7 @@
 /obj/item/clothing/suit/roguetown/shirt/robe/necra
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "mourning robe"
-	desc = "Black robes which cover the body not unlike those in depictions of the Carriageman himself."
+	desc = "Black robes which cover the body not unlike those in depictions of the tollcollector."
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "necrarobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
@@ -98,8 +101,8 @@
 
 /obj/item/clothing/suit/roguetown/shirt/robe/psydonrobe
 	slot_flags = ITEM_SLOT_ARMOR
-	name = "psydon robe"
-	desc = "Blood of Psydon cleanse me."
+	name = "red robes"
+	desc = "Red like blood.."
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "psydonrobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
@@ -189,7 +192,7 @@
 	sleeved = null
 	boobed = TRUE
 	color = null
-	flags_inv = HIDEBOOB|HIDETAIL
+	flags_inv = HIDEBOOB|HIDETAIL|HIDEBUTT
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 
@@ -198,7 +201,7 @@
 /obj/item/clothing/suit/roguetown/shirt/robe/eora
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "eoran robe"
-	desc = "Holy robes, intended for use by followers of Eora"
+	desc = "Holy robes, intended for use by followers of love."
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "eorarobes"
 	icon = 'icons/roguetown/clothing/armor.dmi'
@@ -212,8 +215,8 @@
 	var/fanatic_wear = FALSE
 
 /obj/item/clothing/suit/roguetown/shirt/robe/eora/alt
-	name = "open eoran robe"
-	desc = "Used by more radical followers of the Eoran Church"
+	name = "open courtesan robe"
+	desc = "Used by more radical followers of the loving."
 	body_parts_covered = null
 	icon_state = "eorastraps"
 	fanatic_wear = TRUE
@@ -221,15 +224,15 @@
 /obj/item/clothing/suit/roguetown/shirt/robe/eora/attack_right(mob/user)
 	switch(fanatic_wear)
 		if(FALSE)
-			name = "open eoran robe"
-			desc = "Used by more radical followers of the Eoran Church"
+			name = "open courtesan robe"
+			desc = "Used by more radical followers of the lovers domain."
 			body_parts_covered = null
 			icon_state = "eorastraps"
 			fanatic_wear = TRUE
 			to_chat(usr, span_warning("Now wearing radically!"))
 		if(TRUE)
 			name = "eoran robe"
-			desc = "Holy robes, intended for use by followers of Eora"
+			desc = "Holy robes, intended for use by followers of love."
 			body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 			icon_state = "eorarobes"
 			fanatic_wear = FALSE
@@ -275,7 +278,7 @@
 	sleeved = null
 	boobed = TRUE
 	color = null
-	flags_inv = HIDEBOOB|HIDETAIL|HIDECROTCH
+	flags_inv = HIDEBOOB|HIDETAIL|HIDECROTCH|HIDEBUTT
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 
@@ -289,7 +292,7 @@
 	sleeved = null
 	boobed = TRUE
 	color = null
-	flags_inv = HIDEBOOB|HIDETAIL|HIDECROTCH
+	flags_inv = HIDEBOOB|HIDETAIL|HIDECROTCH|HIDEBUTT
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 
@@ -303,6 +306,6 @@
 	sleeved = null
 	boobed = TRUE
 	color = null
-	flags_inv = HIDEBOOB|HIDETAIL
+	flags_inv = HIDEBOOB|HIDETAIL|HIDEBUTT
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL

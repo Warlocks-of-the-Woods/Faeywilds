@@ -37,7 +37,7 @@
 		/obj/item/clothing/shoes/roguetown/simpleshoes = 15,
 		/obj/item/clothing/suit/roguetown/shirt/undershirt/random = 15,
 		/obj/item/storage/belt/rogue/leather/cloth = 15,
-		/obj/item/clothing/cloak/raincloak/mortus = 15,
+		/obj/item/clothing/cloak/raincloak/rogue = 15,
 		/obj/item/clothing/head/roguetown/armingcap = 15,
 		/obj/item/clothing/cloak/apron/waist = 15,
 		/obj/item/storage/belt/rogue/leather/rope = 15,

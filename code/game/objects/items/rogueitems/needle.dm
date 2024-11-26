@@ -93,9 +93,12 @@
 				user.visible_message(span_info("[user] repairs [I]!"))
 				if(I.obj_broken == TRUE)
 					I.obj_broken = FALSE
+				if(istype(I, /obj/item/clothing))
+					var/obj/item/clothing/C = I
+					C.update_clothes_damaged_state(FALSE)
 				I.obj_integrity = I.max_integrity
+				I.update_overlays()
 				user.mind?.adjust_experience(/datum/skill/misc/sewing, user.STAINT, TRUE)
-
 				//Vrell - Part of storage item repair fix
 				if(target_storage)
 					target_storage.being_repaired = FALSE

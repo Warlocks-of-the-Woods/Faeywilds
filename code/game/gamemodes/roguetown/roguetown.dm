@@ -35,9 +35,12 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	var/headrebdecree = FALSE
 	var/reb_end_time = 0
 
+	var/needlord = FALSE
 	var/check_for_lord = TRUE
 	var/next_check_lord = 0
 	var/missing_lord_time = FALSE
+	var/roundvoteend = FALSE
+	var/ttime
 
 	var/kingsubmit = FALSE
 	var/deathknightspawn = FALSE
@@ -48,7 +51,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	skeletons = FALSE
 
 /datum/game_mode/chaosmode/check_finished()
-	var/ttime = world.time - SSticker.round_start_time
+	ttime = world.time - SSticker.round_start_time
 	if(roguefight)
 		if(ttime >= 30 MINUTES)
 			return TRUE
@@ -61,7 +64,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 
 	if(ttime >= GLOB.round_timer)
 		if(roundvoteend)
-			if(ttime >= round_ends_at)
+			if(ttime >= (GLOB.round_timer + 15 MINUTES) )
 				for(var/mob/living/carbon/human/H in GLOB.human_list)
 					if(H.stat != DEAD)
 						if(H.allmig_reward)
@@ -70,7 +73,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 				return TRUE
 		else
 			if(!SSvote.mode && SSticker.autovote)
-				SSvote.initiate_vote("endround", "the Gods")
+				SSvote.initiate_vote("endround", pick("Zlod", "Sun King", "Gaia", "Moon Queen", "Aeon", "Gemini", "Aries"))
 
 	if(headrebdecree)
 		if(reb_end_time == 0)
@@ -84,7 +87,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 		if(ttime >= reb_end_time)
 			return TRUE
 
-	check_for_lord()
+	if(needlord)
+		check_for_lord()
 /*
 	if(ttime > 180 MINUTES) //3 hour cutoff
 		return TRUE*/
@@ -97,7 +101,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	var/lord_dead = FALSE
 	for(var/mob/living/carbon/human/H in GLOB.human_list)
 		if(H.mind)
-			if(H.job == "Duke")
+			if(H.job == "Monarch")
 				lord_found = TRUE
 				if(H.stat == DEAD)
 					lord_dead = TRUE
@@ -198,10 +202,10 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 /datum/game_mode/chaosmode/proc/pick_bandits()
 	//BANDITS
 	banditgoal = rand(200,400)
-	restricted_jobs = list("Duke",
-	"Duke Courtier",
-	"Guildmaster",
-	"Priest",
+	restricted_jobs = list("Monarch",
+	"Consort",
+	"Merchant Prince",
+	"Prophet",
 	"Knight")
 	var/num_bandits = 0
 	if(num_players() >= 10)
@@ -268,8 +272,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 
 
 /datum/game_mode/chaosmode/proc/pick_aspirants()
-	var/list/possible_jobs_aspirants = list("Royal Heir", "Guard Captain", "Steward", "Hand", "Knight")
-	var/list/possible_jobs_helpers = list("Guard Captain", "Royal Heir", "Hand",  "Steward", "Knight")
+	var/list/possible_jobs_aspirants = list("Royal Heir", "Watchmen Captain", "Steward", "Hand", "Knight")
+	var/list/possible_jobs_helpers = list("Watchmen Captain", "Royal Heir", "Hand",  "Steward", "Knight")
 	var/list/rolesneeded = list("Aspirant","Loyalist","Supporter")
 
 	antag_candidates = get_players_for_role(ROLE_ASPIRANT)
@@ -342,18 +346,13 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_maniac()
-	restricted_jobs = list("Duke", "Duke Courtier")
+	restricted_jobs = list("Monarch", "Consort")
 	antag_candidates = get_players_for_role(ROLE_MANIAC)
 	var/datum/mind/villain = pick_n_take(antag_candidates)
 	if(villain)
 		var/blockme = FALSE
 		if(!(villain in allantags))
 			blockme = TRUE
-		if(villain.assigned_role in GLOB.apprentices_positions)
-			blockme = TRUE
-		if(villain.current)
-			if(villain.current.gender == FEMALE)
-				blockme = TRUE
 		if(blockme)
 			return
 		allantags -= villain
@@ -368,8 +367,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 
 /datum/game_mode/chaosmode/proc/pick_cultist()
 	var/remaining = 3 // 1 heresiarch, 2 cultists
-	restricted_jobs = list("Duke",
-	"Duchess Courtier",
+	restricted_jobs = list("Monarch",
+	"Consort",
 	"Merchant",
 	"Priest",
 	"Bandit")
@@ -405,23 +404,14 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	// 	return FALSE
 
 	restricted_jobs = list(
-	"Duke",
-	"Duchess Consort",
-	"Dungeoneer",
-	"Inquisitor",
-	"Confessor",
-	"Watchman",
-	"Man at Arms",
-	"Priest",
-	"Acolyte",
-	"Cleric",
-	"Retinue Captain",
-	"Court Magician",
-	"Templar",
-	"Bog Guard",
-	"Bog Master",
-	"Knight",
-	"Mortician",
+	"Monarch",
+	"Consort",
+	"Prophet",
+	"Wytcher",
+	"Hedgeknight",
+	"Hedgemaster",
+	"Royal Guard",
+	"Gravesinger",
 	"Mercenary"
 	)
 	antag_candidates = get_players_for_role(ROLE_LICH)
@@ -445,23 +435,23 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 /datum/game_mode/chaosmode/proc/pick_vampires()
 	var/vampsremaining = 3
 	restricted_jobs = list(
-	"Duke",
-	"Duke Courtier",
-	"Dungeoneer",
-	"Inquisitor",
+	"Monarch",
+	"Consort",
+	"Beastmaster",
+	"Wytcher",
 	"Confessor",
 	"Watchman",
 	"Man at Arms",
-	"Priest",
-	"Acolyte",
-	"Cleric",
-	"Guard Captain",
-	"Court Magician",
-	"Templar",
+	"Prophet",
+	"Watchmen Captain",
+	"Magician",
+	"Paladin",
 	"Grandmaster",
-	"Bog Guard",
-	"Bog Master",
+	"Hedge Knight",
+	"Hedgemaster",
 	"Knight",
+	"Mercenary",
+	"Sellsword",
 	"Bandit"
 	)
 	antag_candidates = get_players_for_role(ROLE_NBEAST)
@@ -494,27 +484,23 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 /datum/game_mode/chaosmode/proc/pick_werewolves()
 	// Ideally we want adventurers/pilgrims/towners to roll it
 	restricted_jobs = list(
-	"Duke",
-	"Duke Courtier",
-	"Dungeoneer",
-	"Inquisitor",
+	"Monarch",
+	"Consort",
+	"Beastmaster",
+	"Wytcher",
 	"Confessor",
 	"Watchman",
 	"Man at Arms",
-	"Priest",
-	"Acolyte",
-	"Cleric",
-	"Guard Captain",
-	"Court Magician",
-	"Templar",
+	"Prophet",
+	"Watchmen Captain",
+	"Magician",
+	"Paladin",
 	"Grandmaster",
-	"Bog Guard",
-	"Bog Master",
+	"Hedge Knight",
+	"Hedgemaster",
 	"Knight",
-	"Mortician",
-	"Desert Rider",
-	"Desert Rider Mercenary",
-	"Grenzelhoft Mercenary",
+	"Mercenary",
+	"Sellsword",
 	"Bandit"
 	)
 

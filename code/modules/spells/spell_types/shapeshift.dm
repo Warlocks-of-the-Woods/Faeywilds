@@ -1,5 +1,5 @@
 /obj/effect/proc_holder/spell/targeted/shapeshift
-	name = "Shapechange"
+	name = "Animal Spirit"
 	desc = ""
 	clothes_req = FALSE
 	human_req = FALSE
@@ -7,22 +7,21 @@
 	cooldown_min = 50
 	range = -1
 	include_user = TRUE
-	invocation = "RAC'WA NO!"
-	invocation_type = "shout"
+	invocation = ""
+	invocation_type = "whisper"
 	action_icon_state = "shapeshift"
 
 	var/revert_on_death = TRUE
-	var/die_with_shapeshifted_form = TRUE
+	var/die_with_shapeshifted_form = FALSE
 	var/convert_damage = TRUE //If you want to convert the caster's health to the shift, and vice versa.
 	var/convert_damage_type = BRUTE //Since simplemobs don't have advanced damagetypes, what to convert damage back into.
 
 	var/shapeshift_type
-	var/list/possible_shapes = list(/mob/living/simple_animal/mouse,\
-		/mob/living/simple_animal/pet/dog/corgi,\
-		/mob/living/simple_animal/hostile/carp/ranged/chaos,\
-		/mob/living/simple_animal/bot/secbot/ed209,\
-		/mob/living/simple_animal/hostile/poison/giant_spider/hunter/viper,\
-		/mob/living/simple_animal/hostile/construct/armored)
+	var/list/possible_shapes = list(/mob/living/simple_animal/hostile/retaliate/rogue/spider/shapeshift,
+	/mob/living/simple_animal/hostile/retaliate/rogue/wolf/shapeshift,
+	/mob/living/simple_animal/hostile/retaliate/rogue/bigrat/shapeshift,
+	/mob/living/simple_animal/hostile/retaliate/rogue/mole/shapeshift,
+	/mob/living/simple_animal/hostile/retaliate/rogue/saiga/shapeshift)
 
 /obj/effect/proc_holder/spell/targeted/shapeshift/cast(list/targets,mob/user = usr)
 	if(src in user.mob_spell_list)
@@ -36,7 +35,7 @@
 			for(var/path in possible_shapes)
 				var/mob/living/simple_animal/A = path
 				animal_list[initial(A.name)] = path
-			var/new_shapeshift_type = input(M, "Choose Your Animal Form!", "It's Morphing Time!", null) as null|anything in sortList(animal_list)
+			var/new_shapeshift_type = input(M, "Choose your Wildshape form. You can only choose one form for the entire week..", null) as null|anything in sortList(animal_list)
 			if(shapeshift_type)
 				return
 			shapeshift_type = new_shapeshift_type

@@ -5,7 +5,7 @@
 
 /datum/supply_pack/rogue/food/healthpot
 	name = "Healing Potion"
-	cost = 18
+	cost = 25
 	contains = list(
 					/obj/item/reagent_containers/glass/bottle/rogue/healthpot,
 					/obj/item/reagent_containers/glass/bottle/rogue/healthpot,
@@ -14,7 +14,7 @@
 
 /datum/supply_pack/rogue/food/manapot
 	name = "Manna Potion"
-	cost = 24
+	cost = 18
 	contains = list(
 					/obj/item/reagent_containers/glass/bottle/rogue/manapot,
 					/obj/item/reagent_containers/glass/bottle/rogue/manapot,
@@ -38,9 +38,18 @@
 					/obj/item/reagent_containers/glass/bottle/rogue/trekkersdelight,
 				)
 
+/datum/supply_pack/rogue/food/antipoisonpot
+	name = "Anti Pregnancy Potion"
+	cost = 20
+	contains = list(
+					/obj/item/reagent_containers/glass/bottle/rogue/antipregnancy,
+					/obj/item/reagent_containers/glass/bottle/rogue/antipregnancy,
+					/obj/item/reagent_containers/glass/bottle/rogue/antipregnancy,
+				)
+
 /datum/supply_pack/rogue/food/wineb
 	name = "Wine"
-	cost = 45
+	cost = 25
 	contains = list(
 					/obj/item/reagent_containers/glass/bottle/rogue/wine,
 					/obj/item/reagent_containers/glass/bottle/rogue/wine,

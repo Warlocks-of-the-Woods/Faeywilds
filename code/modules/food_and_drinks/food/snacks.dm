@@ -75,6 +75,10 @@ All foods are distributed among various categories. Use common sense.
 
 	var/fertamount = 50
 
+	var/can_distill = FALSE //If FALSE, this object cannot be distilled into an alcohol.
+	var/distill_reagent //If NULL and this object can be distilled, it uses a generic fruit_wine reagent and adjusts its variables.
+	var/distill_amt = 24
+
 	drop_sound = 'sound/foley/dropsound/food_drop.ogg'
 	smeltresult = /obj/item/ash
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
@@ -113,7 +117,7 @@ All foods are distributed among various categories. Use common sense.
 /obj/item/reagent_containers/food/snacks/process()
 	..()
 	if(rotprocess)
-		if(!istype(loc, /obj/structure/closet/crate/chest) && !istype(loc, /obj/structure/roguemachine/vendor))
+		if(!istype(loc, /obj/structure/closet/crate/chest) && !istype(loc, /obj/structure/roguemachine/vendor) && !(locate(/obj/structure/table) in loc))
 			warming -= 20 //ssobj processing has a wait of 20
 			if(warming < (-1*rotprocess))
 				if(become_rotten())
@@ -175,7 +179,7 @@ All foods are distributed among various categories. Use common sense.
 			result = new /obj/item/reagent_containers/food/snacks/badrecipe(A)
 		initialize_cooked_food(result, 1)
 		return result
-	if(istype(A,/obj/machinery/light/rogue/hearth) || istype(A,/obj/machinery/light/rogue/firebowl) || istype(A,/obj/machinery/light/rogue/campfire))
+	if(istype(A,/obj/machinery/light/rogue/hearth) || istype(A,/obj/machinery/light/rogue/forge) || istype(A,/obj/machinery/light/rogue/firebowl) || istype(A,/obj/machinery/light/rogue/campfire))
 		var/obj/item/result
 		if(fried_type)
 			result = new fried_type(A)
@@ -235,7 +239,6 @@ All foods are distributed among various categories. Use common sense.
 
 /obj/item/reagent_containers/food/snacks/attack_self(mob/user)
 	return
-
 
 /obj/item/reagent_containers/food/snacks/attack(mob/living/M, mob/living/user, def_zone)
 	if(user.used_intent.type == INTENT_HARM)
@@ -348,21 +351,6 @@ All foods are distributed among various categories. Use common sense.
 	if(istype(W, /obj/item/storage))
 		..() // -> item/attackby()
 		return 0
-/*	if(istype(W, /obj/item/reagent_containers/food/snacks))
-		var/obj/item/reagent_containers/food/snacks/S = W
-		if(custom_food_type && ispath(custom_food_type))
-			if(S.w_class > WEIGHT_CLASS_SMALL)
-				to_chat(user, span_warning("[S] is too big for [src]!"))
-				return 0
-			if(!S.customfoodfilling || istype(W, /obj/item/reagent_containers/food/snacks/customizable) || istype(W, /obj/item/reagent_containers/food/snacks/pizzaslice/custom) || istype(W, /obj/item/reagent_containers/food/snacks/cakeslice/custom))
-				to_chat(user, span_warning("[src] can't be filled with [S]!"))
-				return 0
-			if(contents.len >= 20)
-				to_chat(user, span_warning("I can't add more ingredients to [src]!"))
-				return 0
-			var/obj/item/reagent_containers/food/snacks/customizable/C = new custom_food_type(get_turf(src))
-			C.initialize_custom_food(src, S, user)
-			return 0*/
 	if(user.used_intent.blade_class == slice_bclass && W.wlength == WLENGTH_SHORT)
 		if(slice_bclass == BCLASS_CHOP)
 			//	RTD meat chopping noise
@@ -375,7 +363,9 @@ All foods are distributed among various categories. Use common sense.
 				return 1
 		else if(slice(W, user))
 			return 1
-	..()
+		else
+			return ..()
+	return ..()
 //Called when you finish tablecrafting a snack.
 /obj/item/reagent_containers/food/snacks/CheckParts(list/parts_list, datum/crafting_recipe/food/R)
 	..()
@@ -564,7 +554,9 @@ All foods are distributed among various categories. Use common sense.
 		add_fingerprint(user)
 		contents += W
 		stored_item = 1
-		return 1 // no afterattack here
+	else
+		return ..()
+	return ..()
 
 /obj/item/reagent_containers/food/snacks/MouseDrop(atom/over)
 	var/turf/T = get_turf(src)
@@ -573,4 +565,3 @@ All foods are distributed among various categories. Use common sense.
 		TB.MouseDrop(over)
 	else
 		return ..()
-

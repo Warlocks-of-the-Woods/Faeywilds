@@ -17,6 +17,7 @@
 	wdefense = 5
 	ingsize = 3
 	improvised = TRUE
+	w_class = WEIGHT_CLASS_NORMAL
 
 /obj/item/cooking/pan/examine(mob/user)
 	. = ..()

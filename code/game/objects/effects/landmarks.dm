@@ -87,13 +87,25 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/adventurerlate
 	name = "Adventurerlate"
 	icon_state = "arrow"
-	jobspawn_override = list("Skeleton", "Pilgrim", "Adventurer", "Migrant")
+	jobspawn_override = list("Adventurer")
+	delete_after_roundstart = FALSE
+
+/obj/effect/landmark/start/wandererlate
+	name = "Wandererlate"
+	icon_state = "arrow"
+	jobspawn_override = list("Skeleton", "Pilgrim", "Migrant")
+	delete_after_roundstart = FALSE
+
+/obj/effect/landmark/start/banditlate
+	name = "Bandit"
+	icon_state = "arrow"
+	jobspawn_override = list("Bandit")
 	delete_after_roundstart = FALSE
 
 /obj/effect/landmark/start/bogguardlate
 	name = "Bogguardlate"
 	icon_state = "arrow"
-	jobspawn_override = list("Bog Master", "Bog Guard")
+	jobspawn_override = list("Hedgemaster", "Hedge Knight")
 	delete_after_roundstart = FALSE
 
 /obj/effect/landmark/start/vagrantlate
@@ -101,6 +113,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 	jobspawn_override = list("Low-life")
 	delete_after_roundstart = FALSE
+
+/obj/effect/landmark/start/vagrantlate
+	name = "Beggarlate"
+	icon_state = "arrow"
+	jobspawn_override = list("Beggar")
+	delete_after_roundstart = FALSE
+
 
 /obj/effect/landmark/start/vagabondlate
 	name = "Vagabondlate"
@@ -111,27 +130,16 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/mercenarylate
 	name = "Mercenarylate"
 	icon_state = "arrow"
-	jobspawn_override = list("Mercenary")
+	jobspawn_override = list("Mercenary",  "Sellsword")
 
 /obj/effect/landmark/start/seelie
-	name = "Town Seelie"
+	name = "Forest Seelie"
 	icon_state = "arrow"
+
 /obj/effect/landmark/start/seelielate
 	name = "Seelielate"
 	icon_state = "arrow"
-	jobspawn_override = list("Town Seelie")
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/desertriderlate
-	name = "DesertRiderlate"
-	icon_state = "arrow"
-	jobspawn_override = list("Desert Rider Mercenary")
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/grenzelhoftlate
-	name = "Grenzelhoftlate"
-	icon_state = "arrow"
-	jobspawn_override = list("Grenzelhoft Mercenary")
+	jobspawn_override = list("Forest Seelie")
 	delete_after_roundstart = FALSE
 
 /obj/effect/landmark/start/villagerlate
@@ -141,7 +149,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	delete_after_roundstart = FALSE
 
 /obj/effect/landmark/start/lord
-	name = "Duke"
+	name = "Monarch"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/knight
@@ -149,11 +157,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/sheriff
-	name = "Sheriff"
+	name = "Town Sheriff"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/guard_captain
-	name = "Knight Captain"
+	name = "Commander"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/noble
@@ -169,7 +177,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/steward
-	name = "Steward"
+	name = "Guild Appraiser"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/clerk
@@ -177,47 +185,51 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/magician
-	name = "Arch-Mage"
+	name = "Magician"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/physician
-	name = "Court Physician"
+	name = "Physician"
 	icon_state = "arrow"
 
-/*/obj/effect/landmark/start/guardsman
+/obj/effect/landmark/start/guardsman
 	name = "Watchman"
-	icon_state = "arrow" */
+	icon_state = "arrow"
 
 /obj/effect/landmark/start/royalguard
-	name = "Royal Knight"
+	name = "Royal Guard"
 	icon_state = "arrow"
 
-// /obj/effect/landmark/start/bogmaster
-// 	name = "Bog Master"
-// 	icon_state = "arrow"
+/obj/effect/landmark/start/bogmaster
+	name = "Hedgemaster"
+	icon_state = "arrow"
 
 /obj/effect/landmark/start/bogguardsman
-	name = "Royal Ranger"
+	name = "Hedge Knight"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/judge
-	name = "Judge"
+	name = "Law Mage"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/councillor
-	name = "Royal Advisor"
+	name = "Councillor"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/veteran
-	name = "Veteran Mercenary"
+	name = "Guildmaster"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/dungeoneer
-	name = "Dungeoneer"
+	name = "Beastmaster"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/gatemaster
+	name = "Gatemaster"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/watchman
-	name = "Gatemaster"
+	name = "Watchman"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/villager
@@ -229,15 +241,15 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/priest
-	name = "Priest"
+	name = "Prophet"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/cleric
-	name = "Cleric"
+	name = "Priest"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/monk
-	name = "Acolyte"
+	name = "Priest"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/druid
@@ -245,7 +257,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/templar
-	name = "Templar Knight"
+	name = "Paladin"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/grandtemplar
@@ -253,7 +265,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/puritan
-	name = "Inquisitor"
+	name = "Witcher"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/shepherd
@@ -269,11 +281,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/merchant
-	name = "Guildmaster"
+	name = "Merchant Prince"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/shophand
-	name = "Guildmaster Apprentice"
+	name = "Shophand"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/grabber
@@ -326,11 +338,15 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/gravedigger
-	name = "Mortician"
+	name = "Gravesinger"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/mercenary
 	name = "Mercenary"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/sellsword
+	name = "Sellsword"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/vagrant
@@ -338,7 +354,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/lady
-	name = "Duke Courtier"
+	name = "Consort"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/prince
@@ -346,7 +362,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/prisonerr
-	name = "Prisoner (Rockhill)"
+	name = "Prisoner (StoneHedge)"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/prisonerb
@@ -357,12 +373,24 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Tribal Slave"
 	icon_state = "arrow"
 
+/obj/effect/landmark/start/prisonerd
+	name = "Public Servant"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/griefer
+	name = "Dumb Whoreson"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/lunatic
+	name = "Shunned Slave"
+	icon_state = "arrow"
+
 /obj/effect/landmark/start/hostage
 	name = "Hostage"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/jester
-	name = "Jester"
+	name = "Harlequin"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/hand
@@ -382,7 +410,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/butler
-	name = "Butler"
+	name = "Head Butler"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/barkeeper
@@ -400,7 +428,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/wapprentice
-	name = "Mage Apprentice"
+	name = "Magicians Apprentice"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/servant
@@ -448,7 +476,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/triballate
 	name = "triballate"
 	icon_state = "arrow"
-	jobspawn_override = list("Tribal Cook", "Tribal Guard", "Chieftain", "Tribal Smith", "Tribal Shaman", "Tribal Villager"/*, "Tribal Slave"*/)
+	jobspawn_override = list("Tribal Cook", "Tribal Guard", "Chieftain", "Tribal Smith", "Tribal Shaman", "Tribal Villager", "Tribal Slave")
 	delete_after_roundstart = FALSE
 
 //Hearthstone Additions
@@ -456,7 +484,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/ladylate
 	name = "ladylate"
 	icon_state = "arrow"
-	jobspawn_override = list("Duke Courtier")
+	jobspawn_override = list("Consort")
 	delete_after_roundstart = FALSE
 
 /obj/effect/landmark/start/noblelate
@@ -468,7 +496,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 //Vikings Additions
 
 /obj/effect/landmark/start/highking
-	name = "Northmen King"
+	name = "Dwarf Artificer"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/highkinglate
@@ -912,3 +940,51 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 
 /obj/effect/landmark/underworldsafe // To prevent demons spawn camping will save a lot of ear rape.
 	name = "safe zone"
+
+GLOBAL_LIST_EMPTY(travel_tile_locations)
+
+/obj/effect/landmark/travel_tile_location
+	name = "travel tile location"
+
+/obj/effect/landmark/travel_tile_location/Initialize()
+	. = ..()
+	GLOB.travel_tile_locations += src
+
+/obj/effect/landmark/travel_tile_location/Destroy()
+	GLOB.travel_tile_locations -= src
+	. = ..()
+
+GLOBAL_LIST_EMPTY(travel_spawn_points)
+
+/obj/effect/landmark/travel_spawn_point
+	name = "travel spawn point"
+	icon_state = "generic_event"
+	var/taken = FALSE
+
+/obj/effect/landmark/travel_spawn_point/Initialize()
+	. = ..()
+	GLOB.travel_spawn_points += src
+
+/obj/effect/landmark/travel_spawn_point/Destroy()
+	GLOB.travel_spawn_points -= src
+	. = ..()
+
+/proc/get_free_travel_spawn_point()
+	var/list/shuffled = shuffle(GLOB.travel_spawn_points)
+	for(var/obj/effect/landmark/travel_spawn_point/point as anything in shuffled)
+		if(point.taken)
+			continue
+		point.taken = TRUE
+		return point.loc
+	return null
+
+/proc/create_travel_tiles(var/atom/location, travel_id, travel_goes_to_id, required_trait, tile_path)
+	for(var/obj/effect/landmark/travel_tile_location/landmark as anything in GLOB.travel_tile_locations)
+		if(get_dist(location, landmark) > 5)
+			continue
+		// Create travel tile here
+		var/obj/structure/fluff/traveltile/tile = new tile_path(landmark.loc)
+		tile.aportalid = travel_id
+		tile.aportalgoesto = travel_goes_to_id
+		tile.required_trait = required_trait
+		tile.hide_if_needed()

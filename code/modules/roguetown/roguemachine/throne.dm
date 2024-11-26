@@ -1,8 +1,8 @@
 GLOBAL_VAR(king_throne)
 
 /obj/structure/roguethrone
-	name = "throne of the Duke"
-	desc = "A big throne, to hold the Duke's giant personality. Say 'help' with the crown on your head if you are confused."
+	name = "throne of stonehedge"
+	desc = "A big throne, to hold the Lord's giant personality. Say 'help' with the crown on your head if you are confused."
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	icon_state = "throne"
 	density = FALSE
@@ -70,7 +70,7 @@ GLOBAL_VAR(king_throne)
 	if(rebel_leader_sit_time >= REBEL_THRONE_TIME && !notified_rebel_able)
 		notified_rebel_able = TRUE
 		to_chat(user, span_notice("That's it - time to announce our victory!"))
-	
+
 /obj/structure/roguethrone/lordcolor(primary,secondary)
 	if(!primary || !secondary)
 		return

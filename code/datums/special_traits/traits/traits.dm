@@ -1,5 +1,6 @@
 //// Sleep Specials
 //// these should still be in the round-start/late join specials as well! It's just these are contextually fitting for Sleep Specials as well!
+/* made most of those into traits instead.
 /datum/special_trait/nothing
 	name = "Nothing"
 	greet_text = span_notice("You're not special")
@@ -39,7 +40,7 @@
 /datum/special_trait/deadened
 	name = "Deadened"
 	greet_text = span_notice("Ever since <b>it</b> happened, I've never been able to feel anything. Inside or out")
-	weight = 25
+	weight = 50
 
 /datum/special_trait/deadened/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_NOMOOD, "[type]")
@@ -64,7 +65,7 @@
 
 /datum/special_trait/night_owl
 	name = "Night Owl"
-	greet_text = span_notice("I've always preferred Noc over her sister")
+	greet_text = span_notice("I've always preferred Lune over her brother")
 	weight = 100
 
 /datum/special_trait/night_owl/on_apply(mob/living/carbon/human/character, silent)
@@ -82,7 +83,7 @@
 /datum/special_trait/duelist
 	name = "Swordmaster Apprentice"
 	greet_text = span_notice("I was the student of a legendary sword master, my skill is rivalled by few! I've also hidden a rapier.")
-	weight = 50
+	weight = 25
 
 /datum/special_trait/duelist/on_apply(mob/living/carbon/human/character, silent)
 	character.cmode_music = 'sound/music/combat_duelist.ogg'
@@ -93,7 +94,7 @@
 /datum/special_trait/eagle_eyed
 	name = "Eagle Eyed"
 	greet_text = span_notice("With my sharp aim I could always hit distant targets, I've also hidden a crossbow and some bolts.")
-	weight = 50
+	weight = 25
 
 /datum/special_trait/eagle_eyed/on_apply(mob/living/carbon/human/character, silent)
 	character.change_stat("perception", 2)
@@ -158,7 +159,7 @@
 /datum/special_trait/pineapple
 	name = "The safeword is \"Pineapple\""
 	greet_text = span_notice("I enjoy whipping people until they squirm and whine, their pain makes my pleasure. I also have a hidden a whip")
-	weight = 50
+	weight = 25
 
 /datum/special_trait/pineapple/on_apply(mob/living/carbon/human/character, silent)
 	character.mind.special_items["Whip"] = /obj/item/rogueweapon/whip
@@ -238,7 +239,7 @@
 	ADD_TRAIT(character, TRAIT_CIVILIZEDBARBARIAN, TRAIT_GENERIC) //Need to make trait improve hitting people with chairs, mugs, goblets.
 
 /datum/special_trait/mastercraftsmen
-	name = "Master Crasftman"
+	name = "Master Craftsman"
 	greet_text = "In my youth, I've decided I'd get a grasp on every trade, and pursued the 10 arts of the craft."
 	req_text = "Middle-aged or Old"
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
@@ -282,6 +283,7 @@
 
 /datum/special_trait/swift/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_DODGEEXPERT, "[type]")
+	ADD_TRAIT(character, TRAIT_GOODRUNNER, "[type]")
 	character.mind.adjust_skillrank(/datum/skill/misc/athletics, 6, TRUE)
 	character.change_stat("speed", 3)
 
@@ -320,7 +322,7 @@
 	character.update_transform()
 
 /datum/special_trait/atheism
-	name = "Faithless"
+	name = "Godless"
 	greet_text = span_notice("Gods may exist, but know what? I care not.")
 	req_text = "Non-Church Role"
 	restricted_jobs = list(CHURCH_ROLES)
@@ -337,7 +339,7 @@
 
 /datum/special_trait/nimrod/on_apply(mob/living/carbon/human/character, silent)
 	character.change_stat("speed", -2)
-	character.change_stat("intelligence", -4)	
+	character.change_stat("intelligence", -4)
 
 /datum/special_trait/nopouch
 	name = "No Pouch"
@@ -356,7 +358,7 @@
 
 /datum/special_trait/hussite
 	name = "Known Heretic"
-	greet_text = span_boldwarning("I've been denounced by the church for either reasons legitimate or not!")
+	greet_text = span_boldwarning("I've been denounced by the various faiths for either reasons legitimate or not!")
 	req_text = "Non-church role"
 	weight = 100
 	restricted_jobs = list(CHURCH_ROLES)
@@ -422,7 +424,7 @@
 /datum/special_trait/unlucky
 	name = "Unlucky"
 	greet_text = span_boldwarning("Ever since you knocked over that glass vase, you just feel... off")
-	weight = 100
+	weight = 25
 
 /datum/special_trait/unlucky/on_apply(mob/living/carbon/human/character, silent)
 	character.STALUC = rand(1, 10)
@@ -457,7 +459,7 @@
 /datum/special_trait/atrophy
 	name = "Atrophy"
 	greet_text = span_boldwarning("When growing up I could barely feed myself... this left me weak and fragile")
-	weight = 200
+	weight = 50
 
 /datum/special_trait/atrophy/on_apply(mob/living/carbon/human/character)
 	character.change_stat("strength", -2)
@@ -483,6 +485,14 @@
 
 /datum/special_trait/bad_week/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_BAD_MOOD, "[type]")
+
+/datum/special_trait/nude_sleeper
+	name = "Picky Sleeper"
+	greet_text = span_boldwarning("I just can't seem to fall asleep unless I'm <i>truly</i> comfortable...")
+	weight = 50
+
+/datum/special_trait/nude_sleeper/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_NUDE_SLEEPER, "[type]")
 
 //job specials
 /datum/special_trait/punkprincess //I think everyone will like the Rebellous Prince-Like Princess. I'd love to do one for the prince as well that gives him princess loadout, but, up to you!
@@ -558,8 +568,9 @@
 	greet_text = span_notice("I'm sick of working as an underling, I will start my own trade emporium. I've got my hands on a hidden merchant key and a curious magical device")
 	req_text = "Be a Shophand"
 	allowed_jobs = list(/datum/job/roguetown/shophand)
-	weight = 50
+	weight = 100
 
 /datum/special_trait/illicit_merchant/on_apply(mob/living/carbon/human/character, silent)
 	character.mind.special_items["Merchant Key"] = /obj/item/roguekey/merchant
 	character.mind.special_items["GOLDFACE Gem"] = /obj/item/gem_device/goldface
+*/

@@ -3,7 +3,7 @@ GLOBAL_LIST_EMPTY(chosen_music)
 GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town,/area/rogue/outdoors/town,/area/rogue/under/town)) //hey
 
 /area/rogue
-	name = "roguetown"
+	name = "stonehedge"
 	icon_state = "rogue"
 	has_gravity = STANDARD_GRAVITY
 	ambientsounds = null
@@ -45,7 +45,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 ///// OUTDOORS AREAS //////
 
 /area/rogue/outdoors
-	name = "outdoors roguetown"
+	name = "outdoors stonehedge"
 	icon_state = "outdoors"
 	outdoors = TRUE
 	ambientrain = RAIN_OUT
@@ -97,8 +97,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 				/turf/open/floor/rogue/dirt)
 	ambush_mobs = list(
 				/mob/living/simple_animal/hostile/retaliate/rogue/bigrat = 30,
-				/mob/living/carbon/human/species/skeleton/npc/ambush = 20,
-				/mob/living/carbon/human/species/skeleton/npc/dungeon/ambush = 10,
+				/mob/living/carbon/human/species/skeleton/npc/ambush = 10,
 				/mob/living/carbon/human/species/goblin/npc/ambush/hell = 20)
 	droning_sound = 'sound/music/area/decap.ogg'
 	droning_sound_dusk = null
@@ -113,7 +112,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound_night = null
 
 /area/rogue/outdoors/rtfield
-	name = "the basin"
+	name = "stonehedge basin"
 	icon_state = "rtfield"
 	soundenv = 19
 	ambush_times = list("night")
@@ -121,9 +120,8 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 				/turf/open/floor/rogue/dirt,
 				/turf/open/floor/rogue/grass)
 	ambush_mobs = list(
-				/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 30,
-				/mob/living/carbon/human/species/skeleton/npc/ambush = 50)
-	first_time_text = "GRASSLANDS"
+				/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 30)
+	first_time_text = "STONEHEDGE BASIN"
 	droning_sound = 'sound/music/area/newtownambience.ogg'
 	droning_sound_dusk = 'sound/music/area/DS2_majula.ogg'
 	droning_sound_night = 'sound/music/area/JS_secunda.ogg'
@@ -152,10 +150,14 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 				/turf/open/floor/rogue/dirt,
 				/turf/open/floor/rogue/grass)
 	ambush_mobs = list(
+				/mob/living/carbon/human/species/skeleton/npc/dungeon/ambush = 30,
+				/mob/living/carbon/human/species/skeleton/npc/ambush = 20,
 				/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 40,
-				/mob/living/carbon/human/species/skeleton/npc/ambush = 10,
-				/mob/living/carbon/human/species/skeleton/npc/dungeon/ambush = 5,
-				/mob/living/carbon/human/species/goblin/npc/ambush = 30)
+				/mob/living/simple_animal/hostile/retaliate/rogue/bigrat = 60,
+				/mob/living/simple_animal/hostile/retaliate/rogue/spider = 40,
+				/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider = 30,
+				/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/hunter = 30,
+				/mob/living/carbon/human/species/goblin/npc/ambush/cave = 30)
 	first_time_text = "THE MURDERWOOD"
 	converted_type = /area/rogue/indoors/shelter/woods
 /area/rogue/indoors/shelter/woods
@@ -194,15 +196,11 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 				/turf/open/water)
 	//Minotaurs too strong for the lazy amount of places this area covers
 	ambush_mobs = list(
-				/mob/living/carbon/human/species/skeleton/npc/dungeon/ambush = 20,
-				/mob/living/carbon/human/species/skeleton/npc/ambush = 40,
-				/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 50,
-				/mob/living/simple_animal/hostile/retaliate/rogue/bogtrollbig = 30,
-				/mob/living/simple_animal/hostile/retaliate/rogue/spider = 30,
+				/mob/living/simple_animal/hostile/retaliate/rogue/bigrat = 60,
 				/mob/living/carbon/human/species/goblin/npc/ambush/cave = 30,
-				/mob/living/simple_animal/hostile/retaliate/rogue/wendigo = 25,
+				/mob/living/simple_animal/hostile/retaliate/rogue/bogtroll = 50,
 				/mob/living/simple_animal/hostile/retaliate/rogue/wolf/gator = 50)
-	first_time_text = "THE TERRROBOG"
+	first_time_text = "THE FOREST"
 	converted_type = /area/rogue/indoors/shelter/bog
 
 /area/rogue/outdoors/goblinfort
@@ -242,23 +240,6 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	first_time_text = "Tribal Ground"
 	converted_type = /area/rogue/indoors/shelter/bog
 
-/area/rogue/outdoors/vikingarea
-	name = "vikingarea"
-	icon_state = "viking"
-	ambientsounds = AMB_BOGDAY
-	ambientnight = AMB_BOGNIGHT
-	spookysounds = SPOOKY_FROG
-	spookynight = SPOOKY_GEN
-	droning_sound = 'sound/music/area/viking.ogg'
-	droning_sound_dusk = null
-	droning_sound_night = null
-	ambush_times = list("night","dawn","dusk","day")
-	ambush_types = list(
-				/turf/open/floor/rogue/dirt,
-				/turf/open/floor/rogue/grass,
-				/turf/open/water)
-	first_time_text = "The Deep North"
-	converted_type = /area/rogue/indoors/shelter/bog
 
 
 
@@ -326,7 +307,6 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 				/mob/living/simple_animal/hostile/retaliate/rogue/bigrat = 30,
 				/mob/living/carbon/human/species/goblin/npc/ambush/cave = 20,
 				/mob/living/carbon/human/species/skeleton/npc/ambush = 10,
-				/mob/living/carbon/human/species/skeleton/npc/dungeon/ambush = 5,
 				/mob/living/simple_animal/hostile/retaliate/rogue/minotaur = 5)
 	converted_type = /area/rogue/outdoors/caves
 /area/rogue/outdoors/caves
@@ -351,7 +331,6 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 				/turf/open/floor/rogue/dirt)
 	ambush_mobs = list(
 				/mob/living/carbon/human/species/skeleton/npc = 10,
-				/mob/living/carbon/human/species/skeleton/npc/dungeon = 5,
 				/mob/living/simple_animal/hostile/retaliate/rogue/bigrat = 30,
 				/mob/living/carbon/human/species/goblin/npc/sea = 20,
 				/mob/living/simple_animal/hostile/retaliate/rogue/cavetroll = 15)
@@ -417,7 +396,6 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	ambush_mobs = list(
 				/mob/living/simple_animal/hostile/retaliate/rogue/bigrat = 30,
 				/mob/living/carbon/human/species/skeleton/npc = 10,
-				/mob/living/carbon/human/species/skeleton/npc/dungeon = 5,
 				/mob/living/carbon/human/species/goblin/npc/hell = 20,
 				/mob/living/simple_animal/hostile/retaliate/rogue/minotaur = 5)
 	droning_sound = 'sound/music/area/decap.ogg'
@@ -482,7 +460,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound_dusk = null
 	droning_sound_night = null
 	converted_type = /area/rogue/outdoors/exposed/manorgarri
-	first_time_text = "THE KEEP OF ROCKHILL"
+	first_time_text = "THE KEEP OF STONEHEDGE"
 /area/rogue/outdoors/exposed/manorgarri
 	icon_state = "manorgarri"
 	droning_sound = 'sound/music/area/manorgarri.ogg'
@@ -583,6 +561,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 
 /area/rogue/indoors/town/church/chapel
 	icon_state = "chapel"
+	first_time_text = "THE HOUSE OF THE TEN"
 
 /area/rogue/indoors/town/fire_chamber
 	name = "incinerator"
@@ -613,7 +592,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	return FALSE
 
 /area/rogue/indoors/town/entrance
-	first_time_text = "Roguetown"
+	first_time_text = "Stonehedge"
 	icon_state = "entrance"
 
 /area/rogue/indoors/town/dwarfin
@@ -640,7 +619,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound_dusk = 'sound/music/area/DS2_majula.ogg'
 	droning_sound_night = 'sound/music/area/HK_reflection.ogg'
 	converted_type = /area/rogue/indoors/shelter/town
-	first_time_text = "THE TOWN OF ROCKHILL"
+	first_time_text = "THE TOWN OF STONEHEDGE"
 /area/rogue/indoors/shelter/town
 	icon_state = "town"
 	droning_sound = 'sound/music/area/townstreets.ogg'
@@ -774,3 +753,174 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound_dusk = null
 	droning_sound_night = null
 	first_time_text = "The Forest of Repentence"
+
+/area/rogue/under/deep_caverns
+    name = "Deep Caverns"
+    icon_state = "deep_caverns"
+    droning_sound = 'sound/music/area/caves.ogg'
+    var/generation_attempted = FALSE
+
+    // Override the New() proc to call the generation logic upon creation
+    New()
+        ..()
+        spawn(20) // 20 ticks delay
+        if (!generation_attempted)
+            call_deep_caverns_generation_logic()
+
+// Proc to initiate the generation logic
+/area/rogue/under/deep_caverns/proc/call_deep_caverns_generation_logic()
+    generation_attempted = TRUE
+    // Run the generation logic in the background
+    spawn(1) generate_deep_caverns_layout()
+
+// Proc to generate the cavern layout dynamically
+/area/rogue/under/deep_caverns/proc/generate_deep_caverns_layout()
+    var/list/turfs = list()
+
+    for (var/turf/T in world)
+        if (T.loc == src)
+            turfs += T
+
+    var/total_turfs = length(turfs)
+
+    if (total_turfs == 0)
+        return
+
+    var/grid_width = sqrt(total_turfs)
+    var/grid_height = grid_width
+
+    // Initialize grid
+    var/list/grid = list()
+    for (var/i = 1 to grid_width)
+        grid += list(new/list(grid_height))
+
+    // Adjust initial probability to favor open tiles slightly
+    var/initial_wall_prob = 30 // 30% chance of being a wall
+
+    // Randomly fill grid
+    for (var/x = 1 to grid_width)
+        for (var/y = 1 to grid_height)
+            grid[x][y] = prob(initial_wall_prob) // Set probability for walls
+
+    // Cellular automata iterations
+    var/iterations = 0
+    var/max_iterations = 4
+    while (iterations < max_iterations)
+        grid = do_cellular_automaton_iteration(grid, grid_width, grid_height)
+        iterations++
+        sleep(5) // Sleep for a few ticks to prevent blocking
+
+    // Apply grid to turfs
+    var/water_count = 0
+    var/index = 1
+    for (var/x = 1 to grid_width)
+        for (var/y = 1 to grid_height)
+            if (index > total_turfs)
+                break
+            var/turf/T = turfs[index]
+            if (grid[x][y])
+                T.ChangeTurf(/turf/closed/mineral/random/rogue/high) // Updated closed tile rock
+                water_count++ // Update water_count if you use it later
+            else
+                if (prob(10) && water_count < total_turfs * 0.05) // 5% water
+                    T.ChangeTurf(/turf/open/water/swamp)
+                    water_count++
+                else
+                    // Randomly choose between naturalstone and dirt
+                    if (prob(50)) // 50% chance
+                        T.ChangeTurf(/turf/open/floor/rogue/naturalstone)
+                    else
+                        T.ChangeTurf(/turf/open/floor/rogue/dirt)
+            index++
+
+    // Connectivity checks
+    var/list/open_turfs = list()
+    for (var/turf/T in turfs)
+        if (istype(T, /turf/open/floor/rogue/naturalstone) || istype(T, /turf/open/floor/rogue/dirt))
+            open_turfs += T
+
+    var/connected_threshold = total_turfs * 0.70 // 70% connected
+
+    if (length(open_turfs) > 0)
+        var/turf/starting_turf = pick(open_turfs)
+        var/list/visited_turfs = list()
+        var/list/queue = list(starting_turf)
+        visited_turfs += starting_turf
+
+        while (length(queue) > 0)
+            var/turf/current_turf = queue[1]
+            queue.Remove(current_turf)
+
+            for (var/turf/neighbor in orange(1, current_turf))
+                if ((istype(neighbor, /turf/open/floor/rogue/naturalstone) || istype(neighbor, /turf/open/floor/rogue/dirt)) && !(neighbor in visited_turfs))
+                    queue += neighbor
+                    visited_turfs += neighbor
+
+        if (length(visited_turfs) < connected_threshold)
+            return
+    else
+        return
+
+    // Unified list of items, objects, and mobs to be spawned
+    var/list/spawnables = list(
+    // Not rare objects
+    list(/obj/structure/spider/stickyweb, 0.45),
+    list(/obj/structure/flora/rogueshroom, 0.30),
+    list(/obj/structure/glowshroom, 0.20),
+    list(/obj/effect/spawner/lootdrop/roguetown/dungeon/misc, 0.085),
+
+    // Rare objects
+    list(/obj/effect/decal/remains/human, 0.02),
+    list(/obj/effect/decal/cleanable/blood/old, 0.02),
+    list(/obj/item/rogueweapon/pick, 0.015),
+    list(/mob/living/simple_animal/hostile/retaliate/rogue/mole, 0.02),
+    list(/mob/living/simple_animal/hostile/retaliate/rogue/spider/mutated, 0.05),
+
+    // Superrare objects
+    list(/obj/item/roguegem, 0.010),
+    list(/obj/item/roguecoin/silver/pile, 0.005),
+    list(/obj/structure/bed/rogue/shit, 0.01),
+    list(/obj/item/rope/chain, 0.009)
+)
+
+    var/list/placed_objects = list()
+
+    for (var/list/spawnable in spawnables)
+        var/obj_type = spawnable[1]
+        var/spawn_prob = spawnable[2]
+
+        for (var/turf/T in turfs)
+            if (istype(T, /turf/open/floor/rogue/naturalstone) || istype(T, /turf/open/floor/rogue/dirt))
+                if (prob(spawn_prob))
+                    var/obj/new_object = new obj_type
+                    new_object.loc = T
+                    placed_objects += T
+
+// Cellular automaton iteration
+/area/rogue/under/deep_caverns/proc/do_cellular_automaton_iteration(list/grid, width, height)
+    var/list/new_grid = list()
+    for (var/i = 1 to width)
+        new_grid += list(new/list(height))
+
+    for (var/x = 1 to width)
+        for (var/y = 1 to height)
+            var/wall_count = count_neighbor_walls(grid, x, y, width, height)
+            if (grid[x][y])
+                new_grid[x][y] = (wall_count >= 4)
+            else
+                new_grid[x][y] = (wall_count >= 5)
+
+    return new_grid
+
+// Count neighbor walls
+/area/rogue/under/deep_caverns/proc/count_neighbor_walls(list/grid, x, y, width, height)
+    var/count = 0
+    for (var/dx = -1 to 1)
+        for (var/dy = -1 to 1)
+            var/nx = x + dx
+            var/ny = y + dy
+            if (nx > 0 && nx <= width && ny > 0 && ny <= height)
+                count += grid[nx][ny]
+            else
+                count++ // Count out-of-bounds as walls
+    return count

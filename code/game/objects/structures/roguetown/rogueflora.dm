@@ -15,9 +15,10 @@
 	plane = GAME_PLANE_UPPER
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	destroy_sound = 'sound/misc/woodhit.ogg'
-	debris = list(/obj/item/grown/log/tree/stick = 2)
-	static_debris = list(/obj/item/grown/log/tree = 1)
+	debris = list(/obj/item/grown/log/tree/stick = 8)
+	static_debris = list(/obj/item/grown/log/tree/large = 4)
 	alpha = 200
+	leanable = TRUE
 	var/stump_type = /obj/structure/flora/roguetree/stump
 
 /obj/structure/flora/roguetree/attack_right(mob/user)
@@ -34,8 +35,9 @@
 			return
 
 /obj/structure/flora/roguetree/fire_act(added, maxstacks)
-	if(added > 5)
-		return ..()
+	if(added <= 5)
+		return
+	return ..()
 
 /obj/structure/flora/roguetree/Initialize()
 	. = ..()
@@ -191,7 +193,7 @@
 	opacity = 0
 	max_integrity = 200
 	blade_dulling = DULLING_CUT
-	static_debris = list(/obj/item/grown/log/tree = 1)
+	static_debris = list(/obj/item/grown/log/tree/large = 1)
 	climb_offset = 14
 	stump_type = FALSE
 
@@ -254,7 +256,7 @@
 		if(L.m_intent == MOVE_INTENT_SNEAK)
 			return
 		else
-			playsound(A.loc, "plantcross", 100, FALSE, -1)
+			playsound(A.loc, "plantcross", HAS_TRAIT(L, TRAIT_LIGHT_STEP) ? 50 : 100, -1)
 			var/oldx = A.pixel_x
 			animate(A, pixel_x = oldx+1, time = 0.5)
 			animate(pixel_x = oldx-1, time = 0.5)
@@ -281,8 +283,12 @@
 	if(prob(88))
 		bushtype = pickweight(list(/obj/item/reagent_containers/food/snacks/grown/berries/rogue=5,
 					/obj/item/reagent_containers/food/snacks/grown/berries/rogue/poison=3,
+					/obj/item/reagent_containers/food/snacks/grown/rogue/pipeweed=1,
+					/obj/item/seeds/apple=1,
+					/obj/item/seeds/wheat=1,
+					/obj/item/seeds/wheat/oat=1,
 					/obj/item/reagent_containers/food/snacks/grown/shroom=2,
-					/obj/item/reagent_containers/food/snacks/grown/rogue/pipeweed=1))
+					/obj/item/reagent_containers/food/snacks/grown/rogue/sweetleaf=1))
 	loot_replenish()
 	pixel_x += rand(-3,3)
 	return ..()
@@ -325,10 +331,8 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		playsound(src.loc, "plantcross", 50, FALSE, -1)
 		if(do_after(L, rand(1,5), target = src))
-#ifndef MATURESERVER
 			if(!looty.len && (world.time > res_replenish))
 				loot_replenish()
-#endif
 			if(prob(50) && looty.len)
 				if(looty.len == 1)
 					res_replenish = world.time + 8 MINUTES
@@ -339,13 +343,8 @@
 					user.visible_message(span_notice("[user] finds [B] in [src]."))
 					return
 			user.visible_message(span_warning("[user] searches through [src]."))
-#ifdef MATURESERVER
-			if(!looty.len)
-				to_chat(user, span_warning("Picked clean."))
-#else
 			if(!looty.len)
 				to_chat(user, span_warning("Picked clean... I should try later."))
-#endif
 /obj/structure/flora/roguegrass/bush/update_icon()
 	icon_state = "bush[rand(1, 4)]"
 
@@ -373,6 +372,7 @@
 	max_integrity = 150
 	debris = list(/obj/item/natural/fibers = 1, /obj/item/grown/log/tree/stick = 1, /obj/item/natural/thorn = 1)
 	attacked_sound = 'sound/misc/woodhit.ogg'
+	leanable = TRUE
 
 /obj/structure/flora/roguegrass/bush/wall/Initialize()
 	..()
@@ -417,7 +417,7 @@
 	layer = 4.81
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	destroy_sound = 'sound/misc/woodhit.ogg'
-	static_debris = list( /obj/item/grown/log/tree/small = 1)
+	static_debris = list(/obj/item/grown/log/tree/large = 2,/obj/item/grown/log/tree/small = 1)
 	dir = SOUTH
 
 /obj/structure/flora/rogueshroom/attack_right(mob/user)
@@ -456,8 +456,9 @@
 	return 1
 
 /obj/structure/flora/rogueshroom/fire_act(added, maxstacks)
-	if(added > 5)
-		return ..()
+	if(added <= 5)
+		return
+	return ..()
 
 /obj/structure/flora/rogueshroom/obj_destruction(damage_flag)
 	var/obj/structure/S = new /obj/structure/flora/shroomstump(loc)
@@ -470,18 +471,25 @@
 	desc = "It was a very happy shroom. Not anymore."
 	icon_state = "mush1stump"
 	opacity = 0
-	max_integrity = 100
+	density = 0
+	max_integrity = 50
+	blade_dulling = DULLING_CUT
+	attacked_sound = 'sound/misc/woodhit.ogg'
+	destroy_sound = 'sound/misc/woodhit.ogg'
+	static_debris = list(/obj/item/grown/log/tree/small = 1)
 	climbable = TRUE
 	climb_time = 0
 	density = TRUE
 	icon = 'icons/roguetown/misc/foliagetall.dmi'
 	layer = TABLE_LAYER
-	blade_dulling = DULLING_PICK
-	static_debris = null
+	blade_dulling = DULLING_CUT
 	debris = null
 	alpha = 255
 	pixel_x = -16
 	climb_offset = 14
+	attacked_sound = 'sound/misc/woodhit.ogg'
+	destroy_sound = 'sound/misc/woodhit.ogg'
+	static_debris = list( /obj/item/grown/log/tree/small = 1)
 
 /obj/structure/flora/shroomstump/Initialize()
 	. = ..()
@@ -641,10 +649,8 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		playsound(src.loc, "plantcross", 50, FALSE, -1)
 		if(do_after(L, rand(1,5), target = src))
-#ifndef MATURESERVER
 			if(!looty.len && (world.time > res_replenish))
 				loot_replenish()
-#endif
 			if(prob(50) && looty.len)
 				if(looty.len == 1)
 					res_replenish = world.time + 8 MINUTES
@@ -655,13 +661,8 @@
 					user.visible_message(span_notice("[user] finds [B] in [src]."))
 					return
 			user.visible_message(span_warning("[user] searches through [src]."))
-#ifdef MATURESERVER
-			if(!looty.len)
-				to_chat(user, span_warning("Picked clean."))
-#else
 			if(!looty.len)
 				to_chat(user, span_warning("Picked clean... I should try later."))
-#endif
 /obj/structure/flora/roguegrass/fungus_bush/update_icon()
 	icon_state = "fungus_bush[rand(1, 3)]"
 
@@ -679,6 +680,24 @@
 		return 0
 	return 1
 
+/obj/structure/flora/roguetree/happyrandom
+	name = "tree"
+	icon = 'modular_stonehedge/icons/roguetown/misc/foliagetall.dmi'
+	desc = "An healthy tree, elves sure love trees."
+
+/obj/structure/flora/roguetree/happy/Initialize()
+	. = ..()
+	//random healthy tree sprite every time one is spawned
+	icon_state = "t[rand(1,14)]"
+
+/obj/structure/flora/rogueshroom/happyrandom
+	name = "mushroom"
+	icon = 'modular_stonehedge/icons/roguetown/misc/foliagetall.dmi'
+	desc = "Mushrooms might be the happiest beings in this island."
+
+/obj/structure/flora/rogueshroom/happyrandom/Initialize()
+	. = ..()
+	icon_state = "mush[rand(1,5)]"
 
 
 //wildplant tree
@@ -695,8 +714,8 @@
 	plane = GAME_PLANE_UPPER
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	destroy_sound = 'sound/misc/woodhit.ogg'
-	debris = list(/obj/item/grown/log/tree/stick = 2)
-	static_debris = list(/obj/item/grown/log/tree = 1)
+	debris = list(/obj/item/grown/log/tree/stick = 4)
+	static_debris = list(/obj/item/grown/log/tree/large = 2)
 	alpha = 200
 	var/stump_type = /obj/structure/flora/roguetree/stump
 

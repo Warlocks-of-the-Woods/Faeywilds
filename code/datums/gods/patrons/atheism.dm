@@ -1,13 +1,13 @@
 /datum/patron/godless
-	name = "Faithless"
-	domain = "The Real World"
-	desc = "Maybe they exist, maybe they do not, but you don't care. It's only your will, not an unseen force's."
-	worshippers = "Madmen, beasts and the ones beyond saving"
+	name = "Godwoken"
+	domain = "Self-Manifestation"
+	desc = "You have what it takes to be a god, someday. You might work with them or against them, following your own jurisdiction. But what might your domain be..?  "
+	worshippers = "???"
 	associated_faith = /datum/faith/godless
 	mob_traits = list(TRAIT_FAITHLESS)
 	undead_hater = FALSE
 	confess_lines = list(
-		"Gods are WORTHLESS!",
+		"We are all gods of our own destiny!",
 		"I DON'T NEED GODS!",
 		"I AM MY OWN GOD!",
 		"YOUR WILL IS YOUR OWN, THEY AREN'T REAL!",

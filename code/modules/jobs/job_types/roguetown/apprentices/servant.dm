@@ -1,15 +1,16 @@
 /datum/job/roguetown/servant
 	title = "Servant"
+	f_title = "Maid"
 	flag = SERVANT
 	department_flag = APPRENTICES
 	faction = "Station"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 0
+	spawn_positions = 0
 
 	allowed_races = RACES_ALL_KINDSPLUS
 	allowed_ages = list(AGE_ADULT)
 
-	tutorial = "Granted a comfortable life in the Duke's manor as one of his servants! You will appreciate it more and more every day as you clean the floors and are beaten for nothing."
+	tutorial = "Granted a comfortable life in the Monarch's manor as one of his servants! You will appreciate it more and more every day as you clean the floors and are beaten for nothing."
 
 	outfit = /datum/outfit/job/roguetown/servant
 	display_order = JDO_SERVANT
@@ -19,16 +20,15 @@
 
 /datum/outfit/job/roguetown/servant/pre_equip(mob/living/carbon/human/H)
 	..()
-
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2 , TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/masonry, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/cooking, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sneaking, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/stealing, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sewing, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 2 , TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/masonry, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/carpentry, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 1, TRUE)
 		backl = /obj/item/storage/backpack/rogue/satchel
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/tights
@@ -38,9 +38,8 @@
 		neck = /obj/item/storage/belt/rogue/pouch
 		beltr = /obj/item/storage/keyring/servant
 		armor = /obj/item/clothing/suit/roguetown/armor/leather/vest/black
-		H.change_stat("perception", 1)
 	else
-		armor = /obj/item/clothing/suit/roguetown/shirt/rags
+		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/black
 		shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
 		neck = /obj/item/storage/belt/rogue/pouch

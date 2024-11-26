@@ -12,3 +12,4 @@
 	//dropshrink = 0.8
 	slot_flags = null
 	improvised = TRUE
+	w_class = WEIGHT_CLASS_SMALL

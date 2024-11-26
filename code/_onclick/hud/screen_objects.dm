@@ -734,6 +734,10 @@
 /atom/movable/screen/rogmove/proc/toggle(mob/user)
 	if(isobserver(user))
 		return
+	var/mob/living/carbon/userhuman = user
+	if(userhuman.has_status_effect(/datum/status_effect/debuff/stealthcd))
+		to_chat(user, span_danger("I need to wait a bit longer to enter stealth again!"))
+		return
 	if(user.m_intent == MOVE_INTENT_SNEAK)
 		user.toggle_rogmove_intent(MOVE_INTENT_WALK)
 	else
@@ -796,8 +800,11 @@
 	if(H.mind && H.mind.antag_datums)
 		for(var/datum/antagonist/D in H.mind.antag_datums)
 			if(istype(D, /datum/antagonist/vampirelord) || istype(D, /datum/antagonist/vampire) || istype(D, /datum/antagonist/bandit) || istype(D, /datum/antagonist/lich))
-				qdel(src)
-				return
+				// STONEKEEP CHANGE START, let quirky vampires use advsetup
+				if(!istype(D, /datum/antagonist/vampirelord/lesser/secret))
+					qdel(src)
+					return
+				// STONEKEEP CHANGE END, let quirky vampires use advsetup
 	if(H.advsetup)
 		alpha = 0
 		icon = 'icons/mob/advsetup.dmi'
@@ -1650,23 +1657,24 @@
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
 		if(!HAS_TRAIT(H, TRAIT_NOMOOD))
-			if(H.stress)
+			var/stress_amt = H.get_stress_amount()
+			if(stress_amt > 0)
 				state2use = "stress2"
-				if(H.stress >= 10)
-					state2use = "stress3"
-				if(H.stress >= 20)
-					state2use = "stress4"
-				if(H.stress >= 30)
-					state2use = "stress5"
+			if(stress_amt >= 5)
+				state2use = "stress3"
+			if(stress_amt >= 15)
+				state2use = "stress4"
+			if(stress_amt >= 25)
+				state2use = "stress5"
 		if(H.has_status_effect(/datum/status_effect/buff/drunk))
 			state2use = "mood_drunk"
 		if(H.has_status_effect(/datum/status_effect/buff/druqks))
-			state2use = "mood_high"
+			state2use = "mood_drunk"
 		if(H.InFullCritical())
-			state2use = "mood_fear"
+			state2use = "stress4"
 		if(H.mind)
 			if(H.mind.has_antag_datum(/datum/antagonist/zombie))
-				state2use = "mood_fear"
+				state2use = "stress4"
 		if(H.stat == DEAD)
 			state2use = "mood_dead"
 	add_overlay(state2use)
@@ -1682,11 +1690,12 @@
 				to_chat(M, span_info("[M.charflaw.desc]"))
 			to_chat(M, "*--------*")
 			var/list/already_printed = list()
-			for(var/datum/stressevent/S in M.positive_stressors)
+			var/list/pos_stressors = M.get_positive_stressors()
+			for(var/datum/stressevent/S in pos_stressors)
 				if(S in already_printed)
 					continue
 				var/cnt = 1
-				for(var/datum/stressevent/CS in M.positive_stressors)
+				for(var/datum/stressevent/CS in pos_stressors)
 					if(CS == S)
 						continue
 					if(CS.type == S.type)
@@ -1699,11 +1708,12 @@
 					to_chat(M, "[ddesc] (x[cnt])")
 				else
 					to_chat(M, "[ddesc]")
-			for(var/datum/stressevent/S in M.negative_stressors)
+			var/list/neg_stressors = M.get_negative_stressors()
+			for(var/datum/stressevent/S in neg_stressors)
 				if(S in already_printed)
 					continue
 				var/cnt = 1
-				for(var/datum/stressevent/CS in M.negative_stressors)
+				for(var/datum/stressevent/CS in neg_stressors)
 					if(CS == S)
 						continue
 					if(CS.type == S.type)
@@ -1723,7 +1733,8 @@
 				to_chat(M, span_warning("I haven't TRIUMPHED."))
 				return
 			if(alert("Do you want to remember a TRIUMPH?", "", "Yes", "No") == "Yes")
-				if(M.add_stress(/datum/stressevent/triumph))
+				if(!M.has_stress_event(/datum/stressevent/triumph))
+					M.add_stress(/datum/stressevent/triumph)
 					M.adjust_triumphs(-1)
 					M.playsound_local(M, 'sound/misc/notice (2).ogg', 100, FALSE)
 
@@ -1852,6 +1863,25 @@
 				hud_used.rmb_intent.update_icon()
 				hud_used.rmb_intent.collapse_intents()
 
+/mob/living/proc/cycle_rmb_intent()
+    if(!possible_rmb_intents?.len)
+        return
+
+    // Find the index of the current intent
+    var/index = possible_rmb_intents.Find(rmb_intent)
+
+    if(index == -1)
+        rmb_intent = possible_rmb_intents[1]
+    else
+        // Calculate the next index, wrapping around if at the end
+        index = (index % possible_rmb_intents.len) + 1
+        rmb_intent = possible_rmb_intents[index]
+
+    if(hud_used?.rmb_intent)
+    {
+        hud_used.rmb_intent.update_icon()
+        hud_used.rmb_intent.collapse_intents()
+    }
 
 /atom/movable/screen/time
 	name = "Sir Sun"
@@ -1901,6 +1931,7 @@
 	screen_loc = rogueui_fat
 	layer = HUD_LAYER+0.1
 
+/*
 /atom/movable/screen/grain
 	icon = 'icons/grain.dmi'
 	icon_state = "grain"
@@ -1924,6 +1955,7 @@
 	layer = 24
 	plane = 24
 	blend_mode = BLEND_MULTIPLY
+*/
 
 /atom/movable/screen/char_preview
 	name = "Me."

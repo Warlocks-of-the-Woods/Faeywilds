@@ -12,8 +12,10 @@
 	vision_range = 5
 	aggro_vision_range = 9
 	base_intents = list(/datum/intent/simple/bite)
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/rogue/meat/steak = 1,
-					/obj/item/natural/silk = 2, /obj/item/hearthnatural/beespider_fang = 1)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/rogue/meat/spider = 1,
+					/obj/item/natural/silk = 2,
+					/obj/item/reagent_containers/food/snacks/rogue/honey = 2,
+					/obj/item/hearthnatural/beespider_fang = 2)
 	faction = list("spiders")
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	attack_sound = 'sound/combat/wooshes/punch/punchwoosh (2).ogg'
@@ -32,6 +34,7 @@
 	STASTR = 9
 	STASPD = 10
 	deaggroprob = 0
+	tame_chance = 20
 	defprob = 40
 	defdrain = 10
 	attack_same = 0
@@ -59,6 +62,7 @@
 	gender = MALE
 	if(prob(33))
 		gender = FEMALE
+		milkies = TRUE
 	update_icon()
 
 /mob/living/simple_animal/hostile/retaliate/rogue/spider/AttackingTarget()
@@ -90,8 +94,6 @@
 			return pick('sound/vo/mobs/spider/pain.ogg')
 		if("death")
 			return pick('sound/vo/mobs/spider/death.ogg')
-		if("idle")
-			return pick('sound/vo/mobs/spider/idle (1).ogg','sound/vo/mobs/spider/idle (2).ogg','sound/vo/mobs/spider/idle (3).ogg','sound/vo/mobs/spider/idle (4).ogg')
 
 /mob/living/simple_animal/hostile/retaliate/rogue/spider/taunted(mob/user)
 	emote("aggro")
@@ -108,6 +110,11 @@
 				visible_message(span_alertalien("[src] creates some honey."))
 				var/turf/T = get_turf(src)
 				playsound(T, pick('sound/vo/mobs/spider/speak (1).ogg','sound/vo/mobs/spider/speak (2).ogg','sound/vo/mobs/spider/speak (3).ogg','sound/vo/mobs/spider/speak (4).ogg'), 100, TRUE, -1)
+				new /obj/item/reagent_containers/food/snacks/rogue/honey(T)
+				new /obj/item/reagent_containers/food/snacks/rogue/honey(T)
+				new /obj/item/reagent_containers/food/snacks/rogue/honey(T)
+				new /obj/item/reagent_containers/food/snacks/rogue/honey(T)
+				new /obj/item/reagent_containers/food/snacks/rogue/honey(T)
 				new /obj/item/reagent_containers/food/snacks/rogue/honey(T)
 	if(pulledby && !tame)
 		if(HAS_TRAIT(pulledby, TRAIT_WEBWALK))
@@ -157,3 +164,9 @@
 			return "foreleg"
 	return ..()
 
+/mob/living/simple_animal/hostile/retaliate/rogue/spider/tame
+	tame = TRUE
+	deaggroprob = 30
+
+/mob/living/simple_animal/hostile/retaliate/rogue/spider/shapeshift
+	erpable = TRUE

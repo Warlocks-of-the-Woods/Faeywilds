@@ -1,5 +1,5 @@
 /obj/effect/proc_holder/spell/invoked/sacred_flame_rogue
-	name = "Sacred Flame"
+	name = "Ignite"
 	overlay_state = "sacredflame"
 	releasedrain = 30
 	chargedrain = 0
@@ -8,15 +8,14 @@
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	chargedloop = null
-	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	sound = 'sound/magic/heal.ogg'
-	invocation = "Cleansing flames, kindle!"
+	invocation = "Ignis!"
 	invocation_type = "shout"
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/skill/magic/arcane
 	antimagic_allowed = TRUE
 	charge_max = 5 SECONDS
-	miracle = TRUE
-	devotion_cost = 30
+	miracle = FALSE
+	devotion_cost = 0
 
 /obj/effect/proc_holder/spell/invoked/sacred_flame_rogue/cast(list/targets, mob/user = usr)
 	. = ..()
@@ -42,11 +41,11 @@
 	return FALSE
 
 /obj/effect/proc_holder/spell/invoked/revive
-	name = "Anastasis"
+	name = "Ressurection"
 	overlay_state = "revive"
 	releasedrain = 90
 	chargedrain = 0
-	chargetime = 50
+	chargetime = 30
 	range = 1
 	warnie = "sydwarning"
 	no_early_release = TRUE
@@ -58,7 +57,7 @@
 	antimagic_allowed = TRUE
 	charge_max = 2 MINUTES
 	miracle = TRUE
-	devotion_cost = 80
+	devotion_cost = 100
 	/// Amount of PQ gained for reviving people
 	var/revive_pq = PQ_GAIN_REVIVE
 
@@ -67,9 +66,6 @@
 	if(isliving(targets[1]))
 		testing("revived1")
 		var/mob/living/target = targets[1]
-		if(HAS_TRAIT(target, TRAIT_FAITHLESS))
-			to_chat(user, span_warning("Astrata's light has no effect! She denies aiding a non-believer!"))
-			return FALSE
 		if(target == user)
 			return FALSE
 		if(target.stat < DEAD)
@@ -95,6 +91,7 @@
 			qdel(underworld_spirit)
 			ghost.mind.transfer_to(target, TRUE)
 		target.grab_ghost(force = TRUE) // even suicides
+		target.remove_client_colour(/datum/client_colour/monochrome)
 		target.emote("breathgasp")
 		target.Jitter(100)
 		if(isseelie(target))
@@ -106,7 +103,7 @@
 				var/obj/item/organ/wings/seelie/new_wings = new wing_type()
 				new_wings.Insert(fairy_target)
 		target.update_body()
-		target.visible_message(span_notice("[target] is revived by holy light!"), span_green("I awake from the void."))
+		target.visible_message(span_notice("[target] is revived by radiant light!"), span_green("I awake from the realm before death."))
 		if(target.mind)
 			if(revive_pq && !HAS_TRAIT(target, TRAIT_IWASREVIVED) && user?.ckey)
 				adjust_playerquality(revive_pq, user.ckey)
@@ -122,6 +119,6 @@
 	for(var/obj/structure/fluff/psycross/S in oview(5, user))
 		found = S
 	if(!found)
-		to_chat(user, span_warning("I need a holy cross."))
+		to_chat(user, span_warning("I need a divine effigy.."))
 		return FALSE
 	return TRUE

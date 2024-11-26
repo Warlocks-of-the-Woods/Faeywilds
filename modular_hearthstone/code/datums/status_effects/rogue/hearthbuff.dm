@@ -99,13 +99,18 @@
 /datum/status_effect/buff/virilitybuff/on_apply()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
-		C.sexcon.set_charge(INFINITY)
+		var/obj/item/organ/filling_organ/testicles/testie = C.getorganslot(ORGAN_SLOT_TESTICLES)
+		testie.reagent_generate_rate = 20 //20 sperm regenerated per life tick
+		if(!testie.virility)
+			testie.virility = TRUE
 	return ..()
 
 /datum/status_effect/buff/virilitybuff/on_remove()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
-		C.sexcon.set_charge(0)
+		var/obj/item/organ/filling_organ/testicles/testie = C.getorganslot(ORGAN_SLOT_TESTICLES)
+		testie.reagent_generate_rate = initial(testie.reagent_generate_rate)
+		testie.virility = initial(testie.virility)
 	return ..()
 
 /datum/status_effect/buff/invisbuff

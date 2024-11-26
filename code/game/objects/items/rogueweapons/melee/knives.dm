@@ -27,15 +27,18 @@
 	thrown_bclass = BCLASS_CUT
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	smeltresult = /obj/item/ingot/iron
+	pickup_sound = 'modular_helmsguard/sound/sheath_sounds/draw_dagger.ogg'
+	sheathe_sound = 'modular_helmsguard/sound/sheath_sounds/put_back_dagger.ogg'
 
-
+/obj/item/rogueweapon/huntingknife/equipped(mob/user, slot, initial = FALSE)
+	pickup_sound = pick("modular_helmsguard/sound/sheath_sounds/draw_dagger.ogg", "modular_helmsguard/sound/sheath_sounds/draw_dagger2.ogg")
+	. = ..()
 
 /datum/intent/dagger
 	clickcd = 8
 
 /datum/intent/dagger/cut
 	name = "cut"
-	desc = "A simple iron dagger favored as a fallback weapon for archers and crossbowmen. Just as likely to be in the hands on an assassin or rogue too."
 	icon_state = "incut"
 	attack_verb = list("cuts", "slashes")
 	animname = "cut"
@@ -50,7 +53,7 @@
 /datum/intent/dagger/thrust
 	name = "thrust"
 	icon_state = "instab"
-	attack_verb = list("thrusts")
+	attack_verb = list("thrusts", "stabs")
 	animname = "stab"
 	blade_class = BCLASS_STAB
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
@@ -62,7 +65,7 @@
 /datum/intent/dagger/thrust/pick
 	name = "icepick stab"
 	icon_state = "inpick"
-	attack_verb = list("stabs", "impales")
+	attack_verb = list("picks", "impales")
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	penfactor = 80
 	clickcd = 14
@@ -83,7 +86,7 @@
 /datum/intent/dagger/chop
 	name = "chop"
 	icon_state = "inchop"
-	attack_verb = list("chops")
+	attack_verb = list("chops",)
 	animname = "chop"
 	blade_class = BCLASS_CHOP
 	hitsound = list('sound/combat/hits/bladed/smallslash (1).ogg', 'sound/combat/hits/bladed/smallslash (2).ogg', 'sound/combat/hits/bladed/smallslash (3).ogg')
@@ -110,9 +113,9 @@
 
 /obj/item/rogueweapon/huntingknife/cleaver/combat
 	force = 16
-	name = "knife"
-	desc = "A combat knife. Swift and deadly if you hit."
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop/cleaver)
+	name = "combat knife"
+	desc = "A swift and deadly combat knife."
+	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop/cleaver, /datum/intent/dagger/thrust)
 	icon_state = "combatknife"
 	icon = 'icons/roguetown/weapons/32.dmi'
 	parrysound = list('sound/combat/parry/bladed/bladedmedium (1).ogg','sound/combat/parry/bladed/bladedmedium (2).ogg','sound/combat/parry/bladed/bladedmedium (3).ogg')
@@ -175,10 +178,12 @@
 
 /obj/item/rogueweapon/huntingknife/idagger/steel/parrying
 	name = "steel parrying dagger"
-	desc = "This is a parrying dagger made of solid steel, used to catch opponent's weapons in the handguard."
+	desc = "This is a parrying dagger made of solid steel, used to catch opponent's weapons in the handguard, even more durable."
 	icon_state = "spdagger"
-	wdefense = 6
+	force = 18
+	max_integrity = 225 //this shit costs 2 steel, more than a rapier somehow.
 	smeltresult = /obj/item/ingot/steel
+	wdefense = 6
 
 /obj/item/rogueweapon/huntingknife/idagger/steel/special
 	icon_state = "sdaggeralt"
@@ -195,6 +200,8 @@
 /obj/item/rogueweapon/huntingknife/idagger/silver/pickup(mob/user)
 	. = ..()
 	var/mob/living/carbon/human/H = user
+	if(!H.mind) //to prevent runtime errors
+		return
 	var/datum/antagonist/vampirelord/V_lord = H.mind.has_antag_datum(/datum/antagonist/vampirelord/)
 	var/datum/antagonist/werewolf/W = H.mind.has_antag_datum(/datum/antagonist/werewolf/)
 	if(ishuman(H))
@@ -221,6 +228,8 @@
 	. = ..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
+		if(!H.mind) //to prevent runtime errors
+			return
 		var/datum/antagonist/vampirelord/V_lord = H.mind.has_antag_datum(/datum/antagonist/vampirelord/)
 		var/datum/antagonist/werewolf/W = H.mind.has_antag_datum(/datum/antagonist/werewolf/)
 		if(H.mind.has_antag_datum(/datum/antagonist/vampirelord/lesser))
@@ -250,6 +259,8 @@
 	if(ishuman(target))
 		var/mob/living/carbon/human/s_user = user
 		var/mob/living/carbon/human/H = target
+		if(!H.mind) //to prevent runtime errors
+			return
 		var/datum/antagonist/werewolf/W = H.mind.has_antag_datum(/datum/antagonist/werewolf/)
 		var/datum/antagonist/vampirelord/lesser/Vp = H.mind.has_antag_datum(/datum/antagonist/vampire)
 		var/datum/antagonist/vampirelord/lesser/V = H.mind.has_antag_datum(/datum/antagonist/vampirelord/lesser)
@@ -316,7 +327,6 @@
 	wdefense = 1
 
 /obj/item/rogueweapon/huntingknife/idagger/silver/elvish
-	possible_item_intents = list(/datum/intent/dagger/thrust,/datum/intent/dagger/cut)
 	name = "elvish dagger"
 	desc = "This beautiful dagger is of intricate, elvish design. Sharper, too."
 	force = 19
@@ -324,6 +334,10 @@
 	item_state = "elfdag"
 
 /obj/item/rogueweapon/huntingknife/idagger/silver/elvish/drow
-	name = "nite elf dagger"
-	desc = "This ominous, dark handled dagger was crafted by the assassin race of nite elves."
-	force = 25
+	name = "drowish dagger"
+	desc = "This ominous, jeweled dagger was crafted by the assassin race of nite elves."
+	force = 22
+	sellprice = 75
+	icon = 'modular_stonehedge/icons/roguetown/weapons/32.dmi'
+	icon_state = "drowdagger"
+	item_state = "drowdag"

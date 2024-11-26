@@ -21,6 +21,28 @@
 	canSmoothWith = list(/turf/closed, /turf/open/floor/rogue/volcanic, /turf/open/floor/rogue/dirt, /turf/open/floor/rogue/dirt/road,/turf/open/floor/rogue/naturalstone)
 	neighborlay_override = "lavedge"
 
+
+/turf/open/lava/onbite(mob/user)
+	if(isliving(user))
+		var/mob/living/L = user
+		if(L.stat != CONSCIOUS)
+			return
+		if(iscarbon(user))
+			var/mob/living/carbon/C = user
+			if(C.is_mouth_covered())
+				return
+		playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
+		user.visible_message(span_info("[user] starts to drink from [src]."))
+		if(do_after(L, 25, target = src))
+			var/mob/living/carbon/C = user
+			to_chat(C, span_userdanger("WHY DID I THINK THIS WAS A GOOD IDEA???"))
+			C.flash_fullscreen("redflash3")
+			C.emote("agony", forced = TRUE)
+			C.adjust_fire_stacks(20)
+			C.IgniteMob()
+			C.adjustFireLoss(200)
+
+
 /turf/open/lava/Initialize()
 	. = ..()
 	dir = pick(GLOB.cardinals)
@@ -269,3 +291,20 @@
 
 			L.dust(drop_items = TRUE)
 
+/turf/open/lava/acid/onbite(mob/user)
+	if(isliving(user))
+		var/mob/living/L = user
+		if(L.stat != CONSCIOUS)
+			return
+		if(iscarbon(user))
+			var/mob/living/carbon/C = user
+			if(C.is_mouth_covered())
+				return
+		playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
+		user.visible_message(span_info("[user] starts to drink from [src]."))
+		if(do_after(L, 25, target = src))
+			var/mob/living/carbon/C = user
+			to_chat(C, span_userdanger("WHY DID I THINK THIS WAS A GOOD IDEA???"))
+			C.flash_fullscreen("redflash3")
+			C.emote("agony", forced = TRUE)
+			C.adjustFireLoss(250)

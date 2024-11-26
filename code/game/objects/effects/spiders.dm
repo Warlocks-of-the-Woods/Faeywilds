@@ -5,7 +5,7 @@
 	desc = ""
 	anchored = TRUE
 	density = FALSE
-	max_integrity = 15
+	max_integrity = 5
 	debris = list(/obj/item/natural/silk = 1)
 
 
@@ -45,10 +45,10 @@
 	. = ..()
 
 /obj/structure/spider/stickyweb/CanPass(atom/movable/mover, turf/target)
-	if(istype(mover, /mob/living/simple_animal/hostile/poison/giant_spider))
+	if(istype(mover, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider))
 		return TRUE
 	else if(isliving(mover))
-		if(istype(mover.pulledby, /mob/living/simple_animal/hostile/poison/giant_spider))
+		if(istype(mover.pulledby, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider))
 			return TRUE
 		if(prob(50) && !HAS_TRAIT(mover, TRAIT_WEBWALK))
 			to_chat(mover, span_danger("I get stuck in \the [src] for a moment."))
@@ -58,11 +58,13 @@
 	return TRUE
 
 
-/obj/structure/spider/stickyweb/fire_act(added, maxstacks)
+/obj/structure/spider/fire_act(added, maxstacks)
 	visible_message(span_warning("[src] catches fire!"))
 	var/turf/T = get_turf(src)
 	qdel(src)
 	new /obj/effect/hotspot(T)
+	for(var/obj/structure/spider/nearbyweb in range(1,T)) //fire spreads to adjacent webs, satisfying.
+		nearbyweb.fire_act(1, 20)
 
 /obj/structure/spider/eggcluster
 	name = "egg cluster"
@@ -120,19 +122,19 @@
 	AddComponent(/datum/component/swarming)
 
 /obj/structure/spider/spiderling/hunter
-	grow_as = /mob/living/simple_animal/hostile/poison/giant_spider/hunter
+	grow_as = /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/hunter
 
 /obj/structure/spider/spiderling/nurse
-	grow_as = /mob/living/simple_animal/hostile/poison/giant_spider/nurse
+	grow_as = /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse
 
 /obj/structure/spider/spiderling/midwife
-	grow_as = /mob/living/simple_animal/hostile/poison/giant_spider/nurse/midwife
+	grow_as = /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/midwife
 
 /obj/structure/spider/spiderling/viper
-	grow_as = /mob/living/simple_animal/hostile/poison/giant_spider/hunter/viper
+	grow_as = /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/hunter/viper
 
 /obj/structure/spider/spiderling/tarantula
-	grow_as = /mob/living/simple_animal/hostile/poison/giant_spider/tarantula
+	grow_as = /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/tarantula
 
 /obj/structure/spider/spiderling/Bump(atom/user)
 	if(istype(user, /obj/structure/table))
@@ -185,7 +187,7 @@
 	//=================
 
 	else if(prob(33))
-		var/list/nearby = oview(10, src)
+		var/list/nearby = oview(2, src)
 		if(nearby.len)
 			var/target_atom = pick(nearby)
 			walk_to(src, target_atom)
@@ -203,10 +205,10 @@
 		if(amount_grown >= 100)
 			if(!grow_as)
 				if(prob(3))
-					grow_as = pick(/mob/living/simple_animal/hostile/poison/giant_spider/tarantula, /mob/living/simple_animal/hostile/poison/giant_spider/hunter/viper, /mob/living/simple_animal/hostile/poison/giant_spider/nurse/midwife)
+					grow_as = pick(/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/tarantula, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/hunter/viper, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse/midwife)
 				else
-					grow_as = pick(/mob/living/simple_animal/hostile/poison/giant_spider, /mob/living/simple_animal/hostile/poison/giant_spider/hunter, /mob/living/simple_animal/hostile/poison/giant_spider/nurse)
-			var/mob/living/simple_animal/hostile/poison/giant_spider/S = new grow_as(src.loc)
+					grow_as = pick(/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/hunter, /mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/nurse)
+			var/mob/living/simple_animal/hostile/retaliate/rogue/poison/giant_spider/S = new grow_as(src.loc)
 			S.faction = faction.Copy()
 			S.directive = directive
 			if(player_spiders)

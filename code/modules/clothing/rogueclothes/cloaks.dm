@@ -8,7 +8,7 @@
 	equip_delay_self = 10
 	bloody_icon_state = "bodyblood"
 	sewrepair = TRUE //Vrell - AFAIK, all cloaks are cloth ATM. Technically semi-less future-proof, but it removes a line of code from every subtype, which is worth it IMO.
-	//flags_inv = HIDETAIL - Edited to instead be hidden by the Hood being lifted up instead of the cloak hiding it by default, that way it can still allow for obscuring
+	w_class = WEIGHT_CLASS_NORMAL
 
 
 //////////////////////////
@@ -554,7 +554,7 @@
 	AddComponent(/datum/component/storage/concrete)
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	if(STR)
-		STR.max_combined_w_class = 3
+		STR.max_combined_w_class = 4
 		STR.max_w_class = WEIGHT_CLASS_BULKY
 		STR.max_items = 1
 
@@ -577,6 +577,7 @@
 	boobed = TRUE
 	allowed_race = CLOTHED_RACES_TYPES
 	flags_inv = HIDECROTCH|HIDEBOOB
+	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/clothing/cloak/apron/blacksmith
 	name = "leather apron"
@@ -597,7 +598,7 @@
 	color = null
 	icon_state = "waistpron"
 	item_state = "waistpron"
-	body_parts_covered = GROIN
+	body_parts_covered = null
 	boobed = FALSE
 	flags_inv = HIDECROTCH
 
@@ -614,8 +615,9 @@
 	color = null
 	icon_state = "aproncook"
 	item_state = "aproncook"
-	body_parts_covered = CHEST|GROIN
+	body_parts_covered = CHEST
 	boobed = FALSE
+	flags_inv = HIDECROTCH|HIDEBOOB
 
 /*
 /obj/item/clothing/cloak/apron/waist/ComponentInitialize()
@@ -661,18 +663,13 @@
 		STR.max_w_class = WEIGHT_CLASS_NORMAL
 		STR.max_items = 1
 
-/obj/item/clothing/cloak/raincloak/dropped(mob/living/carbon/human/user)
-	..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
-
-
 
 /obj/item/clothing/cloak/raincloak/red
 	color = CLOTHING_RED
+
+/obj/item/clothing/cloak/raincloak/rogue
+	desc = "A cloak worn by people who want to stay in the shadows."
+	color = CLOTHING_BLACK
 
 /obj/item/clothing/cloak/raincloak/mortus
 	name = "funeral cloak"
@@ -703,7 +700,7 @@
 	dynamic_hair_suffix = ""
 	edelay_type = 1
 	body_parts_covered = HEAD
-	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDETAIL //Edited to include Hide Tail so cloaks can keep their obscuring feature
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDETAIL|HIDEBUTT
 	block2add = FOV_BEHIND
 
 /obj/item/clothing/head/hooded/equipped(mob/user, slot)
@@ -750,11 +747,17 @@
 	inhand_mod = FALSE
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
 
+/obj/item/clothing/cloak/cape/purple
+	color = "#801380"
+
 /obj/item/clothing/cloak/cape/knight
 	color = CLOTHING_PURPLE
 
 /obj/item/clothing/cloak/cape/guard
 	color = CLOTHING_RED
+
+/obj/item/clothing/cloak/cape/black
+	color = CLOTHING_BLACK
 
 /obj/item/clothing/cloak/cape/guard/Initialize()
 	. = ..()
@@ -811,7 +814,7 @@
 
 /obj/item/clothing/cloak/stole
 	name = "stole"
-	desc = "Garments of a priest, usually worn when giving religious speeches to the people."
+	desc = "Garments of a priest, usually worn when giving mass to the people."
 	icon_state = "stole_gold"
 	sleeved = null
 	sleevetype = null
@@ -866,6 +869,7 @@
 	color = CLOTHING_BLACK
 	allowed_sex = list(MALE, FEMALE)
 	flags_inv = null
+	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/clothing/cloak/half/brown
 	color = CLOTHING_BROWN
@@ -907,12 +911,14 @@
 	icon_state = "bkhelm"
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+	w_class = WEIGHT_CLASS_NORMAL
 
 /obj/item/clothing/cloak/tabard/blkknight
 	name = "blood sash"
 	icon_state = "bksash"
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+	w_class = WEIGHT_CLASS_NORMAL
 
 /obj/item/clothing/under/roguetown/platelegs/blk
 	name = "blacksteel legs"
@@ -920,6 +926,7 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+	w_class = WEIGHT_CLASS_BULKY
 
 /obj/item/clothing/gloves/roguetown/plate/blk
 	name = "blacksteel gaunties"
@@ -927,6 +934,7 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/clothing/neck/roguetown/blkknight
 	name = "dragonscale necklace"
@@ -945,7 +953,7 @@
 	attunement_cost = 5
 	infusable = FALSE
 	var/active_item = FALSE
-	
+	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/clothing/neck/roguetown/blkknight/equipped(mob/living/user)
 	. = ..()
@@ -995,6 +1003,7 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+	w_class = WEIGHT_CLASS_BULKY
 
 /obj/item/clothing/shoes/roguetown/boots/armor/blkknight
 	name = "blacksteel boots"
@@ -1002,6 +1011,7 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+	w_class = WEIGHT_CLASS_SMALL
 
 //Short hoods for guards
 
@@ -1075,8 +1085,8 @@
 	flags_inv = HIDECROTCH|HIDEBOOB
 
 /obj/item/clothing/cloak/templar/astrata
-	name = "astratan tabard"
-	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Astrata on it."
+	name = "Elysian tabard"
+	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Elysius on it."
 	icon_state = "tabard_astrata_alt"
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
@@ -1089,8 +1099,8 @@
 	flags_inv = HIDECROTCH|HIDEBOOB
 
 /obj/item/clothing/cloak/templar/noc
-	name = "noc tabard"
-	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Noc on it."
+	name = "Lunite tabard"
+	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Lune on it."
 	icon_state = "tabard_noc"
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
@@ -1103,8 +1113,8 @@
 	flags_inv = HIDECROTCH|HIDEBOOB
 
 /obj/item/clothing/cloak/templar/dendor
-	name = "dendor tabard"
-	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Dendor on it."
+	name = "Sylvan tabard"
+	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Sylvarhn on it."
 	icon_state = "tabard_dendor"
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
@@ -1117,8 +1127,8 @@
 	flags_inv = HIDECROTCH|HIDEBOOB
 
 /obj/item/clothing/cloak/templar/necra
-	name = "necra tabard"
-	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Necra on it."
+	name = "Yamain tabard"
+	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Yamais on it."
 	icon_state = "tabard_necra"
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
@@ -1131,8 +1141,8 @@
 	flags_inv = HIDECROTCH|HIDEBOOB
 
 /obj/item/clothing/cloak/templar/abyssor
-	name = "abyssor tabard"
-	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Abyssor on it."
+	name = "abyssian tabard"
+	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Abyssia on it."
 	icon_state = "tabard_abyssor"
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
@@ -1145,8 +1155,8 @@
 	flags_inv = HIDECROTCH|HIDEBOOB
 
 /obj/item/clothing/cloak/templar/malum
-	name = "malum tabard"
-	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Malum on it."
+	name = "Svaeryonite tabard"
+	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Svaeryhog on it."
 	icon_state = "tabard_malum"
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
@@ -1159,8 +1169,8 @@
 	flags_inv = HIDECROTCH|HIDEBOOB
 
 /obj/item/clothing/cloak/templar/eora
-	name = "eora tabard"
-	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Eora on it."
+	name = "viriitran tabard"
+	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Viriitri on it."
 	icon_state = "tabard_eora"
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
@@ -1173,8 +1183,8 @@
 	flags_inv = HIDECROTCH|HIDEBOOB
 
 /obj/item/clothing/cloak/templar/pestra
-	name = "pestra tabard"
-	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Pestra on it."
+	name = "hermeian tabard"
+	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Hermeis on it."
 	icon_state = "tabard_pestra"
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
@@ -1187,8 +1197,8 @@
 	flags_inv = HIDECROTCH|HIDEBOOB
 
 /obj/item/clothing/cloak/templar/ravox
-	name = "ravox tabard"
-	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Ravox on it."
+	name = "minhurite tabard"
+	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Minhur on it."
 	icon_state = "tabard_ravox"
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
@@ -1201,8 +1211,8 @@
 	flags_inv = HIDECROTCH|HIDEBOOB
 
 /obj/item/clothing/cloak/templar/xylix
-	name = "xylix tabard"
-	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Xylix on it."
+	name = "Onderite tabard"
+	desc = "A medieval overcoat meant to be used over the armor. This one has the symbol of Onder on it."
 	icon_state = "tabard_xylix"
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
@@ -1257,8 +1267,6 @@
 	allowed_sex = list(MALE, FEMALE)
 	nodismemsleeves = TRUE
 
-/obj/item/clothing/cloak/combattante
-	name = "\improper Combattante cloak"
 /obj/item/clothing/cloak/combattante
 	name = "\improper Combattante cloak"
 	desc = "A cloak designed for members of the Combattante Association"

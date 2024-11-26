@@ -105,9 +105,19 @@
 	var/datum/devotion/devotion = null // Used for cleric_holder for priests
 
 	var/headshot_link = null
+	var/nudeshot_link = null
+
+	var/received_resident_key = FALSE
+
+	var/datum/charflaw/charflaw
+	///used for in-round gained roles for examine.
+	var/funnyrole
+
 	var/background_image = null
-	
+
 	var/flavor_text = null
+
+/* useless shit from hearthstone.
 	var/alias = null
 	var/height = null
 	var/interest = null
@@ -115,12 +125,9 @@
 	var/strengths = null
 	var/weakness = null
 	var/theme = null
-/*
 	var/custom_race_name = null
 */
 	var/ooc_notes = null
-
-	var/nsfw_headshot_link = null
 
 	var/nsfw_info = null
 

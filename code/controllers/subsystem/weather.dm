@@ -49,8 +49,8 @@ SUBSYSTEM_DEF(weather)
 		if(MC_TICK_CHECK)
 			return
 
-	// start random weather on relevant levels
-/*	for(var/z in eligible_zlevels)
+/*	// start random weather on relevant levels
+	for(var/z in eligible_zlevels)
 		var/possible_weather = eligible_zlevels[z]
 		var/datum/weather/W = pickweight(possible_weather)
 		run_weather(W, list(text2num(z)))

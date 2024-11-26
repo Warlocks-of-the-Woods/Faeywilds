@@ -587,7 +587,7 @@
 		return
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		H.add_stress(/datum/stressevent/hug)
+		//H.add_stress(/datum/stressevent/hug)
 
 /datum/emote/living/holdbreath
 	key = "hold"

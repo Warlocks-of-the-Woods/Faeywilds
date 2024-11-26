@@ -2,7 +2,7 @@
 	race = /datum/species/anthromorphsmall
 
 /datum/species/anthromorphsmall
-	name = "Verminvolk"
+	name = "Hedgebeast"
 	id = "anthromorphsmall"
 	desc = "<b>Verminvolk</b><br>\
 		A squat, unusual people, they are greatly related to Wild-Kin, in the same way a Kobold might be related to a dragon. \
@@ -17,7 +17,7 @@
 		LIPS,
 		HAIR,
 	)
-	inherent_traits = list(TRAIT_NOMOBSWAP)
+	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_WILD_EATER, TRAIT_DECEIVING_MEEKNESS)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	attack_verb = "slash"
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
@@ -40,11 +40,11 @@
 		OFFSET_ID_F = list(0,-5), OFFSET_GLOVES_F = list(0,-4), OFFSET_WRISTS_F = list(0,-4), OFFSET_HANDS_F = list(0,-4), \
 		OFFSET_CLOAK_F = list(0,0), OFFSET_FACEMASK_F = list(0,-5), OFFSET_HEAD_F = list(0,-5), \
 		OFFSET_FACE_F = list(0,-5), OFFSET_BELT_F = list(0,-4), OFFSET_BACK_F = list(0,-4), \
-		OFFSET_NECK_F = list(0,-5), OFFSET_MOUTH_F = list(0,-5), OFFSET_PANTS_F = list(0,0), \
+		OFFSET_NECK_F = list(0,-5), OFFSET_MOUTH_F = list(0,-5), OFFSET_BUTT = list(0,-4), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES = list(0,-4), OFFSET_UNDIES_F = list(0,-4), \
 		)
-	specstats = list("strength" = -2, "perception" = 1, "intelligence" = 0, "constitution" = -1, "endurance" = 0, "speed" = 2, "fortune" = 1)
-	specstats_f = list("strength" = -3, "perception" = 1, "intelligence" = 2, "constitution" = -1, "endurance" = -1, "speed" = 2, "fortune" = 1)
+	specstats = list("strength" = -3, "perception" = 2, "intelligence" = 2, "constitution" = -1, "endurance" = 0, "speed" = 2, "fortune" = 1)
+	specstats_f = list("strength" = -3, "perception" = 2, "intelligence" = 2, "constitution" = -1, "endurance" = 0, "speed" = 2, "fortune" = 1)
 	race_bonus = list(STAT_ENDURANCE = 1)
 	enflamed_icon = "widefire"
 	organs = list(
@@ -57,6 +57,7 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
+		ORGAN_SLOT_ANUS = /obj/item/organ/filling_organ/anus,
 		)
 	bodypart_features = list(
 		/datum/bodypart_feature/hair/head,
@@ -81,12 +82,15 @@
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/animal,
 		/datum/customizer/organ/belly/animal,
+		/datum/customizer/organ/butt/animal,
 		/datum/customizer/organ/vagina/anthro,
 		)
 	body_marking_sets = list(
 		/datum/body_marking_set/none,
 	)
 	body_markings = list(
+		/datum/body_marking/flushed_cheeks,
+		/datum/body_marking/eyeliner,
 		/datum/body_marking/small/plain,
 		/datum/body_marking/small/sock,
 		/datum/body_marking/small/socklonger,
@@ -101,15 +105,19 @@
 		/datum/body_marking/small/spotted,
 	)
 	descriptor_choices = list(
+		/datum/descriptor_choice/height,
 		/datum/descriptor_choice/body,
 		/datum/descriptor_choice/stature,
 		/datum/descriptor_choice/face,
 		/datum/descriptor_choice/face_exp,
 		/datum/descriptor_choice/skin_all,
 		/datum/descriptor_choice/voice,
-		/datum/descriptor_choice/prominent_one,
-		/datum/descriptor_choice/prominent_two,
+		/datum/descriptor_choice/prominent_one_wild,
+		/datum/descriptor_choice/prominent_two_wild,
+		/datum/descriptor_choice/prominent_three_wild,
+		/datum/descriptor_choice/prominent_four_wild,
 	)
+	languages = list( /datum/language/common, /datum/language/beast,)
 
 /datum/species/anthromorphsmall/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
@@ -160,4 +168,3 @@
 	returned["mcolor2"] = second_color
 	returned["mcolor3"] = third_color
 	return returned
-

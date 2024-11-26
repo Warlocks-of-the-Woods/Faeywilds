@@ -15,6 +15,10 @@
 	var/werewolf_infection_timer
 
 /datum/wound/proc/zombie_infect_attempt()
+	var/mob/living/carbon/M = owner
+	if(HAS_TRAIT(M, TRAIT_SNEK))
+		M.apply_status_effect(/datum/status_effect/buff/healing)
+		return FALSE
 	if(QDELETED(src) || QDELETED(owner) || QDELETED(bodypart_owner))
 		return
 	if(zombie_infection_timer || werewolf_infection_timer || !ishuman(owner) || !prob(zombie_infection_probability))
@@ -24,7 +28,7 @@
 	if(!zombie_antag)
 		return
 	if(human_owner.stat >= DEAD) //do shit the natural way i guess
-		return 
+		return
 	to_chat(human_owner, span_danger("I feel horrible... REALLY horrible..."))
 	human_owner.mob_timers["puke"] = world.time
 	human_owner.vomit(1, blood = TRUE, stun = FALSE)
@@ -51,6 +55,10 @@
 	return TRUE
 
 /datum/wound/proc/werewolf_infect_attempt()
+	var/mob/living/carbon/M = owner
+	if(HAS_TRAIT(M, TRAIT_SNEK))
+		M.apply_status_effect(/datum/status_effect/buff/healing)
+		return FALSE
 	if(QDELETED(src) || QDELETED(owner) || QDELETED(bodypart_owner))
 		return FALSE
 	if(zombie_infection_timer || werewolf_infection_timer || !ishuman(owner) || !prob(werewolf_infection_probability))
@@ -59,7 +67,7 @@
 	if(!human_owner.can_werewolf())
 		return
 	if(human_owner.stat >= DEAD) //forget it
-		return 
+		return
 	to_chat(human_owner, span_danger("I feel horrible... REALLY horrible..."))
 	human_owner.mob_timers["puke"] = world.time
 	human_owner.vomit(1, blood = TRUE, stun = FALSE)

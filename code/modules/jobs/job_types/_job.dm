@@ -66,10 +66,6 @@
 
 	var/display_order = JOB_DISPLAY_ORDER_DEFAULT
 
-
-	///Levels unlocked at roundstart in physiology
-	var/list/roundstart_experience
-
 	//allowed sex/race for picking
 	var/list/allowed_sexes = list(MALE, FEMALE)
 	var/list/allowed_races = RACES_ALL_KINDS
@@ -133,7 +129,7 @@
 	var/immune_to_genderswap = FALSE
 
 /*
-	How this works, its CTAG_DEFINE = amount_to_attempt_to_role 
+	How this works, its CTAG_DEFINE = amount_to_attempt_to_role
 	EX: advclass_cat_rolls = list(CTAG_PILGRIM = 5, CTAG_ADVENTURER = 5)
 	You will still need to contact the subsystem though
 */
@@ -169,18 +165,9 @@
 	if(mind_traits)
 		for(var/t in mind_traits)
 			ADD_TRAIT(H.mind, t, JOB_TRAIT)
-	var/list/roundstart_experience
 
 	if(!ishuman(H))
 		return
-
-	roundstart_experience = skills
-
-	if(roundstart_experience)
-		var/mob/living/carbon/human/experiencer = H
-		for(var/i in roundstart_experience)
-			experiencer.mind.adjust_experience(i, roundstart_experience[i], TRUE)
-
 
 	add_spells(H)
 
@@ -216,19 +203,19 @@
 
 	if(show_in_credits)
 		SScrediticons.processing += H
-	
+
 	if(cmode_music)
 		H.cmode_music = cmode_music
 
 /datum/job/proc/add_spells(mob/living/H)
-	if(spells && H.mind)	
+	if(spells && H.mind)
 		for(var/S in spells)
 			if(H.mind.has_spell(S))
 				continue
 			H.mind.AddSpell(new S)
 
 /datum/job/proc/remove_spells(mob/living/H)
-	if(spells && H.mind)	
+	if(spells && H.mind)
 		for(var/S in spells)
 			if(!H.mind.has_spell(S))
 				continue

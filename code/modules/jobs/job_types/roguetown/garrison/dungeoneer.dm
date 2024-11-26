@@ -1,17 +1,17 @@
 /datum/job/roguetown/dungeoneer
-	title = "Dungeoneer"
+	title = "Beastmaster"
 	flag = DUNGEONEER
 	department_flag = GARRISON
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 
-	allowed_races = RACES_ALL_KINDS
+	allowed_races = RACES_ALL_KINDSPLUS
 	allowed_sexes = list(MALE, FEMALE)
 
 	display_order = JDO_DUNGEONEER
 
-	tutorial = "Be you an instrument of sadism for the King or the guarantor of his merciful hospitality, your duties are a service paid for most handsomely. Perhaps you were promoted from the garrison down to these cells to get your brutality off the town streets where cracked skulls caused outcries, or maybe your soft-hearted lord wanted to be sure his justice was done without malice. In either case, your little world is the lowest office in the Realm; from it your guests see only hell."
+	tutorial = "The Elven kingdom has been good to you. Your pets have fed well, and you've never wanted for coin or company in those creetures they permit you. This place has changed you. You're wild - and you yearn for the hunt."
 	outfit = /datum/outfit/job/roguetown/dungeoneer
 	give_bank_account = 50
 	min_pq = 1
@@ -32,17 +32,17 @@
 	beltl = /obj/item/storage/keyring/dungeoneer
 	backl = /obj/item/storage/backpack/rogue/satchel
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/traps, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/swimming, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/climbing, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/cooking, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sewing, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/traps, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 1, TRUE)
 	H.change_stat("strength", 3)
 	H.change_stat("intelligence", -2)
 	H.change_stat("endurance", 2)

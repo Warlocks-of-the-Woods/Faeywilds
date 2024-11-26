@@ -21,7 +21,6 @@
 	C.liches |= owner
 	. = ..()
 	owner.special_role = name
-	skele_look()
 	equip_lich()
 	greet()
 	return ..()
@@ -33,8 +32,12 @@
 
 /datum/antagonist/lich/proc/skele_look()
 	var/mob/living/carbon/human/L = owner.current
+	/* cooler to be white
 	L.hairstyle = "Bald"
 	L.facial_hairstyle = "Shaved"
+	*/
+	L.hair_color = "bababa"
+	L.facial_hair_color = "bababa"
 	L.update_body()
 	L.update_hair()
 	L.update_body_parts(redraw = TRUE)
@@ -51,11 +54,11 @@
 	ADD_TRAIT(L, TRAIT_TOXIMMUNE, "[type]")
 	ADD_TRAIT(L, TRAIT_STEELHEARTED, "[type]")
 	ADD_TRAIT(L, TRAIT_NOSLEEP, "[type]")
-	ADD_TRAIT(L, TRAIT_LIMPDICK, "[type]")
 	ADD_TRAIT(L, TRAIT_VAMPMANSION, "[type]")
 	ADD_TRAIT(L, TRAIT_NOMOOD, "[type]")
 	ADD_TRAIT(L, TRAIT_NOLIMBDISABLE, "[type]")
 	ADD_TRAIT(L, TRAIT_SHOCKIMMUNE, "[type]")
+	ADD_TRAIT(L, TRAIT_ZOMBIE_IMMUNE, "[type]")
 	ADD_TRAIT(L, TRAIT_LIMBATTACHMENT, "[type]")
 	ADD_TRAIT(L, TRAIT_SEEPRICES, "[type]")
 	ADD_TRAIT(L, TRAIT_CRITICAL_RESISTANCE, "[type]")
@@ -71,8 +74,6 @@
 		QDEL_NULL(eyes)
 	eyes = new /obj/item/organ/eyes/night_vision/zombie
 	eyes.Insert(L)
-	for(var/obj/item/bodypart/B in L.bodyparts)
-		B.skeletonize(FALSE)
 	L.equipOutfit(/datum/outfit/job/roguetown/lich)
 	L.set_patron(/datum/patron/inhumen/zizo)
 
@@ -144,6 +145,7 @@
 /datum/antagonist/lich/proc/rise_anew()
 	var/mob/living/carbon/human/bigbad = owner.current
 	bigbad.revive(TRUE, TRUE)
+	skele_look()
 
 	for(var/obj/item/bodypart/B in bigbad.bodyparts)
 		B.skeletonize(FALSE)

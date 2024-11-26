@@ -9,29 +9,35 @@
 	allowed_races = RACES_ALL_KINDSPLUS
 
 	//thought the level 20 ex adventurer meme would fit considering the bar has a big old sword at the wall.
-	tutorial = "Likely an Ex-Adventurer wise enough to stop by the edge, settling down... Liquor Lodging and Lavish Baths, you are the life of the party and a rich bastard because of it. Well before that pesky merchant came around and convinced people to take up the bottle instead of the tankred, you were the reason the hardworking men and women of this town could rest."
-
+	tutorial = "Likely an Ex-Adventurer wise enough to stop by the edge, settling down... Liquor Lodging and Lavish Baths, you are the life of the party and a rich bastard because of it. These days, you help the younger ones who get lost, or need some direction - between managing this establishment with the help of the other tavern-denizens such as the courtesans. Your room is directly above the bar, where you've left your armor and some gear you grew  fond of."
 	outfit = /datum/outfit/job/roguetown/barkeep
 	display_order = JDO_BARKEEP
-	give_bank_account = 43
-	min_pq = -4
+	give_bank_account = 500
+	min_pq = 0
 	max_pq = null
 
 /datum/outfit/job/roguetown/barkeep/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE) //now he can use the bar sword.
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/labor/farming, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 3, TRUE) //these stats reflect that the tavernkeeper is a retired adventurer with a few different weapon prowesses.
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/athletics, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/cooking, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/crafting, 3 , TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 6, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/shields, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/axes, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/polearms, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 2, TRUE)
 	if(H.gender == MALE)
-		pants = /obj/item/clothing/under/roguetown/tights/random
 		shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/random
 		shoes = /obj/item/clothing/shoes/roguetown/shortboots
 		backr = /obj/item/storage/backpack/rogue/satchel

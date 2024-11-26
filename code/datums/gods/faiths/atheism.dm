@@ -1,5 +1,6 @@
 /datum/faith/godless
-	name = "Faithless"
-	desc = "Maybe they exist, maybe they do not, but you don't care. It's only your will, not an unseen force's."
-	worshippers = "Madmen, beasts and the ones beyond saving"
+	name = "Godless"
+	desc = "Although gods obviously exist in this world, You have chosen to govern and hone yourself. Such people Might become gods themselves, or live lifes free of their interference. Perhaps they might even rival them, or die with such hubris as a thought.."
+	worshippers = "Monks, Madmen, Sages, Warriors, Fools, Strategists, Atheists, Power-Hungry, Stoic, Insane, Simple, Complex, Depraved."
 	godhead = /datum/patron/godless
+	preference_accessible = TRUE

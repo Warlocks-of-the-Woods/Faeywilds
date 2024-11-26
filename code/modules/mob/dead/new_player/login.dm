@@ -21,7 +21,7 @@
 
 	if(client)
 		if(client.is_new_player())
-			to_chat(src, span_userdanger("Due to an invasion of goblins trying to play ROGUETOWN, you need to register your discord account or support us on patreon to join."))
+			to_chat(src, span_userdanger("Due to an invasion of goblins trying to play DREAM KEEP, you need to register your discord account or support us on patreon to join."))
 			to_chat(src, span_info("We dislike discord too, but it's necessary. To register your discord or patreon, please click the 'Register' tab in the top right of the window, and then choose one of the options."))
 		else
 			var/shown_patreon_level = client.patreonlevel()

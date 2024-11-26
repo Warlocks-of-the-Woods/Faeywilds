@@ -1,15 +1,15 @@
 /datum/language/thievescant
 	name = "Thieves' Cant"
 	desc = ""
-	speech_verb = "says"
-	ask_verb = "asks"
-	exclaim_verb = "yells"
+	speech_verb = "gestures"
+	ask_verb = "questioningly gestures"
+	exclaim_verb = "angrily gestures"
 	key = "t"
 	flags = LANGUAGE_HIDE_ICON_IF_UNDERSTOOD | LANGUAGE_HIDE_ICON_IF_NOT_UNDERSTOOD | SIGNLANG | NO_STUTTER
 	space_chance = 66
 	default_priority = 80
 	icon_state = "asse"
-	// signlang = TRUE
+	signlang = TRUE
 	signlang_verb = list(
 		"scrunches their nose",
 		"smiles",
@@ -31,5 +31,11 @@
 		"nods thrice",
 		"shakes their head",
 		"leans to their left",
+		"rolls their shoulder",
+		"touches their chin",
+		"taps on their leg",
+		"scratches their arm",
+		"scratches their leg",
+		"scratches their head",
 		"leans to their right"
 	)

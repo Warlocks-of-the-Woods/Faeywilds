@@ -548,7 +548,7 @@
 		user.mind.teach_crafting_recipe(crafting_recipe_type)
 		to_chat(user,span_notice("I learned how to make [initial(R.name)]."))
 
-//! --BLACKSTONE SCROLLS-- !/
+//! --DREAM KEEP SCROLLS-- !/
 /obj/item/book/granter/spell/blackstone/
     desc = "A scroll of potential known only to those that can decipher its secrets."
     icon = 'icons/roguetown/items/misc.dmi'
@@ -559,10 +559,8 @@
 /obj/item/book/granter/spell/blackstone/onlearned(mob/living/carbon/user)
 	..()
 	if(oneuse == TRUE)
-		name = "siphoned scroll"
-		desc = "A scroll once inscribed with magical scripture. The surface is now barren of knowledge, siphoned by someone else. It's utterly useless."
-		icon_state = "scroll"
-		user.visible_message(span_warning("[src] has had its magic ink ripped from the scroll!"))
+		qdel(src) //no need this trash.
+		user.visible_message(span_warning("[src] has had its magic ink ripped from the scroll, it disintegrates to dust!"))
 
 /obj/item/book/granter/spell/blackstone/fireball
 	name = "Scroll of Fireball"
@@ -627,7 +625,6 @@
 	icon_state ="scrolldarkred"
 	remarks = list("Mediolanum ventis..", "Sana damnatorum..", "Frigidus ossa mortuorum..")
 
-
 //scroll for giving the reader a spell point, this should be dungeon loot
 /obj/item/book/granter/spell_points
 	name = "Arcyne Insight"
@@ -645,10 +642,5 @@
 /obj/item/book/granter/spell_points/onlearned(mob/living/carbon/user)
 	..()
 	if(oneuse == TRUE)
-		name = "siphoned scroll"
-		desc = "A scroll once inscribed with magical scripture. The surface is now barren of knowledge, siphoned by someone else. It's utterly useless."
-		icon_state = "scroll"
-		user.visible_message(span_warning("[src] has had its magic ink ripped from the scroll!"))
-	
-	
-
+		qdel(src) //no need this trash.
+		user.visible_message(span_warning("[src] has had its magic ink ripped from the scroll, it disintegrates to dust!"))

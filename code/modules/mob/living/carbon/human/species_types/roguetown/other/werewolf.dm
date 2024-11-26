@@ -5,10 +5,16 @@
 	var/list/stored_skills
 	var/list/stored_experience
 
+/mob/living/carbon/human/species/werewolf/male
+	gender = MALE
+
+/mob/living/carbon/human/species/werewolf/female
+	gender = FEMALE
+
 /datum/species/werewolf
 	name = "verewolf"
 	id = "werewolf"
-	species_traits = list(NO_UNDERWEAR,NOEYESPRITES)
+	species_traits = list(NO_UNDERWEAR, NO_ORGAN_FEATURES, NO_BODYPART_FEATURES)
 	inherent_traits = list(
 		TRAIT_STRONGBITE,
 		TRAIT_ZJUMP,
@@ -17,6 +23,7 @@
 		TRAIT_BASHDOORS,
 		TRAIT_SHOCKIMMUNE,
 		TRAIT_STEELHEARTED,
+		TRAIT_TOLERANT,
 		TRAIT_BREADY,
 		TRAIT_TOXIMMUNE,
 		TRAIT_ORGAN_EATER,
@@ -51,6 +58,7 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
+		ORGAN_SLOT_ANUS = /obj/item/organ/filling_organ/anus,
 		)
 	languages = list(
 		/datum/language/beast,
@@ -61,7 +69,7 @@
 	playsound(get_turf(H), pick('sound/vo/mobs/wwolf/wolftalk1.ogg','sound/vo/mobs/wwolf/wolftalk2.ogg'), 100, TRUE, -1)
 
 /datum/species/werewolf/regenerate_icons(mob/living/carbon/human/H)
-	H.icon = 'icons/roguetown/mob/monster/werewolf.dmi'
+	H.icon = 'modular_stonehedge/icons/roguetown/mob/monster/werewolf.dmi'
 	H.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB)
 	if(H.gender == MALE)
 		H.icon_state = "wwolf_m"

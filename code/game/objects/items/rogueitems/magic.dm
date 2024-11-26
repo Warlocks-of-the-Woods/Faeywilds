@@ -2,7 +2,7 @@
 
 /obj/item/scrying
 	name = "scrying orb"
-	desc = "On it's glass depths, you can scry on many beings... After each use it must recharge for three minutes."
+	desc = "On it's glass depths, you can scry on many beings... After each use it must recharge for five minutes."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state ="scrying"
 	throw_speed = 3
@@ -11,7 +11,7 @@
 	damtype = BURN
 	force = 15
 	hitsound = 'sound/blank.ogg'
-	sellprice = 30
+	sellprice = 200 //its bought for 1k so maybe its fine
 	dropshrink = 0.6
 
 	var/mob/current_owner
@@ -25,7 +25,7 @@
 	icon_state ="scryeye"
 	cooldown = 5 MINUTES
 
-/obj/item/scrying/attack_self(mob/user)
+/obj/item/scrying/attack_self(mob/living/user)
 	. = ..()
 	if(!user.mind)
 		return
@@ -42,6 +42,31 @@
 		return
 	if(!user.mind || !user.mind.do_i_know(name=input))
 		to_chat(user, span_warning("I don't know anyone by that name."))
+		return
+	var/arcane_skill = user.mind.get_skill_level(/datum/skill/magic/arcane)
+	var/success_chance = 0
+	switch(arcane_skill)
+		if(SKILL_LEVEL_NONE)
+			success_chance = 50
+		if(SKILL_LEVEL_NOVICE)
+			success_chance = 65
+		if(SKILL_LEVEL_APPRENTICE) //Apprentices have this
+			success_chance = 80
+		if(SKILL_LEVEL_JOURNEYMAN) // Adventurer mages have this
+			success_chance = 90
+		if(SKILL_LEVEL_EXPERT)
+			success_chance = 94
+		if(SKILL_LEVEL_MASTER) // Magus has this
+			success_chance = 97
+		if(SKILL_LEVEL_LEGENDARY)
+			success_chance = 100
+	if(!prob(success_chance))
+		to_chat(user, span_boldwarning("You focus your thoughts on the orb, but feel a sharp pain!"))
+		visible_message("\The [src] shatters!")
+		user.flash_fullscreen("redflash1")
+		new /obj/item/shard(get_turf(src))
+		playsound(src, "shatter", 70, TRUE)
+		qdel(src)
 		return
 	for(var/mob/living/carbon/human/HL in GLOB.human_list)
 		if(HL.real_name == input)

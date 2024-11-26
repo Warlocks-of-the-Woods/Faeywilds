@@ -5,10 +5,10 @@
 	var/weapons = list(
 		/obj/item/rogueweapon/huntingknife/cleaver, /obj/item/rogueweapon/huntingknife/idagger/steel, //daggers
 		/obj/item/rogueweapon/sword/rapier, /obj/item/rogueweapon/sword/long, /obj/item/rogueweapon/greatsword, //swords
-		/obj/item/rogueweapon/mace, //blunt
+		/obj/item/rogueweapon/mace/steel, /obj/item/rogueweapon/mace/goden/steel, //blunt
 		/obj/item/rogueweapon/stoneaxe/woodcut/steel, /obj/item/rogueweapon/stoneaxe/battle, //axes
-		/obj/item/rogueweapon/whip, /obj/item/rogueweapon/flail, //flails
-		/obj/item/rogueweapon/spear, /obj/item/rogueweapon/halberd, /obj/item/rogueweapon/sickle/scythe //polearms
+		/obj/item/rogueweapon/whip, /obj/item/rogueweapon/flail/sflail, /obj/item/rogueweapon/flail/peasantwarflail, //flails
+		/obj/item/rogueweapon/spear, /obj/item/rogueweapon/halberd, /obj/item/rogueweapon/eaglebeak, /obj/item/rogueweapon/sickle/scythe //polearms
 		)
 
 /datum/component/pact_weapon/Initialize(mob/living/L, pc)
@@ -19,10 +19,12 @@
 		weapon_owner = L
 		weapon = parent
 		weapon.name += " of the [patronchoice]"
-		weapon.desc += " It is enchanted to use arcane skill rather than it's regular skill"
+		weapon.desc += " It is enchanted to use arcane skill rather than its regular skill. Right click with an empty hand to change this weapon's form."
 		weapon.force *= 1.2
 		weapon.max_blade_int *= 1.2
+		weapon.blade_int = weapon.max_blade_int
 		weapon.max_integrity *= 1.2
+		weapon.obj_integrity = weapon.max_integrity
 		weapon.minstr = 1
 		weapon.associated_skill = /datum/skill/magic/arcane
 		//var/mutable_appearance/magic_overlay = mutable_appearance('icons/effects/effects.dmi', "electricity")

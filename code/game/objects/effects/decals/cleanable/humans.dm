@@ -5,8 +5,8 @@
 	icon = 'icons/roguetown/items/natural.dmi'
 	icon_state = "mess1"
 	random_icon_states = list("mess1", "mess2", "mess3")
-	beauty = -100
-	alpha = 150
+	beauty = 1
+	alpha = 100
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	appearance_flags = NO_CLIENT_COLOR
 

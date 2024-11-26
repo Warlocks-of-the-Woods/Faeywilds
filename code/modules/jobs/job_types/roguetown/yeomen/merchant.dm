@@ -1,5 +1,5 @@
 /datum/job/roguetown/merchant
-	title = "Guildmaster"
+	title = "Merchant Prince"
 	flag = MERCHANT
 	department_flag = YEOMEN
 	faction = "Station"
@@ -12,7 +12,7 @@
 	display_order = JDO_MERCHANT
 
 	outfit = /datum/outfit/job/roguetown/merchant
-	give_bank_account = 22
+	give_bank_account = 800
 	min_pq = 1
 	max_pq = null
 	required = TRUE
@@ -22,21 +22,34 @@
 /datum/outfit/job/roguetown/merchant/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(3,4,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/alchemy, rand(2,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/labor/mathematics, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/swords, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/wrestling, 1, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/knives, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/maces, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/crossbows, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/combat/bows, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/reading, 5, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/alchemy, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sneaking, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/stealing, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/sneaking, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/labor/mathematics, rand(4,5), TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/craft/cooking, 2, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/riding, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/alchemy, 3, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/magic/arcane, 4, TRUE)
+		H.mind.adjust_skillrank_up_to(/datum/skill/misc/medicine, 1, TRUE)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/fireball)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/lightningbolt)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/fetch)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/projectile/magic_missile)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/forcewall)
+
 	ADD_TRAIT(H, TRAIT_SEEPRICES, type)
 	head = /obj/item/clothing/head/roguetown/chaperon
 	neck = /obj/item/clothing/neck/roguetown/horus

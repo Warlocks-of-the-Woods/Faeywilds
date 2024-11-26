@@ -654,9 +654,6 @@
 	new /obj/item/natural/cloth(loc)
 	qdel(src)
 
-
-
-
 // -------------- CHEESE -----------------
 /obj/item/reagent_containers/food/snacks/rogue/cheese
 	name = "fresh cheese"
@@ -741,6 +738,3 @@
 	icon_state = "blue_cheese_slice"
 	become_rot_type = null
 	rotprocess = null
-
-
-

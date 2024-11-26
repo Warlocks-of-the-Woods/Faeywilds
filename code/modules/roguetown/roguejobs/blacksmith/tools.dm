@@ -44,10 +44,13 @@
 			attacked_item.obj_integrity = min(attacked_item.obj_integrity + repair_percent, attacked_item.max_integrity)
 			if(repair_percent == 0.01) // If an inexperienced repair attempt has been successful
 				to_chat(user, span_warning("You fumble your way into slightly repairing [attacked_item]."))
-			else	
+			else
 				user.visible_message(span_info("[user] repairs [attacked_item]!"))
 				if(attacked_item.obj_broken == TRUE)
 					attacked_item.obj_broken = FALSE
+				if(istype(attacked_item, /obj/item/clothing))
+					var/obj/item/clothing/C = attacked_item
+					C.update_clothes_damaged_state(FALSE)
 			blacksmith_mind.adjust_experience(attacked_item.anvilrepair, exp_gained/2) //We gain as much exp as we fix divided by 2
 			return
 		else
@@ -143,6 +146,7 @@
 	//dropshrink = 0.8
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
+	tool_behaviour = TOOL_IMPROVISED_HEMOSTAT
 	associated_skill = null
 	var/obj/item/ingot/hingot = null
 	var/hott = FALSE

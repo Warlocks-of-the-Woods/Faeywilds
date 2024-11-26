@@ -31136,7 +31136,7 @@
 	icon_state = "longtable"
 	},
 /mob/living/simple_animal/pet/cat/black{
-	desc = "The Mad Duke's second favorite pet.";
+	desc = "The Mad Lord's second favorite pet.";
 	name = "Kibble Muncher"
 	},
 /turf/open/floor/rogue/tile/tilerg,

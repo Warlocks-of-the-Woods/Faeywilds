@@ -18,6 +18,7 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver/fly,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach/fly,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
+		ORGAN_SLOT_ANUS = /obj/item/organ/filling_organ/anus,
 		)
 
 /datum/species/fly/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H)

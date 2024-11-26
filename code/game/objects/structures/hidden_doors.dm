@@ -31,12 +31,12 @@
 	var/defenses = FALSE
 
 /obj/structure/mineral_door/secret/vault
-	vip = list("Duke", "Duke Courtier", "Steward", "Hand")
-	vipmessage = "Duke, Duke Courtier, Steward and Hand"
+	vip = list("Monarch", "Consort", "Steward", "Hand")
+	vipmessage = "Monarch, Monarch Courtier, Steward and Hand"
 
 /obj/structure/mineral_door/secret/keep
-	vip = list("Duke", "Duke Courtier", "Royal Heir", "Hand")
-	vipmessage = "Duke, Duke Courtier, Royal Heir and Hand"
+	vip = list("Monarch", "Consort", "Royal Heir", "Hand")
+	vipmessage = "Monarch, Monarch Courtier, Royal Heir and Hand"
 
 /obj/structure/mineral_door/secret/merchant
 	vip = list("Guildmaster", "Guildmaster Apprentice")

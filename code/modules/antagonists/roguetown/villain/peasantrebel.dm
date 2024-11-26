@@ -15,8 +15,8 @@
 		"STICK IT TO THE MAN!",
 		"NO GODS, NO MASTERS!",
 	)
+	rogue_enabled = FALSE
 	increase_votepwr = FALSE
-	rogue_enabled = TRUE
 	var/datum/team/prebels/rev_team
 
 /datum/antagonist/prebel/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
@@ -51,6 +51,18 @@
 			return FALSE
 		if(new_owner.current && HAS_TRAIT(new_owner.current, TRAIT_MINDSHIELD))
 			return FALSE
+
+
+
+/datum/antagonist/prebel/apply_innate_effects(mob/living/mob_override)
+	var/mob/living/M = mob_override || owner.current
+	add_antag_hud(antag_hud_type, antag_hud_name, M)
+
+/datum/antagonist/prebel/remove_innate_effects(mob/living/mob_override)
+	var/mob/living/M = mob_override || owner.current
+	remove_antag_hud(antag_hud_type, M)
+
+
 
 /datum/antagonist/prebel/on_gain()
 	. = ..()
@@ -120,7 +132,7 @@
 
 /obj/effect/proc_holder/spell/self/rebelconvert/cast(list/targets,mob/user = usr)
 	..()
-	var/inputty = input("Make a speech!", "ROGUETOWN") as text|null
+	var/inputty = input("Make a speech!", "DREAM KEEP") as text|null
 	if(inputty)
 		user.say(inputty, forced = "spell")
 		var/datum/antagonist/prebel/PR = user.mind.has_antag_datum(/datum/antagonist/prebel)

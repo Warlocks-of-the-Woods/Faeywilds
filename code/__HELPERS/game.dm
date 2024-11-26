@@ -76,6 +76,18 @@
 			return 0
 	return 1
 
+/proc/playerless_in_area(area/the_area, mob/must_be_alone, check_type = /mob/living/carbon)
+	var/area/our_area = get_area(the_area)
+	for(var/C in GLOB.player_list)
+		if(!istype(C, check_type))
+			continue
+		if(C == must_be_alone)
+			continue
+		if(our_area == get_area(C))
+			return 0
+	return 1
+
+
 //We used to use linear regression to approximate the answer, but Mloc realized this was actually faster.
 //And lo and behold, it is, and it's more accurate to boot.
 /proc/cheap_hypotenuse(Ax,Ay,Bx,By)
@@ -258,11 +270,11 @@
 			processing_list += O
 		T.luminosity = lum
 
-	while(processing_list.len) // recursive_hear_check inlined here
-		var/atom/A = processing_list[1]
+	var/i = 0
+	while(i < length(processing_list)) // recursive_hear_check inlined here
+		var/atom/A = processing_list[++i]
 		if(A.flags_1 & HEAR_1)
 			. += A
-		processing_list.Cut(1, 2)
 		processing_list += A.contents
 
 /proc/get_mobs_in_radio_ranges(list/obj/item/radio/radios)

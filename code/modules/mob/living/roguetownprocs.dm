@@ -19,26 +19,23 @@
 		chance2hit += 10
 
 	if(user.mind)
-		chance2hit += (user.mind.get_skill_level(associated_skill) * 8)
+		chance2hit += (user.mind.get_skill_level(associated_skill) * 7)
 
 	if(used_intent)
 		if(used_intent.blade_class == BCLASS_STAB)
-			chance2hit += 10
+			chance2hit += user.STAPER
 		if(used_intent.blade_class == BCLASS_CUT)
-			chance2hit += 6
+			chance2hit += round(user.STAPER/2)
 
 	if(I)
 		if(I.wlength == WLENGTH_SHORT)
 			chance2hit += 10
 
-	if(user.STAPER > 10)
-		chance2hit += ((user.STAPER-10)*3)
+		chance2hit += ((user.STAPER-10)*5)
 
-	if(user.STAPER < 10)
-		chance2hit -= ((10-user.STAPER)*3)
 
 	if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
-		chance2hit += 20
+		chance2hit += (user.STAPER)*2
 	if(istype(user.rmb_intent, /datum/rmb_intent/swift))
 		chance2hit -= 20
 
@@ -103,9 +100,11 @@
 		prob2defend = 0
 
 	if(!can_see_cone(user))
-		if(d_intent == INTENT_PARRY)
+		if(user.alpha < 15 && !HAS_TRAIT(src, TRAIT_BLINDFIGHTING))//For attacks from invisibility.
 			return FALSE
-		else
+		if(d_intent == INTENT_PARRY && !HAS_TRAIT(src, TRAIT_BLINDFIGHTING))
+			return FALSE
+		if(d_intent == INTENT_DODGE && !HAS_TRAIT(src, TRAIT_BLINDFIGHTING))
 			prob2defend = max(prob2defend-15,0)
 
 //	if(!cmode) // not currently used, see cmode check above
@@ -133,6 +132,7 @@
 			if(intenty && !intenty.canparry)
 				return FALSE
 			var/drained = user.defdrain
+			var/draincoeff = 1 //
 			var/weapon_parry = FALSE
 			var/offhand_defense = 0
 			var/mainhand_defense = 0
@@ -142,7 +142,7 @@
 			var/obj/item/used_weapon = mainhand
 			var/obj/item/rogueweapon/shield/buckler/skiller = get_inactive_held_item()  // buckler code
 			var/obj/item/rogueweapon/shield/buckler/skillerbuck = get_active_held_item()
-			
+
 			if(istype(offhand, /obj/item/rogueweapon/shield/buckler))
 				skiller.bucklerskill(H)
 			if(istype(mainhand, /obj/item/rogueweapon/shield/buckler))
@@ -152,11 +152,13 @@
 				if(mainhand.can_parry)
 					mainhand_defense += (H.mind ? (H.mind.get_skill_level(mainhand.associated_skill) * 20) : 20)
 					mainhand_defense += (mainhand.wdefense * 10)
+					draincoeff += H.mind.get_skill_level(mainhand.associated_skill)
 			if(offhand)
 				if(offhand.can_parry)
 					offhand_defense += (H.mind ? (H.mind.get_skill_level(offhand.associated_skill) * 20) : 20)
 					offhand_defense += (offhand.wdefense * 10)
-			
+					draincoeff += H.mind.get_skill_level(offhand.associated_skill)
+
 			if(mainhand_defense >= offhand_defense)
 				highest_defense += mainhand_defense
 			else
@@ -165,7 +167,7 @@
 
 			var/defender_skill = 0
 			var/attacker_skill = 0
-			
+
 			if(highest_defense <= (H.mind ? (H.mind.get_skill_level(/datum/skill/combat/unarmed) * 20) : 20))
 				defender_skill = H.mind?.get_skill_level(/datum/skill/combat/unarmed)
 				prob2defend += (defender_skill * 20)
@@ -188,7 +190,7 @@
 			// parrying while knocked down sucks ass
 			if(!(mobility_flags & MOBILITY_STAND))
 				prob2defend *= 0.65
-			prob2defend = clamp(prob2defend, 5, 90)
+			prob2defend = clamp(prob2defend, 5, 95)//The counter to parrying is feinting
 			if(src.client?.prefs.showrolls)
 				to_chat(src, span_info("Roll to parry... [prob2defend]%"))
 
@@ -200,16 +202,18 @@
 				to_chat(src, span_warning("The enemy defeated my parry!"))
 				return FALSE
 
-			drained = max(drained, 5)
+			drained = (max(drained, 5) / draincoeff)//Two-weapon fighters armed with one-handed weapons they are skilled in can gain a steep defensive advantage. In riposte stance, they
 			var/exp_multi = 1
 
 			if(!U.mind)
 				exp_multi = exp_multi/2
 			if(istype(user.rmb_intent, /datum/rmb_intent/weak))
 				exp_multi = exp_multi/2
-			
+
 			if(weapon_parry == TRUE)
 				if(do_parry(used_weapon, drained, user)) //show message
+					if((mobility_flags & MOBILITY_STAND) && can_train_combat_skill(src, used_weapon.associated_skill, attacker_skill - SKILL_LEVEL_NOVICE))
+						mind.adjust_experience(used_weapon.associated_skill, max(round(STAINT/2), 0), FALSE)
 					// defender skill gain
 					if((mobility_flags & MOBILITY_STAND) && attacker_skill && (defender_skill < attacker_skill - SKILL_LEVEL_NOVICE))
 						// No duping exp gains by attacking with a shield on active hand
@@ -220,10 +224,17 @@
 							H.mind?.adjust_experience(used_weapon.associated_skill, max(round(STAINT), 0), FALSE)
 
 					var/obj/item/AB = intenty.masteritem
-					
+
 					//attacker skill gain
-					
+
 					if(U.mind)
+						var/attacker_skill_type
+						if(AB)
+							attacker_skill_type = AB.associated_skill
+						else
+							attacker_skill_type = /datum/skill/combat/unarmed
+						if((U.mobility_flags & MOBILITY_STAND) && can_train_combat_skill(U, attacker_skill_type, defender_skill - SKILL_LEVEL_NOVICE))
+							U.mind.adjust_experience(attacker_skill_type, max(round(STAINT/2), 0), FALSE)
 						if((U.mobility_flags & MOBILITY_STAND) && defender_skill && (attacker_skill < defender_skill - SKILL_LEVEL_NOVICE))
 							if(AB)
 								U.mind.adjust_experience(AB.associated_skill, max(round(U.STAINT), 0), FALSE)
@@ -252,6 +263,8 @@
 
 			if(weapon_parry == FALSE)
 				if(do_unarmed_parry(drained, user))
+					if((mobility_flags & MOBILITY_STAND) && can_train_combat_skill(H, /datum/skill/combat/unarmed, attacker_skill - SKILL_LEVEL_NOVICE))
+						H.mind?.adjust_experience(/datum/skill/combat/unarmed, max(round(STAINT/2), 0), FALSE)
 					if((mobility_flags & MOBILITY_STAND) && attacker_skill && (defender_skill < attacker_skill - SKILL_LEVEL_NOVICE))
 						H.mind?.adjust_experience(/datum/skill/combat/unarmed, max(round(STAINT), 0), FALSE)
 					flash_fullscreen("blackflash2")
@@ -391,14 +404,10 @@
 		if(!H?.check_armor_skill())
 			H.Knockdown(1)
 			return FALSE
-		/* Commented out due to gaping imbalance
+//Dreamkeep Change -- Re-enabled alongside the addition of skill-based reduction of parry costs.
 			if(H?.check_dodge_skill())
-				drained = drained - 5  commented out for being too much. It was giving effectively double stamina efficiency compared to everyone else.
-			if(H.mind)
-				drained = drained + max((H.checkwornweight() * 10)-(mind.get_skill_level(/datum/skill/misc/athletics) * 10),0)
-			else
-				drained = drained + (H.checkwornweight() * 10)
-		*/
+				drained = drained - 5
+
 		if(I) //the enemy attacked us with a weapon
 			if(!I.associated_skill) //the enemy weapon doesn't have a skill because its improvised, so penalty to attack
 				prob2defend = prob2defend + 10
@@ -420,7 +429,7 @@
 		// dodging while knocked down sucks ass
 		if(!(L.mobility_flags & MOBILITY_STAND))
 			prob2defend *= 0.25
-		prob2defend = clamp(prob2defend, 5, 90)
+		prob2defend = clamp(prob2defend, 5, 95)//The counter to Dodging is swift attacks to drain stamina
 		if(client?.prefs.showrolls)
 			to_chat(src, span_info("Roll to dodge... [prob2defend]%"))
 		if(!prob(prob2defend))
@@ -432,6 +441,9 @@
 		prob2defend = clamp(prob2defend, 5, 90)
 		if(client?.prefs.showrolls)
 			to_chat(src, span_info("Roll to dodge... [prob2defend]%"))
+		if(!can_see_cone(user) || user.alpha <=15)
+			if(!HAS_TRAIT(src, TRAIT_BLINDFIGHTING))
+				prob2defend = 5//Have to roll a nat 20 to dodge an attack we can't sense coming.
 		if(!prob(prob2defend))
 			return FALSE
 	dodgecd = TRUE

@@ -8,6 +8,8 @@
 	l_sleeve_status = SLEEVE_NOMOD
 	body_parts_covered = null
 	flags_inv = null
+	genitalaccess = TRUE
+	can_hold_endowed = TRUE
 
 /obj/item/clothing/under/roguetown/tights/stockings/random/Initialize()
 	. = ..()
@@ -64,6 +66,28 @@
 /obj/item/clothing/under/roguetown/tights/stockings/fishnet/random/Initialize()
 	. = ..()
 	color = pick("#e6e5e5", CLOTHING_BLACK, CLOTHING_BLUE, "#6F0000", "#664357")
+
+/obj/item/clothing/under/roguetown/chainlegs/iron/fishnet
+	name = "iron chain fishnets"
+	desc = "A legwear of chain interwoven."
+	icon = 'modular_hearthstone/icons/obj/items/clothes/stockings.dmi'
+	mob_overlay_icon = 'modular_hearthstone/icons/obj/items/clothes/on_mob/stockings.dmi'
+	icon_state = "fishnet"
+	color = "#9EA48E"
+	flags_inv = null
+	genitalaccess = TRUE
+	can_hold_endowed = TRUE
+
+/obj/item/clothing/under/roguetown/chainlegs/fishnet
+	name = "steel chain fishnets"
+	desc = "A legwear of chain interwoven."
+	icon = 'modular_hearthstone/icons/obj/items/clothes/stockings.dmi'
+	mob_overlay_icon = 'modular_hearthstone/icons/obj/items/clothes/on_mob/stockings.dmi'
+	icon_state = "fishnet"
+	color = "#9BADB7"
+	flags_inv = null
+	genitalaccess = TRUE
+	can_hold_endowed = TRUE
 
 /obj/item/clothing/under/roguetown/tights/stockings/fishnet/white
 	color = "#e6e5e5"

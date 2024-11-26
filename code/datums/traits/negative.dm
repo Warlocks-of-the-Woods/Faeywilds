@@ -1,5 +1,107 @@
 //predominantly negative traits
 
+
+/datum/quirk/myvice
+	name = "MY VICE (Free points)"
+	desc = "Free points for I carry my vice with me."
+	value = -2
+
+/datum/quirk/monochromatic
+	name = "Monochromacy"
+	desc = "I see things all gray."
+	value = -2
+	medical_record_text = "Patient is afflicted with almost complete color blindness."
+
+/datum/quirk/monochromatic/add()
+	quirk_holder.add_client_colour(/datum/client_colour/monochrome)
+
+/datum/quirk/monochromatic/post_add()
+	if(quirk_holder.mind.assigned_role == "Detective")
+		to_chat(quirk_holder, span_boldannounce("Mmm. Nothing's ever clear in this place. It's all shades of gray..."))
+		quirk_holder.playsound_local(quirk_holder, 'sound/blank.ogg', 50, FALSE)
+
+/datum/quirk/monochromatic/remove()
+	if(quirk_holder)
+		quirk_holder.remove_client_colour(/datum/client_colour/monochrome)
+
+/datum/quirk/phobia
+	name = "Phobia"
+	desc = "I am afraid of something."
+	value = -2
+	medical_record_text = "Patient has an irrational fear of something."
+
+/datum/quirk/phobia/post_add()
+	var/mob/living/carbon/human/H = quirk_holder
+	H.gain_trauma(new /datum/brain_trauma/mild/phobia(H.client.prefs.phobia), TRAUMA_RESILIENCE_ABSOLUTE)
+
+/datum/quirk/phobia/remove()
+	var/mob/living/carbon/human/H = quirk_holder
+	if(H)
+		H.cure_trauma_type(/datum/brain_trauma/mild/phobia, TRAUMA_RESILIENCE_ABSOLUTE)
+
+
+/datum/quirk/no_taste
+	name = "Ageusia"
+	desc = "I can't taste a thing."
+	value = -1
+	mob_trait = TRAIT_AGEUSIA
+	gain_text = span_notice("I can't taste anything!")
+	lose_text = span_notice("I can taste again!")
+	medical_record_text = "Patient suffers from ageusia and is incapable of tasting food or reagents."
+
+/datum/quirk/vegetarian
+	name = "Vegetarian"
+	desc = "I can't eat meat."
+	value = -1
+	gain_text = span_notice("I feel repulsion at the idea of eating meat.")
+	lose_text = span_notice("I feel like eating meat isn't that bad.")
+	medical_record_text = "Patient reports a vegetarian diet."
+
+/datum/quirk/vegetarian/add()
+	var/mob/living/carbon/human/H = quirk_holder
+	var/datum/species/species = H.dna.species
+	species.liked_food &= ~MEAT
+	species.disliked_food |= MEAT
+
+/datum/quirk/vegetarian/remove()
+	var/mob/living/carbon/human/H = quirk_holder
+	if(H)
+		var/datum/species/species = H.dna.species
+		if(initial(species.liked_food) & MEAT)
+			species.liked_food |= MEAT
+		if(!initial(species.disliked_food) & MEAT)
+			species.disliked_food &= ~MEAT
+
+/*
+/datum/quirk/snob
+	name = "Snob"
+	desc = "I like to be in decorated spaces."
+	value = -1
+	gain_text = span_notice("I feel like you understand what things should look like.")
+	lose_text = span_notice("Well who cares about deco anyways?")
+	medical_record_text = "Patient seems to be rather stuck up."
+	mob_trait = TRAIT_SNOB
+*/
+
+/datum/quirk/blooddeficiency
+	name = "Blood Deficiency"
+	desc = "My blood is not enough for me, I need to keep it in me."
+	value = -2
+	gain_text = span_danger("I feel my vigor slowly fading away.")
+	lose_text = span_notice("I feel vigorous again.")
+	medical_record_text = "Patient requires regular treatment for blood loss due to low production of blood."
+
+/datum/quirk/blooddeficiency/on_process()
+	var/mob/living/carbon/human/H = quirk_holder
+	if(NOBLOOD in H.dna.species.species_traits) //can't lose blood if my species doesn't have any
+		return
+	else
+		if (H.blood_volume > (BLOOD_VOLUME_NORMAL - 25)) // just barely survivable without treatment
+			H.blood_volume -= 0.275
+
+
+// we got flaws, we dont need those probably. --vide
+/*
 /datum/quirk/badback
 	name = "Bad Back"
 	desc = ""
@@ -15,22 +117,6 @@
 		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "back_pain", /datum/mood_event/back_pain)
 	else
 		SEND_SIGNAL(quirk_holder, COMSIG_CLEAR_MOOD_EVENT, "back_pain")
-
-/datum/quirk/blooddeficiency
-	name = "Blood Deficiency"
-	desc = ""
-	value = -2
-	gain_text = span_danger("I feel my vigor slowly fading away.")
-	lose_text = span_notice("I feel vigorous again.")
-	medical_record_text = "Patient requires regular treatment for blood loss due to low production of blood."
-
-/datum/quirk/blooddeficiency/on_process()
-	var/mob/living/carbon/human/H = quirk_holder
-	if(NOBLOOD in H.dna.species.species_traits) //can't lose blood if my species doesn't have any
-		return
-	else
-		if (H.blood_volume > (BLOOD_VOLUME_SAFE - 25)) // just barely survivable without treatment
-			H.blood_volume -= 0.275
 
 /datum/quirk/blindness
 	name = "Blind"
@@ -202,11 +288,11 @@
 
 /datum/quirk/family_heirloom/on_clone(data)
 	heirloom = data
-
+*/
 /datum/quirk/frail
 	name = "Frail"
-	desc = ""
-	value = -2
+	desc = "My bones are like sticks."
+	value = -4
 	mob_trait = TRAIT_EASYLIMBDISABLE
 	gain_text = span_danger("I feel frail.")
 	lose_text = span_notice("I feel sturdy again.")
@@ -214,12 +300,13 @@
 
 /datum/quirk/heavy_sleeper
 	name = "Heavy Sleeper"
-	desc = ""
+	desc = "I sleep like a rock."
 	value = -1
 	mob_trait = TRAIT_HEAVY_SLEEPER
 	gain_text = span_danger("I feel sleepy.")
 	lose_text = span_notice("I feel awake again.")
 	medical_record_text = "Patient has abnormal sleep study results and is difficult to wake up."
+/*
 
 /datum/quirk/hypersensitive
 	name = "Hypersensitive"
@@ -266,10 +353,10 @@
 	H.put_in_hands(glasses)
 	H.equip_to_slot(glasses, SLOT_GLASSES)
 	H.regenerate_icons() //this is to remove the inhand icon, which persists even if it's not in their hands
-
+*/
 /datum/quirk/nyctophobia
 	name = "Nyctophobia"
-	desc = ""
+	desc = "I fear the dark..."
 	value = -1
 	medical_record_text = "Patient demonstrates a fear of the dark. (Seriously?)"
 
@@ -281,21 +368,18 @@
 	var/lums = T.get_lumcount()
 	if(lums <= 0.2)
 		if(quirk_holder.m_intent == MOVE_INTENT_RUN)
-			to_chat(quirk_holder, span_warning("Easy, easy, take it slow... you're in the dark..."))
-			quirk_holder.toggle_move_intent()
-		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "nyctophobia", /datum/mood_event/nyctophobia)
-	else
-		SEND_SIGNAL(quirk_holder, COMSIG_CLEAR_MOOD_EVENT, "nyctophobia")
+			to_chat(quirk_holder, span_warning("Easy, easy, I need to take it slow... I am in the dark..."))
+			quirk_holder.toggle_move_intent(MOVE_INTENT_WALK)
 
 /datum/quirk/nonviolent
 	name = "Pacifist"
-	desc = ""
-	value = -2
+	desc = "I can not get myself to harm a thing."
+	value = -6
 	mob_trait = TRAIT_PACIFISM
 	gain_text = span_danger("I feel repulsed by the thought of violence!")
-	lose_text = span_notice("I think you can defend myself again.")
+	lose_text = span_notice("I think I can defend myself again.")
 	medical_record_text = "Patient is unusually pacifistic and cannot bring themselves to cause physical harm."
-
+/*
 /datum/quirk/paraplegic
 	name = "Paraplegic"
 	desc = ""
@@ -546,3 +630,4 @@
 	gain_text = span_danger("There's a lot on my mind right now.")
 	lose_text = span_notice("My mind finally feels calm.")
 	medical_record_text = "Patient's mind is in a vulnerable state, and cannot recover from traumatic events."
+*/

@@ -217,7 +217,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 		if(T.intact && level == 1) //fire can't damage things hidden below the floor.
 			return
 	if(added && !(resistance_flags & FIRE_PROOF))
-		take_damage(CLAMP(0.02 * added, 0, 20), BURN, "fire", 0)
+		take_damage(CLAMP(0.15 * added, 0, 20), BURN, "fire", 0)
 	if(!(resistance_flags & ON_FIRE) && (resistance_flags & FLAMMABLE) && !(resistance_flags & FIRE_PROOF))
 		resistance_flags |= ON_FIRE
 		SSfire_burning.processing[src] = src
@@ -282,7 +282,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 /obj/proc/obj_break(damage_flag)
 	obj_broken = TRUE
 	if(break_sound)
-		playsound(src, break_sound, 100, TRUE)
+		playsound(get_turf(src), break_sound, 80, TRUE)
 	if(break_message)
 		visible_message(break_message)
 
@@ -295,7 +295,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 		burn()
 	else
 		if(destroy_sound)
-			playsound(src, destroy_sound, 100, TRUE)
+			playsound(get_turf(src), destroy_sound, 100, TRUE)
 		if(destroy_message)
 			visible_message(destroy_message)
 		deconstruct(FALSE)

@@ -15,8 +15,8 @@
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "vampire"
 	confess_lines = list(
-		"I WANT YOUR BLOOD!", 
-		"DRINK THE BLOOD!", 
+		"I WANT YOUR BLOOD!",
+		"DRINK THE BLOOD!",
 		"CHILD OF KAIN!",
 	)
 	rogue_enabled = TRUE
@@ -60,13 +60,15 @@
 		owner.adjust_skillrank(/datum/skill/combat/unarmed, 6, TRUE)
 		ADD_TRAIT(owner.current, TRAIT_NOBLE, TRAIT_GENERIC)
 	owner.special_role = name
+	owner.current.faction = list("undead")
 	ADD_TRAIT(owner.current, TRAIT_STRONGBITE, TRAIT_GENERIC)
-	ADD_TRAIT(owner.current, TRAIT_NOROGSTAM, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_NOBREATH, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_NOPAIN, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
+	ADD_TRAIT(owner.current, TRAIT_ZOMBIE_IMMUNE, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_STEELHEARTED, TRAIT_GENERIC)
+	ADD_TRAIT(owner.current, TRAIT_TOLERANT, TRAIT_GENERIC)
 	owner.current.cmode_music = 'sound/music/combat_vamp2.ogg'
 	var/obj/item/organ/eyes/eyes = owner.current.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
@@ -119,7 +121,7 @@
 
 /datum/antagonist/vampire/proc/finalize_vampire()
 	owner.current.playsound_local(get_turf(owner.current), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
-	
+
 
 
 /datum/antagonist/vampire/on_life(mob/user)
@@ -195,6 +197,7 @@
 	update_body()
 	update_hair()
 	update_body_parts(redraw = TRUE)
+	to_chat(src, span_notice("My true form is hidden."))
 
 /mob/living/carbon/human/proc/vampire_undisguise(datum/antagonist/vampirelord/VD)
 	if(!VD)
@@ -210,6 +213,7 @@
 	update_body()
 	update_hair()
 	update_body_parts(redraw = TRUE)
+	to_chat(src, span_notice("My true form is revealed."))
 
 
 /mob/living/carbon/human/proc/blood_strength()
@@ -353,14 +357,14 @@
 		to_chat(src, span_warning("My curse is hidden."))
 		return
 	if(silver_curse_status)
-		to_chat(src, span_warning("My BANE is not letting me REGEN!."))	
+		to_chat(src, span_warning("My BANE is not letting me REGEN!."))
 		return
-	if(VD.vitae < 150)
+	if(VD.vitae < 500)
 		to_chat(src, span_warning("Not enough vitae."))
 		return
 	to_chat(src, span_greentext("! REGENERATE !"))
 	src.playsound_local(get_turf(src), 'sound/misc/vampirespell.ogg', 100, FALSE, pressure_affected = FALSE)
-	VD.handle_vitae(-150)
+	VD.handle_vitae(-500)
 	fully_heal()
 
 /mob/living/carbon/human/proc/vampire_infect()

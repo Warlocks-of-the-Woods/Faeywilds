@@ -184,11 +184,11 @@
 #define HYDRATION_LEVEL_THIRSTY 350
 #define HYDRATION_LEVEL_DEHYDRATED 100
 
-#define NUTRITION_LEVEL_START_MIN 500
+#define NUTRITION_LEVEL_START_MIN 800
 #define NUTRITION_LEVEL_START_MAX 900
 
-#define HYDRATION_LEVEL_START_MIN 500
-#define HYDRATION_LEVEL_START_MAX 600
+#define HYDRATION_LEVEL_START_MIN 800
+#define HYDRATION_LEVEL_START_MAX 900
 
 //Disgust levels for humans
 #define DISGUST_LEVEL_MAXEDOUT 150
@@ -305,6 +305,7 @@
 #define OFFSET_CLOAK "cloak"
 #define OFFSET_MOUTH "mouth"
 #define OFFSET_PANTS "wear_pants"
+#define OFFSET_BUTT "butt"
 #define OFFSET_SHIRT "wear_shirt"
 #define OFFSET_ARMOR "wear_armor"
 #define OFFSET_HANDS "hands"
@@ -336,7 +337,7 @@
 #define POCKET_STRIP_DELAY			40	//time taken (in deciseconds) to search somebody's pockets
 #define DOOR_CRUSH_DAMAGE	15	//the amount of damage that airlocks deal when they crush you
 
-#define HUNGER_FACTOR		0.15	//factor at which mob nutrition decreases
+#define HUNGER_FACTOR		0.10	//factor at which mob nutrition decreases
 #define ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
 #define REAGENTS_METABOLISM 1	//How many units of reagent are consumed per tick, by default.
 #define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4)	// By defining the effect multiplier this way, it'll exactly adjust all effects according to how they originally were with the 0.4 metabolism
@@ -349,7 +350,7 @@
 
 // Roundstart trait system
 
-#define MAX_QUIRKS 6 //The maximum amount of quirks one character can have at roundstart
+#define MAX_QUIRKS 4 //The maximum amount of quirks one character can have at roundstart
 
 // AI Toggles
 #define AI_CAMERA_LUMINOSITY	5
@@ -427,7 +428,7 @@
 #define SKIN_COLOR_GRENZELHOFT "fff0e9"
 #define SKIN_COLOR_HAMMERHOLD "ffe0d1"
 #define SKIN_COLOR_AVAR "fcccb3"
-#define SKIN_COLOR_ROCKHILL "edc6b3"
+#define SKIN_COLOR_STONEHEDGE "edc6b3"
 #define SKIN_COLOR_OTAVA "e2b9a3"
 #define SKIN_COLOR_ETRUSCA "d9a284"
 #define SKIN_COLOR_GRONN "c9a893"

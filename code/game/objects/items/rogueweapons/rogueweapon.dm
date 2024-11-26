@@ -44,6 +44,15 @@
 /obj/item/rogueweapon/get_examine_string(mob/user, thats = FALSE)
 	return "[thats? "That's ":""]<b>[get_examine_name(user)]</b>"
 
+/obj/item/rogueweapon/pickup(mob/user)
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_RAVOX_CURSE))
+		var/mob/living/carbon/human/H = user
+		to_chat(H, span_warning("The idea repulses me!"))
+		H.cursed_freak_out()
+		H.Paralyze(20)
+		return
+
 /obj/item/rogueweapon/get_dismemberment_chance(obj/item/bodypart/affecting, mob/user)
 	if(!get_sharpness() || !affecting.can_dismember(src))
 		return 0

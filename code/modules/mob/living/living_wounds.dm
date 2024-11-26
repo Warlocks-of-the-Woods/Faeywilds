@@ -58,6 +58,8 @@
 /// Loops through our list of wounds healing them until we run out of healing or all wounds are healed
 /mob/living/proc/heal_wounds(heal_amount)
 	var/healed_any = FALSE
+	if(has_status_effect(/datum/status_effect/buff/fortify))
+		heal_amount *= 1.5
 	for(var/datum/wound/wound as anything in get_wounds())
 		if(heal_amount <= 0)
 			continue
@@ -174,7 +176,7 @@
 			if((bclass in GLOB.artery_strong_bclasses) && istype(user.rmb_intent, /datum/rmb_intent/strong))
 				dam += 30
 			else if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
-				dam += 30
+				dam += user.STAPER*3
 		used = round(max(dam / 3, 1), 1)
 		if(prob(used))
 			attempted_wounds += /datum/wound/artery/chest

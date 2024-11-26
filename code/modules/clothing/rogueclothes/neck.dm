@@ -4,6 +4,7 @@
 	icon = 'icons/roguetown/clothing/neck.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/neck.dmi'
 	bloody_icon_state = "bodyblood"
+	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/clothing/neck/roguetown/coif
 	name = "coif"
@@ -81,6 +82,7 @@
 	icon_state = "chaincoif"
 	item_state = "chaincoif"
 	flags_inv = HIDEHAIR
+	resistance_flags = FIRE_PROOF
 	armor = list("blunt" = 30, "slash" = 60, "stab" = 45, "bullet" = 10, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 
 	max_integrity = 200
@@ -93,6 +95,7 @@
 	blocksound = CHAINHIT
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
+	clothing_flags = CANT_SLEEP_IN
 
 /obj/item/clothing/neck/roguetown/chaincoif/AdjustClothes(mob/user)
 	if(loc == user)
@@ -130,7 +133,6 @@
 	armor = list("blunt" = 90, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
-
 	max_integrity = 300
 	resistance_flags = FIRE_PROOF
 	slot_flags = ITEM_SLOT_NECK
@@ -140,7 +142,7 @@
 
 /obj/item/clothing/neck/roguetown/gorget
 	name = "gorget"
-	desc = "An iron gorget to protect the neck."
+	desc = "An iron gorget to protect the neck. 'You are my bitch now.'"
 	icon_state = "gorget"
 	armor = list("blunt" = 90, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	smeltresult = /obj/item/ingot/iron
@@ -151,11 +153,13 @@
 	body_parts_covered = NECK
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = PLATEHIT
+	clothing_flags = CANT_SLEEP_IN|CURSED
 
 /obj/item/clothing/neck/roguetown/gorget/prisoner/Initialize()
 	. = ..()
 	name = "cursed collar"
 	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
+	clothing_flags = null
 
 /obj/item/clothing/neck/roguetown/gorget/prisoner/dropped(mob/living/carbon/human/user)
 	. = ..()
@@ -163,9 +167,18 @@
 		return
 	qdel(src)
 
+/obj/item/clothing/neck/roguetown/gorget/prisoner/servant
+	name = "cursed obedience collar"
+	desc = "This collar makes me obligated to heed to orders of others. And prevents me from running away..."
+
+/obj/item/clothing/neck/roguetown/gorget/prisoner/servant/equipped(mob/user, slot)
+	. = ..()
+	to_chat(user, span_warning("This collar makes me heed to orders of others, unless it includes self harm or orders that will indirectly or directly harm to town and its population... And also it prevents me from running away..."))
+	to_chat(user, span_alert("Roleplay accordingly to your collar's effects."))
+
 /obj/item/clothing/neck/roguetown/psicross
-	name = "psycross"
-	desc = ""
+	name = "divine Symbol"
+	desc = "This focus allows for divine practitioners to ask for favor and channel it."
 	icon_state = "psicross"
 	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
@@ -175,67 +188,72 @@
 	anvilrepair = /datum/skill/craft/armorsmithing
 
 /obj/item/clothing/neck/roguetown/psicross/astrata
-	name = "amulet of Astrata"
-	desc = ""
+	name = "Amulet of the Sun"
+	desc = "It glistens with a sheen like the Dragons above."
 	icon_state = "astrata"
 
 /obj/item/clothing/neck/roguetown/psicross/noc
-	name = "amulet of Noc"
-	desc = ""
+	name = "amulet of Moon"
+	desc = "It sparkles with a sheen like the Dragons above."
 	icon_state = "noc"
 
 /obj/item/clothing/neck/roguetown/psicross/dendor
-	name = "amulet of Dendor"
-	desc = ""
+	name = "amulet of Nature"
+	desc = "The nature spirits are said to favor those who wear this trinket."
 	icon_state = "dendor"
 
 /obj/item/clothing/neck/roguetown/psicross/necra
-	name = "amulet of Necra"
-	desc = ""
+	name = "amulet of Death"
+	desc = "She watches her faithful with cold eyes."
 	icon_state = "necra"
 
+/obj/item/clothing/neck/roguetown/psicross/ravox
+	name = "amulet of Battle"
+	desc = "His blades of flame dance the inferno that unbinds the mortal soul."
+	icon_state = "ravox"
+
 /obj/item/clothing/neck/roguetown/psicross/eora
-	name = "amulet of Eora"
-	desc = ""
+	name = "amulet of Love"
+	desc = "Said to be held close to their acolytes hearts."
 	icon_state = "eora"
 
 /obj/item/clothing/neck/roguetown/psicross/pestra
-	name = "amulet of Pestra"
-	desc = ""
+	name = "amulet of Medicine"
+	desc = "Worn by those who know the arts of preservation and perseverance."
 	icon_state = "pestra"
 
 /obj/item/clothing/neck/roguetown/psicross/xylix
-	name = "amulet of Xylix"
-	desc = ""
+	name = "amulet of Arts"
+	desc = "Worn by Harlequins and Musicians alike."
 	icon_state = "xylix"
 
 /obj/item/clothing/neck/roguetown/psicross/malum
-	name = "amulet of Malum"
-	desc = ""
+	name = "amulet of the Forge"
+	desc = "Favored by those of the forge."
 	icon_state = "malum"
 
 /obj/item/clothing/neck/roguetown/psicross/ravox
-	name = "amulet of Ravox"
-	desc = ""
+	name = "amulet of Battle"
+	desc = "A symbol of the eternal dance."
 	icon_state = "ravox"
 
 /obj/item/clothing/neck/roguetown/psicross/abyssor
-	name = "amulet of Abyssor"
-	desc = ""
+	name = "amulet of Tides"
+	desc = "Those who call to the tides wear this symbol."
 	icon_state = "abyssor"
 
 /obj/item/clothing/neck/roguetown/psicross/wood
-	name = "wooden psycross"
+	name = "wooden divine symbol"
 	icon_state = "psicrossw"
 	sellprice = 0
 
 /obj/item/clothing/neck/roguetown/psicross/talisman
-	name = "talisman"
+	name = "divine Talisman"
 	icon_state = "talisman"
-	sellprice = 0	
+	sellprice = 0
 
 /obj/item/clothing/neck/roguetown/psicross/silver
-	name = "silver psycross"
+	name = "silver divine symbol"
 	icon_state = "psicrossiron"
 	sellprice = 50
 
@@ -261,7 +279,7 @@
 		if(W && W.transformed == TRUE)
 			to_chat(H, span_userdanger("I can't equip the silver, it is my BANE!"))
 			H.Knockdown(20)
-			H.Paralyze(20)	
+			H.Paralyze(20)
 
 /obj/item/clothing/neck/roguetown/psicross/silver/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE)
 	. = ..()
@@ -288,8 +306,8 @@
 			H.Paralyze(20)
 
 /obj/item/clothing/neck/roguetown/psicross/g
-	name = "golden psycross"
-	desc = ""
+	name = "golden divine symbol"
+	desc = "This symbol is made from gold, known to be favored for its conductive properties."
 	icon_state = "psicrossg"
 	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
@@ -307,8 +325,8 @@
 	anvilrepair = /datum/skill/craft/armorsmithing
 
 /obj/item/clothing/neck/roguetown/horus
-	name = "eye of horuz"
-	desc = ""
+	name = "all-seeing eye"
+	desc = "This amulet can see the true worth of things. Said to be gifted by she who knows."
 	icon_state = "horus"
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	//dropshrink = 0.75
@@ -381,9 +399,7 @@
 	item_state = "skullamulet"
 	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
-	sellprice = 100		
-
-
+	sellprice = 100
 
 /obj/item/clothing/neck/roguetown/slavecollar
 	name = "slave collar"
