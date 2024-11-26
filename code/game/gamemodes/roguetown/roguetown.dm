@@ -185,7 +185,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	if(prob(45))
 		pick_aspirants()
 		log_game("Minor Antagonist: Aspirant")
-	*/
+	
 	if(prob(30))
 		pick_lich()
 		log_game("Minor Antagonist: Lich")

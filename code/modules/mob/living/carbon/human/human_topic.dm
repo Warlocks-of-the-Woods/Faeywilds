@@ -1,6 +1,6 @@
 /mob/living/carbon/human/Topic(href, href_list)
 	var/observer_privilege = isobserver(usr)
-	var/race_name = dna.species.name
+	//var/race_name = dna.species.name
 
 
 /*
